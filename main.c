@@ -83,11 +83,12 @@ void add_menu(GtkWidget* Fixed1)
     ajouter_menu(maMenuBar, menu_Help);
 }
 
-void add_onglet(GtkWidget* window,GtkWidget* fixed, gchar* label)
+void add_onglet(GtkWidget* window,GtkWidget* fixed,GtkWidget* Fixed1,gchar* label, gchar* labe2)
 {
     GtkWidget *notebook = gtk_notebook_new();
     gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_TOP); // Set tab position to the bottom
     gtk_notebook_append_page(GTK_NOTEBOOK(notebook), fixed, gtk_label_new(label));
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Fixed1, gtk_label_new(labe2));
     gtk_container_add(GTK_CONTAINER(window), notebook);
 }
 
@@ -103,9 +104,8 @@ int main(int argc, char *argv[]) {
     add_cocher(fixed);
     add_radio(fixed);
     add_spin(fixed);
-    add_onglet(ma_fenetre->window,fixed,"one");
     add_menu(Fixed1);
-    add_onglet(ma_fenetre->window,Fixed1,"two");
+    add_onglet(ma_fenetre->window,fixed,Fixed1,"one","two");
 
 
 

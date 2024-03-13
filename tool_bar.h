@@ -80,7 +80,7 @@ item_bar *initialiser_item_stock(GtkWidget *pere,const gchar *icon, gchar *lab, 
 void creer_toolitem(item_bar *toolitem, toolbar *bar,gboolean choix,void (*fonction)(GtkWidget*,gpointer),gchar *type,gpointer data)
 {
     /* Création à partir de stock */
-    GtkWidget *box = gtk_vbox_new(FALSE, 5);
+    GtkWidget *box = gtk_box_new(FALSE, 5);
     GtkWidget *button = gtk_tool_button_new_from_stock(toolitem->icon);
     //gtk_toolbar_insert(GTK_TOOLBAR(ptoolbar), button, -1);
     gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);

@@ -31,9 +31,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="boutton_normal.h" />
+		<Unit filename="cocher.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="menu.h" />
+		<Unit filename="onglet.h" />
+		<Unit filename="radio.h" />
+		<Unit filename="spin_button.h" />
+		<Unit filename="tool_bar.h" />
+		<Unit filename="window.h" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

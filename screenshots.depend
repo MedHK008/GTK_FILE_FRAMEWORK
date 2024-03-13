@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710172546 source:e:\screenshots\main.c
+1710241166 source:e:\screenshots\main.c
 	<gtk/gtk.h>
 	<stdio.h>
 	<stdlib.h>
@@ -3271,7 +3271,7 @@
 
 1703052288 c:\msys64\mingw64\include\gtk-3.0\gtk\gtk-autocleanups.h
 
-1710171087 e:\screenshots\menu.h
+1710241865 e:\screenshots\menu.h
 
 1710171161 e:\screenshots\window.h
 
@@ -3285,5 +3285,5 @@
 
 1710171412 e:\screenshots\onglet.h
 
-1710171488 e:\screenshots\tool_bar.h
+1710241772 e:\screenshots\tool_bar.h
 
