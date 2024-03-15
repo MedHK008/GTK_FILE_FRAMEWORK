@@ -22,14 +22,6 @@
 #include "tool_bar.h"
 
 
-GtkWidget *create_fixed()
-{
-    GtkFixed *fixed = GTK_FIXED(gtk_fixed_new());
-    return ((GtkWidget*)fixed);
-}
-
-
-
 int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
     GtkWidget *notebook = gtk_notebook_new();
@@ -100,6 +92,7 @@ int main(int argc, char *argv[]) {
     ///matqissch hadchi li mor had lcomment
     add_to_window(notebook,ma_fenetre->window);
     gtk_widget_show_all(ma_fenetre->window);
+    g_signal_connect(G_OBJECT(ma_fenetre->window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_main();
 
     return 0;
