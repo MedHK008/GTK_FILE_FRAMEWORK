@@ -22,6 +22,14 @@
 #include "tool_bar.h"
 
 
+GtkWidget *create_fixed()
+{
+    GtkFixed *fixed = GTK_FIXED(gtk_fixed_new());
+    return ((GtkWidget*)fixed);
+}
+
+
+
 int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
     GtkWidget *notebook = gtk_notebook_new();
