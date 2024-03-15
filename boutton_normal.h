@@ -1,6 +1,7 @@
 #ifndef BOUTTON_NORMAL_H_INCLUDED
 #define BOUTTON_NORMAL_H_INCLUDED
 
+
 typedef struct b {
     GtkWidget *parent;  // le widget parent
     GtkWidget *btn;     // le boutton

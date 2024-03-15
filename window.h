@@ -132,4 +132,12 @@ void create_window(Fenetre *W) {
         gtk_window_set_resizable(GTK_WINDOW(W->window), FALSE);
     }
 }
+
+Fenetre* add_window()
+{
+    Fenetre *ma_fenetre = initialiser_win("Instagram", NULL, "F1", "#f72585", 3840, 2160, 2, 0, 0, 25, TRUE);
+    create_window(ma_fenetre);
+    return((Fenetre*)ma_fenetre);
+}
+
 #endif // WINDOW_H_INCLUDED

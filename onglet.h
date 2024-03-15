@@ -56,13 +56,16 @@ void onglet_activer(Onglet *onglet) {
 }
 
 
-void add_onglet(GtkWidget* window,GtkWidget* fixed,GtkWidget* Fixed1,gchar* label, gchar* labe2)
+void add_onglet(GtkWidget* notebook,GtkWidget* fixed,gchar* label)
 {
-    GtkWidget *notebook = gtk_notebook_new();
-    gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_TOP); // Set tab position to the bottom
+    gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_TOP);
     gtk_notebook_append_page(GTK_NOTEBOOK(notebook), fixed, gtk_label_new(label));
-    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), Fixed1, gtk_label_new(labe2));
-    gtk_container_add(GTK_CONTAINER(window), notebook);
+
 }
 
+
+void add_to_window(GtkWidget* notebook,GtkWidget* window)
+{
+    gtk_container_add(GTK_CONTAINER(window), notebook);
+}
 #endif // ONGLET_H_INCLUDED

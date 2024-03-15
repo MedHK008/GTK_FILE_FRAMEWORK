@@ -110,15 +110,18 @@ void create_spin_button(SpinButtonObject* Sb) {
     }
 }
 
-void add_spin(GtkWidget* fixed)
-{
-    // Initialize SpinButtonObject
-    SpinButtonObject *spinButton = init_spin_button(0.0, 100.0, 5.0, 50.0, 30, 150, 1, 2, 1, 1, "#00ff00", 1.0);
+void add_spin(GtkWidget* fixed,gint x,gint y, gdouble val_min, gdouble val_max, gdouble pas, gdouble val_defaut,
+              gint height, gint width, gint wrap, gint digits, gint numeric, gint arrondis,
+              gchar* color, gfloat color_opc) {
+    // Initialize SpinButtonObject with provided parameters
+    SpinButtonObject *spinButton = init_spin_button(val_min, val_max, pas, val_defaut,
+                                                    height, width, wrap, digits, numeric, arrondis, color, color_opc);
     // Create SpinButton
     create_spin_button(spinButton);
-    // Create a fixed widget to hold cocher buttons
-    gtk_fixed_put(GTK_FIXED(fixed), spinButton->SpinButton, 450, 50); // Adjust position as needed
+    // Create a fixed widget to hold the spin button
+    gtk_fixed_put(GTK_FIXED(fixed), spinButton->SpinButton, x, y); // Adjust position as needed
 }
+
 
 
 #endif // SPIN_BUTTON_H_INCLUDED

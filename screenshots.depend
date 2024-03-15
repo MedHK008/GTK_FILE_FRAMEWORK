@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1710532911 source:e:\screenshots\main.c
+1710543827 source:e:\screenshots\main.c
 	<gtk/gtk.h>
+	<gdk/gdk.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -3273,17 +3274,17 @@
 
 1710531753 e:\screenshots\menu.h
 
-1710171161 e:\screenshots\window.h
+1710541044 e:\screenshots\window.h
 
-1710532911 e:\screenshots\boutton_normal.h
+1710541216 e:\screenshots\boutton_normal.h
 
-1710531753 e:\screenshots\cocher.h
+1710536810 e:\screenshots\cocher.h
 
-1710531753 e:\screenshots\radio.h
+1710539796 e:\screenshots\radio.h
 
-1710531753 e:\screenshots\spin_button.h
+1710542660 e:\screenshots\spin_button.h
 
-1710531753 e:\screenshots\onglet.h
+1710543827 e:\screenshots\onglet.h
 
 1710241772 e:\screenshots\tool_bar.h
 

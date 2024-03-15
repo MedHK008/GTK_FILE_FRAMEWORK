@@ -4,6 +4,8 @@
 typedef struct elem_radio {
     GtkWidget *pRadio; // le widget radio
     char nom[NBC]; // nom du bouton
+    char *hexcolor; // couleur de fond en hexadécimal
+    gboolean checked; // indique si le bouton est coché au début ou non
     struct elem_radio *suivant; // le bouton radio qui vient après le courant
 } elem_radio;
 
@@ -14,9 +16,7 @@ typedef struct radio {
     elem_radio *liste; // Les éléments de la Liste radio
 } radio;
 
-
-
-elem_radio* ajouter_radio_fin(elem_radio *L, char label[NBC]) {
+elem_radio* ajouter_radio_fin(elem_radio *L, char label[NBC], char *bgcolor, gboolean checked) {
     elem_radio *elem = (elem_radio*)malloc(sizeof(elem_radio));
     if (elem == NULL) {
         perror("Erreur lors de l'allocation de mémoire");
@@ -24,6 +24,8 @@ elem_radio* ajouter_radio_fin(elem_radio *L, char label[NBC]) {
     }
     elem->suivant = NULL;
     strcpy(elem->nom, label);
+    elem->hexcolor = strdup(bgcolor); // Allocation et copie de la couleur
+    elem->checked = checked; // Initialisation du statut du bouton radio
     if (!L) return elem;
     elem_radio *t = L;
     while (L->suivant) L = L->suivant;
@@ -43,29 +45,34 @@ radio* grouper_radio(elem_radio *L, GtkWidget *parent) {
     return radioButtons;
 }
 
-void create_radio(radio *R) {
+void create_radio(radio *R, gint x, gint y) {
     GtkWidget *first_radio = NULL; // Pour conserver une référence au premier bouton radio
-    gint i=20;
     while (R->liste) {
         R->liste->pRadio = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(first_radio), R->liste->nom);
+        if (R->liste->hexcolor) {
+            GdkRGBA color;
+            gdk_rgba_parse(&color, R->liste->hexcolor);
+            gtk_widget_override_background_color(R->liste->pRadio, GTK_STATE_FLAG_NORMAL, &color);
+        }
+        if (R->liste->checked) {
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(R->liste->pRadio), TRUE); // Cocher le bouton si nécessaire
+        }
         if (!first_radio) // Si c'est le premier bouton radio, sauvegardez sa référence
             first_radio = R->liste->pRadio;
-        gtk_fixed_put(GTK_FIXED(R->fixed), R->liste->pRadio, 350, i); // Positionnement des boutons dans le Fixed
-        i+=20;
+        gtk_fixed_put(GTK_FIXED(R->fixed), R->liste->pRadio, x, y); // Positionnement des boutons dans le Fixed
+        y+=25;
         R->liste = R->liste->suivant;
     }
 }
 
-
-void add_radio(GtkWidget* fixed)
-{
+void add_radio(GtkWidget* fixed, int numButtons, gint x, gint y, char *labels[], char *colors[], gboolean checked[]) {
     elem_radio *liste_radio = NULL;
-    liste_radio = ajouter_radio_fin(liste_radio, "Option 1");
-    liste_radio = ajouter_radio_fin(liste_radio, "Option 2");
-    liste_radio = ajouter_radio_fin(liste_radio, "Option 3");
+    for (int i = 0; i < numButtons; i++) {
+        liste_radio = ajouter_radio_fin(liste_radio, labels[i], colors[i], checked[i]);
+    }
     radio *grouped_radio = grouper_radio(liste_radio, fixed);
     grouped_radio->fixed = fixed;
-    create_radio(grouped_radio);
+    create_radio(grouped_radio, x, y);
 }
 
 #endif // RADIO_H_INCLUDED
