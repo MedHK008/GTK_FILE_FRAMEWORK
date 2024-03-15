@@ -14,6 +14,8 @@ typedef struct radio {
     elem_radio *liste; // Les éléments de la Liste radio
 } radio;
 
+
+
 elem_radio* ajouter_radio_fin(elem_radio *L, char label[NBC]) {
     elem_radio *elem = (elem_radio*)malloc(sizeof(elem_radio));
     if (elem == NULL) {
@@ -52,6 +54,18 @@ void create_radio(radio *R) {
         i+=20;
         R->liste = R->liste->suivant;
     }
+}
+
+
+void add_radio(GtkWidget* fixed)
+{
+    elem_radio *liste_radio = NULL;
+    liste_radio = ajouter_radio_fin(liste_radio, "Option 1");
+    liste_radio = ajouter_radio_fin(liste_radio, "Option 2");
+    liste_radio = ajouter_radio_fin(liste_radio, "Option 3");
+    radio *grouped_radio = grouper_radio(liste_radio, fixed);
+    grouped_radio->fixed = fixed;
+    create_radio(grouped_radio);
 }
 
 #endif // RADIO_H_INCLUDED

@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710241166 source:e:\screenshots\main.c
+1710532911 source:e:\screenshots\main.c
 	<gtk/gtk.h>
 	<stdio.h>
 	<stdlib.h>
@@ -3271,19 +3271,19 @@
 
 1703052288 c:\msys64\mingw64\include\gtk-3.0\gtk\gtk-autocleanups.h
 
-1710241865 e:\screenshots\menu.h
+1710531753 e:\screenshots\menu.h
 
 1710171161 e:\screenshots\window.h
 
-1710171204 e:\screenshots\boutton_normal.h
+1710532911 e:\screenshots\boutton_normal.h
 
-1710171265 e:\screenshots\cocher.h
+1710531753 e:\screenshots\cocher.h
 
-1710171265 e:\screenshots\radio.h
+1710531753 e:\screenshots\radio.h
 
-1710171346 e:\screenshots\spin_button.h
+1710531753 e:\screenshots\spin_button.h
 
-1710171412 e:\screenshots\onglet.h
+1710531753 e:\screenshots\onglet.h
 
 1710241772 e:\screenshots\tool_bar.h
 

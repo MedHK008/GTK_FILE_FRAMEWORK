@@ -29,4 +29,15 @@ cocher *init_cocher(GtkWidget *parent, const char *label, gint x, gint y)
     return C;
 }
 
+void add_cocher(GtkWidget* fixed)
+{
+    cocher *checkbox1 = init_cocher(fixed, "Check 1", 150, 50);
+    cocher *checkbox2 = init_cocher(fixed, "Check 2", 150, 100);
+    cocher *checkbox3 = init_cocher(fixed, "Check 3", 150, 150);
+    gtk_fixed_put(fixed,checkbox1->boutcoche,checkbox1->x,checkbox1->y);
+    gtk_fixed_put(fixed,checkbox2->boutcoche,checkbox2->x,checkbox2->y);
+    gtk_fixed_put(fixed,checkbox3->boutcoche,checkbox3->x,checkbox3->y);
+}
+
+
 #endif // COCHER_H_INCLUDED

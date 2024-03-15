@@ -143,4 +143,35 @@ void ajouter_menu_item(menu *parent_menu, menu *menu_elem, const gchar *icon)
     gtk_menu_shell_append(GTK_MENU_SHELL(parent_menu->MENU), menu_elem->menu_item);
 }
 
+
+void add_menu(GtkWidget* Fixed1)
+{
+    menubar *maMenuBar = creer_menubar(0, Fixed1);
+   gtk_fixed_put(GTK_FIXED(Fixed1), maMenuBar->menubar, 0, 0);
+    menu *menu_file = init_menu_item(0, "File", TRUE);
+    ajouter_menu(maMenuBar, menu_file);
+    menu *menu_open = init_menu_item(0, "Open", FALSE);
+    ajouter_menu_item(menu_file, menu_open,NULL);
+    menu *menu_save = init_menu_item(1, "Save", FALSE);
+    ajouter_menu_item(menu_file, menu_save, NULL);
+    menu *menu_edit = init_menu_item(0, "Edit", TRUE);
+    ajouter_menu(maMenuBar, menu_edit);
+    menu *menu_cut = init_menu_item(1, "Cut", FALSE);
+    ajouter_menu_item(menu_edit, menu_cut, NULL);
+    menu *menu_copy = init_menu_item(1, "Copy", FALSE);
+    ajouter_menu_item(menu_edit, menu_copy, NULL);
+    menu *menu_paste = init_menu_item(1, "Paste", FALSE);
+    ajouter_menu_item(menu_edit, menu_paste, NULL);
+     menu *menu_S = init_menu_item(0, "Search", TRUE);
+    ajouter_menu(maMenuBar, menu_S);
+     menu *menu_B = init_menu_item(0, "Build", TRUE);
+    ajouter_menu(maMenuBar, menu_B);
+    menu *menu_D = init_menu_item(0, "Debug", TRUE);
+    ajouter_menu(maMenuBar, menu_D);
+     menu *menu_Set= init_menu_item(0, "Settings", TRUE);
+    ajouter_menu(maMenuBar, menu_Set);
+    menu *menu_Help = init_menu_item(0, "Help", TRUE);
+    ajouter_menu(maMenuBar, menu_Help);
+}
+
 #endif // MENU_H_INCLUDED

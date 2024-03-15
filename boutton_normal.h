@@ -11,7 +11,10 @@ typedef struct b {
     gint height;        // height of the button
 } boutton;
 
-boutton* init_button(GtkWidget* p, char label[NBC], int mnemo, int bgcolor, gint width, gint height, char *image_path) {
+
+
+
+boutton* init_button(GtkWidget* p, char label[NBC], int mnemo,gint width, gint height, gchar *image_path) {
     boutton *B;
     B = (boutton*)malloc(sizeof(boutton)); // Allocation de memoire
     if(!B) exit(-1); // erreur d'allocation
@@ -20,6 +23,7 @@ boutton* init_button(GtkWidget* p, char label[NBC], int mnemo, int bgcolor, gint
     strcpy(B->label, label);
     B->icon = NULL;
     B->width = width;
+    B->parent=p;
     B->height = height;
     if (image_path != NULL) {
         B->icon = gtk_image_new_from_file(image_path);
@@ -61,6 +65,12 @@ void create_button(boutton* B, GtkFixed *fixed, gint x, gint y) {
             B->btn = gtk_button_new_with_mnemonic(B->label);
     }
     gtk_fixed_put(fixed, B->btn, x, y);
+}
+
+void add_button(GtkWidget* fixed,gint x_fixed,gint y_fixed,gchar* label,gboolean mnemonique,gint width_button,gint height_button,gchar* path_to_image)
+{
+    boutton *myButton = init_button(fixed,label, mnemonique,width_button,height_button,path_to_image);
+    create_button(myButton, fixed,x_fixed,y_fixed);
 }
 
 #endif // BOUTTON_NORMAL_H_INCLUDED
