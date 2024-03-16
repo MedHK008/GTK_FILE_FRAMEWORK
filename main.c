@@ -6,21 +6,19 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 ///les constante
 #define NBC 100
 #define NB_RADIO 3
 
 ///les bibliothèque des widget
-#include "menu.h"
+//#include "menu.h"
 #include "window.h"
 #include "boutton_normal.h"
 #include "cocher.h"
 #include "radio.h"
 #include "spin_button.h"
 #include "onglet.h"
-#include "tool_bar.h"
-
+//#include "tool_bar.h"
 
 GtkWidget *create_fixed()
 {
@@ -43,10 +41,11 @@ int main(int argc, char *argv[]) {
 /****************************************************** les bouttons***********************************/
 
 /// les parametres : le fixed , le label du button , mnemonique ou non (par defaut on prend premier lettre du label, x , y , path de l'image utiliser (NULL s'il y a pas d'image)
-    add_button(fixed, 0, 50, "Click Me", FALSE, 100, 50, "image.png");
-    add_button(fixed, 100, 50, "", FALSE, 100, 50, NULL);
-    add_button(fixed, 200, 50, "don't click me", FALSE, 100, 50, NULL);
-    add_button(fixed, 300, 50, "", FALSE, 100, 50, "image.png");
+    add_button(fixed,"first",NULL,100,100,"#FF0000",0,100);
+    add_button(fixed,"second",NULL,100,100,NULL,100,100);
+    add_button(fixed,NULL,"gtklogo.png",100,100,"#FF0000",200,100);
+    add_button(fixed,NULL,"gtklogo.png",100,100,NULL,350,100);
+    add_button(fixed,"fifth","gtklogo.png",100,100,"#FF00FF",470,100);
 
 /// les parametres : le fixed , le label , le x , le y ,le bgcolor, si le checkbox est cocher dès le début ou non
     add_cocher(fixed,"testing cocher1",0,300,"#000000",TRUE);
@@ -92,8 +91,10 @@ int main(int argc, char *argv[]) {
 
 
 ///le menu
-    add_menu(fixed1);
+//    add_menu(fixed1);
     add_onglet(notebook,fixed1,"onglet 2");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
+    add_onglet(notebook,fixed2,"onglet 3");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
+    add_onglet(notebook,fixed3,"onglet 4");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
 
 
 

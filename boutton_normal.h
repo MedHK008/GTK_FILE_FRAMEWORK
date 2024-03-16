@@ -2,76 +2,114 @@
 #define BOUTTON_NORMAL_H_INCLUDED
 
 
-typedef struct b {
-    GtkWidget *parent;  // le widget parent
-    GtkWidget *btn;     // le boutton
-    GtkWidget *icon;    // icon si le boutton a une, null si non
-    gchar *label;       // le label
-    gboolean mnemonique; // si le label est mn�monique ou non
-    gint width;         // width of the button
-    gint height;        // height of the button
-} boutton;
+//*********************************************STRUCTURES***********************************************
+typedef struct {
+    GtkWidget* button; // bouton widget
+    gchar* name;       // Nom du bouton
+    gchar* label;      // Le texte sur le bouton
+    gchar* lien;       // Chemin icone du bouton
+    guint width;       // longueur du bouton
+    guint height;      // largeur du bouton
+    gchar* bgColor;    // Couleur de fond du GtkGrid
+} ButtonSimple;
 
 
-
-
-boutton* init_button(GtkWidget* p, char label[NBC], int mnemo,gint width, gint height, gchar *image_path) {
-    boutton *B;
-    B = (boutton*)malloc(sizeof(boutton)); // Allocation de memoire
-    if(!B) exit(-1); // erreur d'allocation
-    if(mnemo) B->mnemonique = TRUE;
-    B->label = (char*)malloc(sizeof(char) * (strlen(label) + 1));
-    strcpy(B->label, label);
-    B->icon = NULL;
-    B->width = width;
-    B->parent=p;
-    B->height = height;
-    if (image_path != NULL) {
-        B->icon = gtk_image_new_from_file(image_path);
+// INITIALISER LE BOUTON
+ButtonSimple* init_button_simple(gchar* nom, gchar* etiq, gchar* lien, gint h, gint w,gchar* bgColor,gint x, gint y) {
+    ButtonSimple* b = (ButtonSimple*)malloc(sizeof(ButtonSimple));
+    if (!b) {
+        printf("\nErreur d'allocation !!\n");
+        exit(0);
     }
-    return B;
+
+    b->name = NULL;
+    b->label = NULL;
+    b->lien = NULL;
+    b->bgColor = NULL;
+    if (etiq) {
+        b->label = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
+        strcpy(b->label, etiq);
+    }
+    if (nom) {
+        b->name = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
+        strcpy(b->name, nom);
+    }
+    if (lien) {
+        b->lien = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
+        strcpy(b->lien, lien);
+    }
+    if (bgColor) {
+        b->bgColor = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
+        strcpy(b->bgColor, bgColor);
+    }
+    b->width = w;
+    b->height = h;
+    return b;
 }
+//***************************************************************
 
-void create_button(boutton* B, GtkFixed *fixed, gint x, gint y) {
-    if (B->icon) {
-        // Create a vertical box to hold the image and label
-        GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+// Fonction pour ajouter une couleur de fond � un widget
+void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
+    GdkRGBA rgba;
 
-        // Add the image to the box
-        gtk_box_pack_start(GTK_BOX(vbox), B->icon, FALSE, FALSE, 0);
-
-        // Create a label for the button
-        GtkWidget *label = NULL;
-        if (B->mnemonique)
-            label = gtk_label_new_with_mnemonic(B->label);
-        else
-            label = gtk_label_new(B->label);
-
-        // Set label alignment to center
-        gtk_label_set_xalign(GTK_LABEL(label), 0.5);
-
-        // Add the label to the box
-        gtk_box_pack_start(GTK_BOX(vbox), label, FALSE, FALSE, 0);
-
-        // Create the button and set its size
-        B->btn = gtk_button_new();
-        gtk_widget_set_size_request(B->btn, B->width, B->height);
-
-        // Add the box (containing the image and label) to the button
-        gtk_container_add(GTK_CONTAINER(B->btn), vbox);
+    if (gdk_rgba_parse(&rgba, color)) {
+        rgba.alpha = opacity;
+        gtk_widget_override_background_color(widget, GTK_STATE_NORMAL, &rgba);
     } else {
-        if (!(B->mnemonique))
-            B->btn = gtk_button_new_with_label(B->label);
-        else
-            B->btn = gtk_button_new_with_mnemonic(B->label);
+        g_print("Erreur : Impossible de parser la couleur %s\n", color);
     }
-    gtk_fixed_put(fixed, B->btn, x, y);
+}
+//***********************************************************
+// CREER LE BOUTON SIMPLE
+void creer_button_Simple(ButtonSimple* B, GtkWidget* fixed, gint x, gint y) {
+    // Créer un GtkBox vertical pour contenir l'image et le label
+    GtkWidget* vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
+    // Changer la couleur de fond de la vbox
+    if (B->bgColor)
+        add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spécifiée
+
+    // Créer un label pour le texte
+    GtkWidget* label = NULL;
+    if (B->label) {
+        label = gtk_label_new(B->label);
+        // Centrer le texte horizontalement et verticalement dans la vbox
+        gtk_widget_set_halign(label, GTK_ALIGN_CENTER);
+        gtk_widget_set_valign(label, GTK_ALIGN_CENTER);
+        // Ajouter le label à la vbox
+        gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
+    }
+
+    // Créer une image si un chemin d'icône est spécifié
+    GtkWidget* image = NULL;
+    if (B->lien)
+        image = gtk_image_new_from_file(B->lien);
+    // Ajouter l'image à la vbox
+    if (image)
+        gtk_box_pack_start(GTK_BOX(vbox), image, TRUE, TRUE, 0);
+
+    // Créer le bouton avec la vbox comme contenu
+    B->button = gtk_button_new();
+    gtk_container_add(GTK_CONTAINER(B->button), vbox);
+
+    // Définir le nom du bouton (ID) pour le styliser en CSS
+    if (B->name)
+        gtk_widget_set_name(B->button, B->name);
+
+    // Définir la taille du bouton
+    if ((B->width > 0) && (B->height > 0))
+        gtk_widget_set_size_request(B->button, B->width, B->height);
+
+    // Ajouter le bouton au GtkFixed parent
+    gtk_fixed_put(GTK_FIXED(fixed), B->button, x, y);
 }
 
-void add_button(GtkWidget* fixed,gint x_fixed,gint y_fixed,gchar* label,gboolean mnemonique,gint width_button,gint height_button,gchar* path_to_image)
+
+
+
+void add_button(GtkWidget*fixed,gchar* label,gchar* path_to_image,gint height,gint width,gchar* bgColor,gint x,gint y)
 {
-    boutton *myButton = init_button(fixed,label, mnemonique,width_button,height_button,path_to_image);
-    create_button(myButton, fixed,x_fixed,y_fixed);
+   ButtonSimple* simpleButton = init_button_simple("mon_bouton",label,path_to_image, height,width ,bgColor,x, y);
+   creer_button_Simple(simpleButton, fixed,x,y);
 }
 
 #endif // BOUTTON_NORMAL_H_INCLUDED

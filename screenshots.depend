@@ -1,18 +1,16 @@
 # depslib dependency file v1.0
-1710545164 source:e:\screenshots\main.c
+1710633338 source:e:\screenshots\main.c
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
-	"menu.h"
 	"window.h"
 	"boutton_normal.h"
 	"cocher.h"
 	"radio.h"
 	"spin_button.h"
 	"onglet.h"
-	"tool_bar.h"
 
 1704104925 c:\msys64\mingw64\include\stdio.h
 	<corecrt_stdio_config.h>
@@ -3276,7 +3274,7 @@
 
 1710541044 e:\screenshots\window.h
 
-1710541216 e:\screenshots\boutton_normal.h
+1710633442 e:\screenshots\boutton_normal.h
 
 1710536810 e:\screenshots\cocher.h
 
