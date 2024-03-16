@@ -591,17 +591,17 @@ void add_progress_bar(GtkWidget *pere,gdouble dfr,gdouble unite,gint x,gint y,gb
 {
     barre_prog *bar=initialiser_barre_prog(pere,dfr,unite,w,h);
     GtkWidget *pVBox=gtk_vbox_new(FALSE,10);
-    gtk_box_pack_start(GTK_BOX(pMainVBox),bar->widget, TRUE, FALSE, 0);
+    gtk_box_pack_start(GTK_BOX(pVBox),bar->widget, TRUE, FALSE, 0);
     switch(type)
     {
         case 0:
         case 1:
                GtkWidget *pButton = gtk_button_new_with_label("ajouter unite");
-               gtk_box_pack_start(GTK_BOX(pMainVBox), pButton, TRUE, FALSE, 0);
+               gtk_box_pack_start(GTK_BOX(pVBox), pButton, TRUE, FALSE, 0);
                g_signal_connect_swapped(G_OBJECT(pButton), "clicked", G_CALLBACK(OnButton),bar);
                if(type==1) break;
         case 2: GtkWidget *pButton1 = gtk_button_new_with_label(GTK_STOCK_REFRESH);
-                gtk_box_pack_start(GTK_BOX(pMainVBox), pButton1, TRUE, FALSE, 0);
+                gtk_box_pack_start(GTK_BOX(pVBox), pButton1, TRUE, FALSE, 0);
                g_signal_connect_swapped(G_OBJECT(pButton1), "clicked", G_CALLBACK(OnButton1),bar);
                break;
     }
