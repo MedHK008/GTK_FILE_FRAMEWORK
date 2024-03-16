@@ -3,59 +3,59 @@
 #include <gtk/gtk.h>
 
 
-// Définition de la structure style
+// DÃ©finition de la structure style
 typedef struct
 {
     gint w; // Largeur
     gint h; // Hauteur
 } style;
 
-// Définition de la structure barre_def
+// DÃ©finition de la structure barre_def
 typedef struct
 {
-    GtkWidget *widget;   // Widget de la barre de défilement
-    GtkWidget *parent;   // Widget parent de la barre de défilement
-    GtkWidget *fils;     // Widget fils (conteneur) associé à la barre de défilement
-    guint hpolic;        // Politique de défilement horizontal (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
-    guint vpolic;        // Politique de défilement vertical (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
-    style s;             // Style de la barre de défilement (largeur et hauteur)
+    GtkWidget *widget;   // Widget de la barre de dÃ©filement
+    GtkWidget *parent;   // Widget parent de la barre de dÃ©filement
+    GtkWidget *fils;     // Widget fils (conteneur) associÃ© Ã  la barre de dÃ©filement
+    guint hpolic;        // Politique de dÃ©filement horizontal (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
+    guint vpolic;        // Politique de dÃ©filement vertical (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
+    style s;             // Style de la barre de dÃ©filement (largeur et hauteur)
 
 } barre_def;
 
-// Fonction pour initialiser une barre de défilement avec des paramètres spécifiés
+// Fonction pour initialiser une barre de dÃ©filement avec des paramÃ¨tres spÃ©cifiÃ©s
 barre_def *initialiser_barre_def(gint w, gint h, guint hpl, guint vpl)
 {
-    // Allocation dynamique de mémoire pour une nouvelle structure barre_def
+    // Allocation dynamique de mÃ©moire pour une nouvelle structure barre_def
     barre_def *scrBar = (barre_def *)g_malloc(sizeof(barre_def));
 
-    // Création d'une nouvelle barre de défilement GtkScrolledWindow
+    // CrÃ©ation d'une nouvelle barre de dÃ©filement GtkScrolledWindow
     scrBar->widget = gtk_scrolled_window_new(NULL, NULL);
 
     // Initialisation des champs de style
     scrBar->s.h = h;
     scrBar->s.w = w;
 
-    // Initialisation des champs de politique de défilement
+    // Initialisation des champs de politique de dÃ©filement
     scrBar->hpolic = hpl;
     scrBar->vpolic = vpl;
 
-    // Retour de la structure initialisée
+    // Retour de la structure initialisÃ©e
     return scrBar;
 }
 
-// Fonction pour créer une barre de défilement avec un conteneur associé
+// Fonction pour crÃ©er une barre de dÃ©filement avec un conteneur associÃ©
 void creer_scrollbar(barre_def *scrbar, GtkWidget *pere, GtkWidget *conteneur)
 {
-    // Ajout de la barre de défilement en tant que fils du widget parent
+    // Ajout de la barre de dÃ©filement en tant que fils du widget parent
     gtk_container_add(GTK_CONTAINER(pere), scrbar->widget);
 
-    // Définition de la taille demandée pour la barre de défilement
+    // DÃ©finition de la taille demandÃ©e pour la barre de dÃ©filement
     gtk_widget_set_size_request(scrbar->widget, scrbar->s.w, scrbar->s.h);
 
-    // Ajout du conteneur à la barre de défilement avec une vue
+    // Ajout du conteneur Ã  la barre de dÃ©filement avec une vue
     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scrbar->widget), conteneur);
 
-    // Définition des politiques de défilement (horizontal et vertical)
+    // DÃ©finition des politiques de dÃ©filement (horizontal et vertical)
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrbar->widget), scrbar->vpolic, scrbar->hpolic);
 }
 
@@ -67,13 +67,13 @@ void add_scrollbar(GtkWidget *grand_pere,GtkWidget *fixed,gint w,gint h,guint hp
 
 
 /****************************************************************************************************************/
-// Définition de la structure item_bar
+// DÃ©finition de la structure item_bar
 typedef struct
 {
-    GtkWidget *widget; // Widget associé à l'élément de la barre d'outils
-    style *s;         // Style de l'élément (position, largeur, hauteur)
-    const gchar *icon;    // Icône associée à l'élément
-    gchar *text;      // Texte associé à l'élément
+    GtkWidget *widget; // Widget associÃ© Ã  l'Ã©lÃ©ment de la barre d'outils
+    style *s;         // Style de l'Ã©lÃ©ment (position, largeur, hauteur)
+    const gchar *icon;    // IcÃ´ne associÃ©e Ã  l'Ã©lÃ©ment
+    gchar *text;      // Texte associÃ© Ã  l'Ã©lÃ©ment
     GtkWidget *parent;
     gint pos;//// Position dans la barre d'outils
 
@@ -81,7 +81,7 @@ typedef struct
 
 
 
-// Définition de la structure toolbar
+// DÃ©finition de la structure toolbar
 typedef struct
 {
     GtkWidget *widget;   // Widget de la barre d'outils
@@ -91,7 +91,7 @@ typedef struct
 
 } toolbar;
 
-// Fonction pour initialiser une barre d'outils avec une orientation spécifiée
+// Fonction pour initialiser une barre d'outils avec une orientation spÃ©cifiÃ©e
 toolbar *initialiser_toolbar(GtkWidget *pere,gchar orientation,gint w,gint h,GtkToolbarStyle stl,GtkIconSize siz)
 {
     toolbar *tbar = (toolbar *)g_malloc(sizeof(toolbar));
@@ -110,19 +110,19 @@ toolbar *initialiser_toolbar(GtkWidget *pere,gchar orientation,gint w,gint h,Gtk
     return tbar;
 }
 
-// Fonction pour définir l'orientation d'une barre d'outils
+// Fonction pour dÃ©finir l'orientation d'une barre d'outils
 toolbar *creer_toolbar(toolbar *tbar)
 {
-    // Vérifie si l'orientation de la barre d'outils est horizontale
+    // VÃ©rifie si l'orientation de la barre d'outils est horizontale
     if (tbar->orientation == 'h' || tbar->orientation == 'H')
-        // Si oui, définir l'orientation de la barre d'outils comme horizontale
+        // Si oui, dÃ©finir l'orientation de la barre d'outils comme horizontale
         gtk_orientable_set_orientation(GTK_TOOLBAR(tbar), GTK_ORIENTATION_HORIZONTAL);
     else
-        // Sinon, définir l'orientation de la barre d'outils comme verticale
+        // Sinon, dÃ©finir l'orientation de la barre d'outils comme verticale
      gtk_orientable_set_orientation(GTK_TOOLBAR(tbar),GTK_ORIENTATION_VERTICAL);
 }
 
-//Fonction pour initialiser un élément de la barre d'outils à partir d'une icône stockée
+//Fonction pour initialiser un Ã©lÃ©ment de la barre d'outils Ã  partir d'une icÃ´ne stockÃ©e
 item_bar *initialiser_item_stock(GtkWidget *pere,const gchar *icon, gchar *lab, gint w, gint h, gint pos)
 {
     item_bar *item = (item_bar *)g_malloc(sizeof(item_bar));
@@ -130,7 +130,7 @@ item_bar *initialiser_item_stock(GtkWidget *pere,const gchar *icon, gchar *lab, 
     item->text = lab;
     item->icon = icon;
 
-    // Allocation de mémoire pour la structure style et initialisation de ses champs
+    // Allocation de mÃ©moire pour la structure style et initialisation de ses champs
     item->s = (style *)g_malloc(sizeof(style));
     item->pos = pos;
     item->s->w = w;
@@ -139,20 +139,20 @@ item_bar *initialiser_item_stock(GtkWidget *pere,const gchar *icon, gchar *lab, 
     return item;
 }
 
-// Fonction pour créer un GtkToolItem à partir d'un item_bar et l'ajouter à la barre d'outils
+// Fonction pour crÃ©er un GtkToolItem Ã  partir d'un item_bar et l'ajouter Ã  la barre d'outils
 void creer_toolitem(item_bar *toolitem, toolbar *bar,gboolean choix,void (*fonction)(GtkWidget*,gpointer),gchar *type,gpointer data)
 {
-    /* Création à partir de stock */
+    /* CrÃ©ation Ã  partir de stock */
     GtkWidget *box = gtk_vbox_new(FALSE, 5);
     GtkWidget *button = gtk_tool_button_new_from_stock(toolitem->icon);
     //gtk_toolbar_insert(GTK_TOOLBAR(ptoolbar), button, -1);
     gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);
-    // Ajoutez une étiquette au conteneur
+    // Ajoutez une Ã©tiquette au conteneur
     GtkWidget *label = gtk_label_new(toolitem->text);
     gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 0);
     gtk_container_add(GTK_CONTAINER(toolitem->widget), box);
     gtk_toolbar_insert(GTK_TOOLBAR(bar->widget), toolitem->widget, toolitem->pos);
-    // Définir la taille du widget si la largeur et la hauteur sont spécifiées
+    // DÃ©finir la taille du widget si la largeur et la hauteur sont spÃ©cifiÃ©es
     if (toolitem->s->w && toolitem->s->h)
         gtk_widget_set_size_request(toolitem->widget, toolitem->s->w, toolitem->s->h);
     if(choix)
@@ -161,21 +161,21 @@ void creer_toolitem(item_bar *toolitem, toolbar *bar,gboolean choix,void (*fonct
 }
 
 
-// Fonction pour créer et ajouter un séparateur à une barre d'outils (toolbar) GTK
-// Paramètres :
-// - sep : Un pointeur vers le widget de séparateur (sera initialisé dans la fonction)
-// - pere : Le widget parent, généralement une barre d'outils GTK (GtkWidget *)
-// - pos : La position à laquelle insérer le séparateur dans la barre d'outils (gint)
-// Retourne le widget de séparateur créé
+// Fonction pour crÃ©er et ajouter un sÃ©parateur Ã  une barre d'outils (toolbar) GTK
+// ParamÃ¨tres :
+// - sep : Un pointeur vers le widget de sÃ©parateur (sera initialisÃ© dans la fonction)
+// - pere : Le widget parent, gÃ©nÃ©ralement une barre d'outils GTK (GtkWidget *)
+// - pos : La position Ã  laquelle insÃ©rer le sÃ©parateur dans la barre d'outils (gint)
+// Retourne le widget de sÃ©parateur crÃ©Ã©
 GtkWidget *creer_separ(GtkWidget *sep, GtkWidget *pere, gint pos)
 {
-    // Créer un nouveau séparateur
+    // CrÃ©er un nouveau sÃ©parateur
     sep = gtk_separator_tool_item_new();
 
-    // Insérer le séparateur dans la barre d'outils à la position spécifiée
+    // InsÃ©rer le sÃ©parateur dans la barre d'outils Ã  la position spÃ©cifiÃ©e
     gtk_toolbar_insert(GTK_TOOLBAR(pere), sep, pos);
 
-    // Renvoyer le widget de séparateur créé
+    // Renvoyer le widget de sÃ©parateur crÃ©Ã©
     return sep;
 }
 
@@ -201,12 +201,12 @@ typedef struct
 {
      gchar text[200];
      guint alignement;/* L'alignement du texte
-    1: GTK_JUSTIFY_LEFT pour aligner le texte à gauche (par défaut);
-    2: GTK_JUSTIFY_RIGHT pour aligner le texte à droite ;
+    1: GTK_JUSTIFY_LEFT pour aligner le texte Ã  gauche (par dÃ©faut);
+    2: GTK_JUSTIFY_RIGHT pour aligner le texte Ã  droite ;
     3: GTK_JUSTIFY_CENTER pour centrer le texte ;
-    4:GTK_JUSTIFY_FILL pour justifier le texte*/
+    4:GTK_JUSTIFY_FILL pour justifierÂ leÂ texte*/
     style s;
-    gchar police[30];//Pour definir la police utilsée*/
+    gchar police[30];//Pour definir la police utilsÃ©e*/
     gint taille_text;/* Pour definir la taille du texte*/
     gchar style[15];//Pour definir le style du texte*/
     gchar epaisseur[15]; /*Pour definir l'epaisseur du texte : small , large , Xlaarge... */
@@ -220,80 +220,80 @@ typedef struct
 // Fonction pour initialiser une structure texte
 texte *initialiser_texte(gint w, gint h, gchar lb[200], guint alg, gchar police[30], gint size, gchar styl[15], gchar epaisseur[15], gchar couleur[15], gchar background[15], gchar underline[15])
 {
-    // Allouer dynamiquement de la mémoire pour une nouvelle structure texte
+    // Allouer dynamiquement de la mÃ©moire pour une nouvelle structure texte
     texte *tex = (texte *)g_malloc(sizeof(texte));
 
-    // Copier le texte passé en paramètre dans la structure texte
+    // Copier le texte passÃ© en paramÃ¨tre dans la structure texte
     strcpy(tex->text, lb);
 
-    // Si alg est non nul, utiliser sa valeur, sinon, utiliser 1 (GTK_JUSTIFY_LEFT) par défaut
+    // Si alg est non nul, utiliser sa valeur, sinon, utiliser 1 (GTK_JUSTIFY_LEFT) par dÃ©faut
     tex->alignement = (alg != 0) ? alg : 1;
 
-    // Si une police est spécifiée, l'utiliser, sinon, utiliser "Sans" par défaut
+    // Si une police est spÃ©cifiÃ©e, l'utiliser, sinon, utiliser "Sans" par dÃ©faut
     if (police)
         strcpy(tex->police, police);
     else
         strcpy(tex->police, "Sans");
 
-    // Si une taille de texte est spécifiée, l'utiliser, sinon, utiliser 10 par défaut
+    // Si une taille de texte est spÃ©cifiÃ©e, l'utiliser, sinon, utiliser 10 par dÃ©faut
     if (size)
         tex->taille_text = size;
     else
         tex->taille_text = 10;
 
-    // Si un style est spécifié, l'utiliser, sinon, utiliser "normal" par défaut
+    // Si un style est spÃ©cifiÃ©, l'utiliser, sinon, utiliser "normal" par dÃ©faut
     if (styl)
         strcpy(tex->style, styl);
     else
         strcpy(tex->style, "normal");
 
-    // Si une couleur de texte est spécifiée, l'utiliser, sinon, utiliser "#000000" (noir) par défaut
+    // Si une couleur de texte est spÃ©cifiÃ©e, l'utiliser, sinon, utiliser "#000000" (noir) par dÃ©faut
     if (couleur)
         strcpy(tex->couleur_text, couleur);
     else
         strcpy(tex->couleur_text, "#000000");
 
-    // Si un soulignement est spécifié, l'utiliser, sinon, utiliser "none" par défaut
+    // Si un soulignement est spÃ©cifiÃ©, l'utiliser, sinon, utiliser "none" par dÃ©faut
     if (underline)
         strcpy(tex->underline, underline);
     else
         strcpy(tex->underline, "none");
 
-    // Initialiser la structure style à partir des valeurs de largeur (w) et hauteur (h)
+    // Initialiser la structure style Ã  partir des valeurs de largeur (w) et hauteur (h)
     tex->s.w = w;
     tex->s.h = h;
 
-    // Renvoyer un pointeur vers la structure texte nouvellement créée
+    // Renvoyer un pointeur vers la structure texte nouvellement crÃ©Ã©e
     return tex;
 }
 
-// Fonction pour appliquer un style à un élément GTK en fonction d'un type donné
+// Fonction pour appliquer un style Ã  un Ã©lÃ©ment GTK en fonction d'un type donnÃ©
 GtkWidget *style_texte(GtkWidget *element, texte *text, gint type)
 {
-    gchar *sUtf8; // Chaîne de caractères pour le formatage du texte en UTF-8
+    gchar *sUtf8; // ChaÃ®ne de caractÃ¨res pour le formatage du texte en UTF-8
 
-    // Utiliser un commutateur (switch) pour gérer différents types d'éléments GTK
+    // Utiliser un commutateur (switch) pour gÃ©rer diffÃ©rents types d'Ã©lÃ©ments GTK
     switch (type)
     {
-        case 1: // Cas où l'élément est un label (GTK_LABEL)
+        case 1: // Cas oÃ¹ l'Ã©lÃ©ment est un label (GTK_LABEL)
             element = gtk_label_new(NULL);
 
-            // Formater le texte avec les propriétés spécifiées dans la structure texte
+            // Formater le texte avec les propriÃ©tÃ©s spÃ©cifiÃ©es dans la structure texte
             sUtf8 = g_strdup_printf("<span  font_desc=\"%d\" style=\"%s\" foreground=\"%s\" font_family=\"%s\" underline=\"%s\">%s</span> ",
                                     text->taille_text, text->style, text->couleur_text, text->police, text->underline, text->text);
 
-            // Appliquer le texte formaté au label
+            // Appliquer le texte formatÃ© au label
             gtk_label_set_markup(GTK_LABEL(element), sUtf8);
 
-            // Libérer la mémoire allouée pour la chaîne sUtf8
+            // LibÃ©rer la mÃ©moire allouÃ©e pour la chaÃ®ne sUtf8
             g_free(sUtf8);
             break;
 
-        // Ajouter d'autres cas pour d'autres types d'éléments GTK si nécessaire
+        // Ajouter d'autres cas pour d'autres types d'Ã©lÃ©ments GTK si nÃ©cessaire
 
     }
 
-    // Renvoyer l'élément GTK avec le style appliqué
+    // Renvoyer l'Ã©lÃ©ment GTK avec le style appliquÃ©
     return element;
 }
 
@@ -301,33 +301,33 @@ GtkWidget *style_texte(GtkWidget *element, texte *text, gint type)
 
 /**********************************************************************************************************/
 
-// Structure pour représenter une étiquette avec un texte stylisé
+// Structure pour reprÃ©senter une Ã©tiquette avec un texte stylisÃ©
 typedef struct Label_et
 {
     GtkWidget *widget;    /// Pointeur vers le widget du label
     GtkWidget *pere;      /// Pointeur vers le parent du label
     texte *text;          /// Texte du label
-    gboolean selectable;  /// Indique si le texte peut être sélectionné
-    gboolean wrap;        /// Indique si le texte peut être coupé en lignes
+    gboolean selectable;  /// Indique si le texte peut Ãªtre sÃ©lectionnÃ©
+    gboolean wrap;        /// Indique si le texte peut Ãªtre coupÃ© en lignes
 } Etiquette;
 
-// Fonction pour initialiser une étiquette (label) avec un texte stylisé
+// Fonction pour initialiser une Ã©tiquette (label) avec un texte stylisÃ©
 Etiquette *initialiser_label(GtkWidget *parent, texte *stext, gboolean select, gboolean coupe)
 {
-    // Allouer dynamiquement de la mémoire pour une nouvelle étiquette
+    // Allouer dynamiquement de la mÃ©moire pour une nouvelle Ã©tiquette
     Etiquette *label = (Etiquette *)g_malloc(sizeof(Etiquette));
 
     // Initialiser les champs de la structure Etiquette
-    label->widget = gtk_label_new(NULL); // Créer un nouveau widget label
+    label->widget = gtk_label_new(NULL); // CrÃ©er un nouveau widget label
     label->pere = parent; // Stocker le widget parent
-    label->text = stext; // Stocker le texte à afficher
+    label->text = stext; // Stocker le texte Ã  afficher
     label->widget = style_texte(label->widget, label->text, 1); // Appliquer le style au label
-    label->selectable = select; // Indiquer si le texte peut être sélectionné
+    label->selectable = select; // Indiquer si le texte peut Ãªtre sÃ©lectionnÃ©
     gtk_label_set_selectable(GTK_LABEL(label->widget), label->selectable);
     label->wrap=coupe;
     gtk_label_set_line_wrap(GTK_LABEL(label->widget), label->wrap);
 
-    // Renvoyer un pointeur vers la structure Etiquette nouvellement créée
+    // Renvoyer un pointeur vers la structure Etiquette nouvellement crÃ©Ã©e
     return label;
 }
 
@@ -344,86 +344,86 @@ void add_label(GtkWidget *pere,texte *text,gboolean selectable,gboolean wrap,gin
 /**********************************************************************************************************/
 
 
-// Structure pour représenter une image avec différentes options
+// Structure pour reprÃ©senter une image avec diffÃ©rentes options
 typedef struct
 {
-    GtkWidget *widget;            // Widget représentant l'image
+    GtkWidget *widget;            // Widget reprÃ©sentant l'image
     GtkWidget *parent;            // Widget parent de l'image
     gint type;                    // Type d'image (1:fichier, 2:animation, 3:stock)
-    const gchar *icon_anim_stock; // Chemin du fichier, nom de l'animation, ou nom d'icône selon le type
-    GdkPixbufAnimation *anim;     // Animation de l'image (utilisé si le type est 2)
-    GtkIconSize size;             // Taille de l'icône (utilisé si le type est 3)
-    style s;                      // Structure pour définir la largeur et la hauteur de l'image
+    const gchar *icon_anim_stock; // Chemin du fichier, nom de l'animation, ou nom d'icÃ´ne selon le type
+    GdkPixbufAnimation *anim;     // Animation de l'image (utilisÃ© si le type est 2)
+    GtkIconSize size;             // Taille de l'icÃ´ne (utilisÃ© si le type est 3)
+    style s;                      // Structure pour dÃ©finir la largeur et la hauteur de l'image
 } image;
 
-// Fonction pour initialiser une image avec des paramètres spécifiques
+// Fonction pour initialiser une image avec des paramÃ¨tres spÃ©cifiques
 image *initialiser_image(GtkWidget *pere, gint t, const gchar *fichier, GtkIconSize sz, gint w, gint h)
 {
-    // Allouer dynamiquement de la mémoire pour une nouvelle structure image
+    // Allouer dynamiquement de la mÃ©moire pour une nouvelle structure image
     image *img = (image *)g_malloc(sizeof(image));
 
     // Initialiser les champs de la structure image
     img->parent = pere;                // Stocker le widget parent
     img->type = t;                     // Stocker le type d'image
-    img->icon_anim_stock = fichier;    // Stocker le chemin du fichier, nom de l'animation, ou nom d'icône
-    img->size = sz;                    // Stocker la taille de l'icône
-    img->s.w = w;                      // Stocker la largeur spécifiée
-    img->s.h = h;                      // Stocker la hauteur spécifiée
+    img->icon_anim_stock = fichier;    // Stocker le chemin du fichier, nom de l'animation, ou nom d'icÃ´ne
+    img->size = sz;                    // Stocker la taille de l'icÃ´ne
+    img->s.w = w;                      // Stocker la largeur spÃ©cifiÃ©e
+    img->s.h = h;                      // Stocker la hauteur spÃ©cifiÃ©e
 
-    // Renvoyer un pointeur vers la structure image nouvellement créée
+    // Renvoyer un pointeur vers la structure image nouvellement crÃ©Ã©e
     return img;
 }
 
-// Fonction pour changer la taille de l'image en fonction des spécifications
+// Fonction pour changer la taille de l'image en fonction des spÃ©cifications
 void change_size(image *img)
 {
     GdkPixbuf *image = gdk_pixbuf_new_from_file(img->icon_anim_stock, NULL);
 
-    // Spécifier la nouvelle largeur et hauteur souhaitées
+    // SpÃ©cifier la nouvelle largeur et hauteur souhaitÃ©es
     int nouvelle_largeur = img->s.w;
     int nouvelle_hauteur = img->s.h;
 
     // Redimensionner l'image
     GdkPixbuf *image_redimensionnee = gdk_pixbuf_scale_simple(image, nouvelle_largeur, nouvelle_hauteur, GDK_INTERP_BILINEAR);
 
-    // Créer un widget GtkImage à partir du GdkPixbuf redimensionné
+    // CrÃ©er un widget GtkImage Ã  partir du GdkPixbuf redimensionnÃ©
     img->widget = gtk_image_new_from_pixbuf(image_redimensionnee);
 
-    // Libérer la mémoire allouée pour les images
+    // LibÃ©rer la mÃ©moire allouÃ©e pour les images
     g_object_unref(image);
     g_object_unref(image_redimensionnee);
 }
 
-// Fonction pour créer l'image en fonction du type spécifié
+// Fonction pour crÃ©er l'image en fonction du type spÃ©cifiÃ©
 void creer_img(image *img)
 {
-    // Instruction switch pour gérer différents types d'images
+    // Instruction switch pour gÃ©rer diffÃ©rents types d'images
     switch (img->type)
     {
     // Cas 1 : Image statique
     case 1:
-        // Vérifier si la largeur ou la hauteur est spécifiée pour le redimensionnement
+        // VÃ©rifier si la largeur ou la hauteur est spÃ©cifiÃ©e pour le redimensionnement
         if (img->s.w || img->s.h)
-            change_size(img); // Appeler une fonction pour changer la taille si elle est spécifiée
+            change_size(img); // Appeler une fonction pour changer la taille si elle est spÃ©cifiÃ©e
         else
         {
-            // Créer un widget d'image GTK et définir sa source à partir d'un fichier
+            // CrÃ©er un widget d'image GTK et dÃ©finir sa source Ã  partir d'un fichier
             img->widget = gtk_image_new();
             gtk_image_set_from_file(img->widget, img->icon_anim_stock);
         }
         break;
 
-    // Cas 2 : Image animée
+    // Cas 2 : Image animÃ©e
     case 2:
-        // Créer une animation GDK Pixbuf à partir d'un fichier
+        // CrÃ©er une animation GDK Pixbuf Ã  partir d'un fichier
         img->anim = gdk_pixbuf_animation_new_from_file(img->icon_anim_stock, NULL);
-        // Créer un widget d'image GTK à partir de l'animation
+        // CrÃ©er un widget d'image GTK Ã  partir de l'animation
         img->widget = gtk_image_new_from_animation(img->anim);
         break;
 
     // Cas 3 : Image stock
     case 3:
-        // Créer un widget d'image GTK et définir sa source à partir d'une icône stock avec une taille spécifiée
+        // CrÃ©er un widget d'image GTK et dÃ©finir sa source Ã  partir d'une icÃ´ne stock avec une taille spÃ©cifiÃ©e
         img->widget = gtk_image_new();
         gtk_image_set_from_stock(img->widget, img->icon_anim_stock, img->size);
         break;
@@ -440,25 +440,25 @@ void add_image(GtkWidget *pere,gint type,const gchar fichier,GtkIconSize size_ic
 /**********************************************************************************************************/
 
 
-// Structure pour représenter un cadre (frame) avec des éléments associés
+// Structure pour reprÃ©senter un cadre (frame) avec des Ã©lÃ©ments associÃ©s
 typedef struct
 {
-    GtkWidget *widget;          // Le widget GTK représentant le cadre
+    GtkWidget *widget;          // Le widget GTK reprÃ©sentant le cadre
     GtkWidget *parent;          // Le parent du cadre
-    gint xligne;                // Position horizontale de l'étiquette dans le cadre
-    gint yligne;                // Position verticale de l'étiquette dans le cadre
-    texte *text;                // Structure de texte associée au cadre
-    GtkWidget *conteneur;       // Le conteneur associé au cadre (peut être un label ou autre)
+    gint xligne;                // Position horizontale de l'Ã©tiquette dans le cadre
+    gint yligne;                // Position verticale de l'Ã©tiquette dans le cadre
+    texte *text;                // Structure de texte associÃ©e au cadre
+    GtkWidget *conteneur;       // Le conteneur associÃ© au cadre (peut Ãªtre un label ou autre)
     GtkShadowType type;         // Type d'ombre du cadre
 } frame;
 
-// Fonction pour initialiser une structure de cadre avec des paramètres spécifiés
+// Fonction pour initialiser une structure de cadre avec des paramÃ¨tres spÃ©cifiÃ©s
 frame *initialiser_frame(GtkWidget *pere, gint x, gint y, texte *t, GtkWidget *fils, GtkShadowType type)
 {
-    // Allouer dynamiquement la mémoire pour la structure de cadre
+    // Allouer dynamiquement la mÃ©moire pour la structure de cadre
     frame *fr = (frame *)g_malloc(sizeof(frame));
 
-    // Initialiser les champs de la structure avec les valeurs spécifiées
+    // Initialiser les champs de la structure avec les valeurs spÃ©cifiÃ©es
     fr->widget = gtk_frame_new(NULL);
     fr->text = t;
     fr->parent = pere;
@@ -467,31 +467,31 @@ frame *initialiser_frame(GtkWidget *pere, gint x, gint y, texte *t, GtkWidget *f
     fr->yligne = y;
     fr->conteneur = fils;
 
-    // Retourner la structure de cadre initialisée
+    // Retourner la structure de cadre initialisÃ©e
     return fr;
 }
 
-// Fonction pour créer un cadre en utilisant les paramètres spécifiés dans la structure
+// Fonction pour crÃ©er un cadre en utilisant les paramÃ¨tres spÃ©cifiÃ©s dans la structure
 void creer_frame(frame *fr)
 {
-    // Créer une chaîne de caractères formatée pour l'étiquette avec des propriétés de texte spécifiées
+    // CrÃ©er une chaÃ®ne de caractÃ¨res formatÃ©e pour l'Ã©tiquette avec des propriÃ©tÃ©s de texte spÃ©cifiÃ©es
     gchar *lab = g_strdup_printf("<span  font_desc=\"%d\" style=\"%s\" foreground=\"%s\" font_family=\"%s\" underline=\"%s\">%s</span> ", fr->text->taille_text, fr->text->style, fr->text->couleur_text, fr->text->police, fr->text->underline, fr->text->text);
 
-    // Créer un widget de label GTK et définir son contenu avec la chaîne formatée
+    // CrÃ©er un widget de label GTK et dÃ©finir son contenu avec la chaÃ®ne formatÃ©e
     GtkWidget *label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(label), lab);
 
-    // Définir le label comme étiquette du cadre
+    // DÃ©finir le label comme Ã©tiquette du cadre
     gtk_frame_set_label_widget(GTK_FRAME(fr->widget), label);
 
     // Assigner le label au conteneur du cadre
     fr->conteneur = label;
 
-    // Si des positions spécifiées, les appliquer à l'étiquette du cadre
+    // Si des positions spÃ©cifiÃ©es, les appliquer Ã  l'Ã©tiquette du cadre
     if (fr->xligne || fr->yligne)
         gtk_frame_set_label_align(GTK_FRAME(fr->widget), fr->xligne, fr->yligne);
 
-    // Si un type d'ombre spécifié, l'appliquer au cadre
+    // Si un type d'ombre spÃ©cifiÃ©, l'appliquer au cadre
     if (fr->type)
         gtk_frame_set_shadow_type(GTK_FRAME(fr->widget), fr->type);
 }
@@ -506,35 +506,35 @@ frame * add_frame(GtkWidget *pere,gfloat xligne,gfloat yligne,texte *tx,GtkWidge
 
 /**********************************************************************************************************/
 
-// Définition de la structure barre_prog
+// DÃ©finition de la structure barre_prog
 typedef struct
 {
     GtkWidget *widget;   // Pointeur vers l'objet de la barre de progression (GtkProgressBar)
     GtkWidget *parent;   // Pointeur vers un widget parent
-    gdouble fraction;    // La fraction actuelle de la barre de progression (peut varier de 0 à 1)
-    gdouble unite;      // L'unité de progression de la barre de progression
+    gdouble fraction;    // La fraction actuelle de la barre de progression (peut varier de 0 Ã  1)
+    gdouble unite;      // L'unitÃ© de progression de la barre de progression
     style s;
 
 } barre_prog;
 
-// Fonction pour initialiser une barre_prog avec des valeurs spécifiées
+// Fonction pour initialiser une barre_prog avec des valeurs spÃ©cifiÃ©es
 barre_prog *initialiser_barre_prog(GtkWidget *pere,gdouble dfr, gdouble unt,gint w,gint h)
 {
-    // Allocation dynamique de mémoire pour une nouvelle structure barre_prog
+    // Allocation dynamique de mÃ©moire pour une nouvelle structure barre_prog
     barre_prog *ProgressBar = (barre_prog *)g_malloc(sizeof(barre_prog));
 
-    // Création d'une nouvelle barre de progression GtkProgressBar et assignation au champ widget
+    // CrÃ©ation d'une nouvelle barre de progression GtkProgressBar et assignation au champ widget
     ProgressBar->widget = gtk_progress_bar_new();
     ProgressBar->parent=pere;
     ProgressBar->s.w=w;
     ProgressBar->s.h=h;
     if(ProgressBar->s.w || ProgressBar->s.h)
           gtk_widget_set_size_request(ProgressBar->widget, ProgressBar->s.w, ProgressBar->s.h);
-    // Initialisation des champs fraction et unite avec les valeurs spécifiées
+    // Initialisation des champs fraction et unite avec les valeurs spÃ©cifiÃ©es
     ProgressBar->unite = unt;
     ProgressBar->fraction = dfr;
 
-    // Retour de la structure initialisée
+    // Retour de la structure initialisÃ©e
     return ProgressBar;
 }
 
@@ -550,7 +550,7 @@ void progression_animation(barre_prog *pWidget, gpointer data)
 
     /* Acquisition du grab sur la barre de progression pour optimiser et bloquer les actions de l'utilisateur */
     gtk_grab_add(pWidget->widget);
-    printf("Début de l'animation de progression\n");
+    printf("DÃ©but de l'animation de progression\n");
 
     // Boucle d'animation
     for (i; i < iTotal; ++i)
@@ -560,27 +560,27 @@ void progression_animation(barre_prog *pWidget, gpointer data)
         /* Modification de la valeur de la barre de progression */
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(pWidget->widget), dFraction);
 
-        /* Permet à GTK+ de traiter les événements en cours */
+        /* Permet Ã  GTK+ de traiter les Ã©vÃ©nements en cours */
         gtk_main_iteration();
     }
 
-    /* Libération du grab sur la barre de progression à la fin de l'animation */
+    /* LibÃ©ration du grab sur la barre de progression Ã  la fin de l'animation */
     gtk_grab_remove(pWidget->widget);
 }
 
 void MettreAJourBarreProgression(barre_prog *pWidget, gpointer data)
 {
-   // Récupération de la valeur actuelle de la barre de progression
+   // RÃ©cupÃ©ration de la valeur actuelle de la barre de progression
    gdouble valeurCourante = gtk_progress_bar_get_fraction(GTK_PROGRESS_BAR(pWidget->widget));
 
-   // Ajout de l'unité à la valeur actuelle
+   // Ajout de l'unitÃ© Ã  la valeur actuelle
    valeurCourante += pWidget->unite;
 
-   // Si la nouvelle valeur dépasse 1.0, revenir à 0.0
+   // Si la nouvelle valeur dÃ©passe 1.0, revenir Ã  0.0
    if (valeurCourante > 1.0)
       valeurCourante = 0.0;
 
-   // Mise à jour de la valeur de la barre de progression dans la structure
+   // Mise Ã  jour de la valeur de la barre de progression dans la structure
    pWidget->fraction = valeurCourante;
 
    // Modification de la valeur de la barre de progression
@@ -596,11 +596,11 @@ void add_progress_bar(GtkWidget *pere,gdouble dfr,gdouble unite,gint x,gint y,gb
     {
         case 0:
         case 1:
-               pButton = gtk_button_new_with_label("ajouter unite");
+               GtkWidget *pButton = gtk_button_new_with_label("ajouter unite");
                gtk_box_pack_start(GTK_BOX(pMainVBox), pButton, TRUE, FALSE, 0);
                g_signal_connect_swapped(G_OBJECT(pButton), "clicked", G_CALLBACK(OnButton),bar);
                if(type==1) break;
-        case 2:pButton1 = gtk_button_new_with_label(GTK_STOCK_REFRESH);
+        case 2: GtkWidget *pButton1 = gtk_button_new_with_label(GTK_STOCK_REFRESH);
                 gtk_box_pack_start(GTK_BOX(pMainVBox), pButton1, TRUE, FALSE, 0);
                g_signal_connect_swapped(G_OBJECT(pButton1), "clicked", G_CALLBACK(OnButton1),bar);
                break;
