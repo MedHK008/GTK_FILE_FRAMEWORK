@@ -1,87 +1,87 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
-// Structure pour représenter une image avec différentes options
+#ifndef IMAGE_H_INCLUDED
+#define IMAGE_H_INCLUDED
+
+// Structure pour reprï¿½senter une image avec diffï¿½rentes options
 typedef struct
 {
-    GtkWidget *widget;            // Widget représentant l'image
+    GtkWidget *widget;            // Widget reprï¿½sentant l'image
     GtkWidget *parent;            // Widget parent de l'image
     gint type;                    // Type d'image (1:fichier, 2:animation, 3:stock)
-    const gchar *icon_anim_stock; // Chemin du fichier, nom de l'animation, ou nom d'icône selon le type
-    GdkPixbufAnimation *anim;     // Animation de l'image (utilisé si le type est 2)
-    GtkIconSize size;             // Taille de l'icône (utilisé si le type est 3)
+    const gchar *icon_anim_stock; // Chemin du fichier, nom de l'animation, ou nom d'icï¿½ne selon le type
+    GdkPixbufAnimation *anim;     // Animation de l'image (utilisï¿½ si le type est 2)
+    GtkIconSize size;             // Taille de l'icï¿½ne (utilisï¿½ si le type est 3)
     gint h;
     gint w;
 } image;
 
-// Fonction pour initialiser une image avec des paramètres spécifiques
+// Fonction pour initialiser une image avec des paramï¿½tres spï¿½cifiques
 image *initialiser_image(GtkWidget *pere, gint t, const gchar *fichier, GtkIconSize sz, gint w, gint h)
 {
-    // Allouer dynamiquement de la mémoire pour une nouvelle structure image
+    // Allouer dynamiquement de la mï¿½moire pour une nouvelle structure image
     image *img = (image *)g_malloc(sizeof(image));
 
     // Initialiser les champs de la structure image
     img->parent = pere;                // Stocker le widget parent
     img->type = t;                     // Stocker le type d'image
-    img->icon_anim_stock = fichier;    // Stocker le chemin du fichier, nom de l'animation, ou nom d'icône
-    img->size = sz;                    // Stocker la taille de l'icône
-    img->w = w;                      // Stocker la largeur spécifiée
-    img->h = h;                      // Stocker la hauteur spécifiée
+    img->icon_anim_stock = fichier;    // Stocker le chemin du fichier, nom de l'animation, ou nom d'icï¿½ne
+    img->size = sz;                    // Stocker la taille de l'icï¿½ne
+    img->w = w;                      // Stocker la largeur spï¿½cifiï¿½e
+    img->h = h;                      // Stocker la hauteur spï¿½cifiï¿½e
 
-    // Renvoyer un pointeur vers la structure image nouvellement créée
+    // Renvoyer un pointeur vers la structure image nouvellement crï¿½ï¿½e
     return img;
 }
 
-// Fonction pour changer la taille de l'image en fonction des spécifications
+// Fonction pour changer la taille de l'image en fonction des spï¿½cifications
 void change_size(image *img)
 {
     GdkPixbuf *image = gdk_pixbuf_new_from_file(img->icon_anim_stock, NULL);
 
-    // Spécifier la nouvelle largeur et hauteur souhaitées
+    // Spï¿½cifier la nouvelle largeur et hauteur souhaitï¿½es
     int nouvelle_largeur = img->w;
     int nouvelle_hauteur = img->h;
 
     // Redimensionner l'image
     GdkPixbuf *image_redimensionnee = gdk_pixbuf_scale_simple(image, nouvelle_largeur, nouvelle_hauteur, GDK_INTERP_BILINEAR);
 
-    // Créer un widget GtkImage à partir du GdkPixbuf redimensionné
+    // Crï¿½er un widget GtkImage ï¿½ partir du GdkPixbuf redimensionnï¿½
     img->widget = gtk_image_new_from_pixbuf(image_redimensionnee);
 
-    // Libérer la mémoire allouée pour les images
+    // Libï¿½rer la mï¿½moire allouï¿½e pour les images
     g_object_unref(image);
     g_object_unref(image_redimensionnee);
 }
 
-// Fonction pour créer l'image en fonction du type spécifié
+// Fonction pour crï¿½er l'image en fonction du type spï¿½cifiï¿½
 void creer_img(image *img)
 {
-    // Instruction switch pour gérer différents types d'images
+    // Instruction switch pour gï¿½rer diffï¿½rents types d'images
     switch (img->type)
     {
     // Cas 1 : Image statique
     case 1:
-        // Vérifier si la largeur ou la hauteur est spécifiée pour le redimensionnement
+        // Vï¿½rifier si la largeur ou la hauteur est spï¿½cifiï¿½e pour le redimensionnement
         if (img->w || img->h)
-            change_size(img); // Appeler une fonction pour changer la taille si elle est spécifiée
+            change_size(img); // Appeler une fonction pour changer la taille si elle est spï¿½cifiï¿½e
         else
         {
-            // Créer un widget d'image GTK et définir sa source à partir d'un fichier
+            // Crï¿½er un widget d'image GTK et dï¿½finir sa source ï¿½ partir d'un fichier
             img->widget = gtk_image_new();
             gtk_image_set_from_file(img->widget, img->icon_anim_stock);
         }
         break;
 
-    // Cas 2 : Image animée
+    // Cas 2 : Image animï¿½e
     case 2:
-        // Créer une animation GDK Pixbuf à partir d'un fichier
+        // Crï¿½er une animation GDK Pixbuf ï¿½ partir d'un fichier
         img->anim = gdk_pixbuf_animation_new_from_file(img->icon_anim_stock, NULL);
-        // Créer un widget d'image GTK à partir de l'animation
+        // Crï¿½er un widget d'image GTK ï¿½ partir de l'animation
         img->widget = gtk_image_new_from_animation(img->anim);
         break;
 
     // Cas 3 : Image stock
     case 3:
-        // Créer un widget d'image GTK et définir sa source à partir d'une icône stock avec une taille spécifiée
+        // Crï¿½er un widget d'image GTK et dï¿½finir sa source ï¿½ partir d'une icï¿½ne stock avec une taille spï¿½cifiï¿½e
         img->widget = gtk_image_new();
         gtk_image_set_from_stock(img->widget, img->icon_anim_stock, img->size);
         break;
@@ -95,3 +95,5 @@ void add_image(GtkWidget *pere,gint type,const gchar fichier,GtkIconSize size_ic
     gtk_fixed_put(GTK_FIXED(pere),img->widget,x,y);
 }
 
+
+#endif // IMAGE_H_INCLUDED

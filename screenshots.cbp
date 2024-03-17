@@ -33,13 +33,17 @@
 		</Compiler>
 		<Unit filename="boutton_normal.h" />
 		<Unit filename="cocher.h" />
+		<Unit filename="frame.h" />
+		<Unit filename="image.h" />
+		<Unit filename="label.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
-		<Unit filename="moujahid.h" />
 		<Unit filename="onglet.h" />
+		<Unit filename="prog_bar.h" />
 		<Unit filename="radio.h" />
+		<Unit filename="scrollbar.h" />
 		<Unit filename="spin_button.h" />
 		<Unit filename="tool_bar.h" />
 		<Unit filename="window.h" />

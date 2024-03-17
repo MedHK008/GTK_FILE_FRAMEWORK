@@ -1,54 +1,53 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
+#ifndef SCROLLBAR_H_INCLUDED
+#define SCROLLBAR_H_INCLUDED
 
-// Définition de la structure barre_def
+// Dï¿½finition de la structure barre_def
 typedef struct
 {
-    GtkWidget *widget;   // Widget de la barre de défilement
-    GtkWidget *parent;   // Widget parent de la barre de défilement
-    GtkWidget *fils;     // Widget fils (conteneur) associé à la barre de défilement
-    guint hpolic;        // Politique de défilement horizontal (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
-    guint vpolic;        // Politique de défilement vertical (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
+    GtkWidget *widget;   // Widget de la barre de dï¿½filement
+    GtkWidget *parent;   // Widget parent de la barre de dï¿½filement
+    GtkWidget *fils;     // Widget fils (conteneur) associï¿½ ï¿½ la barre de dï¿½filement
+    guint hpolic;        // Politique de dï¿½filement horizontal (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
+    guint vpolic;        // Politique de dï¿½filement vertical (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
     gint w; // Largeur
     gint h; // Hauteur
 
 } barre_def;
 
-// Fonction pour initialiser une barre de défilement avec des paramètres spécifiés
+// Fonction pour initialiser une barre de dï¿½filement avec des paramï¿½tres spï¿½cifiï¿½s
 barre_def *initialiser_barre_def(gint w, gint h, guint hpl, guint vpl)
 {
-    // Allocation dynamique de mémoire pour une nouvelle structure barre_def
+    // Allocation dynamique de mï¿½moire pour une nouvelle structure barre_def
     barre_def *scrBar = (barre_def *)g_malloc(sizeof(barre_def));
 
-    // Création d'une nouvelle barre de défilement GtkScrolledWindow
+    // Crï¿½ation d'une nouvelle barre de dï¿½filement GtkScrolledWindow
     scrBar->widget = gtk_scrolled_window_new(NULL, NULL);
 
     // Initialisation des champs de style
     scrBar->h = h;
     scrBar->w = w;
 
-    // Initialisation des champs de politique de défilement
+    // Initialisation des champs de politique de dï¿½filement
     scrBar->hpolic = hpl;
     scrBar->vpolic = vpl;
 
-    // Retour de la structure initialisée
+    // Retour de la structure initialisï¿½e
     return scrBar;
 }
 
-// Fonction pour créer une barre de défilement avec un conteneur associé
+// Fonction pour crï¿½er une barre de dï¿½filement avec un conteneur associï¿½
 void creer_scrollbar(barre_def *scrbar, GtkWidget *pere, GtkWidget *conteneur)
 {
-    // Ajout de la barre de défilement en tant que fils du widget parent
+    // Ajout de la barre de dï¿½filement en tant que fils du widget parent
     gtk_container_add(GTK_CONTAINER(pere), scrbar->widget);
 
-    // Définition de la taille demandée pour la barre de défilement
+    // Dï¿½finition de la taille demandï¿½e pour la barre de dï¿½filement
     gtk_widget_set_size_request(scrbar->widget, scrbar->w, scrbar->h);
 
-    // Ajout du conteneur à la barre de défilement avec une vue
+    // Ajout du conteneur ï¿½ la barre de dï¿½filement avec une vue
     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scrbar->widget), conteneur);
 
-    // Définition des politiques de défilement (horizontal et vertical)
+    // Dï¿½finition des politiques de dï¿½filement (horizontal et vertical)
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrbar->widget), scrbar->vpolic, scrbar->hpolic);
 }
 
@@ -58,3 +57,6 @@ void add_scrollbar(GtkWidget *grand_pere,GtkWidget *fixed,gint w,gint h,guint hp
     creer_scrollbar(scrolled,grand_pere,fixed);
 }
 
+
+
+#endif // SCROLLBAR_H_INCLUDED

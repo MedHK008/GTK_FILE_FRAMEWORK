@@ -11,14 +11,16 @@
 #define NB_RADIO 3
 
 ///les bibliothèque des widget
-//#include "menu.h"
 #include "window.h"
 #include "boutton_normal.h"
 #include "cocher.h"
 #include "radio.h"
 #include "spin_button.h"
 #include "onglet.h"
-//#include "tool_bar.h"
+
+#include "prog_bar.h"
+#include "image.h"
+
 
 GtkWidget *create_fixed()
 {
@@ -92,8 +94,15 @@ int main(int argc, char *argv[]) {
 
 ///le menu
 //    add_menu(fixed1);
+    add_progress_bar(fixed1,2.3,1.0,1000,500,1,250,250);
+    add_image(fixed1,1,"img_example.jpeg",GTK_ICON_SIZE_BUTTON,100,100,250,250);
     add_onglet(notebook,fixed1,"onglet 2");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
+
+
+
     add_onglet(notebook,fixed2,"onglet 3");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
+
+
     add_onglet(notebook,fixed3,"onglet 4");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
 
 

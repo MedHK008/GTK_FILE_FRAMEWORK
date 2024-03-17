@@ -1,14 +1,14 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
-// Définition de la structure item_bar
+#ifndef TOOL_BAR_H_INCLUDED
+#define TOOL_BAR_H_INCLUDED
+
+// Dï¿½finition de la structure item_bar
 typedef struct
 {
-    GtkWidget *widget; // Widget associé à l'élément de la barre d'outils
+    GtkWidget *widget; // Widget associï¿½ ï¿½ l'ï¿½lï¿½ment de la barre d'outils
     gint h;
     gint w;
-    const gchar *icon;    // Icône associée à l'élément
-    gchar *text;      // Texte associé à l'élément
+    const gchar *icon;    // Icï¿½ne associï¿½e ï¿½ l'ï¿½lï¿½ment
+    gchar *text;      // Texte associï¿½ ï¿½ l'ï¿½lï¿½ment
     GtkWidget *parent;
     gint pos;//// Position dans la barre d'outils
 
@@ -16,7 +16,7 @@ typedef struct
 
 
 
-// Définition de la structure toolbar
+// Dï¿½finition de la structure toolbar
 typedef struct
 {
     GtkWidget *widget;   // Widget de la barre d'outils
@@ -27,7 +27,7 @@ typedef struct
 
 } toolbar;
 
-// Fonction pour initialiser une barre d'outils avec une orientation spécifiée
+// Fonction pour initialiser une barre d'outils avec une orientation spï¿½cifiï¿½e
 toolbar *initialiser_toolbar(GtkWidget *pere,gchar orientation,gint w,gint h,GtkToolbarStyle stl,GtkIconSize siz)
 {
     toolbar *tbar = (toolbar *)g_malloc(sizeof(toolbar));
@@ -46,19 +46,19 @@ toolbar *initialiser_toolbar(GtkWidget *pere,gchar orientation,gint w,gint h,Gtk
     return tbar;
 }
 
-// Fonction pour définir l'orientation d'une barre d'outils
+// Fonction pour dï¿½finir l'orientation d'une barre d'outils
 toolbar *creer_toolbar(toolbar *tbar)
 {
-    // Vérifie si l'orientation de la barre d'outils est horizontale
+    // Vï¿½rifie si l'orientation de la barre d'outils est horizontale
     if (tbar->orientation == 'h' || tbar->orientation == 'H')
-        // Si oui, définir l'orientation de la barre d'outils comme horizontale
+        // Si oui, dï¿½finir l'orientation de la barre d'outils comme horizontale
         gtk_orientable_set_orientation(GTK_TOOLBAR(tbar), GTK_ORIENTATION_HORIZONTAL);
     else
-        // Sinon, définir l'orientation de la barre d'outils comme verticale
+        // Sinon, dï¿½finir l'orientation de la barre d'outils comme verticale
      gtk_orientable_set_orientation(GTK_TOOLBAR(tbar),GTK_ORIENTATION_VERTICAL);
 }
 
-//Fonction pour initialiser un élément de la barre d'outils à partir d'une icône stockée
+//Fonction pour initialiser un ï¿½lï¿½ment de la barre d'outils ï¿½ partir d'une icï¿½ne stockï¿½e
 item_bar *initialiser_item_stock(GtkWidget *pere,const gchar *icon, gchar *lab, gint w, gint h, gint pos)
 {
     item_bar *item = (item_bar *)g_malloc(sizeof(item_bar));
@@ -66,7 +66,7 @@ item_bar *initialiser_item_stock(GtkWidget *pere,const gchar *icon, gchar *lab, 
     item->text = lab;
     item->icon = icon;
 
-    // Allocation de mémoire pour la structure style et initialisation de ses champs
+    // Allocation de mï¿½moire pour la structure style et initialisation de ses champs
     item->pos = pos;
     item->w = w;
     item->h = h;
@@ -74,20 +74,20 @@ item_bar *initialiser_item_stock(GtkWidget *pere,const gchar *icon, gchar *lab, 
     return item;
 }
 
-// Fonction pour créer un GtkToolItem à partir d'un item_bar et l'ajouter à la barre d'outils
+// Fonction pour crï¿½er un GtkToolItem ï¿½ partir d'un item_bar et l'ajouter ï¿½ la barre d'outils
 void creer_toolitem(item_bar *toolitem, toolbar *bar,gboolean choix,void (*fonction)(GtkWidget*,gpointer),gchar *type,gpointer data)
 {
-    /* Création à partir de stock */
+    /* Crï¿½ation ï¿½ partir de stock */
     GtkWidget *box = gtk_vbox_new(FALSE, 5);
     GtkWidget *button = gtk_tool_button_new_from_stock(toolitem->icon);
     //gtk_toolbar_insert(GTK_TOOLBAR(ptoolbar), button, -1);
     gtk_box_pack_start(GTK_BOX(box), button, FALSE, FALSE, 0);
-    // Ajoutez une étiquette au conteneur
+    // Ajoutez une ï¿½tiquette au conteneur
     GtkWidget *label = gtk_label_new(toolitem->text);
     gtk_box_pack_start(GTK_BOX(box), label, FALSE, FALSE, 0);
     gtk_container_add(GTK_CONTAINER(toolitem->widget), box);
     gtk_toolbar_insert(GTK_TOOLBAR(bar->widget), toolitem->widget, toolitem->pos);
-    // Définir la taille du widget si la largeur et la hauteur sont spécifiées
+    // Dï¿½finir la taille du widget si la largeur et la hauteur sont spï¿½cifiï¿½es
     if (toolitem->w && toolitem->h)
         gtk_widget_set_size_request(toolitem->widget, toolitem->w, toolitem->h);
     if(choix)
@@ -96,21 +96,21 @@ void creer_toolitem(item_bar *toolitem, toolbar *bar,gboolean choix,void (*fonct
 }
 
 
-// Fonction pour créer et ajouter un séparateur à une barre d'outils (toolbar) GTK
-// Paramètres :
-// - sep : Un pointeur vers le widget de séparateur (sera initialisé dans la fonction)
-// - pere : Le widget parent, généralement une barre d'outils GTK (GtkWidget *)
-// - pos : La position à laquelle insérer le séparateur dans la barre d'outils (gint)
-// Retourne le widget de séparateur créé
+// Fonction pour crï¿½er et ajouter un sï¿½parateur ï¿½ une barre d'outils (toolbar) GTK
+// Paramï¿½tres :
+// - sep : Un pointeur vers le widget de sï¿½parateur (sera initialisï¿½ dans la fonction)
+// - pere : Le widget parent, gï¿½nï¿½ralement une barre d'outils GTK (GtkWidget *)
+// - pos : La position ï¿½ laquelle insï¿½rer le sï¿½parateur dans la barre d'outils (gint)
+// Retourne le widget de sï¿½parateur crï¿½ï¿½
 GtkWidget *creer_separ(GtkWidget *sep, GtkWidget *pere, gint pos)
 {
-    // Créer un nouveau séparateur
+    // Crï¿½er un nouveau sï¿½parateur
     sep = gtk_separator_tool_item_new();
 
-    // Insérer le séparateur dans la barre d'outils à la position spécifiée
+    // Insï¿½rer le sï¿½parateur dans la barre d'outils ï¿½ la position spï¿½cifiï¿½e
     gtk_toolbar_insert(GTK_TOOLBAR(pere), sep, pos);
 
-    // Renvoyer le widget de séparateur créé
+    // Renvoyer le widget de sï¿½parateur crï¿½ï¿½
     return sep;
 }
 
@@ -130,3 +130,6 @@ void add_item_bar(toolbar *bar_pere,const gchar *icon,gchar *label,gint w,gint h
 }
 
 
+
+
+#endif // TOOL_BAR_H_INCLUDED

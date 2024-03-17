@@ -1,27 +1,26 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
-#include "label.h"
+#ifndef FRAME_H_INCLUDED
+#define FRAME_H_INCLUDED
 
-// Structure pour représenter un cadre (frame) avec des éléments associés
+
+// Structure pour reprï¿½senter un cadre (frame) avec des ï¿½lï¿½ments associï¿½s
 typedef struct
 {
-    GtkWidget *widget;          // Le widget GTK représentant le cadre
+    GtkWidget *widget;          // Le widget GTK reprï¿½sentant le cadre
     GtkWidget *parent;          // Le parent du cadre
-    gint xligne;                // Position horizontale de l'étiquette dans le cadre
-    gint yligne;                // Position verticale de l'étiquette dans le cadre
-    texte *text;                // Structure de texte associée au cadre
-    GtkWidget *conteneur;       // Le conteneur associé au cadre (peut être un label ou autre)
+    gint xligne;                // Position horizontale de l'ï¿½tiquette dans le cadre
+    gint yligne;                // Position verticale de l'ï¿½tiquette dans le cadre
+    texte *text;                // Structure de texte associï¿½e au cadre
+    GtkWidget *conteneur;       // Le conteneur associï¿½ au cadre (peut ï¿½tre un label ou autre)
     GtkShadowType type;         // Type d'ombre du cadre
 } frame;
 
-// Fonction pour initialiser une structure de cadre avec des paramètres spécifiés
+// Fonction pour initialiser une structure de cadre avec des paramï¿½tres spï¿½cifiï¿½s
 frame *initialiser_frame(GtkWidget *pere, gint x, gint y, texte *t, GtkWidget *fils, GtkShadowType type)
 {
-    // Allouer dynamiquement la mémoire pour la structure de cadre
+    // Allouer dynamiquement la mï¿½moire pour la structure de cadre
     frame *fr = (frame *)g_malloc(sizeof(frame));
 
-    // Initialiser les champs de la structure avec les valeurs spécifiées
+    // Initialiser les champs de la structure avec les valeurs spï¿½cifiï¿½es
     fr->widget = gtk_frame_new(NULL);
     fr->text = t;
     fr->parent = pere;
@@ -30,31 +29,31 @@ frame *initialiser_frame(GtkWidget *pere, gint x, gint y, texte *t, GtkWidget *f
     fr->yligne = y;
     fr->conteneur = fils;
 
-    // Retourner la structure de cadre initialisée
+    // Retourner la structure de cadre initialisï¿½e
     return fr;
 }
 
-// Fonction pour créer un cadre en utilisant les paramètres spécifiés dans la structure
+// Fonction pour crï¿½er un cadre en utilisant les paramï¿½tres spï¿½cifiï¿½s dans la structure
 void creer_frame(frame *fr)
 {
-    // Créer une chaîne de caractères formatée pour l'étiquette avec des propriétés de texte spécifiées
+    // Crï¿½er une chaï¿½ne de caractï¿½res formatï¿½e pour l'ï¿½tiquette avec des propriï¿½tï¿½s de texte spï¿½cifiï¿½es
     gchar *lab = g_strdup_printf("<span  font_desc=\"%d\" style=\"%s\" foreground=\"%s\" font_family=\"%s\" underline=\"%s\">%s</span> ", fr->text->taille_text, fr->text->style, fr->text->couleur_text, fr->text->police, fr->text->underline, fr->text->text);
 
-    // Créer un widget de label GTK et définir son contenu avec la chaîne formatée
+    // Crï¿½er un widget de label GTK et dï¿½finir son contenu avec la chaï¿½ne formatï¿½e
     GtkWidget *label = gtk_label_new(NULL);
     gtk_label_set_markup(GTK_LABEL(label), lab);
 
-    // Définir le label comme étiquette du cadre
+    // Dï¿½finir le label comme ï¿½tiquette du cadre
     gtk_frame_set_label_widget(GTK_FRAME(fr->widget), label);
 
     // Assigner le label au conteneur du cadre
     fr->conteneur = label;
 
-    // Si des positions spécifiées, les appliquer à l'étiquette du cadre
+    // Si des positions spï¿½cifiï¿½es, les appliquer ï¿½ l'ï¿½tiquette du cadre
     if (fr->xligne || fr->yligne)
         gtk_frame_set_label_align(GTK_FRAME(fr->widget), fr->xligne, fr->yligne);
 
-    // Si un type d'ombre spécifié, l'appliquer au cadre
+    // Si un type d'ombre spï¿½cifiï¿½, l'appliquer au cadre
     if (fr->type)
         gtk_frame_set_shadow_type(GTK_FRAME(fr->widget), fr->type);
 }
@@ -67,3 +66,6 @@ frame * add_frame(GtkWidget *pere,gfloat xligne,gfloat yligne,texte *tx,GtkWidge
     return fr;
 }
 
+
+
+#endif // FRAME_H_INCLUDED

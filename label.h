@@ -1,18 +1,18 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
+#ifndef LABEL_H_INCLUDED
+#define LABEL_H_INCLUDED
+
 
 typedef struct
 {
      gchar text[200];
      guint alignement;/* L'alignement du texte
-    1: GTK_JUSTIFY_LEFT pour aligner le texte à gauche (par défaut);
-    2: GTK_JUSTIFY_RIGHT pour aligner le texte à droite ;
+    1: GTK_JUSTIFY_LEFT pour aligner le texte ï¿½ gauche (par dï¿½faut);
+    2: GTK_JUSTIFY_RIGHT pour aligner le texte ï¿½ droite ;
     3: GTK_JUSTIFY_CENTER pour centrer le texte ;
-    4:GTK_JUSTIFY_FILL pour justifier le texte*/
+    4:GTK_JUSTIFY_FILL pour justifierï¿½leï¿½texte*/
     gint w; // Largeur
     gint h; // Hauteur
-    gchar police[30];//Pour definir la police utilsée*/
+    gchar police[30];//Pour definir la police utilsï¿½e*/
     gint taille_text;/* Pour definir la taille du texte*/
     gchar style[15];//Pour definir le style du texte*/
     gchar epaisseur[15]; /*Pour definir l'epaisseur du texte : small , large , Xlaarge... */
@@ -26,80 +26,80 @@ typedef struct
 // Fonction pour initialiser une structure texte
 texte *initialiser_texte(gint w, gint h, gchar lb[200], guint alg, gchar police[30], gint size, gchar styl[15], gchar epaisseur[15], gchar couleur[15], gchar background[15], gchar underline[15])
 {
-    // Allouer dynamiquement de la mémoire pour une nouvelle structure texte
+    // Allouer dynamiquement de la mï¿½moire pour une nouvelle structure texte
     texte *tex = (texte *)g_malloc(sizeof(texte));
 
-    // Copier le texte passé en paramètre dans la structure texte
+    // Copier le texte passï¿½ en paramï¿½tre dans la structure texte
     strcpy(tex->text, lb);
 
-    // Si alg est non nul, utiliser sa valeur, sinon, utiliser 1 (GTK_JUSTIFY_LEFT) par défaut
+    // Si alg est non nul, utiliser sa valeur, sinon, utiliser 1 (GTK_JUSTIFY_LEFT) par dï¿½faut
     tex->alignement = (alg != 0) ? alg : 1;
 
-    // Si une police est spécifiée, l'utiliser, sinon, utiliser "Sans" par défaut
+    // Si une police est spï¿½cifiï¿½e, l'utiliser, sinon, utiliser "Sans" par dï¿½faut
     if (police)
         strcpy(tex->police, police);
     else
         strcpy(tex->police, "Sans");
 
-    // Si une taille de texte est spécifiée, l'utiliser, sinon, utiliser 10 par défaut
+    // Si une taille de texte est spï¿½cifiï¿½e, l'utiliser, sinon, utiliser 10 par dï¿½faut
     if (size)
         tex->taille_text = size;
     else
         tex->taille_text = 10;
 
-    // Si un style est spécifié, l'utiliser, sinon, utiliser "normal" par défaut
+    // Si un style est spï¿½cifiï¿½, l'utiliser, sinon, utiliser "normal" par dï¿½faut
     if (styl)
         strcpy(tex->style, styl);
     else
         strcpy(tex->style, "normal");
 
-    // Si une couleur de texte est spécifiée, l'utiliser, sinon, utiliser "#000000" (noir) par défaut
+    // Si une couleur de texte est spï¿½cifiï¿½e, l'utiliser, sinon, utiliser "#000000" (noir) par dï¿½faut
     if (couleur)
         strcpy(tex->couleur_text, couleur);
     else
         strcpy(tex->couleur_text, "#000000");
 
-    // Si un soulignement est spécifié, l'utiliser, sinon, utiliser "none" par défaut
+    // Si un soulignement est spï¿½cifiï¿½, l'utiliser, sinon, utiliser "none" par dï¿½faut
     if (underline)
         strcpy(tex->underline, underline);
     else
         strcpy(tex->underline, "none");
 
-    // Initialiser la structure style à partir des valeurs de largeur (w) et hauteur (h)
+    // Initialiser la structure style ï¿½ partir des valeurs de largeur (w) et hauteur (h)
     tex->w = w;
     tex->h = h;
 
-    // Renvoyer un pointeur vers la structure texte nouvellement créée
+    // Renvoyer un pointeur vers la structure texte nouvellement crï¿½ï¿½e
     return tex;
 }
 
-// Fonction pour appliquer un style à un élément GTK en fonction d'un type donné
+// Fonction pour appliquer un style ï¿½ un ï¿½lï¿½ment GTK en fonction d'un type donnï¿½
 GtkWidget *style_texte(GtkWidget *element, texte *text, gint type)
 {
-    gchar *sUtf8; // Chaîne de caractères pour le formatage du texte en UTF-8
+    gchar *sUtf8; // Chaï¿½ne de caractï¿½res pour le formatage du texte en UTF-8
 
-    // Utiliser un commutateur (switch) pour gérer différents types d'éléments GTK
+    // Utiliser un commutateur (switch) pour gï¿½rer diffï¿½rents types d'ï¿½lï¿½ments GTK
     switch (type)
     {
-        case 1: // Cas où l'élément est un label (GTK_LABEL)
+        case 1: // Cas oï¿½ l'ï¿½lï¿½ment est un label (GTK_LABEL)
             element = gtk_label_new(NULL);
 
-            // Formater le texte avec les propriétés spécifiées dans la structure texte
+            // Formater le texte avec les propriï¿½tï¿½s spï¿½cifiï¿½es dans la structure texte
             sUtf8 = g_strdup_printf("<span  font_desc=\"%d\" style=\"%s\" foreground=\"%s\" font_family=\"%s\" underline=\"%s\">%s</span> ",
                                     text->taille_text, text->style, text->couleur_text, text->police, text->underline, text->text);
 
-            // Appliquer le texte formaté au label
+            // Appliquer le texte formatï¿½ au label
             gtk_label_set_markup(GTK_LABEL(element), sUtf8);
 
-            // Libérer la mémoire allouée pour la chaîne sUtf8
+            // Libï¿½rer la mï¿½moire allouï¿½e pour la chaï¿½ne sUtf8
             g_free(sUtf8);
             break;
 
-        // Ajouter d'autres cas pour d'autres types d'éléments GTK si nécessaire
+        // Ajouter d'autres cas pour d'autres types d'ï¿½lï¿½ments GTK si nï¿½cessaire
 
     }
 
-    // Renvoyer l'élément GTK avec le style appliqué
+    // Renvoyer l'ï¿½lï¿½ment GTK avec le style appliquï¿½
     return element;
 }
 
@@ -107,33 +107,33 @@ GtkWidget *style_texte(GtkWidget *element, texte *text, gint type)
 
 /**********************************************************************************************************/
 
-// Structure pour représenter une étiquette avec un texte stylisé
+// Structure pour reprï¿½senter une ï¿½tiquette avec un texte stylisï¿½
 typedef struct Label_et
 {
     GtkWidget *widget;    /// Pointeur vers le widget du label
     GtkWidget *pere;      /// Pointeur vers le parent du label
     texte *text;          /// Texte du label
-    gboolean selectable;  /// Indique si le texte peut être sélectionné
-    gboolean wrap;        /// Indique si le texte peut être coupé en lignes
+    gboolean selectable;  /// Indique si le texte peut ï¿½tre sï¿½lectionnï¿½
+    gboolean wrap;        /// Indique si le texte peut ï¿½tre coupï¿½ en lignes
 } Etiquette;
 
-// Fonction pour initialiser une étiquette (label) avec un texte stylisé
+// Fonction pour initialiser une ï¿½tiquette (label) avec un texte stylisï¿½
 Etiquette *initialiser_label(GtkWidget *parent, texte *stext, gboolean select, gboolean coupe)
 {
-    // Allouer dynamiquement de la mémoire pour une nouvelle étiquette
+    // Allouer dynamiquement de la mï¿½moire pour une nouvelle ï¿½tiquette
     Etiquette *label = (Etiquette *)g_malloc(sizeof(Etiquette));
 
     // Initialiser les champs de la structure Etiquette
-    label->widget = gtk_label_new(NULL); // Créer un nouveau widget label
+    label->widget = gtk_label_new(NULL); // Crï¿½er un nouveau widget label
     label->pere = parent; // Stocker le widget parent
-    label->text = stext; // Stocker le texte à afficher
+    label->text = stext; // Stocker le texte ï¿½ afficher
     label->widget = style_texte(label->widget, label->text, 1); // Appliquer le style au label
-    label->selectable = select; // Indiquer si le texte peut être sélectionné
+    label->selectable = select; // Indiquer si le texte peut ï¿½tre sï¿½lectionnï¿½
     gtk_label_set_selectable(GTK_LABEL(label->widget), label->selectable);
     label->wrap=coupe;
     gtk_label_set_line_wrap(GTK_LABEL(label->widget), label->wrap);
 
-    // Renvoyer un pointeur vers la structure Etiquette nouvellement créée
+    // Renvoyer un pointeur vers la structure Etiquette nouvellement crï¿½ï¿½e
     return label;
 }
 
@@ -146,3 +146,6 @@ void add_label(GtkWidget *pere,texte *text,gboolean selectable,gboolean wrap,gin
 
 }
 
+
+
+#endif // LABEL_H_INCLUDED

@@ -1,36 +1,35 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <gtk/gtk.h>
-// Définition de la structure barre_prog
+#ifndef PROG_BAR_H_INCLUDED
+#define PROG_BAR_H_INCLUDED
+
 typedef struct
 {
     GtkWidget *widget;   // Pointeur vers l'objet de la barre de progression (GtkProgressBar)
     GtkWidget *parent;   // Pointeur vers un widget parent
-    gdouble fraction;    // La fraction actuelle de la barre de progression (peut varier de 0 à 1)
-    gdouble unite;      // L'unité de progression de la barre de progression
+    gdouble fraction;    // La fraction actuelle de la barre de progression (peut varier de 0 ï¿½ 1)
+    gdouble unite;      // L'unitï¿½ de progression de la barre de progression
     gint h;
     gint w;
 
 } barre_prog;
 
-// Fonction pour initialiser une barre_prog avec des valeurs spécifiées
+// Fonction pour initialiser une barre_prog avec des valeurs spï¿½cifiï¿½es
 barre_prog *initialiser_barre_prog(GtkWidget *pere,gdouble dfr, gdouble unt,gint w,gint h)
 {
-    // Allocation dynamique de mémoire pour une nouvelle structure barre_prog
+    // Allocation dynamique de mï¿½moire pour une nouvelle structure barre_prog
     barre_prog *ProgressBar = (barre_prog *)g_malloc(sizeof(barre_prog));
 
-    // Création d'une nouvelle barre de progression GtkProgressBar et assignation au champ widget
+    // Crï¿½ation d'une nouvelle barre de progression GtkProgressBar et assignation au champ widget
     ProgressBar->widget = gtk_progress_bar_new();
     ProgressBar->parent=pere;
     ProgressBar->w=w;
     ProgressBar->h=h;
     if(ProgressBar->w || ProgressBar->h)
           gtk_widget_set_size_request(ProgressBar->widget, ProgressBar->w, ProgressBar->h);
-    // Initialisation des champs fraction et unite avec les valeurs spécifiées
+    // Initialisation des champs fraction et unite avec les valeurs spï¿½cifiï¿½es
     ProgressBar->unite = unt;
     ProgressBar->fraction = dfr;
 
-    // Retour de la structure initialisée
+    // Retour de la structure initialisï¿½e
     return ProgressBar;
 }
 
@@ -46,7 +45,7 @@ void progression_animation(barre_prog *pWidget, gpointer data)
 
     /* Acquisition du grab sur la barre de progression pour optimiser et bloquer les actions de l'utilisateur */
     gtk_grab_add(pWidget->widget);
-    printf("Début de l'animation de progression\n");
+    printf("Dï¿½but de l'animation de progression\n");
 
     // Boucle d'animation
     for (i; i < iTotal; ++i)
@@ -56,27 +55,27 @@ void progression_animation(barre_prog *pWidget, gpointer data)
         /* Modification de la valeur de la barre de progression */
         gtk_progress_bar_set_fraction(GTK_PROGRESS_BAR(pWidget->widget), dFraction);
 
-        /* Permet à GTK+ de traiter les événements en cours */
+        /* Permet ï¿½ GTK+ de traiter les ï¿½vï¿½nements en cours */
         gtk_main_iteration();
     }
 
-    /* Libération du grab sur la barre de progression à la fin de l'animation */
+    /* Libï¿½ration du grab sur la barre de progression ï¿½ la fin de l'animation */
     gtk_grab_remove(pWidget->widget);
 }
 
 void OnButton(barre_prog *pWidget, gpointer data)
 {
-   // Récupération de la valeur actuelle de la barre de progression
+   // Rï¿½cupï¿½ration de la valeur actuelle de la barre de progression
    gdouble valeurCourante = gtk_progress_bar_get_fraction(GTK_PROGRESS_BAR(pWidget->widget));
 
-   // Ajout de l'unité à la valeur actuelle
+   // Ajout de l'unitï¿½ ï¿½ la valeur actuelle
    valeurCourante += pWidget->unite;
 
-   // Si la nouvelle valeur dépasse 1.0, revenir à 0.0
+   // Si la nouvelle valeur dï¿½passe 1.0, revenir ï¿½ 0.0
    if (valeurCourante > 1.0)
       valeurCourante = 0.0;
 
-   // Mise à jour de la valeur de la barre de progression dans la structure
+   // Mise ï¿½ jour de la valeur de la barre de progression dans la structure
    pWidget->fraction = valeurCourante;
 
    // Modification de la valeur de la barre de progression
@@ -105,4 +104,4 @@ void add_progress_bar(GtkWidget *pere,gdouble dfr,gdouble unite,gint x,gint y,gb
 
 }
 
-
+#endif // PROG_BAR_H_INCLUDED
