@@ -56,12 +56,21 @@ void onglet_activer(Onglet *onglet) {
 }
 
 
-void add_onglet(GtkWidget* notebook,GtkWidget* fixed,gchar* label)
-{
-    gtk_notebook_set_tab_pos(GTK_NOTEBOOK(notebook), GTK_POS_TOP);
-    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), fixed, gtk_label_new(label));
+#include <gtk/gtk.h>
 
+void add_onglet(GtkWidget* notebook, GtkWidget* fixed, gchar* label, const char* bgcolor) {
+    // Create a label widget with the specified text
+    GtkWidget* tab_label = gtk_label_new(label);
+
+    // Set the background color of the tab label
+    GdkRGBA color;
+    gdk_rgba_parse(&color, bgcolor); // Parse the background color string
+    gtk_widget_override_background_color(tab_label, GTK_STATE_FLAG_NORMAL, &color);
+
+    // Append the fixed widget with the custom tab label to the notebook
+    gtk_notebook_append_page(GTK_NOTEBOOK(notebook), fixed, tab_label);
 }
+
 
 
 void add_to_window(GtkWidget* notebook,GtkWidget* window)

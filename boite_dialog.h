@@ -1,97 +1,98 @@
 #ifndef BOITE_DIALOG_H_INCLUDED
 #define BOITE_DIALOG_H_INCLUDED
 
-// Structure représentant une boîte de dialogue
+
+// Structure reprï¿½sentant une boï¿½te de dialogue
 typedef struct {
-    GtkWidget *dialogue;        // Le widget de la boîte de dialogue GTK
-    GtkWidget *zone_contenu;    // Le widget de la zone de contenu de la boîte de dialogue
-    GtkWindow *parent;          // La fenêtre parente de la boîte de dialogue
-    gchar *titre;               // Le titre de la boîte de dialogue
-    gchar *icone;               // Le chemin vers l'icône de la boîte de dialogue
-    gint modal;                 // Indique si la boîte de dialogue est modale (TRUE) ou non modale (FALSE)
-    gint hauteur;               // La hauteur de la boîte de dialogue
-    gint largeur;               // La largeur de la boîte de dialogue
-    gint position;              // La position de la boîte de dialogue sur l'écran (par exemple, GTK_WIN_POS_CENTER)
-    gint etat;                  // L'état de la boîte de dialogue (0: normal, 1: actif, 2: pré-sélectionné, 3: sélectionné, 4: insensible)
-    gchar *couleur_fond;        // La couleur de fond de la boîte de dialogue
+    GtkWidget *dialogue;        // Le widget de la boï¿½te de dialogue GTK
+    GtkWidget *zone_contenu;    // Le widget de la zone de contenu de la boï¿½te de dialogue
+    GtkWindow *parent;          // La fenï¿½tre parente de la boï¿½te de dialogue
+    gchar *titre;               // Le titre de la boï¿½te de dialogue
+    gchar *icone;               // Le chemin vers l'icï¿½ne de la boï¿½te de dialogue
+    gint modal;                 // Indique si la boï¿½te de dialogue est modale (TRUE) ou non modale (FALSE)
+    gint hauteur;               // La hauteur de la boï¿½te de dialogue
+    gint largeur;               // La largeur de la boï¿½te de dialogue
+    gint position;              // La position de la boï¿½te de dialogue sur l'ï¿½cran (par exemple, GTK_WIN_POS_CENTER)
+    gint etat;                  // L'ï¿½tat de la boï¿½te de dialogue (0: normal, 1: actif, 2: prï¿½-sï¿½lectionnï¿½, 3: sï¿½lectionnï¿½, 4: insensible)
+    gchar *couleur_fond;        // La couleur de fond de la boï¿½te de dialogue
 } BoiteDialogue;
 
-// Fonction pour créer et initialiser une structure BoiteDialogue
+// Fonction pour crï¿½er et initialiser une structure BoiteDialogue
 BoiteDialogue *creer_initialiser_boite_dialogue(GtkWindow *parent, gchar *titre, gchar *icone, guint modal, gint hauteur, gint largeur, gint etat, gchar *couleur_fond) {
-    // Allouer de la mémoire pour la structure BoiteDialogue
+    // Allouer de la mï¿½moire pour la structure BoiteDialogue
     BoiteDialogue *BD = (BoiteDialogue *)g_malloc(sizeof(BoiteDialogue));
-    BD->zone_contenu = NULL; // Initialiser le pointeur de la zone de contenu à NULL
-    BD->dialogue = NULL; // Initialiser le pointeur du dialogue à NULL
-    BD->icone = NULL; // Initialiser le pointeur de l'icône à NULL
-    BD->titre = NULL; // Initialiser le pointeur du titre à NULL
+    BD->zone_contenu = NULL; // Initialiser le pointeur de la zone de contenu ï¿½ NULL
+    BD->dialogue = NULL; // Initialiser le pointeur du dialogue ï¿½ NULL
+    BD->icone = NULL; // Initialiser le pointeur de l'icï¿½ne ï¿½ NULL
+    BD->titre = NULL; // Initialiser le pointeur du titre ï¿½ NULL
 
-    if (!BD) { // Vérifier si l'allocation de mémoire a échoué
+    if (!BD) { // Vï¿½rifier si l'allocation de mï¿½moire a ï¿½chouï¿½
         printf("\nERREUR\n"); // Afficher un message d'erreur
         exit(-1); // Quitter le programme avec un code d'erreur
     }
 
-    if (titre) { // Vérifier si le titre est défini
-        BD->titre = g_strdup(titre); // Dupliquer la chaîne de caractères du titre
-        if (!BD->titre) { // Vérifier si la duplication a échoué
+    if (titre) { // Vï¿½rifier si le titre est dï¿½fini
+        BD->titre = g_strdup(titre); // Dupliquer la chaï¿½ne de caractï¿½res du titre
+        if (!BD->titre) { // Vï¿½rifier si la duplication a ï¿½chouï¿½
             printf("\nERREUR\n"); // Afficher un message d'erreur
             exit(-1); // Quitter le programme avec un code d'erreur
         }
     }
 
-    if (icone) { // Vérifier si l'icône est définie
-        BD->icone = g_strdup(icone); // Dupliquer la chaîne de caractères de l'icône
-        if (!BD->icone) { // Vérifier si la duplication a échoué
+    if (icone) { // Vï¿½rifier si l'icï¿½ne est dï¿½finie
+        BD->icone = g_strdup(icone); // Dupliquer la chaï¿½ne de caractï¿½res de l'icï¿½ne
+        if (!BD->icone) { // Vï¿½rifier si la duplication a ï¿½chouï¿½
             printf("\nErreur\n"); // Afficher un message d'erreur
             exit(-1); // Quitter le programme avec un code d'erreur
         }
     }
 
-    if (couleur_fond) { // Vérifier si la couleur de fond est définie
-        BD->couleur_fond = g_strdup(couleur_fond); // Dupliquer la chaîne de caractères de la couleur de fond
-        if (!BD->couleur_fond) { // Vérifier si la duplication a échoué
+    if (couleur_fond) { // Vï¿½rifier si la couleur de fond est dï¿½finie
+        BD->couleur_fond = g_strdup(couleur_fond); // Dupliquer la chaï¿½ne de caractï¿½res de la couleur de fond
+        if (!BD->couleur_fond) { // Vï¿½rifier si la duplication a ï¿½chouï¿½
             printf("\nERREUR\n"); // Afficher un message d'erreur
             exit(-1); // Quitter le programme avec un code d'erreur
         }
     }
 
-    BD->parent = parent; // Affecter la fenêtre parente
-    BD->modal = modal; // Indiquer si la boîte de dialogue est modale
-    BD->hauteur = hauteur; // Définir la hauteur de la boîte de dialogue
-    BD->largeur = largeur; // Définir la largeur de la boîte de dialogue
+    BD->parent = parent; // Affecter la fenï¿½tre parente
+    BD->modal = modal; // Indiquer si la boï¿½te de dialogue est modale
+    BD->hauteur = hauteur; // Dï¿½finir la hauteur de la boï¿½te de dialogue
+    BD->largeur = largeur; // Dï¿½finir la largeur de la boï¿½te de dialogue
 
-    return BD; // Retourner la structure BoiteDialogue initialisée
+    return BD; // Retourner la structure BoiteDialogue initialisï¿½e
 }
 
-// Fonction pour définir les attributs visuels de la boîte de dialogue
+// Fonction pour dï¿½finir les attributs visuels de la boï¿½te de dialogue
 void definir_attributs_boite_dialogue(BoiteDialogue *BD) {
-    GdkRGBA couleur; // Déclaration d'une structure de couleur GTK
-    BD->dialogue = gtk_dialog_new(); // Créer une nouvelle boîte de dialogue GTK
-    gtk_window_set_title(GTK_WINDOW(BD->dialogue), BD->titre); // Définir le titre de la boîte de dialogue
-    gtk_window_set_icon_from_file(GTK_WINDOW(BD->dialogue), BD->icone, NULL); // Définir l'icône de la boîte de dialogue à partir d'un fichier
-    BD->zone_contenu = gtk_fixed_new(); // Obtenir la zone de contenu de la boîte de dialogue
-    gtk_widget_set_size_request(BD->dialogue, BD->largeur, BD->hauteur); // Définir la taille de la boîte de dialogue
-    gtk_window_set_transient_for(GTK_WINDOW(BD->dialogue), GTK_WINDOW(BD->parent)); // Définir la fenêtre parente de la boîte de dialogue
+    GdkRGBA couleur; // Dï¿½claration d'une structure de couleur GTK
+    BD->dialogue = gtk_dialog_new(); // Crï¿½er une nouvelle boï¿½te de dialogue GTK
+    gtk_window_set_title(GTK_WINDOW(BD->dialogue), BD->titre); // Dï¿½finir le titre de la boï¿½te de dialogue
+    gtk_window_set_icon_from_file(GTK_WINDOW(BD->dialogue), BD->icone, NULL); // Dï¿½finir l'icï¿½ne de la boï¿½te de dialogue ï¿½ partir d'un fichier
+    BD->zone_contenu = gtk_fixed_new(); // Obtenir la zone de contenu de la boï¿½te de dialogue
+    gtk_widget_set_size_request(BD->dialogue, BD->largeur, BD->hauteur); // Dï¿½finir la taille de la boï¿½te de dialogue
+    gtk_window_set_transient_for(GTK_WINDOW(BD->dialogue), GTK_WINDOW(BD->parent)); // Dï¿½finir la fenï¿½tre parente de la boï¿½te de dialogue
 
-    if (BD->modal == 1) // Vérifier si la boîte de dialogue est modale
-        gtk_window_set_modal(GTK_WINDOW(BD->dialogue), TRUE); // Définir la boîte de dialogue comme modale
+    if (BD->modal == 1) // Vï¿½rifier si la boï¿½te de dialogue est modale
+        gtk_window_set_modal(GTK_WINDOW(BD->dialogue), TRUE); // Dï¿½finir la boï¿½te de dialogue comme modale
 
     gdk_rgba_parse(&couleur, BD->couleur_fond); // Convertir la couleur de fond en format GTK
 
-    // Appliquer la couleur de fond en fonction de l'état de la boîte de dialogue
+    // Appliquer la couleur de fond en fonction de l'ï¿½tat de la boï¿½te de dialogue
     switch (BD->etat) {
-    case 0: // État normal
+    case 0: // ï¿½tat normal
         gtk_widget_override_background_color(BD->dialogue, GTK_STATE_FLAG_NORMAL, &couleur);
         break;
-    case 1: // État actif
+    case 1: // ï¿½tat actif
         gtk_widget_override_background_color(BD->dialogue, GTK_STATE_FLAG_ACTIVE, &couleur);
         break;
-    case 2: // État de surbrillance
+    case 2: // ï¿½tat de surbrillance
         gtk_widget_override_background_color(BD->dialogue, GTK_STATE_FLAG_PRELIGHT, &couleur);
         break;
-    case 3: // État sélectionné
+    case 3: // ï¿½tat sï¿½lectionnï¿½
         gtk_widget_override_background_color(BD->dialogue, GTK_STATE_FLAG_SELECTED, &couleur);
         break;
-    case 4: // État insensible
+    case 4: // ï¿½tat insensible
         gtk_widget_override_background_color(BD->dialogue, GTK_STATE_FLAG_INSENSITIVE, &couleur);
         break;
     }
@@ -103,13 +104,13 @@ BoiteDialogue* Add_boite_dialogue(GtkWindow *parent, gchar *titre, gchar *icone,
     return (BoiteDialogue*)(bd);
 
 }
-// Fonction pour ajouter un bouton à une boîte de dialogue
+// Fonction pour ajouter un bouton ï¿½ une boï¿½te de dialogue
 void ajouter_a_boite_dialogue(BoiteDialogue*dialogue,GtkWidget*element , gint x , gint y) {
-    if (dialogue && element) // Vérifier si le libellé du bouton et la boîte de dialogue sont définis
-        gtk_fixed_put(dialogue->zone_contenu,element,x,y); // Ajouter un bouton avec le libellé spécifié et la réponse associée à la boîte de dialogue
+    if (dialogue && element) // Vï¿½rifier si le libellï¿½ du bouton et la boï¿½te de dialogue sont dï¿½finis
+        gtk_fixed_put(dialogue->zone_contenu,element,x,y); // Ajouter un bouton avec le libellï¿½ spï¿½cifiï¿½ et la rï¿½ponse associï¿½e ï¿½ la boï¿½te de dialogue
 }
 
-// Fonction pour ajouter une action à une boîte de dialogue
+// Fonction pour ajouter une action ï¿½ une boï¿½te de dialogue
 //GTK_RESPONSE_NONE : -1
 //GTK_RESPONSE_REJECT : -2
 //GTK_RESPONSE_ACCEPT : -3
@@ -122,10 +123,9 @@ void ajouter_a_boite_dialogue(BoiteDialogue*dialogue,GtkWidget*element , gint x 
 //GTK_RESPONSE_APPLY : -10
 //GTK_RESPONSE_HELP : -11
 void ajouter_action_a_boite_dialogue(BoiteDialogue *dialogue, GtkWidget *widget, gint reponse) {
-    if (widget && dialogue) // Vérifier si le widget et la boîte de dialogue sont définis
-        gtk_dialog_add_action_widget(dialogue->dialogue, widget, reponse); // Ajouter une action associée au widget à la boîte de dialogue
+    if (widget && dialogue) // Vï¿½rifier si le widget et la boï¿½te de dialogue sont dï¿½finis
+        gtk_dialog_add_action_widget(dialogue->dialogue, widget, reponse); // Ajouter une action associï¿½e au widget ï¿½ la boï¿½te de dialogue
 }
-
 
 
 

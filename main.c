@@ -23,8 +23,15 @@
 #include "frame.h"
 #include "scrollbar.h"
 #include "tool_bar.h"
+
+
+#include "boite_dialog.h"
+#include "entry.h"
+
+
 GtkWidget *create_fixed()
 {
+
     GtkFixed *fixed = GTK_FIXED(gtk_fixed_new());
     return ((GtkWidget*)fixed);
 }
@@ -101,16 +108,16 @@ int main(int argc, char *argv[]) {
     add_spin(fixed, 50, 650, 0.0, 100.0, 1.0, 1.0, 30, 150, 1, 2, 1, 1, "#00ff00", 1.0);
     add_spin(fixed, 250, 650, 0.0, 100.0, 50.0, 5.0, 30, 30, 1, 2, 1, 1, "#ff0000", 1.0);
     add_spin(fixed, 450, 650, 0.0, 100.0, 100.0, 100.0, 50, 150, 1, 2, 1, 1, "#ffffff", 1.0);
-    add_onglet(notebook,fixed,"onglet 1");
+    add_onglet(notebook,fixed,"onglet 1","#FF00FF");
 /***********************************************les bouttons fin*****************************************/
 
 
     add_progress_bar(fixed1,2.3,1.0,1000,500,1,250,250);
     add_image(fixed1,1,"gtklogo.png",GTK_ICON_SIZE_BUTTON,50,50,250,250);
-    add_onglet(notebook,fixed1,"onglet 2");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
+    add_onglet(notebook,fixed1,"onglet 2","#00FFFF");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
 
     add_label(fixed2,txt,TRUE,FALSE,350,350);
-    add_onglet(notebook,fixed2,"onglet 3");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
+    add_onglet(notebook,fixed2,"onglet 3","#FFFF00");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
 
 /*************************************frame example******************************************************************/
 //    add_button(fixed3,"first",NULL,100,100,"#FF0000",0,100);
@@ -148,6 +155,11 @@ int main(int argc, char *argv[]) {
 
     frame* frm=add_frame(fixed,0.5,1.0,txt,NULL,GTK_SHADOW_IN,800,0);
     gtk_container_add(GTK_CONTAINER(frm->widget),fixed3);
+
+
+    Add_Entry(fixed4,"azerty",50,0,1,"A","a",200,50,1,"#FFFFFF",500,500);
+    add_onglet(notebook,fixed4,"onglet4","#0000FF");
+
 /*************************************frame example fin******************************************************************/
 
 

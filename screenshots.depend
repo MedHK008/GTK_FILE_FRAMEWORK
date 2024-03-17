@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710677595 source:e:\screenshots\main.c
+1710679885 source:e:\screenshots\main.c
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -16,6 +16,8 @@
 	"frame.h"
 	"scrollbar.h"
 	"tool_bar.h"
+	"boite_dialog.h"
+	"entry.h"
 
 1704104925 c:\msys64\mingw64\include\stdio.h
 	<corecrt_stdio_config.h>
@@ -3288,7 +3290,8 @@
 
 1710542660 e:\screenshots\spin_button.h
 
-1710543827 e:\screenshots\onglet.h
+1710679885 e:\screenshots\onglet.h
+	<gtk/gtk.h>
 
 1710634294 e:\screenshots\tool_bar.h
 
@@ -3301,4 +3304,8 @@
 1710634291 e:\screenshots\frame.h
 
 1710636189 e:\screenshots\scrollbar.h
+
+1710677831 e:\screenshots\boite_dialog.h
+
+1710678149 e:\screenshots\entry.h
 
