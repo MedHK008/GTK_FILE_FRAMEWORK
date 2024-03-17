@@ -31,8 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="boite_dialog.h" />
 		<Unit filename="boutton_normal.h" />
 		<Unit filename="cocher.h" />
+		<Unit filename="entry.h" />
 		<Unit filename="frame.h" />
 		<Unit filename="image.h" />
 		<Unit filename="label.h" />
