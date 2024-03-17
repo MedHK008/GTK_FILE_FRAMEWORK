@@ -2,19 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="boutton_normal.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1828" topLine="89" />
-		</Cursor>
-	</File>
 	<File name="spin_button.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1824" topLine="46" />
 		</Cursor>
 	</File>
-	<File name="prog_bar.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="radio.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2081" topLine="42" />
+			<Cursor1 position="2077" topLine="29" />
 		</Cursor>
 	</File>
 	<File name="cocher.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -24,7 +19,17 @@
 	</File>
 	<File name="main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="4703" topLine="106" />
+			<Cursor1 position="5117" topLine="99" />
+		</Cursor>
+	</File>
+	<File name="boutton_normal.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1828" topLine="89" />
+		</Cursor>
+	</File>
+	<File name="frame.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2612" topLine="48" />
 		</Cursor>
 	</File>
 	<File name="menu.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -32,9 +37,9 @@
 			<Cursor1 position="4553" topLine="111" />
 		</Cursor>
 	</File>
-	<File name="tool_bar.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="onglet.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1326" topLine="39" />
+			<Cursor1 position="2041" topLine="35" />
 		</Cursor>
 	</File>
 	<File name="scrollbar.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -42,9 +47,14 @@
 			<Cursor1 position="2351" topLine="23" />
 		</Cursor>
 	</File>
-	<File name="window.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="tool_bar.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2512" topLine="71" />
+			<Cursor1 position="1326" topLine="39" />
+		</Cursor>
+	</File>
+	<File name="prog_bar.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2081" topLine="42" />
 		</Cursor>
 	</File>
 	<File name="image.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -52,19 +62,9 @@
 			<Cursor1 position="3936" topLine="4" />
 		</Cursor>
 	</File>
-	<File name="radio.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="window.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2077" topLine="29" />
-		</Cursor>
-	</File>
-	<File name="onglet.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2041" topLine="35" />
-		</Cursor>
-	</File>
-	<File name="frame.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2612" topLine="48" />
+			<Cursor1 position="2512" topLine="71" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
