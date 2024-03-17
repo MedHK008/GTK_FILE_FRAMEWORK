@@ -11,7 +11,6 @@ typedef struct
     guint vpolic;        // Politique de d�filement vertical (GTK_POLICY_AUTOMATIC, GTK_POLICY_ALWAYS, GTK_POLICY_NEVER)
     gint w; // Largeur
     gint h; // Hauteur
-
 } barre_def;
 
 // Fonction pour initialiser une barre de d�filement avec des param�tres sp�cifi�s

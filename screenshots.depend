@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710635242 source:e:\screenshots\main.c
+1710637337 source:e:\screenshots\main.c
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -13,6 +13,8 @@
 	"onglet.h"
 	"prog_bar.h"
 	"image.h"
+	"label.h"
+	"frame.h"
 
 1704104925 c:\msys64\mingw64\include\stdio.h
 	<corecrt_stdio_config.h>
@@ -3290,5 +3292,9 @@
 
 1710634301 e:\screenshots\prog_bar.h
 
-1710634300 e:\screenshots\image.h
+1710636376 e:\screenshots\image.h
+
+1710634298 e:\screenshots\label.h
+
+1710634291 e:\screenshots\frame.h
 

@@ -88,7 +88,7 @@ void creer_img(image *img)
     }
 }
 
-void add_image(GtkWidget *pere,gint type,const gchar fichier,GtkIconSize size_icon,gint w,gint h,gint x,gint y)
+void add_image(GtkWidget *pere,gint type,const gchar* fichier,GtkIconSize size_icon,gint w,gint h,gint x,gint y)
 {
     image *img=initialiser_image(pere,type,fichier,size_icon,w,h);
     creer_img(img);

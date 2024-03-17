@@ -20,8 +20,10 @@
 
 #include "prog_bar.h"
 #include "image.h"
-
-
+#include "label.h"
+#include "frame.h"
+#include "scrollbar.h"
+#include "tool_bar.h"
 GtkWidget *create_fixed()
 {
     GtkFixed *fixed = GTK_FIXED(gtk_fixed_new());
@@ -38,6 +40,7 @@ int main(int argc, char *argv[]) {
     GtkWidget* fixed1 = create_fixed();///fiha le menu bohdo db
     GtkWidget* fixed2 = create_fixed();///khawya
     GtkWidget* fixed3 = create_fixed();///khawya
+    GtkWidget* fixed4 = create_fixed();///khawya
 
 
 /****************************************************** les bouttons***********************************/
@@ -87,23 +90,21 @@ int main(int argc, char *argv[]) {
     add_spin(fixed, 0, 800, 0.0, 100.0, 1.0, 1.0, 30, 150, 1, 2, 1, 1, "#00ff00", 1.0);
     add_spin(fixed, 200, 800, 0.0, 100.0, 50.0, 5.0, 30, 30, 1, 2, 1, 1, "#ff0000", 1.0);
     add_spin(fixed, 400, 800, 0.0, 100.0, 100.0, 100.0, 50, 150, 1, 2, 1, 1, "#ffffff", 1.0);
-
-    add_onglet(notebook,fixed,"onglet 1");
+//    add_onglet(notebook,fixed,"onglet 1");
 /***********************************************les bouttons fin*****************************************/
 
 
-///le menu
-//    add_menu(fixed1);
     add_progress_bar(fixed1,2.3,1.0,1000,500,1,250,250);
-    add_image(fixed1,1,"img_example.jpeg",GTK_ICON_SIZE_BUTTON,100,100,250,250);
+    add_image(fixed1,1,"gtklogo.png",GTK_ICON_SIZE_BUTTON,100,100,250,250);
     add_onglet(notebook,fixed1,"onglet 2");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
 
-
-
+    texte* txt=initialiser_texte(20,30,"izenfoizfn",NULL,NULL,25,NULL,NULL,"red","#00FF00",NULL);
+    add_label(fixed2,txt,TRUE,FALSE,350,350);
     add_onglet(notebook,fixed2,"onglet 3");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
-
-
+    frame* frm=add_frame(fixed3,0.5,1.0,txt,NULL,GTK_SHADOW_IN,540,0);
+    gtk_container_add(GTK_CONTAINER(frm->widget),fixed);
     add_onglet(notebook,fixed3,"onglet 4");///pour ajouter le fixed dans l'onglet (tqdr dir bo wla tableau wla contenair, ay widget)
+
 
 
 
