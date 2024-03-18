@@ -2,6 +2,43 @@
 #define LABEL_H_INCLUDED
 
 
+/**
+ fonts for the label : 
+ 
+Sans-Serif Fonts:
+
+Arial
+Helvetica
+Calibri
+Verdana
+Tahoma
+Trebuchet MS
+Open Sans
+Serif Fonts:
+
+Times New Roman
+Georgia
+Garamond
+Cambria
+Palatino
+Baskerville
+Monospace (Fixed-width) Fonts:
+
+Courier New
+Consolas
+Monaco
+Liberation Mono
+Inconsolata
+Source Code Pro
+Other Common Fonts:
+
+Impact
+Comic Sans MS
+Lucida Console
+Lucida Sans Unicode
+ **/
+
+
 typedef struct
 {
      gchar text[200];
