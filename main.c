@@ -29,6 +29,8 @@
 #include "entry.h"
 
 
+#include "menu.h"
+
 GtkWidget *create_fixed()
 {
 
@@ -161,7 +163,6 @@ int main(int argc, char *argv[]) {
     add_onglet(notebook,fixed4,"onglet4","#0000FF");
 
 /*************************************frame example fin******************************************************************/
-
 
 
 
