@@ -126,7 +126,9 @@ void ajouter_action_a_boite_dialogue(BoiteDialogue *dialogue, GtkWidget *widget,
     if (widget && dialogue) // V�rifier si le widget et la bo�te de dialogue sont d�finis
         gtk_dialog_add_action_widget(dialogue->dialogue, widget, reponse); // Ajouter une action associ�e au widget � la bo�te de dialogue
 }
-
+void on_button_clicked(GtkWidget *widget, gpointer data) {
+    gtk_widget_show_all(GTK_WIDGET(data));
+}
 
 
 #endif // BOITE_DIALOG_H_INCLUDED

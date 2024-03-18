@@ -223,68 +223,60 @@ menu *add_menu_item(menu *parent_menu, guint type, gchar *label, gboolean isSubm
     return new_menu_item;
 }
 
-int main(int argc, char *argv[]) {
-    gtk_init(&argc, &argv);
-
-    // Création de la fenêtre principale
-    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(GTK_WINDOW(window), "Menu Example");
-    gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
-
-    GtkWidget *Fixed = gtk_fixed_new();
-    gtk_container_add(GTK_CONTAINER(window), Fixed);
-
-    // Ajout de la barre de menus à la fenêtre principale
-    menubar *maMenuBar = add_menu_bar(Fixed, 0);
-
-    // Exemple d'ajout d'un menu "File"
-    menu *menu_file = add_menu(maMenuBar, "File");
-    // Exemple d'ajout d'éléments de menu à "File"
-    menu *menu_open = add_menu_item(menu_file, 0, "_New", TRUE, FALSE, NULL);
-       add_menu_item(menu_open, 0, "empty file", FALSE, FALSE, NULL);
-       add_menu_item(menu_open, 2, "sep", FALSE, FALSE, NULL);
-       add_menu_item(menu_open, 0, "project...", FALSE, FALSE, NULL);
-       add_menu_item(menu_file, 0, "_Save", FALSE, FALSE, NULL);
-
-    // Exemple d'ajout d'un menu "Edit"
-    menu *menu_edit = add_menu(maMenuBar, "Edit");
-        // Exemple d'ajout d'éléments de menu à "Edit"
-        add_menu_item(menu_edit,0, "C_ut", FALSE, FALSE, NULL);
-        add_menu_item(menu_edit, 0, "_Copy", FALSE, TRUE, NULL);
-        add_menu_item(menu_edit, 0, "_Paste", FALSE, FALSE, NULL);
-
-     menu *menu_view = add_menu(maMenuBar, "View");
-       menu *menu_tool = add_menu_item(menu_view,0, "_Toolbars", TRUE, FALSE, NULL);
-           add_menu_item(menu_tool,0, "Fit toolbar", FALSE, FALSE, NULL);
-           add_menu_item(menu_tool, 0, "OPtimise toolbar", FALSE, FALSE, NULL);
-           add_menu_item(menu_tool, 2, NULL, FALSE, FALSE, NULL);
-           add_menu_item(menu_tool,1, "Compiler", FALSE, FALSE, NULL);
-           add_menu_item(menu_tool, 1, "Debuger", FALSE, FALSE, NULL);
-           add_menu_item(menu_view, 1, "Status_bar", FALSE, FALSE, NULL);
-       add_menu_item(menu_view,1, "_Logs", FALSE, FALSE, NULL);
-       add_menu_item(menu_view, 1, "_Manager", FALSE, FALSE, NULL);
-       add_menu_item(menu_view, 1, "Status_bar", FALSE, FALSE, NULL);
-
-    // Exemple d'ajout d'un menu "Language"
-    menu *menu_language = add_menu(maMenuBar, "Language");
-    // Exemple d'ajout d'éléments radio à "Language"
-       add_menu_item(menu_language, 4, "C/C++", FALSE, TRUE, NULL);
-       add_menu_item(menu_language, 4, "Python", FALSE, FALSE, NULL);
-       add_menu_item(menu_language, 4, "Java", FALSE, FALSE, NULL);
-       add_menu_item(menu_language, 4, "C#", FALSE, FALSE, NULL);
-       add_menu_item(menu_language, 4, "JavaScript", FALSE, FALSE, NULL);
-       add_menu_item(menu_language, 4, "PHP", FALSE, FALSE, NULL);
-
-    //Connexion du signal destroy pour quitter l'application
-    g_signal_connect(G_OBJECT(window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
-
-    // Affichage de la fenêtre et exécution de la boucle principale GTK
-    gtk_widget_show_all(window);
-    gtk_main();
-
-    return 0;
-}
-
+//int main(int argc, char *argv[]) {
+//    gtk_init(&argc, &argv);
+//
+//    // Création de la fenêtre principale
+//    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+//    gtk_window_set_title(GTK_WINDOW(window), "Menu Example");
+//    gtk_window_set_default_size(GTK_WINDOW(window), 400, 300);
+//
+//    GtkWidget *Fixed = gtk_fixed_new();
+//    gtk_container_add(GTK_CONTAINER(window), Fixed);
+//
+//    // Ajout de la barre de menus à la fenêtre principale
+//    menubar *maMenuBar = add_menu_bar(Fixed, 0);
+//
+//    // Exemple d'ajout d'un menu "File"
+//    menu *menu_file = add_menu(maMenuBar, "File");
+//    // Exemple d'ajout d'éléments de menu à "File"
+//    menu *menu_open = add_menu_item(menu_file, 0, "_New", TRUE, FALSE, NULL);
+//       add_menu_item(menu_open, 0, "empty file", FALSE, FALSE, NULL);
+//       add_menu_item(menu_open, 2, "sep", FALSE, FALSE, NULL);
+//       add_menu_item(menu_open, 0, "project...", FALSE, FALSE, NULL);
+//       add_menu_item(menu_file, 0, "_Save", FALSE, FALSE, NULL);
+//
+//    // Exemple d'ajout d'un menu "Edit"
+//    menu *menu_edit = add_menu(maMenuBar, "Edit");
+//        // Exemple d'ajout d'éléments de menu à "Edit"
+//        add_menu_item(menu_edit,0, "C_ut", FALSE, FALSE, NULL);
+//        add_menu_item(menu_edit, 0, "_Copy", FALSE, TRUE, NULL);
+//        add_menu_item(menu_edit, 0, "_Paste", FALSE, FALSE, NULL);
+//
+//     menu *menu_view = add_menu(maMenuBar, "View");
+//       menu *menu_tool = add_menu_item(menu_view,0, "_Toolbars", TRUE, FALSE, NULL);
+//           add_menu_item(menu_tool,0, "Fit toolbar", FALSE, FALSE, NULL);
+//           add_menu_item(menu_tool, 0, "OPtimise toolbar", FALSE, FALSE, NULL);
+//           add_menu_item(menu_tool, 2, NULL, FALSE, FALSE, NULL);
+//           add_menu_item(menu_tool,1, "Compiler", FALSE, FALSE, NULL);
+//           add_menu_item(menu_tool, 1, "Debuger", FALSE, FALSE, NULL);
+//           add_menu_item(menu_view, 1, "Status_bar", FALSE, FALSE, NULL);
+//       add_menu_item(menu_view,1, "_Logs", FALSE, FALSE, NULL);
+//       add_menu_item(menu_view, 1, "_Manager", FALSE, FALSE, NULL);
+//       add_menu_item(menu_view, 1, "Status_bar", FALSE, FALSE, NULL);
+//
+//    // Exemple d'ajout d'un menu "Language"
+//    menu *menu_language = add_menu(maMenuBar, "Language");
+//    // Exemple d'ajout d'éléments radio à "Language"
+//       add_menu_item(menu_language, 4, "C/C++", FALSE, TRUE, NULL);
+//       add_menu_item(menu_language, 4, "Python", FALSE, FALSE, NULL);
+//       add_menu_item(menu_language, 4, "Java", FALSE, FALSE, NULL);
+//       add_menu_item(menu_language, 4, "C#", FALSE, FALSE, NULL);
+//       add_menu_item(menu_language, 4, "JavaScript", FALSE, FALSE, NULL);
+//       add_menu_item(menu_language, 4, "PHP", FALSE, FALSE, NULL);
+//
+//
+//
 
 
 

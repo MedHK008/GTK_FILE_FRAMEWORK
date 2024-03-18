@@ -59,7 +59,7 @@ void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
 }
 //***********************************************************
 // CREER LE BOUTON SIMPLE
-void creer_button_Simple(ButtonSimple* B, GtkWidget* fixed, gint x, gint y) {
+void creer_button_Simple(ButtonSimple* B) {
     // Créer un GtkBox vertical pour contenir l'image et le label
     GtkWidget* vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     // Changer la couleur de fond de la vbox
@@ -93,19 +93,23 @@ void creer_button_Simple(ButtonSimple* B, GtkWidget* fixed, gint x, gint y) {
     if ((B->width > 0) && (B->height > 0))
         gtk_widget_set_size_request(B->button, B->width, B->height);
 
-    // Ajouter le bouton au GtkFixed parent
-    gtk_fixed_put(GTK_FIXED(fixed), B->button, x, y);
 }
 
 
 
-void add_button(GtkWidget*fixed,gchar* label,gchar* path_to_image,gint height,gint width,gchar* bgColor,gint x,gint y,gint image_w,gint image_h)
-{
-    ButtonSimple* simpleButton;
-    image *img=initialiser_image(simpleButton,1,path_to_image,GTK_ICON_SIZE_BUTTON,image_w,image_h);
+
+
+ButtonSimple* add_button(gchar* label, gchar* path_to_image, gint height, gint width, gchar* bgColor, gint image_w, gint image_h) {
+    ButtonSimple* simpleButton = NULL;
+
+    // Initialize image widget
+    image* img = initialiser_image(simpleButton, 1, path_to_image, GTK_ICON_SIZE_BUTTON, image_w, image_h);
     creer_img(img);
-    simpleButton= init_button_simple("mon_bouton",label,img->widget, height,width ,bgColor,x, y);
-    creer_button_Simple(simpleButton, fixed,x,y);
+    // Initialize the button structure
+    simpleButton = init_button_simple("mon_bouton", label, img->widget, height, width, bgColor, 0, 0);
+    creer_button_Simple(simpleButton);
+    return simpleButton;
 }
+
 
 #endif // BOUTTON_NORMAL_H_INCLUDED
