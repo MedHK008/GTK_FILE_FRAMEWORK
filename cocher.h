@@ -31,7 +31,6 @@ cocher *init_cocher(GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui,
     C->boutcoche = gtk_check_button_new_with_label(C->label);
     C->x = x;
     C->y = y;
-
     C->next = NULL; // Initialize next pointer to NULL
 
     // Set button background color

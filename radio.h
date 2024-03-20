@@ -65,14 +65,42 @@ void create_radio(radio *R, gint x, gint y) {
     }
 }
 
-void add_radio(GtkWidget* fixed, int numButtons, gint x, gint y, char *labels[], char *colors[], gboolean checked[]) {
+#include <gtk/gtk.h>
+
+// Define your structures and functions as before...
+
+GtkWidget* add_radio(int numButtons, gint x, gint y, char *labels[], char *colors[], gboolean checked[]) {
     elem_radio *liste_radio = NULL;
     for (int i = 0; i < numButtons; i++) {
         liste_radio = ajouter_radio_fin(liste_radio, labels[i], colors[i], checked[i]);
     }
-    radio *grouped_radio = grouper_radio(liste_radio, fixed);
-    grouped_radio->fixed = fixed;
-    create_radio(grouped_radio, x, y);
+    radio *grouped_radio = grouper_radio(liste_radio, NULL);  // Pass NULL as the parent widget
+
+    // Create a new GtkBox to hold the radio buttons
+    GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);  // Vertical box with spacing of 5
+
+    // Create radio buttons inside the box
+    GtkWidget *first_radio = NULL; // For the first radio button in the group
+    while (grouped_radio->liste) {
+        grouped_radio->liste->pRadio = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(first_radio), grouped_radio->liste->nom);
+        if (grouped_radio->liste->hexcolor) {
+            GdkRGBA color;
+            gdk_rgba_parse(&color, grouped_radio->liste->hexcolor);
+            gtk_widget_override_background_color(grouped_radio->liste->pRadio, GTK_STATE_FLAG_NORMAL, &color);
+        }
+        if (grouped_radio->liste->checked) {
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(grouped_radio->liste->pRadio), TRUE);
+        }
+        if (!first_radio)
+            first_radio = grouped_radio->liste->pRadio;
+        gtk_box_pack_start(GTK_BOX(box), grouped_radio->liste->pRadio, FALSE, FALSE, 0); // Pack radio button into the box
+        grouped_radio->liste = grouped_radio->liste->suivant;
+    }
+
+    return box;  // Return the box containing the radio buttons
 }
+
+
+
 
 #endif // RADIO_H_INCLUDED

@@ -15,8 +15,6 @@ int main(int argc, char *argv[]) {
     GtkWidget *notebook = gtk_notebook_new();
     Fenetre* ma_fenetre = add_window();
 
-
-
 /****************************************************** les bouttons***********************************/
 
     GtkWidget* fixed = create_fixed();///les bouttons (is finished)
@@ -53,10 +51,13 @@ int main(int argc, char *argv[]) {
 /// les parametres : le fixed  , le x , le y , les labels,le bgcolor de chaque button, le radio qui soit cocher dès le début (all FALSE signifie que aucun ne sera cocher)
     texte* txt_radio=initialiser_texte(20,30,"exemple des bouttons radio",NULL,NULL,25,NULL,NULL,"red","#00FF00",NULL);
     add_label(fixed,txt_radio,TRUE,FALSE,50,450);
-    char *labels2[NB_RADIO] = {"Option 1", "Option 2", "Option 3"};
-    char *colors2[NB_RADIO] = {"#FFFFFF", "#FFFFFF", "#FFFFFF"};
-    gboolean checked2[NB_RADIO] = {FALSE, FALSE, FALSE};
-    add_radio(fixed, NB_RADIO,250,500, labels2, colors2,checked2);
+//    char *labels2[NB_RADIO] = {"Option 1", "Option 2", "Option 3"};
+//    char *colors2[NB_RADIO] = {"#FFFFFF", "#FFFFFF", "#FFFFFF"};
+//    gboolean checked2[NB_RADIO] = {FALSE, FALSE, FALSE};
+//    add_radio(fixed, NB_RADIO,250,500, labels2, colors2,checked2);
+
+    GtkWidget *radioBox = add_radio(3, 20, 20, (char *[]){"Option 1", "Option 2", "Option 3"},(char *[]){NULL}, (gboolean[]){TRUE, FALSE, FALSE});
+    add_widget_to_fixed(fixed0,radioBox,200,450);
 /****************************************************** les radios***********************************/
 /****************************************************** les spins***********************************/
 ///khdem biha wskot mafiya li ykteb lcommentaire db
