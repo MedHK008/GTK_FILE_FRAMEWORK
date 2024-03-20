@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710796337 source:e:\screenshots\main.c
+1710939754 source:e:\screenshots\main.c
 	"headers.h"
 
 1704104925 c:\msys64\mingw64\include\stdio.h
@@ -3267,7 +3267,7 @@
 1710795332 e:\screenshots\boutton_normal.h
 	"image.h"
 
-1710536810 e:\screenshots\cocher.h
+1710939820 e:\screenshots\cocher.h
 
 1710539796 e:\screenshots\radio.h
 
@@ -3282,7 +3282,7 @@
 
 1710677527 e:\screenshots\image.h
 
-1710634298 e:\screenshots\label.h
+1710796834 e:\screenshots\label.h
 
 1710634291 e:\screenshots\frame.h
 
@@ -3294,7 +3294,7 @@
 
 1710796013 e:\screenshots\fixed.h
 
-1710793478 e:\screenshots\headers.h
+1710798871 e:\screenshots\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3304,14 +3304,7 @@
 	"cocher.h"
 	"radio.h"
 	"spin_button.h"
-	"prog_bar.h"
 	"label.h"
-	"frame.h"
-	"scrollbar.h"
-	"tool_bar.h"
-	"boite_dialog.h"
-	"entry.h"
-	"menu.h"
 	"window.h"
 	"onglet.h"
 	"fixed.h"

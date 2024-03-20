@@ -1,7 +1,6 @@
 #ifndef COCHER_H_INCLUDED
 #define COCHER_H_INCLUDED
 
-
 typedef struct coche {
     GtkWidget *parent;  // le widget parent
     gchar *label;       // Le nom du bouton à cocher;
@@ -9,7 +8,19 @@ typedef struct coche {
     gint x;
     gint y;
     gchar *gui;         // Couleur de fond du bouton au format HEX (par exemple, "#000000")
+    struct coche *next; // Pointer to the next checkbox in the list
 } cocher;
+
+typedef struct {
+    cocher *head; // Pointer to the head of the list
+} CheckboxList;
+
+CheckboxList *init_checkbox_list() {
+    CheckboxList *list = (CheckboxList *)malloc(sizeof(CheckboxList));
+    if (list == NULL) return NULL;
+    list->head = NULL; // Initialize the list with NULL
+    return list;
+}
 
 cocher *init_cocher(GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui, gboolean checked) {
     cocher *C = (cocher *)malloc(sizeof(cocher));
@@ -20,21 +31,32 @@ cocher *init_cocher(GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui,
     C->boutcoche = gtk_check_button_new_with_label(C->label);
     C->x = x;
     C->y = y;
-    C->gui = g_strdup(gui);  // Allocate memory for C->gui and copy the string
+
+    C->next = NULL; // Initialize next pointer to NULL
 
     // Set button background color
-    GdkColor color;
-    gdk_color_parse(C->gui, &color);
-    gtk_widget_modify_bg(C->boutcoche, GTK_STATE_NORMAL, &color);
-
+    if (gui)
+    {
+        C->gui = g_strdup(gui);  // Allocate memory for C->gui and copy the string
+        GdkColor color;
+        gdk_color_parse(C->gui, &color);
+        gtk_widget_modify_bg(C->boutcoche, GTK_STATE_NORMAL, &color);
+    }
     // Set initial state of the check button
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(C->boutcoche), checked);
 
     return C;
 }
 
-void add_cocher(GtkWidget *fixed, gchar *label, gint x_fixed, gint y_fixed, gchar *gui, gboolean checked) {
-    cocher *checkbox1 = init_cocher(fixed, label, x_fixed, y_fixed, gui, checked);
-    gtk_fixed_put(GTK_FIXED(fixed), checkbox1->boutcoche, x_fixed, y_fixed);
+GtkWidget *add_cocher(CheckboxList *list, GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui, gboolean checked) {
+    cocher *checkbox = init_cocher(parent, label, x, y, gui, checked);
+    if (checkbox == NULL) return NULL; // Check if initialization failed
+
+    // Add checkbox to the list
+    checkbox->next = list->head;
+    list->head = checkbox;
+
+    return checkbox->boutcoche;
 }
+
 #endif // COCHER_H_INCLUDED

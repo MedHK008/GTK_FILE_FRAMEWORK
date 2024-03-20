@@ -22,18 +22,18 @@
 
 
 
-#include "prog_bar.h"
+//#include "prog_bar.h"
 #include "label.h"
-#include "frame.h"
-#include "scrollbar.h"
-#include "tool_bar.h"
+//#include "frame.h"
+//#include "scrollbar.h"
+//#include "tool_bar.h"
 
 
-#include "boite_dialog.h"
-#include "entry.h"
-
-
-#include "menu.h"
+//#include "boite_dialog.h"
+//#include "entry.h"
+//
+//
+//#include "menu.h"
 #include "window.h"
 #include "onglet.h"
 #include "fixed.h"
