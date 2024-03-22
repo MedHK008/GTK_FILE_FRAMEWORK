@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1710940492 source:e:\screenshots\main.c
+1710940696 source:e:\screenshots\main.c
 	"headers.h"
 
 1704104925 c:\msys64\mingw64\include\stdio.h
@@ -3269,8 +3269,7 @@
 
 1710940492 e:\screenshots\cocher.h
 
-1710940492 e:\screenshots\radio.h
-	<gtk/gtk.h>
+1711027166 e:\screenshots\radio.h
 
 1710542660 e:\screenshots\spin_button.h
 
