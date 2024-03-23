@@ -55,12 +55,7 @@ typedef enum{
 //    free(Supp);
 //    return (Pile*)(P);
 //}
-//char epurer_blan(FILE*f)
-//{
-//    char c ;
-//    while((c=fgetc(F))==' ' || c=='\n');
-//    return (char*)(c);
-//}
+
 
 
 
@@ -115,7 +110,7 @@ void lire_fichier(FILE*F,fixed* fixed0)
     gchar c ;
     gchar current_token[MAX];
     Token tok;
-//    c=epurer_blan();
+    c=epurer_blan(F);
     while(c!=EOF)
     {
         if(c=='<')
@@ -138,6 +133,7 @@ void lire_fichier(FILE*F,fixed* fixed0)
                 case Button:
                     ButtonSimple* B=add_button(F);
                     add_widget_to_fixed(fixed0,B->button,50,50);
+                    c=epurer_blan(F);
                     break;
 //                case Radio:
 //                    buttonRadioFunction(F);
@@ -182,7 +178,11 @@ void lire_fichier(FILE*F,fixed* fixed0)
                     // Gérer le cas où le token n'est pas reconnu
                     break;
             }
+            printf("\n fin de if");
+
         }
+        else
+                return;
     }
 }
 

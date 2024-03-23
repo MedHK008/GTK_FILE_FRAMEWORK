@@ -1,6 +1,5 @@
 #ifndef BOUTTON_NORMAL_H_INCLUDED
 #define BOUTTON_NORMAL_H_INCLUDED
-
 #include "image.h"
 
 //*********************************************STRUCTURES***********************************************
@@ -15,10 +14,14 @@ typedef struct {
     GtkWidget* image;  // Widget de l'image pour le bouton
 } ButtonSimple;
 
-
-ButtonSimple* buttonSimpleFunction(FILE* F)
+gchar epurer_blan(FILE*f)
 {
-    ButtonSimple* b = (ButtonSimple*)malloc(sizeof(ButtonSimple));
+    char c ;
+    while((c=fgetc(f))==' ' || c=='\n');
+    return (gchar)(c);
+}
+ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
+{
     gchar* elem;
     elem=(gchar*)g_malloc(sizeof(gchar)*50);
     gchar c;
@@ -26,57 +29,53 @@ ButtonSimple* buttonSimpleFunction(FILE* F)
     {
         fscanf(F,"%s",elem);
        if (strcmp(elem, "name") == 0) {
-            if ((c = fgetc(F)) == '=') {
-                if ((c = fgetc(F)) == '\"') {
+            if ((c = epurer_blan(F)) == '=') {
+                if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     while ((c = fgetc(F)) != '\"')
                         b->name[i++] = c;
                     b->name[i] = '\0';
+                 printf("\n %s \n",b->name);
                 }
-                fgetc(F); // discard the space
             }
         } else if (strcmp(elem, "label") == 0) {
-            if ((c = fgetc(F)) == '=') {
-                if ((c = fgetc(F)) == '\"') {
+            if ((c = epurer_blan(F)) == '=') {
+                if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     while ((c = fgetc(F)) != '\"')
                         b->label[i++] = c;
                     b->label[i] = '\0';
                 }
-                fgetc(F); // discard the space
             }
         } else if (strcmp(elem, "lien") == 0) {
-            if ((c = fgetc(F)) == '=') {
-                if ((c = fgetc(F)) == '\"') {
+            if ((c = epurer_blan(F)) == '=') {
+                if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     while ((c = fgetc(F)) != '\"')
                         b->lien[i++] = c;
                     b->lien[i] = '\0';
                 }
-                fgetc(F); // discard the space
             }
         } else if (strcmp(elem, "width") == 0) {
-            if ((c = fgetc(F)) == '=') {
+            if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &b->width);
             }
-            fgetc(F); // discard the space
         } else if (strcmp(elem, "height") == 0) {
-            if ((c = fgetc(F)) == '=') {
+            if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &b->height);
             }
-            fgetc(F); // discard the space
         } else if (strcmp(elem, "bgColor") == 0) {
-            if ((c = fgetc(F)) == '=') {
-                if ((c = fgetc(F)) == '\"') {
+            if ((c = epurer_blan(F)) == '=') {
+                if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     while ((c = fgetc(F)) != '\"')
                         b->bgColor[i++] = c;
                     b->bgColor[i] = '\0';
                 }
-                fgetc(F); // discard the space
             }
         }
     }while(strcmp(elem,">"));
+    return b;
 }
 
 
@@ -91,12 +90,20 @@ ButtonSimple* init_button_simple() {
         exit(0);
     }
     b->name = NULL;
-    b->label = NULL;
+    b->label=(gchar*)g_malloc(sizeof(gchar)*30);
+    b->label[0]='\0';
+
     b->image = NULL;  // Initialize image widget to NULL
-    b->bgColor = NULL;
-    b->height=NULL;
-    b->lien=NULL;
-    b->width=NULL;
+
+
+    b->bgColor=(gchar*)g_malloc(sizeof(gchar)*30);
+    b->bgColor[0]='\0';
+    b->name=(gchar*)g_malloc(sizeof(gchar)*30);
+    b->name[0]='\0';
+    b->height=0;
+    b->lien=(gchar*)g_malloc(sizeof(gchar)*30);
+    b->lien[0]='\0';
+    b->width=0;
     return b;
 }
 //***************************************************************
@@ -118,9 +125,11 @@ void creer_button_Simple(ButtonSimple* B) {
     // Créer un GtkBox vertical pour contenir l'image et le label
     GtkWidget* vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     // Changer la couleur de fond de la vbox
-    if (B->bgColor)
-        add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spécifiée
+    if(B->bgColor)
+    {
 
+               add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spécifiée
+    }
     // Créer un label pour le texte
     GtkWidget* label = NULL;
     if (B->label) {
@@ -157,7 +166,7 @@ ButtonSimple* add_button(FILE* F) {
     // Initialize the button structure
     ButtonSimple* B =NULL;
     B = init_button_simple();
-    B = buttonSimpleFunction(F);
+    B = buttonSimpleFunction(B,F);
     creer_button_Simple(B);
     // Initialize image widget
     image* img = initialiser_image(B, 1, B->lien, GTK_ICON_SIZE_BUTTON, B->width, B->height);

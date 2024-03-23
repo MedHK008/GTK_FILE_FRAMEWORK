@@ -3315,3 +3315,47 @@
 
 1711209082 e:\screenshots\reader.h
 
+1711209784 source:c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\main.c
+	"headers.h"
+
+1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\headers.h
+	<gtk/gtk.h>
+	<gdk/gdk.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"boutton_normal.h"
+	"cocher.h"
+	"radio.h"
+	"spin_button.h"
+	"label.h"
+	"window.h"
+	"onglet.h"
+	"fixed.h"
+	"reader.h"
+	"ex_buttons.h"
+
+1711215433 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\boutton_normal.h
+	"image.h"
+
+1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\image.h
+
+1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\cocher.h
+
+1711209784 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\radio.h
+
+1711209784 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\spin_button.h
+
+1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\label.h
+
+1711209784 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\window.h
+
+1711209784 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\onglet.h
+	<gtk/gtk.h>
+
+1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\fixed.h
+
+1711215024 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\reader.h
+
+1711215390 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\ex_buttons.h
+
