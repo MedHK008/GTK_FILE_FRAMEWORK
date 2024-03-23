@@ -35,12 +35,12 @@
 		<Unit filename="boutton_normal.h" />
 		<Unit filename="cocher.h" />
 		<Unit filename="entry.h" />
+		<Unit filename="ex_buttons.h" />
 		<Unit filename="fixed.h" />
 		<Unit filename="frame.h" />
 		<Unit filename="headers.h" />
 		<Unit filename="image.h" />
 		<Unit filename="label.h" />
-		<Unit filename="les_bouttons.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
