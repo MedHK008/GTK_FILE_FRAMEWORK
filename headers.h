@@ -2,6 +2,7 @@
 #define HEADERS_H_INCLUDED
 
 
+
 ///les bibliothèque
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
@@ -13,6 +14,13 @@
 #define NBC 100
 #define NB_RADIO 3
 
+gchar epurer_blan(FILE*f)
+{
+    char c ;
+    while((c=fgetc(f))==' ' || c=='\n');
+    return (gchar)(c);
+}
+#include "label.h"
 ///les bibliothèque des widget
 #include "boutton_normal.h"
 #include "cocher.h"
@@ -22,7 +30,7 @@
 
 
 //#include "prog_bar.h"
-#include "label.h"
+
 //#include "frame.h"
 //#include "scrollbar.h"
 //#include "tool_bar.h"
@@ -49,5 +57,7 @@ void fin_programme(Fenetre* ma_fenetre)
     g_signal_connect(G_OBJECT(ma_fenetre->window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_main();
 }
+
+
 
 #endif // HEADERS_H_INCLUDED

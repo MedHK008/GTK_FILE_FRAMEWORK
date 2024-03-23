@@ -1,1 +1,1 @@
-<button name ="button1" label ="click" lien ="gtklogo.png" width =200 height =200 bgColor ="RED" >
+<button name ="button1" label ="click" lien ="gtklogo.png" width =50 height =50 >

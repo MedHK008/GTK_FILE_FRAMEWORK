@@ -131,7 +131,8 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                    entryFunction(F);
 //                    break;
                 case Button:
-                    ButtonSimple* B=add_button(F);
+                    texte* label_button=initialiser_texte(20,30,"exemple des boutons",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
+                    ButtonSimple* B=add_button(F,label_button);
                     add_widget_to_fixed(fixed0,B->button,50,50);
                     c=epurer_blan(F);
                     break;
@@ -178,8 +179,6 @@ void lire_fichier(FILE*F,fixed* fixed0)
                     // Gérer le cas où le token n'est pas reconnu
                     break;
             }
-            printf("\n fin de if");
-
         }
         else
                 return;
