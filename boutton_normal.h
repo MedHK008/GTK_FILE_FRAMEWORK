@@ -16,33 +16,87 @@ typedef struct {
 } ButtonSimple;
 
 
+ButtonSimple* buttonSimpleFunction(FILE* F)
+{
+    ButtonSimple* b = (ButtonSimple*)malloc(sizeof(ButtonSimple));
+    gchar* elem;
+    elem=(gchar*)g_malloc(sizeof(gchar)*50);
+    gchar c;
+    do
+    {
+        fscanf(F,"%s",elem);
+       if (strcmp(elem, "name") == 0) {
+            if ((c = fgetc(F)) == '=') {
+                if ((c = fgetc(F)) == '\"') {
+                    int i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        b->name[i++] = c;
+                    b->name[i] = '\0';
+                }
+                fgetc(F); // discard the space
+            }
+        } else if (strcmp(elem, "label") == 0) {
+            if ((c = fgetc(F)) == '=') {
+                if ((c = fgetc(F)) == '\"') {
+                    int i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        b->label[i++] = c;
+                    b->label[i] = '\0';
+                }
+                fgetc(F); // discard the space
+            }
+        } else if (strcmp(elem, "lien") == 0) {
+            if ((c = fgetc(F)) == '=') {
+                if ((c = fgetc(F)) == '\"') {
+                    int i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        b->lien[i++] = c;
+                    b->lien[i] = '\0';
+                }
+                fgetc(F); // discard the space
+            }
+        } else if (strcmp(elem, "width") == 0) {
+            if ((c = fgetc(F)) == '=') {
+                fscanf(F, "%d", &b->width);
+            }
+            fgetc(F); // discard the space
+        } else if (strcmp(elem, "height") == 0) {
+            if ((c = fgetc(F)) == '=') {
+                fscanf(F, "%d", &b->height);
+            }
+            fgetc(F); // discard the space
+        } else if (strcmp(elem, "bgColor") == 0) {
+            if ((c = fgetc(F)) == '=') {
+                if ((c = fgetc(F)) == '\"') {
+                    int i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        b->bgColor[i++] = c;
+                    b->bgColor[i] = '\0';
+                }
+                fgetc(F); // discard the space
+            }
+        }
+    }while(strcmp(elem,">"));
+}
+
+
+
+
+
 // INITIALISER LE BOUTON
-ButtonSimple* init_button_simple(gchar* nom, gchar* etiq, gchar* name, GtkWidget* img_widget, gint h, gint w, gchar* bgColor, gint x, gint y) {
+ButtonSimple* init_button_simple() {
     ButtonSimple* b = (ButtonSimple*)malloc(sizeof(ButtonSimple));
     if (!b) {
         printf("\nErreur d'allocation !!\n");
         exit(0);
     }
-
     b->name = NULL;
     b->label = NULL;
     b->image = NULL;  // Initialize image widget to NULL
     b->bgColor = NULL;
-    if (etiq) {
-        b->label = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
-        strcpy(b->label, etiq);
-    }
-    if (name) {
-        b->name = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
-        strcpy(b->name, name);
-    }
-    if (bgColor) {
-        b->bgColor = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
-        strcpy(b->bgColor, bgColor);
-    }
-    b->width = w;
-    b->height = h;
-    b->image = img_widget;  // Set the image widget
+    b->height=NULL;
+    b->lien=NULL;
+    b->width=NULL;
     return b;
 }
 //***************************************************************
@@ -95,16 +149,20 @@ void creer_button_Simple(ButtonSimple* B) {
         gtk_widget_set_size_request(B->button, B->width, B->height);
 }
 
-ButtonSimple* add_button(gchar* name, gchar* label, gchar* path_to_image, gint height, gint width, gchar* bgColor, gint image_w, gint image_h) {
-    ButtonSimple* simpleButton = NULL;
 
-    // Initialize image widget
-    image* img = initialiser_image(simpleButton, 1, path_to_image, GTK_ICON_SIZE_BUTTON, image_w, image_h);
-    creer_img(img);
+///gchar* name, gchar* label, gchar* path_to_image, gint height, gint width, gchar* bgColor,
+
+
+ButtonSimple* add_button(FILE* F) {
     // Initialize the button structure
-    simpleButton = init_button_simple("mon_bouton", label, name, img->widget, height, width, bgColor, 0, 0);
-    creer_button_Simple(simpleButton);
-    return simpleButton;
+    ButtonSimple* B =NULL;
+    B = init_button_simple();
+    B = buttonSimpleFunction(F);
+    creer_button_Simple(B);
+    // Initialize image widget
+    image* img = initialiser_image(B, 1, B->lien, GTK_ICON_SIZE_BUTTON, B->width, B->height);
+    creer_img(img);
+    return B;
 }
 
 #endif // BOUTTON_NORMAL_H_INCLUDED

@@ -48,6 +48,7 @@
 		<Unit filename="onglet.h" />
 		<Unit filename="prog_bar.h" />
 		<Unit filename="radio.h" />
+		<Unit filename="reader.h" />
 		<Unit filename="scrollbar.h" />
 		<Unit filename="spin_button.h" />
 		<Unit filename="tool_bar.h" />

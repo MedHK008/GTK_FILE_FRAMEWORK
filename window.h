@@ -38,7 +38,7 @@ Fenetre* initialiser_win(gchar* titre, gchar* icon_path,gchar *name,gchar*bgcolo
 
     // Copiez le titre
     if (titre)
-        win->titre = g_strdup(titre);
+        win->titre = "titre";
     else
         win->titre = NULL;
 
@@ -92,14 +92,14 @@ void create_window(Fenetre *W)
     // Si la hauteur et la largeur sont supérieures à 0, configurez la taille par défaut
     if (W->hauteur > 0 && W->largeur > 0)
         gtk_window_set_default_size(GTK_WINDOW(W->window), W->largeur, W->hauteur);
-    
+
    //Configurer le positionnement
      if(!W->position_init)
         // Utilisez les coordonnées spécifiées
         gtk_window_move(GTK_WINDOW(W->window), W->posx, W->posy);
      else
          gtk_window_set_position(GTK_WINDOW(W->window), W->position_init);
-    
+
     // Définir l'épaisseur de la bordure
     gtk_container_set_border_width(GTK_CONTAINER(W->window), W->border_width);
 
@@ -112,7 +112,7 @@ Fenetre* add_window(gchar* title, gchar* icon_path, gchar* name, gchar* bgcolor,
                    guint posx, guint posy, guint border_size, gboolean resizable)
 {
     Fenetre* ma_fenetre = initialiser_win(title, icon_path, name, bgcolor, width, height, pos_init, posx, posy, border_size, resizable);
-    create_window(ma_fenetre); 
+    create_window(ma_fenetre);
     return (Fenetre*)ma_fenetre;
 }
 #endif // WINDOW_H_INCLUDED

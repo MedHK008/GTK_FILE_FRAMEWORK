@@ -4,14 +4,14 @@
 // Structure pour repr�senter une image avec diff�rentes options
 typedef struct
 {
-    GtkWidget *widget;            // Widget repr�sentant l'image
-    GtkWidget *parent;            // Widget parent de l'image
+    GtkWidget *widget;            // Widget repr�sentant l'image// Widget parent de l'image
     gint type;                    // Type d'image (1:fichier, 2:animation, 3:stock)
     const gchar *icon_anim_stock; // Chemin du fichier, nom de l'animation, ou nom d'ic�ne selon le type
     GdkPixbufAnimation *anim;     // Animation de l'image (utilis� si le type est 2)
     GtkIconSize size;             // Taille de l'ic�ne (utilis� si le type est 3)
     gint h;
     gint w;
+    GtkWidget *parent;
 } image;
 
 // Fonction pour initialiser une image avec des param�tres sp�cifiques
@@ -21,7 +21,7 @@ image *initialiser_image(GtkWidget *pere, gint t, const gchar *fichier, GtkIconS
     image *img = (image *)g_malloc(sizeof(image));
 
     // Initialiser les champs de la structure image
-    img->parent = pere;                // Stocker le widget parent
+    img->parent = pere;               // Stocker le widget parent
     img->type = t;                     // Stocker le type d'image
     img->icon_anim_stock = fichier;    // Stocker le chemin du fichier, nom de l'animation, ou nom d'ic�ne
     img->size = sz;                    // Stocker la taille de l'ic�ne
