@@ -5,7 +5,7 @@ GtkWidget* exemple()
 {
     GtkWidget *notebook = gtk_notebook_new();
     /****************************************************** les bouttons***********************************/
-        Fixed* fixed0=init_gtk_fixed();
+        Fixed* fixed0=init_gtk_fixed("fixed0");
     /******************************************************boutton normal***********************************/
     /// les parametres : le fixed , le label du button , path de l'image utiliser (NULL s'il y a pas d'image),height,width,bgcolor, x , y
         texte* txt_button=initialiser_texte(20,30,"exemple des boutons",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);

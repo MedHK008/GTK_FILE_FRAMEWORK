@@ -2,18 +2,20 @@
 #define FIXED_H_INCLUDED
 
 typedef struct {
+    gchar* name;
     GtkWidget* fixed;
 } Fixed;
 
 
-Fixed* init_gtk_fixed() {
+Fixed* init_gtk_fixed(gchar* name) {
     Fixed* info =(Fixed*)malloc(sizeof(Fixed));
     if (!info) {
         g_print("Error: Failed to allocate memory for Fixed\n");
         return NULL;
     }
+    info->name=name;
     info->fixed = gtk_fixed_new();
-
+    if (info->name) gtk_widget_set_name(info->fixed,info->name);
     return info;
 }
 
