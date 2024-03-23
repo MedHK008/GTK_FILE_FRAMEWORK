@@ -6,6 +6,7 @@
 typedef struct {
     GtkWidget *entree;          // Le widget de la zone de saisie GTK
     gchar *placeholder;         // Le texte de substitution affich� lorsqu'il n'y a pas de texte
+    gchar *nom;                 // Le nom du widget
     gint longueur_max;          // Le nombre maximal de caract�res pouvant �tre saisis
     gfloat alignement_x;        // L'alignement horizontal du texte (0 pour � gauche, 1 pour � droite)
     gint visible;               // Indique si le texte saisi est visible (TRUE) ou cach� (FALSE)
@@ -100,7 +101,7 @@ void definir_attributs_saisie(Saisie *e) {
     }
 }
 
-void Add_Entry(GtkWidget*fixed,gchar *placeholder, gint longueur_max, gfloat alignement_x, gint visible, gint caractere_visible, guchar carac_vis, gint w, gint h, gint etat, gchar *couleur_fond,gint x ,gint y)
+Enty *Add_Entry(GtkWidget*fixed,gchar *placeholder, gint longueur_max, gfloat alignement_x, gint visible, gint caractere_visible, guchar carac_vis, gint w, gint h, gint etat, gchar *couleur_fond,gint x ,gint y)
 {
     Saisie *E=creer_initialiser_saisie(placeholder,longueur_max,alignement_x,visible,caractere_visible,carac_vis,w,h,etat,couleur_fond);
     definir_attributs_saisie(E);
