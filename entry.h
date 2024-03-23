@@ -101,11 +101,11 @@ void definir_attributs_saisie(Saisie *e) {
     }
 }
 
-Enty *Add_Entry(GtkWidget*fixed,gchar *placeholder, gint longueur_max, gfloat alignement_x, gint visible, gint caractere_visible, guchar carac_vis, gint w, gint h, gint etat, gchar *couleur_fond,gint x ,gint y)
+Enty *Add_Entry(gchar *placeholder, gint longueur_max, gfloat alignement_x, gint visible, gint caractere_visible, guchar carac_vis, gint w, gint h, gint etat, gchar *couleur_fond)
 {
     Saisie *E=creer_initialiser_saisie(placeholder,longueur_max,alignement_x,visible,caractere_visible,carac_vis,w,h,etat,couleur_fond);
     definir_attributs_saisie(E);
-    gtk_fixed_put(fixed,E->entree,x,y);
+   
 }
 
 
