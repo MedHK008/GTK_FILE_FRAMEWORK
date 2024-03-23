@@ -2,6 +2,7 @@
 #define BOUTTON_NORMAL_H_INCLUDED
 
 #include "image.h"
+
 //*********************************************STRUCTURES***********************************************
 typedef struct {
     GtkWidget* button; // bouton widget
@@ -16,7 +17,7 @@ typedef struct {
 
 
 // INITIALISER LE BOUTON
-ButtonSimple* init_button_simple(gchar* nom, gchar* etiq, GtkWidget* img_widget, gint h, gint w, gchar* bgColor, gint x, gint y) {
+ButtonSimple* init_button_simple(gchar* nom, gchar* etiq, gchar* name, GtkWidget* img_widget, gint h, gint w, gchar* bgColor, gint x, gint y) {
     ButtonSimple* b = (ButtonSimple*)malloc(sizeof(ButtonSimple));
     if (!b) {
         printf("\nErreur d'allocation !!\n");
@@ -31,9 +32,9 @@ ButtonSimple* init_button_simple(gchar* nom, gchar* etiq, GtkWidget* img_widget,
         b->label = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
         strcpy(b->label, etiq);
     }
-    if (nom) {
+    if (name) {
         b->name = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
-        strcpy(b->name, nom);
+        strcpy(b->name, name);
     }
     if (bgColor) {
         b->bgColor = (gchar*)malloc(30 * sizeof(gchar)); // Allocation fixe
@@ -46,7 +47,7 @@ ButtonSimple* init_button_simple(gchar* nom, gchar* etiq, GtkWidget* img_widget,
 }
 //***************************************************************
 
-// Fonction pour ajouter une couleur de fond � un widget
+// Fonction pour ajouter une couleur de fond à un widget
 void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
     GdkRGBA rgba;
 
@@ -92,24 +93,18 @@ void creer_button_Simple(ButtonSimple* B) {
     // Définir la taille du bouton
     if ((B->width > 0) && (B->height > 0))
         gtk_widget_set_size_request(B->button, B->width, B->height);
-
 }
 
-
-
-
-
-ButtonSimple* add_button(gchar* label, gchar* path_to_image, gint height, gint width, gchar* bgColor, gint image_w, gint image_h) {
+ButtonSimple* add_button(gchar* name, gchar* label, gchar* path_to_image, gint height, gint width, gchar* bgColor, gint image_w, gint image_h) {
     ButtonSimple* simpleButton = NULL;
 
     // Initialize image widget
     image* img = initialiser_image(simpleButton, 1, path_to_image, GTK_ICON_SIZE_BUTTON, image_w, image_h);
     creer_img(img);
     // Initialize the button structure
-    simpleButton = init_button_simple("mon_bouton", label, img->widget, height, width, bgColor, 0, 0);
+    simpleButton = init_button_simple("mon_bouton", label, name, img->widget, height, width, bgColor, 0, 0);
     creer_button_Simple(simpleButton);
     return simpleButton;
 }
-
 
 #endif // BOUTTON_NORMAL_H_INCLUDED

@@ -5,6 +5,7 @@
 typedef struct
 {
     GtkWidget *SpinButton;//SpinButton
+    gchar* name;
     gdouble min;//la valeur minimale
     gdouble max;//la valeur maximale
     gdouble step;//le pas
@@ -16,15 +17,15 @@ typedef struct
     gint numeric;//0:(tapez de caracteres en generale), 1:(juste les chiffres)
     gint arrondissement;//0,1
     gchar* bgcolor;//background color
-}SpinButtonObject;
+}SpinButton;
 
 
-SpinButtonObject * init_spin_button(gdouble val_min ,gdouble val_max, gdouble pas,gdouble val_defaut,
+SpinButton * init_spin_button(gchar* name,gdouble val_min ,gdouble val_max, gdouble pas,gdouble val_defaut,
         gint height, gint width, gint wrap, gint digits,gint numeric , gint arrondis,gchar* color,gfloat color_opc)
 {
-    SpinButtonObject *Sb = NULL;
+    SpinButton *Sb = NULL;
     //allocation mémoire
-    Sb =(SpinButtonObject*)malloc(sizeof(SpinButtonObject));
+    Sb =(SpinButton*)malloc(sizeof(SpinButton));
     //test d'allocation
     if(!Sb)
     {
@@ -36,6 +37,7 @@ SpinButtonObject * init_spin_button(gdouble val_min ,gdouble val_max, gdouble pa
     Sb->min=val_min;
     Sb->max=val_max;
     Sb->step=pas;
+    Sb->name=name;
     Sb->value=val_defaut;
     Sb->height=height;
     Sb->width=width;
@@ -55,7 +57,7 @@ SpinButtonObject * init_spin_button(gdouble val_min ,gdouble val_max, gdouble pa
         }
     }
 
-    return ((SpinButtonObject*)Sb);
+    return ((SpinButton*)Sb);
 }
 
 void add_bgcolor(GtkWidget* widget, const gchar* color, gdouble opacity) {
@@ -79,12 +81,13 @@ void add_bgcolor(GtkWidget* widget, const gchar* color, gdouble opacity) {
     SpinButtonObjet "Sb: indique notre spinbutton object � cr�er SpinButton bien cr�e
     cette fonction sert � cr�er spinbutton en utilisant des fonctions de base sur ses caract�ristiques
 */
-void create_spin_button(SpinButtonObject* Sb) {
+void create_spin_button(SpinButton* Sb) {
     //L'intervalle du SpinButton avec le pas
     if ((Sb->max) >= (Sb->min)) {
         Sb->SpinButton = gtk_spin_button_new_with_range(Sb->min, Sb->max, Sb->step); //Valeur par defaut
         gtk_spin_button_set_value(GTK_SPIN_BUTTON(Sb->SpinButton), Sb->value);
         //largeur et hauteur
+        if (Sb->name) gtk_widget_set_name(Sb->SpinButton,Sb->name);
         if ((Sb->height > 0) && (Sb->width > 0))
             gtk_widget_set_size_request(GTK_WIDGET(Sb->SpinButton), Sb->width, Sb->height);
         else
@@ -110,16 +113,15 @@ void create_spin_button(SpinButtonObject* Sb) {
     }
 }
 
-void add_spin(GtkWidget* fixed,gint x,gint y, gdouble val_min, gdouble val_max, gdouble pas, gdouble val_defaut,
+SpinButton* add_spin(gint x,gint y, gdouble val_min, gdouble val_max, gdouble pas, gdouble val_defaut,
               gint height, gint width, gint wrap, gint digits, gint numeric, gint arrondis,
-              gchar* color, gfloat color_opc) {
-    // Initialize SpinButtonObject with provided parameters
-    SpinButtonObject *spinButton = init_spin_button(val_min, val_max, pas, val_defaut,
+              gchar* color, gfloat color_opc,gchar* name) {
+    // Initialize SpinButton with provided parameters
+    SpinButton *spin = init_spin_button(name,val_min, val_max, pas, val_defaut,
                                                     height, width, wrap, digits, numeric, arrondis, color, color_opc);
     // Create SpinButton
-    create_spin_button(spinButton);
-    // Create a fixed widget to hold the spin button
-    gtk_fixed_put(GTK_FIXED(fixed), spinButton->SpinButton, x, y); // Adjust position as needed
+    create_spin_button(spin);
+    return ((SpinButton*)spin);
 }
 
 

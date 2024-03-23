@@ -37,6 +37,7 @@
 #include "window.h"
 #include "onglet.h"
 #include "fixed.h"
+#include "ex_buttons.h"
 
 void debut_programme(int argc,char*argv[]){
     gtk_init(&argc,&argv);

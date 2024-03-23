@@ -1,74 +1,15 @@
 #include "headers.h"
 
-GtkWidget *create_fixed()
-{
-
-    GtkFixed *fixed = GTK_FIXED(gtk_fixed_new());
-    return ((GtkWidget*)fixed);
-}
 
 
 
 int main(int argc, char *argv[]) {
     debut_programme(argc,argv);
-
-    GtkWidget *notebook = gtk_notebook_new();
     Fenetre* ma_fenetre = add_window();
 
-/****************************************************** les bouttons***********************************/
-
-    GtkWidget* fixed = create_fixed();///les bouttons (is finished)
-    Fixed* fixed0=init_gtk_fixed();
-/******************************************************boutton normal***********************************/
-/// les parametres : le fixed , le label du button , path de l'image utiliser (NULL s'il y a pas d'image),height,width,bgcolor, x , y
-    texte* txt_button=initialiser_texte(20,30,"exemple des boutons",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
-    add_label(fixed0->fixed,txt_button,TRUE,FALSE,50,0);
-    ButtonSimple *button = add_button("first","gtklogo.png",100,100,"#FF0000",50,50);
-    add_widget_to_fixed(fixed0,button->button,50,50);
-    add_onglet(notebook,fixed0->fixed,"onglet 0","#FFFFFF");
-/******************************************************boutton normal***********************************/
-/****************************************************** les cochers***********************************/
-/// les parametres : le fixed , le label , le x , le y ,le bgcolor, si le checkbox est cocher dès le début ou non
-    texte* txt_cocher=initialiser_texte(20,30,"exemple des bouttons a cocher",NULL,NULL,25,NULL,NULL,"green","#00FF00",NULL);
-    add_label(fixed0->fixed,txt_cocher,TRUE,FALSE,50,250);
-    // Initialize the checkbox list
-    CheckboxList *checkboxList = init_checkbox_list();
-
-    GtkWidget *checkbox1 = add_cocher(checkboxList,fixed0->fixed, "testing cocher1", 200, 300,NULL, TRUE);
-    GtkWidget *checkbox2 = add_cocher(checkboxList,fixed0->fixed, "testing cocher2", 200, 330, "#FFFFFF", TRUE);
-    GtkWidget *checkbox3 = add_cocher(checkboxList,fixed0->fixed, "testing cocher3", 200, 360, "#FFFFFF", TRUE);
-    GtkWidget *checkbox4 = add_cocher(checkboxList,fixed0->fixed, "testing cocher4", 200, 390, "#FFFFFF", TRUE);
-
-    // Add the checkboxes to the fixed container
-    add_widget_to_fixed(fixed0,checkbox1, 200, 300);
-    add_widget_to_fixed(fixed0,checkbox2, 200, 330);
-    add_widget_to_fixed(fixed0,checkbox3, 200, 360);
-    add_widget_to_fixed(fixed0,checkbox4, 200, 390);
+    GtkWidget *notebook = exemple();
 
 
-/****************************************************** les cochers***********************************/
-/****************************************************** les radios***********************************/
-/// les parametres : le fixed  , le x , le y , les labels,le bgcolor de chaque button, le radio qui soit cocher dès le début (all FALSE signifie que aucun ne sera cocher)
-    texte* txt_radio=initialiser_texte(20,30,"exemple des bouttons radio",NULL,NULL,25,NULL,NULL,"red","#00FF00",NULL);
-    add_label(fixed,txt_radio,TRUE,FALSE,50,450);
-//    char *labels2[NB_RADIO] = {"Option 1", "Option 2", "Option 3"};
-//    char *colors2[NB_RADIO] = {"#FFFFFF", "#FFFFFF", "#FFFFFF"};
-//    gboolean checked2[NB_RADIO] = {FALSE, FALSE, FALSE};
-//    add_radio(fixed, NB_RADIO,250,500, labels2, colors2,checked2);
-
-    GtkWidget *radioBox = add_radio(3, 20, 20, (char *[]){"Option 1", "Option 2", "Option 3"},(char *[]){NULL}, (gboolean[]){TRUE, FALSE, FALSE});
-    add_widget_to_fixed(fixed0,radioBox,200,450);
-/****************************************************** les radios***********************************/
-/****************************************************** les spins***********************************/
-///khdem biha wskot mafiya li ykteb lcommentaire db
-    texte* txt_spin=initialiser_texte(20,30,"exemple boutton spin",NULL,NULL,25,NULL,NULL,"red","#00FF00",NULL);
-    add_label(fixed,txt_spin,TRUE,FALSE,50,600);
-    add_spin(fixed, 50, 650, 0.0, 100.0, 1.0, 1.0, 30, 150, 1, 2, 1, 1, "#00ff00", 1.0);
-    add_spin(fixed, 250, 650, 0.0, 100.0, 50.0, 5.0, 30, 30, 1, 2, 1, 1, "#ff0000", 1.0);
-    add_spin(fixed, 450, 650, 0.0, 100.0, 100.0, 100.0, 50, 150, 1, 2, 1, 1, "#ffffff", 1.0);
-/****************************************************** les spins***********************************/
-    add_onglet(notebook,fixed,"onglet 1","#FF00FF");
-/***********************************************les bouttons fin*****************************************/
 //    GtkWidget* fixed1 = create_fixed();///fiha le menu bohdo db
 //    add_progress_bar(fixed1,2.3,1.0,1000,500,1,250,250);
 //    add_image(fixed1,1,"gtklogo.png",GTK_ICON_SIZE_BUTTON,50,50,250,250);
