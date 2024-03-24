@@ -11,7 +11,7 @@ typedef enum{
     Button,
     Radio,
     Checkbox,
-    BoiteDialogue,
+    boiteDialogue,
     Frame,
     Image,
     ProgBar,
@@ -24,37 +24,8 @@ typedef enum{
     MenuItem
 }Token;
 
+Saisie *En[MAX];
 
-//typedef struct pl{
-//    gchar *contenue;
-//    struct pl*svt;
-//}Pile;
-//Pile *initialiser_Pile(Pile*P)
-//{
-//    P=NULL;
-//    return(Pile*)(P);
-//}
-//Pile*empiler(Pile *P,gchar*name)
-//{
-//    Pile*NE=(Pile*)malloc(sizeof(Pile));
-//    if(NE){
-//        NE->contenue=name;
-//        if(!P) return(Pile*)(NE);
-//        else {
-//            NE->svt=P;
-//            return(Pile*)(P);
-//        }
-//    }
-//    exit(-1);
-//}
-//Pile* depiler(Pile*P)
-//{
-//    if(!P) return(Pile*)(NULL);
-//    Pile*Supp=P;
-//    P=P->svt;
-//    free(Supp);
-//    return (Pile*)(P);
-//}
 
 
 
@@ -76,7 +47,7 @@ Token string_to_token(const char *str) {
     } else if (!strcmp(str, "checkbox")) {
         return Checkbox;
     } else if (!strcmp(str, "boite_dialogue")) {
-        return BoiteDialogue;
+        return boiteDialogue;
     } else if (!strcmp(str, "frame")) {
         return Frame;
     } else if (!strcmp(str, "image")) {
@@ -110,12 +81,22 @@ void lire_fichier(FILE*F,fixed* fixed0)
     gchar c ;
     gchar current_token[MAX];
     Token tok;
+    gchar*elem=(gchar*)g_malloc(sizeof(gchar)*50);
+    int into =0;
     c=epurer_blan(F);
+    BoiteDialogue *BD ;
+    ButtonSimple* B;
+    Saisie*E;
     while(c!=EOF)
     {
         if(c=='<')
         {
+            c=fgetc(F);
+            if(c!='/')
+            {
+            ungetc(c,F);
              fscanf(F,"%s",current_token);
+
              tok=string_to_token(current_token);
              switch(tok) {
 //                case fenetre:
@@ -127,14 +108,23 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                case Label:
 //                    labelFunction(F);
 //                    break;
-//                case Entry:
-//                    entryFunction(F);
-//                    break;
-                case Button:
-                    texte* label_button=initialiser_texte(20,30,"exemple des boutons",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
-                    ButtonSimple* B=add_button(F,label_button);
-                    add_widget_to_fixed(fixed0,B->button,50,50);
+                case Entry:
+
+                    E=Add_Entry(F);
                     c=epurer_blan(F);
+                    if(into==1)
+                        ajouter_a_boite_dialogue(BD,E->entree,E->x_pos,E->y_pos);
+                    else if(into==0)
+                        add_widget_to_fixed(fixed0,E->entree,E->x_pos,E->y_pos);
+                    break;
+                case Button:
+                     B=add_button(F);
+//                    add_widget_to_fixed(fixed0,B->button,50,50);
+                    c=epurer_blan(F);
+                     if(into==1)
+                        ajouter_a_boite_dialogue(BD,B->button,100,100);
+                    else if(into==0)
+                        add_widget_to_fixed(fixed0,B->button,100,100);
                     break;
 //                case Radio:
 //                    buttonRadioFunction(F);
@@ -142,8 +132,11 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                case Checkbox:
 //                    checkboxFunction(F);
 //                    break;
-//                case BoiteDialogue:
-//                    boiteDialogueFunction(F);
+//                case boiteDialogue:
+//                    printf("m here");
+//                   into=1;
+//                    BD=Add_boite_dialogue(F);
+//                    c=epurer_blan(F);
 //                    break;
 //                case Frame:
 //                    frameFunction(F);
@@ -179,9 +172,17 @@ void lire_fichier(FILE*F,fixed* fixed0)
                     // Gérer le cas où le token n'est pas reconnu
                     break;
             }
+
+
         }
         else
-                return;
+        {
+            fscanf(F,"%s",elem);
+            if(strcmp(elem,"boite_dialogue>"))
+               into=0;
+        }
+
+    }
     }
 }
 
