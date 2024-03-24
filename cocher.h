@@ -1,10 +1,8 @@
-#ifndef COCHER_H_INCLUDED
-#define COCHER_H_INCLUDED
+#include <gtk/gtk.h>
 
 typedef struct coche {
     GtkWidget *parent;  // le widget parent
     gchar *label;       // Le nom du bouton à cocher;
-    gchar *name;
     GtkWidget *boutcoche;
     gint x;
     gint y;
@@ -16,6 +14,7 @@ typedef struct {
     cocher *head; // Pointer to the head of the list
 } CheckboxList;
 
+
 CheckboxList *init_checkbox_list() {
     CheckboxList *list = (CheckboxList *)malloc(sizeof(CheckboxList));
     if (list == NULL) return NULL;
@@ -23,16 +22,32 @@ CheckboxList *init_checkbox_list() {
     return list;
 }
 
-cocher *init_cocher(GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui, gboolean checked,gchar* name) {
+// Function to initialize every attribute to NULL
+cocher *init_empty_cocher() {
     cocher *C = (cocher *)malloc(sizeof(cocher));
     if (C == NULL) return NULL;
-    C->name=name;
+
+    C->parent = NULL;
+    C->label = NULL;
+    C->boutcoche = NULL;
+    C->x = 0;
+    C->y = 0;
+    C->gui = NULL;
+    C->next = NULL;
+
+    return C;
+}
+
+// Function to create and initialize a cocher widget
+cocher *create_cocher(GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui, gboolean checked) {
+    cocher *C = init_empty_cocher();
+    if (C == NULL) return NULL;
+
     C->parent = parent;
     C->label = g_strdup(label);  // Allocate memory for C->label and copy the string
     C->boutcoche = gtk_check_button_new_with_label(C->label);
     C->x = x;
     C->y = y;
-    C->next = NULL; // Initialize next pointer to NULL
 
     // Set button background color
     if (gui)
@@ -42,18 +57,16 @@ cocher *init_cocher(GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui,
         gdk_color_parse(C->gui, &color);
         gtk_widget_modify_bg(C->boutcoche, GTK_STATE_NORMAL, &color);
     }
-    // Définir le nom du bouton (ID) pour le styliser en CSS
-    if (C->name)
-        gtk_widget_set_name(C->boutcoche,C->name);
     // Set initial state of the check button
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(C->boutcoche), checked);
 
     return C;
 }
 
-GtkWidget *add_cocher(CheckboxList *list, GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui, gboolean checked,gchar* name) {
-    cocher *checkbox = init_cocher(parent, label, x, y, gui, checked,name);
-    if (checkbox == NULL) return NULL; // Check if initialization failed
+// Function to add a cocher to the CheckboxList
+GtkWidget *add_cocher(CheckboxList *list, GtkWidget *parent, gchar *label, gint x, gint y, gchar *gui, gboolean checked) {
+    cocher *checkbox = create_cocher(parent, label, x, y, gui, checked);
+    if (checkbox == NULL) return NULL; // Check if creation failed
 
     // Add checkbox to the list
     checkbox->next = list->head;
@@ -62,4 +75,3 @@ GtkWidget *add_cocher(CheckboxList *list, GtkWidget *parent, gchar *label, gint 
     return checkbox->boutcoche;
 }
 
-#endif // COCHER_H_INCLUDED

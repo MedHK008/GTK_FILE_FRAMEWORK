@@ -3267,7 +3267,12 @@
 1711207391 e:\screenshots\boutton_normal.h
 	"image.h"
 
+<<<<<<< Updated upstream
 1711154626 e:\screenshots\cocher.h
+=======
+1711247437 e:\screenshots\cocher.h
+	<gtk/gtk.h>
+>>>>>>> Stashed changes
 
 1711155363 e:\screenshots\radio.h
 
@@ -3311,9 +3316,15 @@
 	"reader.h"
 	"ex_buttons.h"
 
+<<<<<<< Updated upstream
 1711209019 e:\screenshots\ex_buttons.h
 
 1711209082 e:\screenshots\reader.h
+=======
+1711236796 e:\screenshots\ex_buttons.h
+
+1711246895 e:\screenshots\reader.h
+>>>>>>> Stashed changes
 
 1711209784 source:c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\main.c
 	"headers.h"

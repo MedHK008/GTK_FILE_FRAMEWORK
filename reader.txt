@@ -1,1 +1,10 @@
+<<<<<<< Updated upstream
 <button name ="button1" label ="click" lien ="gtklogo.png" width =200 height =200 bgColor ="RED" >
+=======
+<button name ="button1" label ="click" lien ="gtklogo.png" width =50 height =50 >
+<Checkbox> 
+    <check1 name ="check1" label ="click" gui="#FFFFFF">
+    <check1 name ="check1" label ="click" gui="#FFFFFF">
+    <check1 name ="check1" label ="click" gui="#FFFFFF">
+</Checkbox>
+>>>>>>> Stashed changes

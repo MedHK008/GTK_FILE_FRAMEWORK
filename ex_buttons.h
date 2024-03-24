@@ -21,18 +21,16 @@ GtkWidget* exemple()
         texte* txt_cocher=initialiser_texte(20,30,"exemple des bouttons a cocher",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
         add_label(fixed0->fixed,txt_cocher,TRUE,FALSE,50,280);
         // Initialize the checkbox list
-        CheckboxList *checkboxList = init_checkbox_list();
-
-        GtkWidget *checkbox1 = add_cocher(checkboxList,fixed0->fixed, "testing cocher1", 200, 300,NULL, TRUE,"coche1");
-        GtkWidget *checkbox2 = add_cocher(checkboxList,fixed0->fixed, "testing cocher2", 200, 330, "#FFFFFF", TRUE,"coche2");
-        GtkWidget *checkbox3 = add_cocher(checkboxList,fixed0->fixed, "testing cocher3", 200, 360, "#FFFFFF", TRUE,"coche3");
-        GtkWidget *checkbox4 = add_cocher(checkboxList,fixed0->fixed, "testing cocher4", 200, 390, "#FFFFFF", TRUE,"coche4");
-
-        // Add the checkboxes to the fixed container
-        add_widget_to_fixed(fixed0,checkbox1, 200, 300);
-        add_widget_to_fixed(fixed0,checkbox2, 200, 330);
-        add_widget_to_fixed(fixed0,checkbox3, 200, 360);
-        add_widget_to_fixed(fixed0,checkbox4, 200, 390);
+//        CheckboxList *checkboxList = init_checkbox_list();
+//
+//        GtkWidget *checkbox1 = add_cocher(checkboxList,fixed0->fixed, "testing cocher1", 200, 300,NULL, TRUE,"coche1");
+//        GtkWidget *checkbox2 = add_cocher(checkboxList,fixed0->fixed, "testing cocher2", 200, 330, "#FFFFFF", TRUE,"coche2");
+//        GtkWidget *checkbox3 = add_cocher(checkboxList,fixed0->fixed, "testing cocher3", 200, 360, "#FFFFFF", TRUE,"coche3");
+//        GtkWidget *checkbox4 = add_cocher(checkboxList,fixed0->fixed, "testing cocher4", 200, 390, "#FFFFFF", TRUE,"coche4");
+//        add_widget_to_fixed(fixed0,checkbox1, 200, 300);
+//        add_widget_to_fixed(fixed0,checkbox2, 200, 330);
+//        add_widget_to_fixed(fixed0,checkbox3, 200, 360);
+//        add_widget_to_fixed(fixed0,checkbox4, 200, 390);
 
 
     /****************************************************** les cochers***********************************/

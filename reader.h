@@ -130,17 +130,28 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                case Entry:
 //                    entryFunction(F);
 //                    break;
+<<<<<<< Updated upstream
                 case Button:
                     ButtonSimple* B=add_button(F);
+=======
+                case Button:
+                    texte* txt_cocher=initialiser_texte(20,30,"exemple des bouttons a cocher",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
+                    ButtonSimple* B=add_button(F,txt_cocher);
+>>>>>>> Stashed changes
                     add_widget_to_fixed(fixed0,B->button,50,50);
                     c=epurer_blan(F);
                     break;
 //                case Radio:
 //                    buttonRadioFunction(F);
 //                    break;
-//                case Checkbox:
-//                    checkboxFunction(F);
-//                    break;
+                case Checkbox:
+                    CheckboxList *checkboxList = init_checkbox_list();
+
+                    // Parse and add checkboxes from file
+
+                    // Example of adding checkboxes to fixed positions
+
+                    break;
 //                case BoiteDialogue:
 //                    boiteDialogueFunction(F);
 //                    break;
