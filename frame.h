@@ -58,7 +58,7 @@ void creer_frame(frame *fr)
         gtk_frame_set_shadow_type(GTK_FRAME(fr->widget), fr->type);
 }
 
-frame * add_frame(GtkWidget *pere,gfloat xligne,gfloat yligne,texte *tx,GtkWidget *fils,GtkShadowType type,gint x,gint y)
+frame * add_frame(GtkWidget *pere,gfloat xligne,gfloat yligne,gboolean lab,texte *tx,GtkWidget *fils,GtkShadowType type,gint x,gint y)
 {
     frame *fr=initialiser_frame(pere,xligne,yligne,tx,fils,type);
     creer_frame(fr);

@@ -1,1 +1,8 @@
-<button name ="button1" label ="click" lien ="gtklogo.png" width =50 height =50 >
+<button name ="button1" label ="click" lien ="gtklogo.png" width =200 height =200 bgColor ="RED" >
+<prog_bar name ="bar_prog" type =0 fraction =2.0 unite =0.2 width =100 height =200 xligne =500 yligne =40 >
+<tool_bar name ="tool_bar" orientation ="v" width =100 height =200 xligne =500 yligne =40 style_tbar =1 style_icon =3 >
+<item_bar name ="item" icon =gtk-save label ="enregistrer" width =100 height =100 position =-1 >
+<item_bar name ="item" icon =gtk-close label ="FERMER" width =100 height =100 position =-1 >
+<item_bar name ="item" icon =gtk-quit label ="QUITTER" width =100 height =100 position =-1 >
+</tool_bar >
+

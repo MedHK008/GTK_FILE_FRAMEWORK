@@ -104,7 +104,7 @@ Token string_to_token(const char *str) {
 }
 
 
-void lire_fichier(FILE*F,fixed* fixed0)
+void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox)
 {
     if(!F) exit(-1);
     gchar c ;
@@ -117,6 +117,7 @@ void lire_fichier(FILE*F,fixed* fixed0)
         {
              fscanf(F,"%s",current_token);
              tok=string_to_token(current_token);
+             printf("\n %c",c);
              switch(tok) {
 //                case fenetre:
 //                    windowFunction(F);
@@ -131,8 +132,7 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                    entryFunction(F);
 //                    break;
                 case Button:
-                    texte* label_button=initialiser_texte(20,30,"exemple des boutons",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
-                    ButtonSimple* B=add_button(F,label_button);
+                    ButtonSimple* B=add_button(F);
                     add_widget_to_fixed(fixed0,B->button,50,50);
                     c=epurer_blan(F);
                     break;
@@ -145,24 +145,36 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                case BoiteDialogue:
 //                    boiteDialogueFunction(F);
 //                    break;
-//                case Frame:
-//                    frameFunction(F);
-//                    break;
+                 // case Frame:
+                    //frame *fr=add_frame(F);
+                   // lire_son_elem(fr,F);
+                   // c=epurer_blan(F);
+                  //  break;
 //                case Image:
 //                    imageFunction(F);
 //                    break;
-//                case ProgBar:
-//                    progBarFunction(F);
-//                    break;
+                  case ProgBar:
+                      barre_prog *prog_bar=add_progress_bar(F);
+                      add_widget_to_fixed(fixed0,prog_bar->parent,prog_bar->x,prog_bar->y);
+                      c=epurer_blan(F);
+                      break;
 //                case ScrollBar:
 //                    scrollBarFunction(F);
 //                    break;
 //                case spB:
 //                    spinButtonFunction(F);
 //                    break;
-//                case ToolBar:
-//                    toolBarFunction(F);
-//                    break;
+                case ToolBar:
+                    toolbar *tbar=add_toolbar(pvbox,F);
+                    lire_son_item(tbar ,F);
+                    c=epurer_blan(F);
+                    /*
+                    add_item_bar(tbar,GTK_STOCK_SAVE,"enregistrer",100,100,1);
+                    add_item_bar(tbar,GTK_STOCK_CLOSE,"fermer",100,100,-1);
+                    add_item_bar(tbar,GTK_STOCK_QUIT,"quitter",100,100,-1);
+                    */
+
+                    break;
 //                case ItemBar:
 //                    itemBarFunction(F);
 //                    break;
@@ -179,6 +191,8 @@ void lire_fichier(FILE*F,fixed* fixed0)
                     // Gérer le cas où le token n'est pas reconnu
                     break;
             }
+            printf("\n fin de if");
+
         }
         else
                 return;
