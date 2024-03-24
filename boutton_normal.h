@@ -1,25 +1,20 @@
 #ifndef BOUTTON_NORMAL_H_INCLUDED
 #define BOUTTON_NORMAL_H_INCLUDED
 #include "image.h"
-
+#include "label.h"
 //*********************************************STRUCTURES***********************************************
 typedef struct {
     GtkWidget* button; // bouton widget
     gchar* name;       // Nom du bouton
-    gchar* label;      // Le texte sur le bouton
+    texte* label;      // Le texte sur le bouton
+    image* img;
     gchar* lien;       // Chemin icone du bouton
     guint width;       // longueur du bouton
     guint height;      // largeur du bouton
     gchar* bgColor;    // Couleur de fond du GtkGrid
-    GtkWidget* image;  // Widget de l'image pour le bouton
 } ButtonSimple;
 
-gchar epurer_blan(FILE*f)
-{
-    char c ;
-    while((c=fgetc(f))==' ' || c=='\n');
-    return (gchar)(c);
-}
+
 ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
 {
     gchar* elem;
@@ -43,8 +38,8 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
                 if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     while ((c = fgetc(F)) != '\"')
-                        b->label[i++] = c;
-                    b->label[i] = '\0';
+                        b->label->text[i++] = c;
+                    b->label->text[i] = '\0';
                 }
             }
         } else if (strcmp(elem, "lien") == 0) {
@@ -83,19 +78,15 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
 
 
 // INITIALISER LE BOUTON
-ButtonSimple* init_button_simple() {
+ButtonSimple* init_button_simple(texte* label_text) {
     ButtonSimple* b = (ButtonSimple*)malloc(sizeof(ButtonSimple));
     if (!b) {
         printf("\nErreur d'allocation !!\n");
         exit(0);
     }
     b->name = NULL;
-    b->label=(gchar*)g_malloc(sizeof(gchar)*30);
-    b->label[0]='\0';
-
-    b->image = NULL;  // Initialize image widget to NULL
-
-
+    b->label=(texte*)g_malloc(sizeof(texte));
+    b->label=label_text;
     b->bgColor=(gchar*)g_malloc(sizeof(gchar)*30);
     b->bgColor[0]='\0';
     b->name=(gchar*)g_malloc(sizeof(gchar)*30);
@@ -142,9 +133,11 @@ void creer_button_Simple(ButtonSimple* B) {
     }
 
     // Ajouter l'image à la vbox
-    if (B->image)
-        gtk_box_pack_start(GTK_BOX(vbox), B->image, TRUE, TRUE, 0);
-
+    if (B->lien){
+        image* img=initialiser_image(B->button,1,"gtklogo.png",GTK_ICON_SIZE_BUTTON,B->width,B->height);
+        creer_img(img);
+        gtk_box_pack_start(GTK_BOX(vbox), img->widget, TRUE, TRUE, 0);
+    }
     // Créer le bouton avec la vbox comme contenu
     B->button = gtk_button_new();
     gtk_container_add(GTK_CONTAINER(B->button), vbox);
@@ -162,15 +155,12 @@ void creer_button_Simple(ButtonSimple* B) {
 ///gchar* name, gchar* label, gchar* path_to_image, gint height, gint width, gchar* bgColor,
 
 
-ButtonSimple* add_button(FILE* F) {
+ButtonSimple* add_button(FILE* F,texte* label_text) {
     // Initialize the button structure
     ButtonSimple* B =NULL;
-    B = init_button_simple();
+    B = init_button_simple(label_text);
     B = buttonSimpleFunction(B,F);
     creer_button_Simple(B);
-    // Initialize image widget
-    image* img = initialiser_image(B, 1, B->lien, GTK_ICON_SIZE_BUTTON, B->width, B->height);
-    creer_img(img);
     return B;
 }
 

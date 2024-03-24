@@ -9,6 +9,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+gchar epurer_blan(FILE*f)
+{
+    char c ;
+    while((c=fgetc(f))==' ' || c=='\n');
+    return (gchar)(c);
+}
+
+
 ///les constante
 #define NBC 100
 #define NB_RADIO 3
@@ -18,21 +27,6 @@
 #include "cocher.h"
 #include "radio.h"
 #include "spin_button.h"
-
-
-
-//#include "prog_bar.h"
-#include "label.h"
-//#include "frame.h"
-//#include "scrollbar.h"
-//#include "tool_bar.h"
-
-
-//#include "boite_dialog.h"
-//#include "entry.h"
-//
-//
-//#include "menu.h"
 #include "window.h"
 #include "onglet.h"
 #include "fixed.h"

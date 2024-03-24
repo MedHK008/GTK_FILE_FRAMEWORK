@@ -67,6 +67,37 @@ void create_radio(radio *R, gint x, gint y) {
         R->liste = R->liste->suivant;
     }
 }
+//
+//elem_radio* radioFunction(elem_radio* L, FILE* F) {
+//    if (L == NULL || F == NULL) return NULL;
+//
+//    gchar elem[50];
+//    gchar c;
+//    int check;
+//
+//    do {
+//        if (fscanf(F, "%49s", elem) != 1) break;
+//
+//        if (strcmp(elem, "label") == 0) {
+//            gchar label[NBC];
+//            if (fscanf(F, "=\"%49[^\"]\"", label) != 1) break;
+//            L->label = strdup(label);
+//        } else if (strcmp(elem, "name") == 0) {
+//            gchar name[NBC];
+//            if (fscanf(F, "=\"%49[^\"]\"", name) != 1) break;
+//            L->name = strdup(name);
+//        } else if (strcmp(elem, "hexcolor") == 0) {
+//            gchar hexcolor[8];  // Assuming hex color is in the format "#RRGGBB"
+//            if (fscanf(F, "=\"%7[^\"]\"", hexcolor) != 1) break;
+//            L->hexcolor = strdup(hexcolor);
+//        } else if (strcmp(elem, "checked") == 0) {
+//            if (fscanf(F, "=\"%d\"", &check) == 1)
+//                L->checked = (check == 1) ? TRUE : FALSE;
+//        }
+//    } while (strcmp(elem, ">"));
+//
+//    return L;
+//}
 
 
 GtkWidget* add_radio(int numButtons, gint x, gint y, char *labels[], char *colors[], gboolean checked[],gchar* name[]) {

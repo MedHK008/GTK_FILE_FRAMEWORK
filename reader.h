@@ -25,41 +25,6 @@ typedef enum{
 }Token;
 
 
-//typedef struct pl{
-//    gchar *contenue;
-//    struct pl*svt;
-//}Pile;
-//Pile *initialiser_Pile(Pile*P)
-//{
-//    P=NULL;
-//    return(Pile*)(P);
-//}
-//Pile*empiler(Pile *P,gchar*name)
-//{
-//    Pile*NE=(Pile*)malloc(sizeof(Pile));
-//    if(NE){
-//        NE->contenue=name;
-//        if(!P) return(Pile*)(NE);
-//        else {
-//            NE->svt=P;
-//            return(Pile*)(P);
-//        }
-//    }
-//    exit(-1);
-//}
-//Pile* depiler(Pile*P)
-//{
-//    if(!P) return(Pile*)(NULL);
-//    Pile*Supp=P;
-//    P=P->svt;
-//    free(Supp);
-//    return (Pile*)(P);
-//}
-
-
-
-
-
 Token string_to_token(const char *str) {
     if (!strcmp(str, "window")){
         return fenetre;
@@ -98,7 +63,6 @@ Token string_to_token(const char *str) {
     } else if (!strcmp(str, "menu_item")) {
         return MenuItem;
     } else {
-        // Retourner une valeur par défaut ou une valeur d'erreur
         return -1;
     }
 }
@@ -130,27 +94,23 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                case Entry:
 //                    entryFunction(F);
 //                    break;
-<<<<<<< Updated upstream
-                case Button:
-                    ButtonSimple* B=add_button(F);
-=======
                 case Button:
                     texte* txt_cocher=initialiser_texte(20,30,"exemple des bouttons a cocher",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
                     ButtonSimple* B=add_button(F,txt_cocher);
->>>>>>> Stashed changes
                     add_widget_to_fixed(fixed0,B->button,50,50);
                     c=epurer_blan(F);
                     break;
 //                case Radio:
-//                    buttonRadioFunction(F);
+//                    elem_radio* radioButtons = NULL;
+//                    radioButtons = radioFunction(radioButtons, file);
 //                    break;
                 case Checkbox:
-                    CheckboxList *checkboxList = init_checkbox_list();
-
-                    // Parse and add checkboxes from file
-
-                    // Example of adding checkboxes to fixed positions
-
+                    printf("fuck1\n");
+                    cocher* C = add_cocher(F);
+                    printf("fuck2\n");
+                    add_widget_to_fixed(fixed0,C->boutcoche,50,150);
+                    printf("fuck3\n");
+                    c=epurer_blan(F);
                     break;
 //                case BoiteDialogue:
 //                    boiteDialogueFunction(F);
