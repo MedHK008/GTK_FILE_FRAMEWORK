@@ -69,6 +69,9 @@ void create_radio(radio *R, gint x, gint y) {
 }
 
 
+
+
+
 GtkWidget* add_radio(int numButtons, gint x, gint y, char *labels[], char *colors[], gboolean checked[],gchar* name[]) {
     elem_radio *liste_radio = NULL;
     for (int i = 0; i < numButtons; i++) {

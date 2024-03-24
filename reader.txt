@@ -1,5 +1,4 @@
-<button name ="button1" label ="click" lien ="gtklogo.png" width =50 height =50 >
+<button name ="button1" label ="click" lien ="gtklogo.png" width =50 height =50 posx =50 posy =50 bgColor ="#FFFF00" >
 <checkbox label ="check1" name ="check1" gui ="#FF00FF" checked =1 >
 <entry name ="hello" placeholder ="saisir votre nom"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =20 y_pos =20 >
 <entry name ="hello1" placeholder ="saisir votre nom1"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =200 y_pos =100 >
-

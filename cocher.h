@@ -46,7 +46,6 @@ cocher *cocherFunction(cocher *C, FILE *F) {
     int check;
     do {
         fscanf(F, "%s", elem);
-        printf("%s",elem);
         if (strcmp(elem, "label") == 0)
         {
             C->label=(gchar*)g_malloc(sizeof(gchar)*50);
@@ -57,7 +56,6 @@ cocher *cocherFunction(cocher *C, FILE *F) {
                     while ((c=fgetc(F)) != '\"')
                         C->label[i++] = c;
                     C->label[i] = '\0';
-                    printf("  %s   ",C->label);
                 }
             }
         }
@@ -101,13 +99,9 @@ cocher *cocherFunction(cocher *C, FILE *F) {
 }
 
 cocher *add_cocher(FILE *F) {
-    printf("fuck4\n");
     cocher *checkbox = init_empty_cocher();
-    printf("fuck5\n");
     checkbox = cocherFunction(checkbox, F);
-    printf("\nfuck6\n");
     create_cocher(checkbox);
-    printf("\nfuck7\n");
     return checkbox;
 }
 
