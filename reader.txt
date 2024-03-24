@@ -1,1 +1,27 @@
-<button name ="button1" label ="click" lien ="gtklogo.png" width =50 height =50 >
+<window  name ="f1" title ="Instagram" icon ="C:\\Users\\pc\\Desktop\\GTK project\\TestGtkmacro\\insta_icon.png" width =500 height =600 
+         bgColor ="#ED1B24" position_init ="center" resizable =T border_width =45 >
+
+<menu_bar name ="mb1" orientation ="TTB" >
+  <menu_item name ="File" IsSubmenu =T >
+    <menu_item name ="_Open"  IsSubmenu =T > 
+       <menu_item name ="Code"  IsSubmenu =T >
+          <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
+          <menu_item name ="P_roject" type =3 >
+          <menu_item name ="C_lass" type =3 >
+          <menu_item name ="Sep" type =2 >
+          <menu_item name ="_Save" type =1 >
+       <menu_item/>
+    <menu_item/>
+    <menu_item name ="_Save" type =1 >  
+  <menu_item/>
+  <menu_item name ="View" type =0 IsSubmenu =T >
+       <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
+       <menu_item name ="P_roject" type =3 >
+       <menu_item name ="C_lass" type =3 >
+       <menu_item name ="Sep" type =2 >
+       <menu_item name ="_Save" type =1 >
+  <menu_item/>
+  
+<menu_bar/>
+
+
