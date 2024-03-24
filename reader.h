@@ -118,20 +118,23 @@ void lire_fichier(FILE*F,fixed* fixed0)
                         add_widget_to_fixed(fixed0,E->entree,E->x_pos,E->y_pos);
                     break;
                 case Button:
-                     B=add_button(F);
-//                    add_widget_to_fixed(fixed0,B->button,50,50);
+                    texte* txt_cocher=initialiser_texte(20,30,"exemple des bouttons a cocher",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
+                    ButtonSimple* B=add_button(F,txt_cocher);
+                    add_widget_to_fixed(fixed0,B->button,50,50);
                     c=epurer_blan(F);
-                     if(into==1)
-                        ajouter_a_boite_dialogue(BD,B->button,100,100);
-                    else if(into==0)
-                        add_widget_to_fixed(fixed0,B->button,100,100);
                     break;
 //                case Radio:
-//                    buttonRadioFunction(F);
+//                    elem_radio* radioButtons = NULL;
+//                    radioButtons = radioFunction(radioButtons, file);
 //                    break;
-//                case Checkbox:
-//                    checkboxFunction(F);
-//                    break;
+                case Checkbox:
+                    printf("fuck1\n");
+                    cocher* C = add_cocher(F);
+                    printf("fuck2\n");
+                    add_widget_to_fixed(fixed0,C->boutcoche,50,150);
+                    printf("fuck3\n");
+                    c=epurer_blan(F);
+                    break;
 //                case boiteDialogue:
 //                    printf("m here");
 //                   into=1;

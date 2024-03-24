@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1711205841 source:e:\screenshots\main.c
+1711289155 source:e:\screenshots\main.c
 	"headers.h"
 
 1704104925 c:\msys64\mingw64\include\stdio.h
@@ -3262,39 +3262,40 @@
 
 1710763723 e:\screenshots\menu.h
 
-1711205584 e:\screenshots\window.h
+1711215837 e:\screenshots\window.h
 
-1711207391 e:\screenshots\boutton_normal.h
+1711289191 e:\screenshots\boutton_normal.h
 	"image.h"
+	"label.h"
 
-1711154626 e:\screenshots\cocher.h
+1711288749 e:\screenshots\cocher.h
 
-1711155363 e:\screenshots\radio.h
+1711288153 e:\screenshots\radio.h
 
-1711156152 e:\screenshots\spin_button.h
+1711215837 e:\screenshots\spin_button.h
 
-1710679885 e:\screenshots\onglet.h
+1711215837 e:\screenshots\onglet.h
 	<gtk/gtk.h>
 
 1710634294 e:\screenshots\tool_bar.h
 
 1710634301 e:\screenshots\prog_bar.h
 
-1711201969 e:\screenshots\image.h
+1711215837 e:\screenshots\image.h
 
-1710796834 e:\screenshots\label.h
+1711215837 e:\screenshots\label.h
 
 1710634291 e:\screenshots\frame.h
 
 1710636189 e:\screenshots\scrollbar.h
 
-1710766316 e:\screenshots\boite_dialog.h
+1711288171 e:\screenshots\boite_dialog.h
 
-1710678149 e:\screenshots\entry.h
+1711288171 e:\screenshots\entry.h
 
-1711209047 e:\screenshots\fixed.h
+1711215837 e:\screenshots\fixed.h
 
-1711208088 e:\screenshots\headers.h
+1711289261 e:\screenshots\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3305,15 +3306,17 @@
 	"radio.h"
 	"spin_button.h"
 	"label.h"
+	"boite_dialog.h"
+	"entry.h"
 	"window.h"
 	"onglet.h"
 	"fixed.h"
 	"reader.h"
 	"ex_buttons.h"
 
-1711209019 e:\screenshots\ex_buttons.h
+1711289191 e:\screenshots\ex_buttons.h
 
-1711209082 e:\screenshots\reader.h
+1711289229 e:\screenshots\reader.h
 
 1711209784 source:c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\main.c
 	"headers.h"

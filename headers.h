@@ -13,6 +13,16 @@
 #define NBC 100
 #define NB_RADIO 3
 
+
+gchar epurer_blan(FILE*f)
+{
+    char c ;
+    while((c=fgetc(f))==' ' || c=='\n');
+    return (gchar)(c);
+}
+
+
+
 ///les bibliothèque des widget
 #include "boutton_normal.h"
 #include "cocher.h"
