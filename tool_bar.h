@@ -60,8 +60,8 @@ toolbar *initialiser_toolbar()
 // Fonction pour d�finir l'orientation d'une barre d'outils
 toolbar *creer_toolbar(toolbar *tbar)
 {
-    gtk_toolbar_set_style(GTK_TOOLBAR(tbar->widget),GTK_TOOLBAR_ICONS);
-    gtk_toolbar_set_icon_size(GTK_TOOLBAR(tbar->widget),GTK_ICON_SIZE_BUTTON);
+    gtk_toolbar_set_style(GTK_TOOLBAR(tbar->widget),style_toolbar(tbar->style_tbar));
+    gtk_toolbar_set_icon_size(GTK_TOOLBAR(tbar->widget),style_iconsize(tbar->style_icon));
     // V�rifie si l'orientation de la barre d'outils est horizontale
     if (tbar->orientation == 'h' || tbar->orientation == 'H')
         // Si oui, d�finir l'orientation de la barre d'outils comme horizontale
@@ -140,8 +140,8 @@ GtkWidget *creer_separ(GtkWidget *sep, GtkWidget *pere, gint pos)
     // Renvoyer le widget de s�parateur cr��
     return sep;
 }
-/*
-GtkToolbarStyle style_toolbar(gint type)
+
+gint style_toolbar(gint type)
 {
   switch(type){
      case 1:return GTK_TOOLBAR_ICONS;
@@ -152,7 +152,7 @@ GtkToolbarStyle style_toolbar(gint type)
 
 }
 
-GtkIconSize style_iconsize(gint type) {
+gint style_iconsize(gint type) {
 
     switch(type) {
         case 1:
@@ -171,7 +171,7 @@ GtkIconSize style_iconsize(gint type) {
             return GTK_ICON_SIZE_INVALID;
     }
 }
-*/
+
 toolbar *toolBarFunction(toolbar *tool_bar,FILE *F)
 {
     gchar* elem;

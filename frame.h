@@ -37,17 +37,17 @@ frame *initialiser_frame(GtkWidget *pere, gint x, gint y, texte *t, GtkWidget *f
 void creer_frame(frame *fr)
 {
     // Cr�er une cha�ne de caract�res format�e pour l'�tiquette avec des propri�t�s de texte sp�cifi�es
-    gchar *lab = g_strdup_printf("<span  font_desc=\"%d\" style=\"%s\" foreground=\"%s\" font_family=\"%s\" underline=\"%s\">%s</span> ", fr->text->taille_text, fr->text->style, fr->text->couleur_text, fr->text->police, fr->text->underline, fr->text->text);
+    //gchar *lab = g_strdup_printf("<span  font_desc=\"%d\" style=\"%s\" foreground=\"%s\" font_family=\"%s\" underline=\"%s\">%s</span> ", fr->text->taille_text, fr->text->style, fr->text->couleur_text, fr->text->police, fr->text->underline, fr->text->text);
 
     // Cr�er un widget de label GTK et d�finir son contenu avec la cha�ne format�e
-    GtkWidget *label = gtk_label_new(NULL);
-    gtk_label_set_markup(GTK_LABEL(label), lab);
+   // GtkWidget *label = gtk_label_new(NULL);
+   // gtk_label_set_markup(GTK_LABEL(label), lab);
 
     // D�finir le label comme �tiquette du cadre
-    gtk_frame_set_label_widget(GTK_FRAME(fr->widget), label);
+   // gtk_frame_set_label_widget(GTK_FRAME(fr->widget), label);
 
     // Assigner le label au conteneur du cadre
-    fr->conteneur = label;
+    //fr->conteneur = label;
 
     // Si des positions sp�cifi�es, les appliquer � l'�tiquette du cadre
     if (fr->xligne || fr->yligne)

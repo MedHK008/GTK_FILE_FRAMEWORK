@@ -1,7 +1,6 @@
 #ifndef BOUTTON_NORMAL_H_INCLUDED
 #define BOUTTON_NORMAL_H_INCLUDED
 #include "image.h"
-
 //*********************************************STRUCTURES***********************************************
 typedef struct {
     GtkWidget* button; // bouton widget
@@ -14,12 +13,7 @@ typedef struct {
     GtkWidget* image;  // Widget de l'image pour le bouton
 } ButtonSimple;
 
-gchar epurer_blan(FILE*f)
-{
-    char c ;
-    while((c=fgetc(f))==' ' || c=='\n');
-    return (gchar)(c);
-}
+
 ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
 {
     gchar* elem;

@@ -104,7 +104,7 @@ Token string_to_token(const char *str) {
 }
 
 
-void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox)
+void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox,GtkWidget *pere)
 {
     if(!F) exit(-1);
     gchar c ;
@@ -113,11 +113,11 @@ void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox)
     c=epurer_blan(F);
     while(c!=EOF)
     {
+        printf("%c",c);
         if(c=='<')
         {
              fscanf(F,"%s",current_token);
              tok=string_to_token(current_token);
-             printf("\n %c",c);
              switch(tok) {
 //                case fenetre:
 //                    windowFunction(F);
@@ -125,9 +125,11 @@ void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox)
 //                case Fixed:
 //                    fixedFunction(F);
 //                    break;
-//                case Label:
-//                    labelFunction(F);
-//                    break;
+                case Label:
+                   Etiquette *lab= add_label(F);
+                   add_widget_to_fixed(fixed0,lab->widget,lab->x,lab->y);
+                   c=epurer_blan(F);
+                   break;
 //                case Entry:
 //                    entryFunction(F);
 //                    break;
@@ -150,17 +152,21 @@ void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox)
                    // lire_son_elem(fr,F);
                    // c=epurer_blan(F);
                   //  break;
-//                case Image:
-//                    imageFunction(F);
-//                    break;
+                 case Image:
+                   image *img=add_image(F);
+                   add_widget_to_fixed(fixed0,img->widget,img->x,img->y);
+                   c=epurer_blan(F);
+                   break;
                   case ProgBar:
                       barre_prog *prog_bar=add_progress_bar(F);
                       add_widget_to_fixed(fixed0,prog_bar->parent,prog_bar->x,prog_bar->y);
                       c=epurer_blan(F);
                       break;
-//                case ScrollBar:
-//                    scrollBarFunction(F);
-//                    break;
+                case ScrollBar:
+                    printf("SDJSJAS");
+                    barre_def *scbar=add_scrollbar(pere,pvbox,F);
+                    c=epurer_blan(F);
+                    break;
 //                case spB:
 //                    spinButtonFunction(F);
 //                    break;

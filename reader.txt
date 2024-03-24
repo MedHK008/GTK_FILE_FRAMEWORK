@@ -1,3 +1,4 @@
+<scroll_bar name ="barre_def" hpolic =1 vpolic =1 width =0 height =600 >
 <button name ="button1" label ="click" lien ="gtklogo.png" width =200 height =200 bgColor ="RED" >
 <prog_bar name ="bar_prog" type =0 fraction =2.0 unite =0.2 width =100 height =200 xligne =500 yligne =40 >
 <tool_bar name ="tool_bar" orientation ="v" width =100 height =200 xligne =500 yligne =40 style_tbar =1 style_icon =3 >
@@ -5,4 +6,6 @@
 <item_bar name ="item" icon =gtk-close label ="FERMER" width =100 height =100 position =-1 >
 <item_bar name ="item" icon =gtk-quit label ="QUITTER" width =100 height =100 position =-1 >
 </tool_bar >
-
+<image name ="image" fichier =gtklogo.png width =40 height =30 xligne =900 yligne =40 type =1 style_icon =3 >
+<label name ="label" selectable =1 wrap =0 xligne =900 yligne =100 >
+<text_label text ="je suis Mohamed" size =30 color ="red" bgcolor ="green" width =100 height =100  >

@@ -3315,10 +3315,10 @@
 
 1711209082 e:\screenshots\reader.h
 
-1711228007 source:c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\main.c
+1711303214 source:c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\main.c
 	"headers.h"
 
-1711243124 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\headers.h
+1711292375 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3331,6 +3331,7 @@
 	"prog_bar.h"
 	"label.h"
 	"frame.h"
+	"scrollbar.h"
 	"tool_bar.h"
 	"window.h"
 	"onglet.h"
@@ -3338,10 +3339,10 @@
 	"reader.h"
 	"ex_buttons.h"
 
-1711215433 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\boutton_normal.h
+1711283449 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\boutton_normal.h
 	"image.h"
 
-1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\image.h
+1711285291 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\image.h
 
 1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\cocher.h
 
@@ -3349,7 +3350,7 @@
 
 1711209784 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\spin_button.h
 
-1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\label.h
+1711290405 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\label.h
 
 1711209784 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\window.h
 
@@ -3358,13 +3359,15 @@
 
 1711209783 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\fixed.h
 
-1711243124 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\reader.h
+1711301582 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\reader.h
 
-1711234667 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\ex_buttons.h
+1711303164 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\ex_buttons.h
 
 1711230881 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\prog_bar.h
 
-1711241253 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\tool_bar.h
+1711282408 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\tool_bar.h
 
-1711243204 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\frame.h
+1711291805 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\frame.h
+
+1711303165 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\scrollbar.h
 
