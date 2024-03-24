@@ -1,6 +1,6 @@
 #ifndef READER_H_INCLUDED
 #define READER_H_INCLUDED
-
+#include "menu.h"
 
 #define MAX 100
 typedef enum{
@@ -21,7 +21,8 @@ typedef enum{
     ItemBar,
     MenuBar,
     Tab,
-    MenuItem
+    MenuItem,
+    Menu
 }Token;
 
 
@@ -97,16 +98,17 @@ Token string_to_token(const char *str) {
         return Tab;
     } else if (!strcmp(str, "menu_item")) {
         return MenuItem;
+
     } else {
-        // Retourner une valeur par défaut ou une valeur d'erreur
+        // Retourner une valeur par dÃ©faut ou une valeur d'erreur
         return -1;
     }
 }
 
 
-void lire_fichier(FILE*F,fixed* fixed0)
+void lire_fichier(FILE*F)
 {
-    if(!F) exit(-1);
+    Fenetre* f1;
     gchar c ;
     gchar current_token[MAX];
     Token tok;
@@ -117,10 +119,12 @@ void lire_fichier(FILE*F,fixed* fixed0)
         {
              fscanf(F,"%s",current_token);
              tok=string_to_token(current_token);
-             switch(tok) {
-//                case fenetre:
-//                    windowFunction(F);
-//                    break;
+             switch(tok)
+             {
+                case fenetre:
+                    f1=add_window(F);
+                    c=epurer_blan(F);
+                    break;
 //                case Fixed:
 //                    fixedFunction(F);
 //                    break;
@@ -130,12 +134,11 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                case Entry:
 //                    entryFunction(F);
 //                    break;
-                case Button:
-                    texte* label_button=initialiser_texte(20,30,"exemple des boutons",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
-                    ButtonSimple* B=add_button(F,label_button);
-                    add_widget_to_fixed(fixed0,B->button,50,50);
-                    c=epurer_blan(F);
-                    break;
+//                case Button:
+//                    ButtonSimple* B=add_button(F);
+//                    add_widget_to_fixed(fixed0,B->button,50,50);
+//                    c=epurer_blan(F);
+//                    break;
 //                case Radio:
 //                    buttonRadioFunction(F);
 //                    break;
@@ -166,23 +169,31 @@ void lire_fichier(FILE*F,fixed* fixed0)
 //                case ItemBar:
 //                    itemBarFunction(F);
 //                    break;
-//                case MenuBar:
-//                    menuBarFunction(F);
-//                    break;
 //                case Tab:
 //                    ongletFunction(F);
 //                    break;
+                  case MenuBar:
+                        menubar *mbar =add_menubar(mbar,F);
+                         ajouter_elems(mbar,F);
+                        gtk_container_add(GTK_CONTAINER(f1->window),mbar->menubar);
+                        c=epurer_blan(F);
+
+                        break;
 //                case MenuItem:
 //                    menuItemFunction(F);
 //                    break;
                 default:
-                    // Gérer le cas où le token n'est pas reconnu
+                    // GÃ©rer le cas oÃ¹ le token n'est pas reconnu
                     break;
             }
+
+
         }
         else
                 return;
     }
+    gtk_widget_show_all(f1->window);
+    fin_programme(f1);
 }
 
 
