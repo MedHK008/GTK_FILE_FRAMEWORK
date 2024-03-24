@@ -3,16 +3,27 @@
 
 int main(int argc, char *argv[]) {
     debut_programme(argc,argv);
-    Fenetre* ma_fenetre=add_window("ma fenetre","gtklogo.png","window","white",
-                   3840,2160,GTK_WIN_POS_CENTER,
-                   -1,-1,5,TRUE);
+     FILE *F = fopen("reader.txt", "r"); // Ouvre le fichier en mode lecture
+    if (F == NULL) {
+        g_print("Impossible d'ouvrir le fichier!!\n");
+     }
+    Fenetre *Win=(Fenetre*)malloc(sizeof(Fenetre));
+    if(Win)
+        {
 
-    GtkWidget *notebook = exemple(ma_fenetre->window);
-     // FILE* F=fopen("reader.txt","r");
-     /// fixed* fixed0=init_gtk_fixed("fixed0");
-     // GtkWidget* box=gtk_vbox_new(FALSE,10);
-     // lire_fichier(F,fixed0,box,ma_fenetre);
-     // gtk_box_pack_start(GTK_BOX(box), fixed0->fixed, FALSE, FALSE,10);
+           printf("\n333");
+              lire_fichier(F,Win,NULL,"/root");
+              printf("\nSOrtie");
+
+        }
+
+
+    return 0;
+}
+
+   // GtkWidget *notebook = exemple();
+
+
 //    GtkWidget* fixed1 = create_fixed();///fiha le menu bohdo db
 //    add_progress_bar(fixed1,2.3,1.0,1000,500,1,250,250);
 //    add_image(fixed1,1,"gtklogo.png",GTK_ICON_SIZE_BUTTON,50,50,250,250);
@@ -121,12 +132,8 @@ int main(int argc, char *argv[]) {
 
 
     ///matqissch hadchi li mor had lcomment
-    //add_to_window(notebook,ma_fenetre->window);
-    gtk_widget_show_all(ma_fenetre->window);
+   // add_to_window(notebook,ma_fenetre->window);
 
-    fin_programme(ma_fenetre);
-    return 0;
-}
 
 
 

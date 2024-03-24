@@ -1,6 +1,7 @@
 #ifndef BOUTTON_NORMAL_H_INCLUDED
 #define BOUTTON_NORMAL_H_INCLUDED
 #include "image.h"
+
 //*********************************************STRUCTURES***********************************************
 typedef struct {
     GtkWidget* button; // bouton widget
@@ -13,7 +14,12 @@ typedef struct {
     GtkWidget* image;  // Widget de l'image pour le bouton
 } ButtonSimple;
 
-
+gchar epurer_blan(FILE*f)
+{
+    gchar c ;
+    while((c=fgetc(f))==' ' || c=='\n');
+    return (gchar)c;
+}
 ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
 {
     gchar* elem;
@@ -102,7 +108,7 @@ ButtonSimple* init_button_simple() {
 }
 //***************************************************************
 
-// Fonction pour ajouter une couleur de fond Ã  un widget
+// Fonction pour ajouter une couleur de fond à un widget
 void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
     GdkRGBA rgba;
 
@@ -116,38 +122,38 @@ void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
 //***********************************************************
 // CREER LE BOUTON SIMPLE
 void creer_button_Simple(ButtonSimple* B) {
-    // CrÃ©er un GtkBox vertical pour contenir l'image et le label
+    // Créer un GtkBox vertical pour contenir l'image et le label
     GtkWidget* vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     // Changer la couleur de fond de la vbox
     if(B->bgColor)
     {
 
-               add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spÃ©cifiÃ©e
+               add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spécifiée
     }
-    // CrÃ©er un label pour le texte
+    // Créer un label pour le texte
     GtkWidget* label = NULL;
     if (B->label) {
         label = gtk_label_new(B->label);
         // Centrer le texte horizontalement et verticalement dans la vbox
         gtk_widget_set_halign(label, GTK_ALIGN_CENTER);
         gtk_widget_set_valign(label, GTK_ALIGN_CENTER);
-        // Ajouter le label Ã  la vbox
+        // Ajouter le label à la vbox
         gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
     }
 
-    // Ajouter l'image Ã  la vbox
+    // Ajouter l'image à la vbox
     if (B->image)
         gtk_box_pack_start(GTK_BOX(vbox), B->image, TRUE, TRUE, 0);
 
-    // CrÃ©er le bouton avec la vbox comme contenu
+    // Créer le bouton avec la vbox comme contenu
     B->button = gtk_button_new();
     gtk_container_add(GTK_CONTAINER(B->button), vbox);
 
-    // DÃ©finir le nom du bouton (ID) pour le styliser en CSS
+    // Définir le nom du bouton (ID) pour le styliser en CSS
     if (B->name)
         gtk_widget_set_name(B->button, B->name);
 
-    // DÃ©finir la taille du bouton
+    // Définir la taille du bouton
     if ((B->width > 0) && (B->height > 0))
         gtk_widget_set_size_request(B->button, B->width, B->height);
 }

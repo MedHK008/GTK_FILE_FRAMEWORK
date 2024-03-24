@@ -3,21 +3,26 @@
 
 typedef struct {
     gchar* name;
+    guint posx,posy;
     GtkWidget* fixed;
 } fixed;
 
 
-fixed* init_gtk_fixed(gchar* name) {
+fixed* init_gtk_fixed()
+{
     fixed* info =(fixed*)malloc(sizeof(fixed));
     if (!info) {
         g_print("Error: Failed to allocate memory for fixed\n");
         return NULL;
     }
-    info->name=name;
+    info->name=(gchar*)malloc(sizeof(gchar));
+    info->name[0]='\0';
+    info->posx=0;
+    info->posy=0;
     info->fixed = gtk_fixed_new();
-    if (info->name) gtk_widget_set_name(info->fixed,info->name);
     return info;
 }
+
 
 void add_widget_to_fixed(fixed* fixedInfo, GtkWidget* widget, gint x, gint y) {
     gtk_fixed_put(GTK_FIXED(fixedInfo->fixed), widget, x, y);

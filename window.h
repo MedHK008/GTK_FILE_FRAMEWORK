@@ -5,114 +5,233 @@
 
 
 typedef struct {
-  GtkWidget *window; // Pointeur vers le widget de la fenÃªtre (obligatoire)
-  gchar *titre; // Titre de la fenÃªtre (facultatif, par dÃ©faut : "")
-  gchar *icon; // Chemin vers l'icÃ´ne de la fenÃªtre (facultatif, par dÃ©faut : "")
-  gchar *name; // Nom de la fenÃªtre (facultatif, par dÃ©faut : "")
-  gchar *bgcolor; // Couleur de fond de la fenÃªtre (facultatif, par dÃ©faut : "#FFFFFF")
-  guint hauteur; // Hauteur de la fenÃªtre en pixels (obligatoire)
-  guint largeur; // Largeur de la fenÃªtre en pixels (obligatoire)
-  gint posx; // Position horizontale de la fenÃªtre par rapport Ã  l'Ã©cran (facultatif, par dÃ©faut : -1)
-  gint posy; // Position verticale de la fenÃªtre par rapport Ã  l'Ã©cran (facultatif, par dÃ©faut : -1)
-  GtkWindowPosition position_init; // Position initiale de la fenÃªtre (obligatoire)
+  GtkWidget *window; // Pointeur vers le widget de la fenêtre (obligatoire)
+  gchar *titre; // Titre de la fenêtre (facultatif, par défaut : "")
+  gchar *icon; // Chemin vers l'icône de la fenêtre (facultatif, par défaut : "")
+  gchar *name; // Nom de la fenêtre (facultatif, par défaut : "")
+  gchar *bgcolor; // Couleur de fond de la fenêtre (facultatif, par défaut : "#FFFFFF")
+  guint hauteur; // Hauteur de la fenêtre en pixels (obligatoire)
+  guint largeur; // Largeur de la fenêtre en pixels (obligatoire)
+  gint posx; // Position horizontale de la fenêtre par rapport à l'écran (facultatif, par défaut : -1)
+  gint posy; // Position verticale de la fenêtre par rapport à l'écran (facultatif, par défaut : -1)
+  GtkWindowPosition position_init; // Position initiale de la fenêtre (obligatoire)
        /*GTK_WIN_POS_CENTER
          GTK_WIN_POS_CENTER_ALWAYS
          GTK_WIN_POS_MOUSE
          GTK_WIN_POS_NONE */
-  guint border_width; // Largeur de la bordure de la fenÃªtre en pixels (facultatif, par dÃ©faut : 0)
-  gboolean modifiable; // Indique si la taille de la fenÃªtre peut Ãªtre modifiÃ©e (facultatif, par dÃ©faut : TRUE)
+  guint border_width; // Largeur de la bordure de la fenêtre en pixels (facultatif, par défaut : 0)
+  gboolean modifiable; // Indique si la taille de la fenêtre peut être modifiée (facultatif, par défaut : TRUE)
 } Fenetre;
 
+
 //Fonction pour initialiser la structure fenetre
-Fenetre* initialiser_win(gchar* titre, gchar* icon_path,gchar *name,gchar*bgcolor, guint h, guint w, GtkWindowPosition pos,
-                          gint x, gint y,guint border, gboolean resizable
-                        )
+Fenetre* init_window()
 {
-    Fenetre* win =(Fenetre*) malloc(sizeof(Fenetre));
+    Fenetre* win = (Fenetre*)malloc(sizeof(Fenetre));
     if (!win) {
-        printf("\nErreur d'allocation de mÃ©moire.");
-        exit(-1);
+        printf("\nErreur d'allocation !!\n");
+        exit(0);
     }
+    win->name=(gchar*)g_malloc(sizeof(gchar)*30);
+    win->name[0] ='\0';
 
-    win->window = NULL; // Initialisez Ã  NULL avant de crÃ©er la fenÃªtre
+    win->titre=(gchar*)g_malloc(sizeof(gchar)*30);
+    win->titre[0]='\0';
 
-    // Copiez le titre
-    if (titre)
-        win->titre = "titre";
-    else
-        win->titre = NULL;
+    win->bgcolor=(gchar*)g_malloc(sizeof(gchar)*30);
+    win->bgcolor[0]='\0';
 
-    // Copiez le chemin de l'icÃ´ne
-    if (icon_path)
-        win->icon = g_strdup(icon_path);//cette fonction alloue l'espace memoire necessaire et copy la chaine dans le variable
-     else
-        win->icon = NULL;
-    //Copier le nom de la fenetre
-    if (name)
-        win->name = g_strdup(name);
-     else
-        win->name = NULL;
-    if (bgcolor)
-        win->bgcolor = g_strdup(bgcolor);
-     else
-       win->bgcolor = NULL;
+    win->name=(gchar*)g_malloc(sizeof(gchar)*30);
+    win->name[0]='\0';
 
-    win->hauteur = h;
-    win->largeur = w;
-    win->position_init = pos;
-    win->posx = x;
-    win->posy = y;
-    win->border_width=border;
-    win->modifiable = resizable;
+    win->icon=(gchar*)g_malloc(sizeof(gchar)*100);
+    win->icon[0]='\0';
 
+    win->largeur=0;
+    win->hauteur=0;
+    win->posx=0;
+    win->posy=0;
+    win->border_width=0;
+    win->modifiable=TRUE;
     return win;
+}
+//Fonction pour transformer une chaine a un element de type GtkWindowPosition
+GtkWindowPosition string_to_window_position( gchar *str)
+{
+    if (strcmp(str, "none") == 0)
+        return GTK_WIN_POS_NONE;
+    else if (strcmp(str, "center") == 0)
+        return GTK_WIN_POS_CENTER;
+     else if (strcmp(str, "mouse") == 0)
+        return GTK_WIN_POS_MOUSE;
+     else if (strcmp(str, "center-always") == 0)
+        return GTK_WIN_POS_CENTER_ALWAYS;
+     else if (strcmp(str, "center-on-parent") == 0)
+        return GTK_WIN_POS_CENTER_ALWAYS;
+     else
+       return GTK_WIN_POS_NONE;
+
+}
+
+ Fenetre* windowFunction(Fenetre* w,FILE* F)
+ {
+    int i;
+    gchar* elem;
+    elem=(gchar*)g_malloc(sizeof(gchar)*30);
+    gchar c;
+    do
+    {
+        fscanf(F,"%s",elem);
+       if (strcmp(elem, "name") == 0)
+        {
+            if ((c = epurer_blan(F)) == '=')
+                if ((c = epurer_blan(F)) == '\"')
+                {
+                     i= 0;
+                    while ((c = fgetc(F)) != '\"')
+                        w->name[i++] = c;
+                    w->name[i] = '\0';
+                }
+
+        } else if (strcmp(elem, "title") == 0)
+        {
+            if ((c = epurer_blan(F)) == '=')
+                if ((c = epurer_blan(F)) == '\"')
+                {
+                     i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        w->titre[i++] = c;
+                    w->titre[i] = '\0';
+                }
+
+         }else if (strcmp(elem, "icon") == 0)
+         {
+            if ((c = epurer_blan(F)) == '=')
+                if ((c = epurer_blan(F)) == '\"')
+                {
+                     i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        w->icon[i++] = c;
+                    w->icon[i] = '\0';
+                }
+
+        } else if (strcmp(elem, "width") == 0)
+        {
+            if ((c = epurer_blan(F)) == '=')
+                fscanf(F, "%d", &w->largeur);
+
+        } else if (strcmp(elem, "height") == 0)
+        {
+            if ((c = epurer_blan(F)) == '=')
+                fscanf(F, "%d", &w->hauteur);
+
+        } else if (strcmp(elem, "bgColor") == 0)
+        {
+            if ((c = epurer_blan(F)) == '=')
+                if ((c = epurer_blan(F)) == '\"')
+                {
+                     i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        w->bgcolor[i++] = c;
+                    w->bgcolor[i] = '\0';
+
+                }
+        }else if (strcmp(elem, "posx") == 0)
+        {
+                if ((c = epurer_blan(F)) == '=')
+                  fscanf(F, "%d", &w->posx);
+        }
+        else if (strcmp(elem, "posy") == 0)
+        {
+                if ((c = epurer_blan(F)) == '=')
+                  fscanf(F, "%d", &w->posy);
+        }
+         else if (strcmp(elem, "border_width") == 0)
+        {
+                if ((c = epurer_blan(F)) == '=')
+                  fscanf(F, "%d", &w->border_width);
+        }
+         else if (strcmp(elem, "resizable") == 0)
+        {
+                if ((c = epurer_blan(F)) == '=')
+                  {
+                    if((c = epurer_blan(F)) == 'F')
+                      w->modifiable=FALSE;
+                    else w->modifiable=TRUE;
+
+                  }
+
+        }
+        else if (strcmp(elem, "position_init") == 0)
+        {
+            gchar temp[30];
+            if ((c = epurer_blan(F)) == '=')
+             {
+                if ((c = epurer_blan(F)) == '\"')
+                {
+                     i = 0;
+                    while ((c = fgetc(F)) != '\"')
+                        temp[i++] = c;
+                    temp[i] = '\0';
+                }
+                w->position_init=string_to_window_position(temp);
+
+            }
+        }
+
+
+    }while(strcmp(elem,">"));
+    return(Fenetre*) w;
 }
 
 void create_window(Fenetre *W)
 {
-    // CrÃ©ez la fenÃªtre
+    // Créez la fenêtre
     W->window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     // Ajoutez le titre s'il existe
     if (W->titre)
         gtk_window_set_title(GTK_WINDOW(W->window), W->titre);
-    // Ajoutez l'icÃ´ne s'il existe
+    // Ajoutez l'icône s'il existe
     if (W->icon)
         gtk_window_set_icon_from_file(GTK_WINDOW(W->window), W->icon, NULL);
     //Ajout de couleur de fond
     if(W->bgcolor)
     {
         GdkRGBA color;
-        // Utilisez gdk_rgba_parse pour dÃ©finir la couleur de fond de la fenÃªtre
+        // Utilisez gdk_rgba_parse pour définir la couleur de fond de la fenêtre
         if (gdk_rgba_parse(&color,W->bgcolor)) {
             gtk_widget_override_background_color(W->window, GTK_STATE_NORMAL, &color);
         } else {
-            g_warning("\nImpossible de dÃ©finir la couleur de fond.");
+            g_warning("\nImpossible de definir la couleur de fond.");
         }
     }
-    // Si la hauteur et la largeur sont supÃ©rieures Ã  0, configurez la taille par dÃ©faut
+    // Si la hauteur et la largeur sont supérieures à 0, configurez la taille par défaut
     if (W->hauteur > 0 && W->largeur > 0)
         gtk_window_set_default_size(GTK_WINDOW(W->window), W->largeur, W->hauteur);
 
    //Configurer le positionnement
      if(!W->position_init)
-        // Utilisez les coordonnÃ©es spÃ©cifiÃ©es
+        // Utilisez les coordonnées spécifiées
         gtk_window_move(GTK_WINDOW(W->window), W->posx, W->posy);
      else
          gtk_window_set_position(GTK_WINDOW(W->window), W->position_init);
 
-    // DÃ©finir l'Ã©paisseur de la bordure
+    // Définir l'épaisseur de la bordure
     gtk_container_set_border_width(GTK_CONTAINER(W->window), W->border_width);
 
     // Si redimensionnable, autorisez le redimensionnement
     gtk_window_set_resizable(GTK_WINDOW(W->window), W->modifiable);
 }
-//Fonction pour ajouter une fenetre
-Fenetre* add_window(gchar* title, gchar* icon_path, gchar* name, gchar* bgcolor,
-                   guint width, guint height, GtkWindowPosition pos_init,
-                   guint posx, guint posy, guint border_size, gboolean resizable)
+
+Fenetre* add_window(FILE* F)
 {
-    Fenetre* ma_fenetre = initialiser_win(title, icon_path, name, bgcolor, width, height, pos_init, posx, posy, border_size, resizable);
-    create_window(ma_fenetre);
-    return (Fenetre*)ma_fenetre;
+    // Initialize the button structure
+    Fenetre* win=NULL;
+    win = init_window();
+    win = windowFunction(win,F);//lire les parametres de la fenetre a partir du fichier
+    create_window(win);
+
+    return(Fenetre*)win;
 }
+
 #endif // WINDOW_H_INCLUDED
