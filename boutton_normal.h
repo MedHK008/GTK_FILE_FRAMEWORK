@@ -6,15 +6,20 @@
 typedef struct {
     GtkWidget* button; // bouton widget
     gchar* name;       // Nom du bouton
-    texte* label;      // Le texte sur le bouton
-    image* img;
+    gchar* label;      // Le texte sur le bouton
     gchar* lien;       // Chemin icone du bouton
     guint width;       // longueur du bouton
     guint height;      // largeur du bouton
     gchar* bgColor;    // Couleur de fond du GtkGrid
+    GtkWidget* image;  // Widget de l'image pour le bouton
 } ButtonSimple;
 
-
+gchar epurer_blan(FILE*f)
+{
+    gchar c ;
+    while((c=fgetc(f))==' ' || c=='\n');
+    return (gchar)c;
+}
 ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
 {
     gchar* elem;
@@ -38,8 +43,8 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
                 if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     while ((c = fgetc(F)) != '\"')
-                        b->label->text[i++] = c;
-                    b->label->text[i] = '\0';
+                        b->label[i++] = c;
+                    b->label[i] = '\0';
                 }
             }
         } else if (strcmp(elem, "lien") == 0) {
@@ -78,14 +83,19 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
 
 
 // INITIALISER LE BOUTON
-ButtonSimple* init_button_simple(texte* label_text) {
+ButtonSimple* init_button_simple() {
     ButtonSimple* b = (ButtonSimple*)malloc(sizeof(ButtonSimple));
     if (!b) {
         printf("\nErreur d'allocation !!\n");
         exit(0);
     }
     b->name = NULL;
-    b->label=label_text;
+    b->label=(gchar*)g_malloc(sizeof(gchar)*30);
+    b->label[0]='\0';
+
+    b->image = NULL;  // Initialize image widget to NULL
+
+
     b->bgColor=(gchar*)g_malloc(sizeof(gchar)*30);
     b->bgColor[0]='\0';
     b->name=(gchar*)g_malloc(sizeof(gchar)*30);
@@ -98,7 +108,7 @@ ButtonSimple* init_button_simple(texte* label_text) {
 }
 //***************************************************************
 
-// Fonction pour ajouter une couleur de fond Ã  un widget
+// Fonction pour ajouter une couleur de fond à un widget
 void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
     GdkRGBA rgba;
 
@@ -112,40 +122,38 @@ void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
 //***********************************************************
 // CREER LE BOUTON SIMPLE
 void creer_button_Simple(ButtonSimple* B) {
-    // CrÃ©er un GtkBox vertical pour contenir l'image et le label
+    // Créer un GtkBox vertical pour contenir l'image et le label
     GtkWidget* vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
     // Changer la couleur de fond de la vbox
     if(B->bgColor)
     {
 
-               add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spÃ©cifiÃ©e
+               add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spécifiée
     }
-    // CrÃ©er un label pour le texte
+    // Créer un label pour le texte
     GtkWidget* label = NULL;
     if (B->label) {
         label = gtk_label_new(B->label);
         // Centrer le texte horizontalement et verticalement dans la vbox
         gtk_widget_set_halign(label, GTK_ALIGN_CENTER);
         gtk_widget_set_valign(label, GTK_ALIGN_CENTER);
-        // Ajouter le label Ã  la vbox
+        // Ajouter le label à la vbox
         gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
     }
 
-    // Ajouter l'image Ã  la vbox
-    if (B->lien){
-        image* img=initialiser_image(B->button,1,"gtklogo.png",GTK_ICON_SIZE_BUTTON,B->width,B->height);
-        creer_img(img);
-        gtk_box_pack_start(GTK_BOX(vbox), img->widget, TRUE, TRUE, 0);
-    }
-    // CrÃ©er le bouton avec la vbox comme contenu
+    // Ajouter l'image à la vbox
+    if (B->image)
+        gtk_box_pack_start(GTK_BOX(vbox), B->image, TRUE, TRUE, 0);
+
+    // Créer le bouton avec la vbox comme contenu
     B->button = gtk_button_new();
     gtk_container_add(GTK_CONTAINER(B->button), vbox);
 
-    // DÃ©finir le nom du bouton (ID) pour le styliser en CSS
+    // Définir le nom du bouton (ID) pour le styliser en CSS
     if (B->name)
         gtk_widget_set_name(B->button, B->name);
 
-    // DÃ©finir la taille du bouton
+    // Définir la taille du bouton
     if ((B->width > 0) && (B->height > 0))
         gtk_widget_set_size_request(B->button, B->width, B->height);
 }
@@ -154,12 +162,15 @@ void creer_button_Simple(ButtonSimple* B) {
 ///gchar* name, gchar* label, gchar* path_to_image, gint height, gint width, gchar* bgColor,
 
 
-ButtonSimple* add_button(FILE* F,texte* label_text) {
+ButtonSimple* add_button(FILE* F) {
     // Initialize the button structure
     ButtonSimple* B =NULL;
-    B = init_button_simple(label_text);
+    B = init_button_simple();
     B = buttonSimpleFunction(B,F);
     creer_button_Simple(B);
+    // Initialize image widget
+    image* img = initialiser_image(B, 1, B->lien, GTK_ICON_SIZE_BUTTON, B->width, B->height);
+    creer_img(img);
     return B;
 }
 

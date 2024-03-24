@@ -3,7 +3,7 @@
 
 
 
-// DÃ©finition des constantes pour les types d'Ã©lÃ©ments de menu
+// Définition des constantes pour les types d'éléments de menu
 guint DEFAULT_MENU=0;
 guint CHECKBOX_MENU=1;
 guint SEPARATOR_MENU=2;
@@ -12,20 +12,20 @@ guint RADIO_MENU=4;
 
 
 typedef struct Menu {
-    GtkWidget *MENU;         // Contient le sous-menu associÃ© Ã  l'Ã©lÃ©ment du menu
-    GtkWidget *menu_item;    // Contient le widget GTK de l'Ã©lÃ©ment du menu
+    GtkWidget *MENU;         // Contient le sous-menu associé à l'élément du menu
+    GtkWidget *menu_item;    // Contient le widget GTK de l'élément du menu
     guint type_composant;
-    gboolean IsradioGroup;   // Type de l'Ã©lÃ©ment du menu (1: checkbox, 2: sÃ©parateur, 3: image, 4: radio)
-    gboolean IsSubmenu;      // Indique si l'Ã©lÃ©ment du menu est un sous-menu
-    gchar *nom;              // Nom de l'Ã©lÃ©ment du menu
-    struct Menu *suivant;    // Pointeur vers l'Ã©lÃ©ment de menu suivant dans la liste
-    struct Menu *liste;      // Liste des Ã©lÃ©ments de sous-menu s'il s'agit d'un menu
+    gboolean IsradioGroup;   // Type de l'élément du menu (1: checkbox, 2: séparateur, 3: image, 4: radio)
+    gboolean IsSubmenu;      // Indique si l'élément du menu est un sous-menu
+    gchar *nom;              // Nom de l'élément du menu
+    struct Menu *suivant;    // Pointeur vers l'élément de menu suivant dans la liste
+    struct Menu *liste;      // Liste des éléments de sous-menu s'il s'agit d'un menu
 } menu;
 
 // Structure pour la barre de menus
 typedef struct {
     GtkWidget *menubar;// Contient la barre de menus GTK
-    GtkWidget *parent; // Contient le widget parent (gÃ©nÃ©ralement la fenÃªtre principale)
+    GtkWidget *parent; // Contient le widget parent (généralement la fenêtre principale)
     gchar* name;
     guint posx,posy;
     GtkPackDirection orientation;  // Orientation de la barre de menus
@@ -34,7 +34,7 @@ typedef struct {
       GTK_PACK_DIRECTION_LTR    gauche vers droite (horizontal)
       GTK_PACK_DIRECTION_RTL    droite vers le gauche(horizontal)
       */
-   menu *liste;      // Liste des Ã©lÃ©ments de menu dans la barre de menus
+   menu *liste;      // Liste des éléments de menu dans la barre de menus
 } menubar;
 
 GtkPackDirection string_to_pack_direction(gchar *str)
@@ -48,7 +48,7 @@ GtkPackDirection string_to_pack_direction(gchar *str)
     else if (strcmp(str, "BTT") == 0)
         return GTK_PACK_DIRECTION_BTT;
     else {
-        return GTK_PACK_DIRECTION_LTR; // ou une autre valeur par dÃ©faut
+        return GTK_PACK_DIRECTION_LTR; // ou une autre valeur par défaut
     }
 }
 
@@ -116,31 +116,31 @@ menubar* menubarFunction(menubar* mb,FILE* F)
     }while(strcmp(elem,">"));
     return mb;
 }
-// Fonction pour crÃ©er une barre de menus
+// Fonction pour créer une barre de menus
 menubar *add_menubar(menubar* mb,FILE *F)
 {
     mb=init_menubar();
     mb=menubarFunction(mb,F);
-    // CrÃ©ation de la barre de menus GTK
+    // Création de la barre de menus GTK
     mb->menubar = gtk_menu_bar_new();
-    // DÃ©finition de l'orientation de la barre de menus
+    // Définition de l'orientation de la barre de menus
     gtk_menu_bar_set_pack_direction(GTK_MENU_BAR(mb->menubar), mb->orientation);
     // Retour de la structure menubar
     return mb;
 }
 
-//Fonction pour initialiser un Ã©lÃ©ment de menu
+//Fonction pour initialiser un élément de menu
 menu* init_menu_item()
 {
-    // Allocation de la mÃ©moire pour la structure menu
+    // Allocation de la mémoire pour la structure menu
     menu *NM = malloc(sizeof(menu));
     if (!NM) {
-        // Gestion de l'erreur d'allocation mÃ©moire
-        g_critical("Echec d'allocation mÃ©moire pour l'Ã©lÃ©ment de menu");
+        // Gestion de l'erreur d'allocation mémoire
+        g_critical("Echec d'allocation mémoire pour l'élément de menu");
         exit(-1);
     }
 
-    // Allocation de la mÃ©moire pour le nom de l'Ã©lÃ©ment
+    // Allocation de la mémoire pour le nom de l'élément
     NM->nom=(gchar*)g_malloc(sizeof(gchar)*30);
     NM->nom[0] ='\0';
     // Initialisation des attributs de la structure
@@ -218,35 +218,35 @@ menu* RadioGroup(menu* M)
 
  return NULL;
 }
-// Fonction pour ajouter un Ã©lÃ©ment de menu Ã  un menu parent
+// Fonction pour ajouter un élément de menu à un menu parent
 menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
 {
-    // VÃ©rifie si le menu parent a dÃ©jÃ  un Ã©lÃ©ment
+    // Vérifie si le menu parent a déjà un élément
     if (!parent_menu->liste)
-        // Le menu parent est vide, ajouter l'Ã©lÃ©ment comme premier Ã©lÃ©ment
+        // Le menu parent est vide, ajouter l'élément comme premier élément
         parent_menu->liste = menu_elem;
     else {
-        // Le menu parent n'est pas vide, ajouter l'Ã©lÃ©ment Ã  la fin de la liste
+        // Le menu parent n'est pas vide, ajouter l'élément à la fin de la liste
         menu *courant;
         for (courant = parent_menu->liste; courant->suivant; courant = courant->suivant);
-        // La boucle trouve le dernier Ã©lÃ©ment de la liste
+        // La boucle trouve le dernier élément de la liste
         courant->suivant = menu_elem;
         menu_elem->suivant = NULL; // Marque la fin de la liste
     }
 
-    // Si l'Ã©lÃ©ment n'est pas un sous-menu, crÃ©er le widget appropriÃ© en fonction du type
+    // Si l'élément n'est pas un sous-menu, créer le widget approprié en fonction du type
     if (!menu_elem->IsSubmenu) {
         switch (menu_elem->type_composant) {
             case 1:
-                // CrÃ©er une case Ã  cocher
+                // Créer une case à cocher
                 menu_elem->menu_item = gtk_check_menu_item_new_with_mnemonic(menu_elem->nom);
                 break;
             case 2:
-                // CrÃ©er un sÃ©parateur
+                // Créer un séparateur
                 menu_elem->menu_item = gtk_separator_menu_item_new();
                 break;
             case 3:
-                // CrÃ©er un bouton radio
+                // Créer un bouton radio
                 menu* Rgroup = RadioGroup(parent_menu->liste);//trouver l'element de groupe radio
                 if ((!parent_menu->liste) ||(!Rgroup))//Si on a pas encore creer le premier button radio qui sera le greoupe
                     menu_elem->menu_item = gtk_radio_menu_item_new_with_mnemonic(NULL, menu_elem->nom);
@@ -254,18 +254,18 @@ menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
                     menu_elem->menu_item = gtk_radio_menu_item_new_with_mnemonic_from_widget(GTK_RADIO_MENU_ITEM(Rgroup->menu_item), menu_elem->nom);
                 break;
             default:
-                // Item par dÃ©faut (Ã©lÃ©ment de menu standard)
+                // Item par défaut (élément de menu standard)
                 menu_elem->menu_item = gtk_menu_item_new_with_mnemonic(menu_elem->nom);
                 break;
         }
     } else {
-        // CrÃ©er un sous-menu
+        // Créer un sous-menu
         menu_elem->menu_item = gtk_menu_item_new_with_mnemonic(menu_elem->nom);
         menu_elem->MENU = gtk_menu_new();
         gtk_menu_item_set_submenu(GTK_MENU_ITEM(menu_elem->menu_item), menu_elem->MENU);
     }
 
-    // Ajouter l'Ã©lÃ©ment (ou le sous-menu) au menu parent
+    // Ajouter l'élément (ou le sous-menu) au menu parent
     gtk_menu_shell_append(GTK_MENU_SHELL(parent_menu->MENU), menu_elem->menu_item);
 
   return menu_elem;
@@ -273,7 +273,7 @@ menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
 
 // Fonction pour ajouter un sous element d'un menu
 menu *add_menu_item(menu *parent,menu* newItem, FILE *F) {
-    // Initialisation de l'Ã©lÃ©ment de menu
+    // Initialisation de l'élément de menu
     newItem = init_menu_item();
     newItem=menuItemFunction(newItem,F);
     if(newItem)
@@ -327,7 +327,7 @@ menu* menuFunction(menu*mi, FILE*F)
     return mi;
 }
 
-// Fonction pour ajouter un menu Ã  la barre de menus
+// Fonction pour ajouter un menu à la barre de menus
 menu* add_menu(menubar* M, menu *child ,FILE *F)
 {
     child=init_menu_item();
@@ -337,19 +337,19 @@ menu* add_menu(menubar* M, menu *child ,FILE *F)
       if (!M->liste)
         M->liste = child;
      else {
-        // Insertion Ã  la fin de la liste
+        // Insertion à la fin de la liste
         menu *courant;
         for (courant = M->liste; courant->suivant; courant = courant->suivant);
         courant->suivant = child;
         child->suivant = NULL;
       }
 
-    // CrÃ©er le widget de l'Ã©lÃ©ment de menu
+    // Créer le widget de l'élément de menu
     child->menu_item = gtk_menu_item_new_with_label(child->nom);
     child->MENU = gtk_menu_new();
     gtk_menu_item_set_submenu(GTK_MENU_ITEM(child->menu_item), child->MENU);
 
-    // Ajouter l'Ã©lÃ©ment de menu Ã  la barre de menus
+    // Ajouter l'élément de menu à la barre de menus
     gtk_menu_shell_append(GTK_MENU_SHELL(M->menubar), child->menu_item);
 
     return child;

@@ -22,7 +22,8 @@ typedef enum{
     MenuBar,
     Tab,
     MenuItem,
-    Menu
+    Root
+
 }Token;
 
 
@@ -56,9 +57,6 @@ typedef enum{
 //    free(Supp);
 //    return (Pile*)(P);
 //}
-
-
-
 
 
 Token string_to_token(const char *str) {
@@ -96,38 +94,76 @@ Token string_to_token(const char *str) {
         return MenuBar;
     } else if (!strcmp(str, "Tab")) {
         return Tab;
-    } else if (!strcmp(str, "menu_item")) {
+    } else if (!strcmp(str, "menu_item"))
         return MenuItem;
+      else if (!strcmp(str, "root"))
+        return Root;
 
-    } else {
-        // Retourner une valeur par dÃ©faut ou une valeur d'erreur
+     else {
+        // Retourner une valeur par défaut ou une valeur d'erreur
         return -1;
     }
 }
-
-
-void lire_fichier(FILE*F)
+void add_to_parent(GtkWidget* child,GtkWidget* parent_w, gchar* parent,guint posx, guint posy)
 {
-    Fenetre* f1;
+  if(!strcmp(parent,"/fixed"))
+    gtk_fixed_put(GTK_FIXED(parent_w),child,posx,posy);
+ else if(!strcmp(parent,"/box"))
+    gtk_box_pack_start(GTK_BOX(parent_w),child,FALSE,FALSE,0);
+ else if(!strcmp(parent,"/window"))
+    gtk_container_add(GTK_CONTAINER(parent_w),child);
+
+}
+void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
+{
     gchar c ;
     gchar current_token[MAX];
     Token tok;
     c=epurer_blan(F);
+    printf("\n%s->%c",parent_token,c);
     while(c!=EOF)
     {
+        printf("\n%s ::: %c",parent_token,c);
         if(c=='<')
         {
-             fscanf(F,"%s",current_token);
+              fscanf(F, "%s", current_token);
+              printf("\n%s",current_token);
+
+            if (!strcmp(current_token , parent_token))
+            {
+                if(!(strcmp(current_token,"/root")))
+                  {
+                       printf("\nRRRRRRRRR");
+                       gtk_widget_show_all(W->window);
+                       fin_programme(W);
+                  }
+                c=epurer_blan(F);
+                return ;
+            }
              tok=string_to_token(current_token);
              switch(tok)
              {
+               case Root: c=epurer_blan(F);
+                          c=epurer_blan(F);
+
+                   break;
+
                 case fenetre:
-                    f1=add_window(F);
+                    printf("\nswitch F");
+                    W=add_window(F);
+                    lire_fichier(F,W,W->window,"/window");
+                    printf("\nsortie F");
                     c=epurer_blan(F);
                     break;
-//                case Fixed:
-//                    fixedFunction(F);
-//                    break;
+                case Fixed:
+                    fixed* fix=init_gtk_fixed();
+                    add_to_parent(fix->fixed,parent_w,parent_token,0,0);
+                    c=epurer_blan(F);
+                    lire_fichier(F,W,fix->fixed,"/fixed");
+                     printf("\nsortie FIXED");
+                    c=epurer_blan(F);
+
+                    break;
 //                case Label:
 //                    labelFunction(F);
 //                    break;
@@ -175,7 +211,8 @@ void lire_fichier(FILE*F)
                   case MenuBar:
                         menubar *mbar =add_menubar(mbar,F);
                          ajouter_elems(mbar,F);
-                        gtk_container_add(GTK_CONTAINER(f1->window),mbar->menubar);
+                        add_to_parent(mbar->menubar,parent_w,parent_token,mbar->posx,mbar->posy);
+                        printf("\nSortirADD");
                         c=epurer_blan(F);
 
                         break;
@@ -183,17 +220,22 @@ void lire_fichier(FILE*F)
 //                    menuItemFunction(F);
 //                    break;
                 default:
-                    // GÃ©rer le cas oÃ¹ le token n'est pas reconnu
+                    // Gérer le cas où le token n'est pas reconnu
                     break;
             }
 
 
         }
         else
-                return;
+           {
+             printf("\nssssWWW"); return ;
+           }
+
+
+
+
     }
-    gtk_widget_show_all(f1->window);
-    fin_programme(f1);
+
 }
 
 

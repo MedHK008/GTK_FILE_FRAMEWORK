@@ -1,7 +1,8 @@
+<root >
 <window  name ="f1" title ="Instagram" icon ="C:\\Users\\pc\\Desktop\\GTK project\\TestGtkmacro\\insta_icon.png" width =500 height =600 
-         bgColor ="#ED1B24" position_init ="center" resizable =T border_width =45 >
-
-<menu_bar name ="mb1" orientation ="TTB" >
+         bgColor ="#ED1B24" position_init ="center" resizable =T  >
+ <fixed >
+ <menu_bar name ="mb1" orientation ="RTL" posx =0 posy =0 >
   <menu_item name ="File" IsSubmenu =T >
     <menu_item name ="_Open"  IsSubmenu =T > 
        <menu_item name ="Code"  IsSubmenu =T >
@@ -23,5 +24,13 @@
   <menu_item/>
   
 <menu_bar/>
+</fixed >
+</window >
+</root >
+
+
+
+
+  
 
 
