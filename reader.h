@@ -75,7 +75,7 @@ Token string_to_token(const char *str) {
 }
 
 
-void lire_fichier(FILE*F,fixed* fixed0)
+BoiteDialogue* lire_fichier(FILE*F,fixed* fixed0)
 {
     if(!F) exit(-1);
     gchar c ;
@@ -97,6 +97,7 @@ void lire_fichier(FILE*F,fixed* fixed0)
             ungetc(c,F);
              fscanf(F,"%s",current_token);
 
+
              tok=string_to_token(current_token);
              switch(tok) {
 //                case fenetre:
@@ -117,27 +118,27 @@ void lire_fichier(FILE*F,fixed* fixed0)
                     else if(into==0)
                         add_widget_to_fixed(fixed0,E->entree,E->x_pos,E->y_pos);
                     break;
-                case Button:
-                     B=add_button(F);
-//                    add_widget_to_fixed(fixed0,B->button,50,50);
-                    c=epurer_blan(F);
-                     if(into==1)
-                        ajouter_a_boite_dialogue(BD,B->button,100,100);
-                    else if(into==0)
-                        add_widget_to_fixed(fixed0,B->button,100,100);
-                    break;
+//                case Button:
+//                     B=add_button(F);
+////                    add_widget_to_fixed(fixed0,B->button,50,50);
+//                    c=epurer_blan(F);
+//                     if(into==1)
+//                        ajouter_a_boite_dialogue(BD,B->button,100,100);
+//                    else if(into==0)
+//                        add_widget_to_fixed(fixed0,B->button,100,100);
+//                    break;
 //                case Radio:
 //                    buttonRadioFunction(F);
 //                    break;
 //                case Checkbox:
 //                    checkboxFunction(F);
 //                    break;
-//                case boiteDialogue:
-//                    printf("m here");
-//                   into=1;
-//                    BD=Add_boite_dialogue(F);
-//                    c=epurer_blan(F);
-//                    break;
+                case boiteDialogue:
+
+                    into=1;
+                    BD=Add_boite_dialogue(F);
+                    c=epurer_blan(F);
+                    break;
 //                case Frame:
 //                    frameFunction(F);
 //                    break;
@@ -177,13 +178,22 @@ void lire_fichier(FILE*F,fixed* fixed0)
         }
         else
         {
+
             fscanf(F,"%s",elem);
-            if(strcmp(elem,"boite_dialogue>"))
-               into=0;
+            if(!strcmp(elem,"boite_dialogue>"))
+            {
+
+
+                 into=0;
+
+            }
+            c=epurer_blan(F);
+
         }
 
     }
     }
+    return BD;
 }
 
 

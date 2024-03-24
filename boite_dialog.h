@@ -34,51 +34,6 @@ BoiteDialogue* init_boite_dialogue()
      BD->zone_contenu=NULL;
      return BD;
 }
-// Fonction pour cr�er et initialiser une structure BoiteDialogue
-BoiteDialogue *creer_initialiser_boite_dialogue(GtkWindow *parent, gchar *titre, gchar *icone, guint modal, gint hauteur, gint largeur, gint etat, gchar *couleur_fond) {
-    // Allouer de la m�moire pour la structure BoiteDialogue
-    BoiteDialogue *BD = (BoiteDialogue *)g_malloc(sizeof(BoiteDialogue));
-    BD->zone_contenu = NULL; // Initialiser le pointeur de la zone de contenu � NULL
-    BD->dialogue = NULL; // Initialiser le pointeur du dialogue � NULL
-    BD->icone = NULL; // Initialiser le pointeur de l'ic�ne � NULL
-    BD->titre = NULL; // Initialiser le pointeur du titre � NULL
-
-    if (!BD) { // V�rifier si l'allocation de m�moire a �chou�
-        printf("\nERREUR\n"); // Afficher un message d'erreur
-        exit(-1); // Quitter le programme avec un code d'erreur
-    }
-
-    if (titre) { // V�rifier si le titre est d�fini
-        BD->titre = g_strdup(titre); // Dupliquer la cha�ne de caract�res du titre
-        if (!BD->titre) { // V�rifier si la duplication a �chou�
-            printf("\nERREUR\n"); // Afficher un message d'erreur
-            exit(-1); // Quitter le programme avec un code d'erreur
-        }
-    }
-
-    if (icone) { // V�rifier si l'ic�ne est d�finie
-        BD->icone = g_strdup(icone); // Dupliquer la cha�ne de caract�res de l'ic�ne
-        if (!BD->icone) { // V�rifier si la duplication a �chou�
-            printf("\nErreur\n"); // Afficher un message d'erreur
-            exit(-1); // Quitter le programme avec un code d'erreur
-        }
-    }
-
-    if (couleur_fond) { // V�rifier si la couleur de fond est d�finie
-        BD->couleur_fond = g_strdup(couleur_fond); // Dupliquer la cha�ne de caract�res de la couleur de fond
-        if (!BD->couleur_fond) { // V�rifier si la duplication a �chou�
-            printf("\nERREUR\n"); // Afficher un message d'erreur
-            exit(-1); // Quitter le programme avec un code d'erreur
-        }
-    }
-
-    BD->parent = parent; // Affecter la fen�tre parente
-    BD->modal = modal; // Indiquer si la bo�te de dialogue est modale
-    BD->hauteur = hauteur; // D�finir la hauteur de la bo�te de dialogue
-    BD->largeur = largeur; // D�finir la largeur de la bo�te de dialogue
-
-    return BD; // Retourner la structure BoiteDialogue initialis�e
-}
 BoiteDialogue* boiteDialogueFunction(BoiteDialogue*BD,FILE* F)
 {
     gchar* elem;
@@ -89,6 +44,7 @@ BoiteDialogue* boiteDialogueFunction(BoiteDialogue*BD,FILE* F)
         c=epurer_blan(F);
         ungetc(c,F);
         fscanf(F,"%s",elem);
+
 
        if (strcmp(elem, "name") == 0)
         {
@@ -187,8 +143,10 @@ void definir_attributs_boite_dialogue(BoiteDialogue *BD) {
     gtk_window_set_transient_for(GTK_WINDOW(BD->dialogue), GTK_WINDOW(BD->parent)); // D�finir la fen�tre parente de la bo�te de dialogue
 
     if (BD->modal == 1) // V�rifier si la bo�te de dialogue est modale
-        gtk_window_set_modal(GTK_WINDOW(BD->dialogue), TRUE); // D�finir la bo�te de dialogue comme modale
 
+        {gtk_window_set_modal(GTK_WINDOW(BD->dialogue), TRUE);
+        gtk_window_set_transient_for(GTK_WINDOW(BD->dialogue),GTK_WINDOW(BD->parent));// D�finir la bo�te de dialogue comme modale
+        }
     gdk_rgba_parse(&couleur, BD->couleur_fond); // Convertir la couleur de fond en format GTK
 
     // Appliquer la couleur de fond en fonction de l'�tat de la bo�te de dialogue

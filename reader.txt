@@ -1,4 +1,8 @@
 
-<entry name ="hello" placeholder ="saisir votre nom"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =20 y_pos =20 >
+<entry name ="hello1" bgColor ="yellow" placeholder ="saisir votre nom1"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =200 y_pos =100 >
+<boite_dialogue name ="window" title ="hello" bgColor ="green" width =1000 height =800 modal =1 >
+<entry name ="hello" bgColor ="red" placeholder ="saisir votre nom"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =20 y_pos =20 >
 <entry name ="hello1" placeholder ="saisir votre nom1"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =200 y_pos =100 >
-
+<entry name ="hello1"  bgColor ="white" width =100 height =50 x_pos =500 y_pos =100 >
+</boite_dialogue>
+<entry name ="hello1" width = bgColor ="black" width =800 height =100 x_pos =500 y_pos =100 >

@@ -11,7 +11,7 @@ GtkWidget* exemple()
     /// les parametres : le fixed , le label du button , path de l'image utiliser (NULL s'il y a pas d'image),height,width,bgcolor, x , y
         texte* txt_button=initialiser_texte(20,30,"exemple des boutons",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
         add_label(fixed0->fixed,txt_button,TRUE,FALSE,50,0);
-        lire_fichier(F,fixed0);
+//        lire_fichier(F,fixed0);
 //        ButtonSimple *button = add_button("boutton1","first","gtklogo.png",100,100,"#FF0000",50,50);
 //        add_widget_to_fixed(fixed0,B->button,50,50);
 
