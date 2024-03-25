@@ -1,52 +1,125 @@
 #ifndef RADIO_H_INCLUDED
 #define RADIO_H_INCLUDED
-
+#include "fixed.h"
 typedef struct elem_radio {
     GtkWidget *pRadio; // le widget radio
     gchar* name;
-    gchar label[NBC]; // label du bouton
-    gchar *hexcolor; // couleur de fond en hexadécimal
+    gchar* label; // label du bouton
+    gchar* hexcolor; // couleur de fond en hexadécimal
     gboolean checked; // indique si le bouton est coché au début ou non
-    struct elem_radio *suivant; // le bouton radio qui vient après le courant
+    gint x_pos;
+    gint y_pos;
+    struct elem_radio* suivant; // le bouton radio qui vient après le courant
 } elem_radio;
 
 typedef struct radio {
-    GtkWidget *fixed; // Conteneur de type Fixed
-    GtkWidget *parent; // le widget parent
-    GtkWidget *pRadio; // L'objet bouton radio
     elem_radio *liste; // Les éléments de la Liste radio
 } radio;
 
-elem_radio* ajouter_radio_fin(elem_radio *L, gchar label[NBC], gchar *bgcolor, gboolean checked,gchar* name) {
-    elem_radio *elem = (elem_radio*)malloc(sizeof(elem_radio));
-    if (elem == NULL) {
-        perror("Erreur lors de l'allocation de mémoire");
-        exit(EXIT_FAILURE);
-    }
-    elem->name = name;
-    elem->suivant = NULL;
-    strcpy(elem->label, label);
-    elem->hexcolor = strdup(bgcolor); // Allocation et copie de la couleur
-    elem->checked = checked; // Initialisation du statut du bouton radio
-    if (!L) return elem;
-    elem_radio *t = L;
-    while (L->suivant) L = L->suivant;
-    L->suivant = elem;
-    return t;
+
+
+elem_radio* init_elem_radio()
+{
+    elem_radio* R=(elem_radio*)g_malloc(sizeof(elem_radio));
+    R->name=(gchar*)g_malloc(sizeof(gchar)*NBC);
+    R->label=(gchar*)g_malloc(sizeof(gchar)*NBC);
+    R->hexcolor=(gchar*)g_malloc(sizeof(gchar)*NBC);
+    R->checked=FALSE;
+    R->x_pos=0;
+    R->y_pos=0;
+    R->suivant=NULL;
+    return((elem_radio*)R);
 }
 
-radio* grouper_radio(elem_radio *L, GtkWidget *parent) {
-    radio *radioButtons = (radio*)malloc(sizeof(radio));
-    if (radioButtons == NULL) {
-        perror("Erreur lors de l'allocation de mémoire");
-        exit(EXIT_FAILURE);
+elem_radio* elemRadioFunction(elem_radio* R,FILE* F)
+{
+    gchar* elem;
+    elem=(gchar*)g_malloc(sizeof(gchar)*NBC);
+    gchar c;
+    int check;
+    if((c = epurer_blan(F)) == '<')
+    {
+        fscanf(F,"%s",elem);
+        if (strcmp("/radio>",elem)==0) return ((elem_radio*)NULL);
+        do
+        {
+            fscanf(F,"%s",elem);
+            printf("%s  ",elem);
+            if (strcmp(elem, "name") == 0) {
+                if ((c = epurer_blan(F)) == '=') {
+                    if ((c = epurer_blan(F)) == '\"') {
+                        int i = 0;
+                        while ((c = fgetc(F)) != '\"')
+                            R->name[i++] = c;
+                        R->name[i] = '\0';
+                    }
+                }
+            } else if (strcmp(elem, "label") == 0) {
+                if ((c = epurer_blan(F)) == '=') {
+                    if ((c = epurer_blan(F)) == '\"') {
+                        int i = 0;
+                        while ((c = fgetc(F)) != '\"')
+                            R->label[i++] = c;
+                        R->label[i] = '\0';
+                    }
+                }
+            } else if (strcmp(elem, "hexcolor") == 0) {
+                if ((c = epurer_blan(F)) == '=') {
+                    if ((c = epurer_blan(F)) == '\"') {
+                        int i = 0;
+                        while ((c = fgetc(F)) != '\"')
+                            R->hexcolor[i++] = c;
+                        R->hexcolor[i] = '\0';
+                    }
+                }
+            } else if (strcmp(elem, "posx") == 0) {
+                if ((c = epurer_blan(F)) == '=') {
+                    fscanf(F, "%d", &R->x_pos);
+                }
+            }else if (strcmp(elem, "posy") == 0) {
+                if ((c = epurer_blan(F)) == '=') {
+                    fscanf(F, "%d", &R->y_pos);
+                }
+            }else if (strcmp(elem, "checked") == 0)
+            {
+                if ((c = epurer_blan(F)) == '=') {
+                    fscanf(F,"%d",&check);
+                    if(check == 1)
+                        R->checked = TRUE;
+                    else
+                        R->checked = FALSE;
+                }
+            }
+        }while(strcmp(elem,">"));
     }
-    radioButtons->fixed = gtk_fixed_new(); // Création du conteneur Fixed
-    radioButtons->liste = L;
-    radioButtons->parent = parent;
+    return R;
+}
+
+elem_radio* ajouter_radio_fin(FILE* F) {
+    elem_radio *elem =init_elem_radio();
+    elem=elemRadioFunction(elem,F);
+    return ((elem_radio*)elem);
+}
+
+radio* grouper_radio(FILE* F) {
+    radio *radioButtons = (radio*)malloc(sizeof(radio));
+    if (radioButtons == NULL)
+    {
+        perror("Erreur lors de l'allocation de mémoire");
+        exit(-1);
+    }
+    elem_radio *elem =ajouter_radio_fin(F);
+    elem_radio* L=elem;
+    do
+    {
+        L->suivant=ajouter_radio_fin(F);
+        L=L->suivant;
+    }while(L);
+    radioButtons->liste=elem;
     return radioButtons;
 }
 
+<<<<<<< Updated upstream
 void create_radio(radio *R, gint x, gint y) {
     GtkWidget *first_radio = NULL; // Pour conserver une référence au premier bouton radio
     while (R->liste) {
@@ -106,28 +179,44 @@ GtkWidget* add_radio(int numButtons, gint x, gint y, char *labels[], char *color
         liste_radio = ajouter_radio_fin(liste_radio, labels[i], colors[i], checked[i],name[i]);
     }
     radio *grouped_radio = grouper_radio(liste_radio, NULL);
+=======
+// Function to create radio buttons from the radio list
+GtkWidget* create_radio_buttons(radio* radio_list) {
+>>>>>>> Stashed changes
     GtkWidget *box = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
-    GtkWidget *first_radio = NULL;
-    while (grouped_radio->liste) {
-        grouped_radio->liste->pRadio = gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(first_radio), grouped_radio->liste->label);
-        if (grouped_radio->liste->hexcolor) {
+    elem_radio* current = radio_list->liste;
+    while (current)
+    {
+        current->pRadio = gtk_radio_button_new_with_label(NULL, current->label);
+        if (current->hexcolor)
+        {
             GdkRGBA color;
-            gdk_rgba_parse(&color, grouped_radio->liste->hexcolor);
-            gtk_widget_override_background_color(grouped_radio->liste->pRadio, GTK_STATE_FLAG_NORMAL, &color);
+            gdk_rgba_parse(&color, current->hexcolor);
+            gtk_widget_override_background_color(current->pRadio, GTK_STATE_FLAG_NORMAL, &color);
         }
-        if (grouped_radio->liste->checked) {
-            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(grouped_radio->liste->pRadio), TRUE);
+        if (current->checked)
+        {
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(current->pRadio), TRUE);
         }
-        if (!first_radio)
-            first_radio = grouped_radio->liste->pRadio;
-        gtk_box_pack_start(GTK_BOX(box), grouped_radio->liste->pRadio, FALSE, FALSE, 0);
-        grouped_radio->liste = grouped_radio->liste->suivant;
+        gtk_box_pack_start(GTK_BOX(box), current->pRadio, FALSE, FALSE, 0);
+        current = current->suivant;
     }
-
     return box;
 }
 
-
+GtkWidget* add_radio(FILE* F) {
+    radio* radio_list = grouper_radio(F);
+    if (radio_list == NULL || radio_list->liste == NULL)
+    {
+        // Error handling: Failed to read radio data or empty radio list
+        fprintf(stderr, "Error: Failed to read radio button data.\n");
+        return NULL;
+    }
+    GtkWidget *pVBox=create_radio_buttons(radio_list);
+    // Debug output
+    printf("Radio buttons created successfully.\n");
+    return ((GtkWidget*)pVBox); // Return the fixed container as GtkWidget
+}
 
 
 #endif // RADIO_H_INCLUDED

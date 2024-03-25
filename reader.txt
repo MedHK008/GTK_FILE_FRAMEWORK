@@ -1,4 +1,12 @@
+<<<<<<< Updated upstream
 <button name ="button1" label ="click" lien ="gtklogo.png" width =50 height =50 >
 <checkbox label ="check1" name ="check1" gui ="#FF00FF" checked =1 >
 
 
+=======
+<radio >
+ <elemRadio name ="radio1" label ="first" hexcolor ="#000000" posx =200 posy =200 checked =1 >
+<elemRadio name ="radio2" label ="second" hexcolor ="#000000" posx =200 posy =220 checked =0 >
+<elemRadio name ="radio3" label ="third" hexcolor ="#000000" posx =200 posy =240 checked =0 >
+< /radio>
+>>>>>>> Stashed changes

@@ -2,128 +2,147 @@
 #define SPIN_BUTTON_H_INCLUDED
 
 
-typedef struct
-{
-    GtkWidget *SpinButton;//SpinButton
+typedef struct {
+    GtkWidget* SpinButton;
     gchar* name;
-    gdouble min;//la valeur minimale
-    gdouble max;//la valeur maximale
-    gdouble step;//le pas
-    gdouble value;//valeur par defaut
-    gint height; //Hauteur du SpinButton
-    gint width; //Longueur du SpinButton
-    gint wrap;//:FALSE, 1:TRUE
-    gint digits;//nombre de chiffres en partie d�cimale
-    gint numeric;//0:(tapez de caracteres en generale), 1:(juste les chiffres)
-    gint arrondissement;//0,1
-    gchar* bgcolor;//background color
-}SpinButton;
+    gint min;
+    gint max;
+    gint step;
+    gint value;
+    gint height;
+    gint width;
+    gint wrap;
+    gint digits;
+    gint numeric;
+    gint arrondissement;
+    gchar* bgcolor;
+} SpinButton;
 
+// Function to read attributes from a text file and assign them to a SpinButton structure
+SpinButton* spinButtonFunction(SpinButton* sb, FILE* file) {
+    gchar elem[50];
+    gchar c;
+    do {
+        fscanf(file, "%s", elem);
+        if (strcmp(elem, "name") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                if ((c = epurer_blan(file)) == '\"') {
+                    int i = 0;
+                    while ((c = fgetc(file)) != '\"')
+                        sb->name[i++] = c;
+                    sb->name[i] = '\0';
+                }
+            }
+            printf("%s",sb->name);
+        } else if (strcmp(elem, "min") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->min);
+            }
+        } else if (strcmp(elem, "max") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->max);
+            }
+        } else if (strcmp(elem, "step") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->step);
+            }
+        } else if (strcmp(elem, "value") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->value);
+            }
+        } else if (strcmp(elem, "height") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->height);
+            }
+        } else if (strcmp(elem, "width") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->width);
+            }
+        } else if (strcmp(elem, "wrap") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->wrap);
+            }
+        } else if (strcmp(elem, "digits") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->digits);
+            }
+        } else if (strcmp(elem, "numeric") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->numeric);
+            }
+        } else if (strcmp(elem, "arrondissement") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->arrondissement);
+            }
+        } else if (strcmp(elem, "bgcolor") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                if ((c = fgetc(file)) == '\"') {
+                    int i = 0;
+                    while ((c = fgetc(file)) != '\"')
+                        sb->bgcolor[i++] = c;
+                    sb->bgcolor[i] = '\0';
+                }
+            }
+        }
+    } while (strcmp(elem, ">"));
+    return sb;
+}
 
-SpinButton * init_spin_button(gchar* name,gdouble val_min ,gdouble val_max, gdouble pas,gdouble val_defaut,
-        gint height, gint width, gint wrap, gint digits,gint numeric , gint arrondis,gchar* color,gfloat color_opc)
-{
-    SpinButton *Sb = NULL;
-    //allocation mémoire
-    Sb =(SpinButton*)malloc(sizeof(SpinButton));
-    //test d'allocation
-    if(!Sb)
-    {
-        printf("\nErreur d'allocation!!!!!!\n");
+// Function to initialize a SpinButton structure
+SpinButton* init_spin_button() {
+    SpinButton* sb = (SpinButton*)malloc(sizeof(SpinButton));
+    if (!sb) {
+        printf("\nErreur d'allocation !!\n");
         exit(0);
     }
+    sb->SpinButton =(GtkWidget*)g_malloc(sizeof(GtkWidget));
+    sb->name = NULL;
+    sb->name =(gchar*)g_malloc(sizeof(char)*50);
+    sb->bgcolor = NULL;
+    sb->bgcolor =(gchar*)g_malloc(sizeof(char)*50);
 
-    Sb->SpinButton =NULL;
-    Sb->min=val_min;
-    Sb->max=val_max;
-    Sb->step=pas;
-    Sb->name=name;
-    Sb->value=val_defaut;
-    Sb->height=height;
-    Sb->width=width;
-    Sb->wrap=wrap;
-    Sb->digits=digits;
-    Sb->numeric = numeric;
-    Sb->arrondissement=arrondis;
-    if(color) {
-        Sb->bgcolor = (gchar*)malloc(30*sizeof(gchar));
-        if(Sb->bgcolor)
-        {
-            strcpy(Sb->bgcolor, color);
-        }
-        else
-        {
-            printf("\nErreur d'allocation\n");
-        }
-    }
-
-    return ((SpinButton*)Sb);
+    return sb;
 }
 
-void add_bgcolor(GtkWidget* widget, const gchar* color, gdouble opacity) {
-    GdkRGBA rgba;
-    if (gdk_rgba_parse(&rgba, color))
-    {
-        rgba.alpha = opacity;
-        gtk_widget_override_background_color(widget, GTK_STATE_NORMAL, &rgba);
-    }
-    else
-    {
-        g_print("Erreur : Impossible de parser la couleur %s\n", color);
-    }
-}
+// Function to create the SpinButton widget based on the SpinButton structure
+void create_spin_button_widget(SpinButton* sb) {
 
-/*
-    fonction: create spin_button
-    entrees :
-    sorties :
-    desciprion:
-    SpinButtonObjet "Sb: indique notre spinbutton object � cr�er SpinButton bien cr�e
-    cette fonction sert � cr�er spinbutton en utilisant des fonctions de base sur ses caract�ristiques
-*/
-void create_spin_button(SpinButton* Sb) {
-    //L'intervalle du SpinButton avec le pas
-    if ((Sb->max) >= (Sb->min)) {
-        Sb->SpinButton = gtk_spin_button_new_with_range(Sb->min, Sb->max, Sb->step); //Valeur par defaut
-        gtk_spin_button_set_value(GTK_SPIN_BUTTON(Sb->SpinButton), Sb->value);
-        //largeur et hauteur
-        if (Sb->name) gtk_widget_set_name(Sb->SpinButton,Sb->name);
-        if ((Sb->height > 0) && (Sb->width > 0))
-            gtk_widget_set_size_request(GTK_WIDGET(Sb->SpinButton), Sb->width, Sb->height);
-        else
-            printf("Height & Width should be positive\n");
-        if (Sb->digits >= 0)
-            gtk_spin_button_set_digits(GTK_SPIN_BUTTON(Sb->SpinButton), Sb->digits);
-        else
-            printf("\nDigits should be positive\n");
-        if (Sb->wrap == 1)
-            gtk_spin_button_set_wrap(GTK_SPIN_BUTTON(Sb->SpinButton), TRUE);
-        if (!(Sb->numeric))
-            gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(Sb->SpinButton), FALSE);
-        if (Sb->arrondissement == 1)
-            gtk_spin_button_set_snap_to_ticks(GTK_SPIN_BUTTON(Sb->SpinButton), TRUE);
 
-        // Set background color
-        if (Sb->bgcolor)
-            add_bgcolor(GTK_WIDGET(Sb->SpinButton), Sb->bgcolor, 1.0); // Setting opacity to 1.0
-
+    if ((sb->max) >= (sb->min)) {
+        sb->SpinButton = gtk_spin_button_new_with_range(sb->min, sb->max, sb->step);
+        gtk_spin_button_set_value(GTK_SPIN_BUTTON(sb->SpinButton), sb->value);
+        gtk_widget_set_size_request(GTK_WIDGET(sb->SpinButton), sb->width, sb->height);
+        gtk_spin_button_set_wrap(GTK_SPIN_BUTTON(sb->SpinButton), sb->wrap);
+        gtk_spin_button_set_digits(GTK_SPIN_BUTTON(sb->SpinButton), sb->digits);
+        gtk_spin_button_set_numeric(GTK_SPIN_BUTTON(sb->SpinButton), sb->numeric);
+        gtk_spin_button_set_snap_to_ticks(GTK_SPIN_BUTTON(sb->SpinButton), sb->arrondissement);
+        if (sb->bgcolor)
+            add_bgcolor_spin_button(GTK_WIDGET(sb->SpinButton), sb->bgcolor, 1.0);
+        gtk_widget_set_name(sb->SpinButton,sb->name);
     } else {
         printf("\nIntervalle du SpinButton n'est pas correct\n");
         exit(0);
     }
 }
 
-SpinButton* add_spin(gint x,gint y, gdouble val_min, gdouble val_max, gdouble pas, gdouble val_defaut,
-              gint height, gint width, gint wrap, gint digits, gint numeric, gint arrondis,
-              gchar* color, gfloat color_opc,gchar* name) {
-    // Initialize SpinButton with provided parameters
-    SpinButton *spin = init_spin_button(name,val_min, val_max, pas, val_defaut,
-                                                    height, width, wrap, digits, numeric, arrondis, color, color_opc);
-    // Create SpinButton
-    create_spin_button(spin);
-    return ((SpinButton*)spin);
+// Function to add a background color to the SpinButton widget
+void add_bgcolor_spin_button(GtkWidget* widget, const gchar* color, gdouble opacity) {
+    GdkRGBA rgba;
+    if (gdk_rgba_parse(&rgba, color)) {
+        rgba.alpha = opacity;
+        gtk_widget_override_background_color(widget, GTK_STATE_NORMAL, &rgba);
+    } else {
+        g_print("Erreur : Impossible de parser la couleur %s\n", color);
+    }
 }
 
+// Function to add a SpinButton widget with specified parameters
+SpinButton* add_spin_button_from_file(FILE* file) {
+    SpinButton* sb = init_spin_button();
+    sb = spinButtonFunction(sb, file);
+    create_spin_button_widget(sb);
+    return ((SpinButton*)sb);
+}
 
 
 #endif // SPIN_BUTTON_H_INCLUDED

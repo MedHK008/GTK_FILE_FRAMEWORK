@@ -3363,3 +3363,108 @@
 
 1711215390 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\ex_buttons.h
 
+<<<<<<< Updated upstream
+=======
+1711240607 source:c:\users\hamza_chroqui\desktop\screenshots-gtk_file\main.c
+	"headers.h"
+
+1711236029 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\headers.h
+	<gtk/gtk.h>
+	<gdk/gdk.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"boutton_normal.h"
+	"cocher.h"
+	"radio.h"
+	"spin_button.h"
+	"label.h"
+	"boite_dialog.h"
+	"entry.h"
+	"window.h"
+	"onglet.h"
+	"fixed.h"
+	"reader.h"
+	"ex_buttons.h"
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\boutton_normal.h
+	"image.h"
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\image.h
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\cocher.h
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\radio.h
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\spin_button.h
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\label.h
+
+1711245671 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\entry.h
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\window.h
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\onglet.h
+	<gtk/gtk.h>
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\fixed.h
+
+1711245690 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\reader.h
+
+1711215837 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\ex_buttons.h
+
+1711245150 c:\users\hamza_chroqui\desktop\screenshots-gtk_file\boite_dialog.h
+
+1711333703 source:c:\users\hkmed\onedrive\bureau\screenshots-main\main.c
+	"headers.h"
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\headers.h
+	<gtk/gtk.h>
+	<gdk/gdk.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"boutton_normal.h"
+	"cocher.h"
+	"radio.h"
+	"spin_button.h"
+	"label.h"
+	"boite_dialog.h"
+	"entry.h"
+	"window.h"
+	"onglet.h"
+	"fixed.h"
+	"reader.h"
+	"ex_buttons.h"
+
+1711327871 c:\users\hkmed\onedrive\bureau\screenshots-main\boutton_normal.h
+	"image.h"
+	"label.h"
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\image.h
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\label.h
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\cocher.h
+
+1711338248 c:\users\hkmed\onedrive\bureau\screenshots-main\radio.h
+	"fixed.h"
+
+1711328498 c:\users\hkmed\onedrive\bureau\screenshots-main\spin_button.h
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\boite_dialog.h
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\entry.h
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\window.h
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\onglet.h
+	<gtk/gtk.h>
+
+1711302939 c:\users\hkmed\onedrive\bureau\screenshots-main\fixed.h
+
+1711335406 c:\users\hkmed\onedrive\bureau\screenshots-main\reader.h
+
+1711333703 c:\users\hkmed\onedrive\bureau\screenshots-main\ex_buttons.h
+
+>>>>>>> Stashed changes
