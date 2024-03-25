@@ -28,6 +28,7 @@ Saisie* init_Saisie()
         printf("\nErreur d'allocation\n");
         exit(0);
     }
+
     S->alignement_x=0;
     S->caractere=NULL;
     S->caractere_visible=0;
@@ -50,9 +51,9 @@ Saisie* entryFunction(Saisie* S,FILE* F)
     gchar c;
     do
     {
-        c=epurer_blan(F);
-        ungetc(c,F);
+
         fscanf(F,"%s",elem);
+        printf("hero--->%s\n",elem);
 
 
        if (strcmp(elem, "name") == 0)
@@ -61,7 +62,7 @@ Saisie* entryFunction(Saisie* S,FILE* F)
                 if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     S->nom=(gchar*)g_malloc(sizeof(gchar)*30);
-                    while ((c = fgetc(F)) != '\"')
+                    while ((c = epurer_blan(F)) != '\"')
                         S->nom[i++] = c;
                     S->nom[i] = '\0';
                 }
@@ -77,6 +78,7 @@ Saisie* entryFunction(Saisie* S,FILE* F)
                     while ((c = fgetc(F)) != '\"')
                         S->placeholder[i++] = c;
                     S->placeholder[i] = '\0';
+                    printf("\n%s\n",S->placeholder);
                 }
             }
         }
@@ -86,41 +88,41 @@ Saisie* entryFunction(Saisie* S,FILE* F)
                 if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
                     S->couleur_fond=(gchar*)g_malloc(sizeof(gchar)*30);
-                    while ((c = fgetc(F)) != '\"')
+                    while ((c = epurer_blan(F)) != '\"')
                         S->couleur_fond[i++] = c;
                     S->couleur_fond[i] = '\0';
                 }
             }
-            fgetc(F);
+
         }
        else if (strcmp(elem, "width") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &S->largeur);
             }
-            fgetc(F);
+
         } else if (strcmp(elem, "height") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &S->hauteur);
             }
-            fgetc(F);
+
         }
          else if (strcmp(elem, "visibility") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &S->visible);
             }
-            fgetc(F);
+
          }
          else if (strcmp(elem, "max_length") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &S->longueur_max);
             }
-            fgetc(F);
+
          }
          else if (strcmp(elem, "X_alignement") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%.2f", &S->alignement_x);
             }
-            fgetc(F);
+
          }
          else if (strcmp(elem, "invisible_carac") == 0) {
                 S->caractere_visible=1;
@@ -131,12 +133,13 @@ Saisie* entryFunction(Saisie* S,FILE* F)
                 }
                 fgetc(F);
 
+
             }}
          else if (strcmp(elem, "color_state") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &S->etat);
             }
-            fgetc(F);
+
          }
         else if (strcmp(elem, "x_pos") == 0) {
             if ((c = epurer_blan(F)) == '=') {
@@ -149,7 +152,6 @@ Saisie* entryFunction(Saisie* S,FILE* F)
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &S->y_pos);
             }
-            fgetc(F);
          }
 
     }while(strcmp(elem,">"));

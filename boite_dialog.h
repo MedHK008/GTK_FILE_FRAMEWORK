@@ -41,10 +41,11 @@ BoiteDialogue* boiteDialogueFunction(BoiteDialogue*BD,FILE* F)
     gchar c;
     do
     {
+
         c=epurer_blan(F);
         ungetc(c,F);
         fscanf(F,"%s",elem);
-
+        printf("%s\n",elem);
 
        if (strcmp(elem, "name") == 0)
         {
@@ -81,25 +82,25 @@ BoiteDialogue* boiteDialogueFunction(BoiteDialogue*BD,FILE* F)
                     BD->couleur_fond[i] = '\0';
                 }
             }
-            fgetc(F);
+
         }
        else if (strcmp(elem, "width") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &BD->largeur);
             }
-            fgetc(F);
+
         } else if (strcmp(elem, "height") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &BD->hauteur);
             }
-            fgetc(F);
+
         }
 
          else if (strcmp(elem, "color_state") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &BD->etat);
             }
-            fgetc(F);
+
          }
 
 
@@ -114,13 +115,13 @@ BoiteDialogue* boiteDialogueFunction(BoiteDialogue*BD,FILE* F)
                     BD->icone[i] = '\0';
                 }
             }
-            fgetc(F);
+
         }
           else if (strcmp(elem, "modal") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &BD->modal);
             }
-            fgetc(F);
+
          }
 
 
@@ -178,7 +179,7 @@ BoiteDialogue* Add_boite_dialogue(FILE *F)
 }
 // Fonction pour ajouter un bouton � une bo�te de dialogue
 void ajouter_a_boite_dialogue(BoiteDialogue*dialogue,GtkWidget*element , gint x , gint y) {
-    if (dialogue->zone_contenu && element) // V�rifier si le libell� du bouton et la bo�te de dialogue sont d�finis
+    if (dialogue && element) // V�rifier si le libell� du bouton et la bo�te de dialogue sont d�finis
         gtk_fixed_put(GTK_FIXED(dialogue->zone_contenu),element,x,y);
  }
 
