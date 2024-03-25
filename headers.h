@@ -13,16 +13,6 @@
 #define NBC 100
 #define NB_RADIO 3
 
-
-gchar epurer_blan(FILE*f)
-{
-    char c ;
-    while((c=fgetc(f))==' ' || c=='\n');
-    return (gchar)(c);
-}
-
-
-
 ///les bibliothèque des widget
 #include "boutton_normal.h"
 #include "cocher.h"
@@ -31,18 +21,18 @@ gchar epurer_blan(FILE*f)
 
 
 
-//#include "prog_bar.h"
+#include "prog_bar.h"
 #include "label.h"
-//#include "frame.h"
+#include "frame.h"
 //#include "scrollbar.h"
-//#include "tool_bar.h"
+#include "tool_bar.h"
+//#include "image.h"
 
-
-#include "boite_dialog.h"
-#include "entry.h"
+//#include "boite_dialog.h"
+//#include "entry.h"
 //
 //
-//#include "menu.h"
+#include "menu.h"
 #include "window.h"
 #include "onglet.h"
 #include "fixed.h"

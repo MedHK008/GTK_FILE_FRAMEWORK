@@ -5,9 +5,7 @@
 // Structure repr�sentant une zone de saisie
 typedef struct {
     GtkWidget *entree;          // Le widget de la zone de saisie GTK
-    gchar *placeholder;
-    gint x_pos ;
-    gint y_pos ;        // Le texte de substitution affich� lorsqu'il n'y a pas de texte
+    gchar *placeholder;         // Le texte de substitution affich� lorsqu'il n'y a pas de texte
     gchar *nom;                 // Le nom du widget
     gint longueur_max;          // Le nombre maximal de caract�res pouvant �tre saisis
     gfloat alignement_x;        // L'alignement horizontal du texte (0 pour � gauche, 1 pour � droite)
@@ -19,143 +17,6 @@ typedef struct {
     gint etat;                  // L'�tat de la zone de saisie (0: normal, 1: actif, 2: pr�-s�lectionn�, 3: s�lectionn�, 4: insensible)
     gchar *couleur_fond;        // La couleur de fond de la zone de saisie
 } Saisie;
-
-Saisie* init_Saisie()
-{
-    Saisie *S=(Saisie*)g_malloc(sizeof(Saisie));
-    if(!S)
-    {
-        printf("\nErreur d'allocation\n");
-        exit(0);
-    }
-    S->alignement_x=0;
-    S->caractere=NULL;
-    S->caractere_visible=0;
-    S->couleur_fond=NULL;
-    S->etat=0;
-    S->hauteur=0;
-    S->largeur=0;
-    S->longueur_max=0;
-    S->nom=NULL;
-    S->placeholder=NULL;
-    S->visible=1;
-    S->x_pos=0;
-    S->y_pos=0;
-    return(Saisie*)(S);
-}
-Saisie* entryFunction(Saisie* S,FILE* F)
-{
-    gchar* elem;
-    elem=(gchar*)g_malloc(sizeof(gchar)*50);
-    gchar c;
-    do
-    {
-        c=epurer_blan(F);
-        ungetc(c,F);
-        fscanf(F,"%s",elem);
-
-
-       if (strcmp(elem, "name") == 0)
-        {
-            if ((c = epurer_blan(F)) == '=') {
-                if ((c = epurer_blan(F)) == '\"') {
-                    int i = 0;
-                    S->nom=(gchar*)g_malloc(sizeof(gchar)*30);
-                    while ((c = fgetc(F)) != '\"')
-                        S->nom[i++] = c;
-                    S->nom[i] = '\0';
-                }
-
-            }
-        }
-        else if (strcmp(elem, "placeholder") == 0)
-            {
-            if ((c = epurer_blan(F)) == '=') {
-                if ((c = epurer_blan(F)) == '\"') {
-                    int i = 0;
-                    S->placeholder=(gchar*)g_malloc(sizeof(gchar)*50);
-                    while ((c = fgetc(F)) != '\"')
-                        S->placeholder[i++] = c;
-                    S->placeholder[i] = '\0';
-                }
-            }
-        }
-       else if (strcmp(elem, "bgColor") == 0)
-        {
-            if ((c = epurer_blan(F)) == '=') {
-                if ((c = epurer_blan(F)) == '\"') {
-                    int i = 0;
-                    S->couleur_fond=(gchar*)g_malloc(sizeof(gchar)*30);
-                    while ((c = fgetc(F)) != '\"')
-                        S->couleur_fond[i++] = c;
-                    S->couleur_fond[i] = '\0';
-                }
-            }
-            fgetc(F);
-        }
-       else if (strcmp(elem, "width") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%d", &S->largeur);
-            }
-            fgetc(F);
-        } else if (strcmp(elem, "height") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%d", &S->hauteur);
-            }
-            fgetc(F);
-        }
-         else if (strcmp(elem, "visibility") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%d", &S->visible);
-            }
-            fgetc(F);
-         }
-         else if (strcmp(elem, "max_length") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%d", &S->longueur_max);
-            }
-            fgetc(F);
-         }
-         else if (strcmp(elem, "X_alignement") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%.2f", &S->alignement_x);
-            }
-            fgetc(F);
-         }
-         else if (strcmp(elem, "invisible_carac") == 0) {
-                S->caractere_visible=1;
-            if ((c = epurer_blan(F)) == '=') {
-                if ((c = epurer_blan(F)) == '\"')
-                {
-                    S->caractere=fgetc(F);
-                }
-                fgetc(F);
-
-            }}
-         else if (strcmp(elem, "color_state") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%d", &S->etat);
-            }
-            fgetc(F);
-         }
-        else if (strcmp(elem, "x_pos") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%d", &S->x_pos);
-            }
-
-         }
-
-        else if (strcmp(elem, "y_pos") == 0) {
-            if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%d", &S->y_pos);
-            }
-            fgetc(F);
-         }
-
-    }while(strcmp(elem,">"));
-    return (Saisie*)(S);
-}
-
 
 
 // Fonction pour cr�er et initialiser une structure Saisie
@@ -195,17 +56,14 @@ Saisie *creer_initialiser_saisie(gchar *placeholder, gint longueur_max, gfloat a
 // Fonction pour d�finir les attributs visuels de la zone de saisie
 void definir_attributs_saisie(Saisie *e) {
     GdkRGBA couleur; // D�claration d'une structure de couleur GTK
-    e->entree = gtk_entry_new();// Cr�er une nouvelle zone de saisie GTK
-    if(e->couleur_fond)
+    e->entree = gtk_entry_new(); // Cr�er une nouvelle zone de saisie GTK
     gdk_rgba_parse(&couleur, e->couleur_fond); // Convertir la couleur de fond en format GTK
-    if(e->placeholder)
+
     // D�finir le texte de substitution de la zone de saisie
     gtk_entry_set_placeholder_text(GTK_ENTRY(e->entree), e->placeholder);
     // D�finir la longueur maximale de la saisie
-    if(e->longueur_max)
     gtk_entry_set_max_length(GTK_ENTRY(e->entree), e->longueur_max);
     // D�finir l'alignement horizontal de la zone de saisie
-    if(e->alignement_x)
     gtk_entry_set_alignment(GTK_ENTRY(e->entree), e->alignement_x);
 
     // Masquer ou afficher le texte saisi en fonction de la visibilit�
@@ -243,16 +101,12 @@ void definir_attributs_saisie(Saisie *e) {
     }
 }
 
-Saisie *Add_Entry(FILE *F)
+Enty *Add_Entry(gchar *placeholder, gint longueur_max, gfloat alignement_x, gint visible, gint caractere_visible, guchar carac_vis, gint w, gint h, gint etat, gchar *couleur_fond)
 {
-    Saisie *S=init_Saisie();
-
-    S=entryFunction(S,F);
-    definir_attributs_saisie(S);
-    return(Saisie*)(S);
-
+    Saisie *E=creer_initialiser_saisie(placeholder,longueur_max,alignement_x,visible,caractere_visible,carac_vis,w,h,etat,couleur_fond);
+    definir_attributs_saisie(E);
+   
 }
-
 
 
 #endif // ENTRY_H_INCLUDED

@@ -1,189 +1,296 @@
 #ifndef READER_H_INCLUDED
 #define READER_H_INCLUDED
 
-
 #define MAX 100
-typedef enum{
-    fenetre,
-    Fixed,
-    Label,
-    Entry,
-    Button,
-    Radio,
-    Checkbox,
-    boiteDialogue,
-    Frame,
-    Image,
-    ProgBar,
-    ScrollBar,
-    spB,
-    ToolBar,
-    ItemBar,
-    MenuBar,
-    Tab,
-    MenuItem
-}Token;
-
-Saisie *En[MAX];
 
 
+//typedef struct pl{
+//    gchar *contenue;
+//    struct pl*svt;
+//}Pile;
+//Pile *initialiser_Pile(Pile*P)
+//{
+//    P=NULL;
+//    return(Pile*)(P);
+//}
+//Pile*empiler(Pile *P,gchar*name)
+//{
+//    Pile*NE=(Pile*)malloc(sizeof(Pile));
+//    if(NE){
+//        NE->contenue=name;
+//        if(!P) return(Pile*)(NE);
+//        else {
+//            NE->svt=P;
+//            return(Pile*)(P);
+//        }
+//    }
+//    exit(-1);
+//}
+//Pile* depiler(Pile*P)
+//{
+//    if(!P) return(Pile*)(NULL);
+//    Pile*Supp=P;
+//    P=P->svt;
+//    free(Supp);
+//    return (Pile*)(P);
+//}
 
 
 
-
-Token string_to_token(const char *str) {
-    if (!strcmp(str, "window")){
-        return fenetre;
-    }else if (!strcmp(str, "fixed")){
-        return Fixed;
-    } else if (!strcmp(str, "label")) {
-        return Label;
-    } else if (!strcmp(str, "entry")) {
-        return Entry;
-    } else if (!strcmp(str, "button")) {
-        return Button;
-    } else if (!strcmp(str, "button_radio")) {
-        return Radio;
-    } else if (!strcmp(str, "checkbox")) {
-        return Checkbox;
-    } else if (!strcmp(str, "boite_dialogue")) {
-        return boiteDialogue;
-    } else if (!strcmp(str, "frame")) {
-        return Frame;
-    } else if (!strcmp(str, "image")) {
-        return Image;
-    } else if (!strcmp(str, "prog_bar")) {
-        return ProgBar;
-    } else if (!strcmp(str, "scroll_bar")) {
-        return ScrollBar;
-    } else if (!strcmp(str, "spin_button")) {
-        return spB;
-    } else if (!strcmp(str, "tool_bar")) {
-        return ToolBar;
-    } else if (!strcmp(str, "item_bar")) {
-        return ItemBar;
-    } else if (!strcmp(str, "menu_bar")) {
-        return MenuBar;
-    } else if (!strcmp(str, "Tab")) {
-        return Tab;
-    } else if (!strcmp(str, "menu_item")) {
-        return MenuItem;
-    } else {
-        // Retourner une valeur par défaut ou une valeur d'erreur
-        return -1;
-    }
-}
-
-
-void lire_fichier(FILE*F,fixed* fixed0)
+void add_to_parent(GtkWidget* child,GtkWidget* parent_w, gchar* parent,guint posx, guint posy)
 {
-    if(!F) exit(-1);
+  if(!strcmp(parent,"/fixed"))
+    gtk_fixed_put(GTK_FIXED(parent_w),child,posx,posy);
+ else if(!strcmp(parent,"/box"))
+    gtk_box_pack_start(GTK_BOX(parent_w),child,FALSE,FALSE,0);
+ else if(!strcmp(parent,"/window"))
+    gtk_container_add(GTK_CONTAINER(parent_w),child);
+ else if(!strcmp(parent,"/scroll_bar"))
+    gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(parent_w), child);
+
+}
+void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
+{
     gchar c ;
     gchar current_token[MAX];
     Token tok;
-    gchar*elem=(gchar*)g_malloc(sizeof(gchar)*50);
-    int into =0;
     c=epurer_blan(F);
-    BoiteDialogue *BD ;
-    ButtonSimple* B;
-    Saisie*E;
+    printf("\n%s->%c",parent_token,c);
     while(c!=EOF)
     {
+        printf("\n%s ::: %c",parent_token,c);
         if(c=='<')
         {
-            c=fgetc(F);
-            if(c!='/')
-            {
-                ungetc(c,F);
-                 fscanf(F,"%s",current_token);
+              fscanf(F, "%s", current_token);
+              printf("\n%s",current_token);
 
-                 tok=string_to_token(current_token);
-                 switch(tok) {
-    //                case fenetre:
-    //                    windowFunction(F);
-    //                    break;
-    //                case Fixed:
-    //                    fixedFunction(F);
-    //                    break;
-    //                case Label:
-    //                    labelFunction(F);
-    //                    break;
-                    case Entry:
-
-                        E=Add_Entry(F);
-                        c=epurer_blan(F);
-                        if(into==1)
-                            ajouter_a_boite_dialogue(BD,E->entree,E->x_pos,E->y_pos);
-                        else if(into==0)
-                            add_widget_to_fixed(fixed0,E->entree,E->x_pos,E->y_pos);
-                        break;
-                    case Button:
-                        texte* txt_cocher=initialiser_texte(20,30,"exemple des bouttons a cocher",3,"Verdana",12,"italic",NULL,"#000000","#FFFFFF",NULL);
-                        ButtonSimple* B=add_button(F,txt_cocher);
-                        printf("%d\t\t%d\n",B->x_pos,B->y_pos);
-                        add_widget_to_fixed(fixed0,B->button,50,50);
-                        c=epurer_blan(F);
-                        break;
-    //                case Radio:
-    //                    elem_radio* radioButtons = NULL;
-    //                    radioButtons = radioFunction(radioButtons, file);
-    //                    break;
-                    case Checkbox:
-                        cocher* C = add_cocher(F);
-                        add_widget_to_fixed(fixed0,C->boutcoche,50,150);
-                        c=epurer_blan(F);
-                        break;
-    //                case boiteDialogue:
-    //                    printf("m here");
-    //                   into=1;
-    //                    BD=Add_boite_dialogue(F);
-    //                    c=epurer_blan(F);
-    //                    break;
-    //                case Frame:
-    //                    frameFunction(F);
-    //                    break;
-    //                case Image:
-    //                    imageFunction(F);
-    //                    break;
-    //                case ProgBar:
-    //                    progBarFunction(F);
-    //                    break;
-    //                case ScrollBar:
-    //                    scrollBarFunction(F);
-    //                    break;
-    //                case spB:
-    //                    spinButtonFunction(F);
-    //                    break;
-    //                case ToolBar:
-    //                    toolBarFunction(F);
-    //                    break;
-    //                case ItemBar:
-    //                    itemBarFunction(F);
-    //                    break;
-    //                case MenuBar:
-    //                    menuBarFunction(F);
-    //                    break;
-    //                case Tab:
-    //                    ongletFunction(F);
-    //                    break;
-    //                case MenuItem:
-    //                    menuItemFunction(F);
-    //                    break;
-                    default:
-                        // Gérer le cas où le token n'est pas reconnu
-                        break;
-                }
-            }
-            else
+            if (!strcmp(current_token , parent_token))
             {
-                fscanf(F,"%s",elem);
-                if(strcmp(elem,"boite_dialogue>"))
-                   into=0;
+                if(!(strcmp(current_token,"/root")))
+                  {
+                       printf("\nRRRRRRRRR");
+                       gtk_widget_show_all(W->window);
+                       fin_programme(W);
+                  }
+                c=epurer_blan(F);
+                return ;
             }
+             tok=string_to_token(current_token);
+             switch(tok)
+             {
+               case Root: c=epurer_blan(F);
+                          c=epurer_blan(F);
+
+                   break;
+
+                case fenetre:
+                    printf("\nswitch F");
+                    W=add_window(F);
+                    lire_fichier(F,W,W->window,"/window");
+                    printf("\nsortie F");
+                    c=epurer_blan(F);
+                    break;
+                case Fixed:
+
+                    fixed* fix=add_fixed(F,fix);
+                    printf("JE SUIS LA2222 \n");
+                    add_to_parent(fix->fixed,parent_w,parent_token,fix->posx,fix->posy);
+                    printf("JE SUIS LA \n");
+                    lire_fichier(F,W,fix->fixed,"/fixed");
+                     printf("\nsortie FIXED");
+                    c=epurer_blan(F);
+
+                    break;
+                case Label:
+                   Etiquette *lab= add_label(F);
+                   add_to_parent(lab->widget,parent_w,parent_token,lab->x,lab->y);
+                   c=epurer_blan(F);
+                   break;
+//                case Entry:
+//                    entryFunction(F);
+//                    break;
+                case Button:
+                     ButtonSimple* B=add_button(F);
+                    add_to_parent(B->button,parent_w,parent_token,50,50);
+                    c=epurer_blan(F);
+                    break;
+//                case Radio:
+//                    buttonRadioFunction(F);
+//                    break;
+//                case Checkbox:
+//                    checkboxFunction(F);
+//                    break;
+//                case BoiteDialogue:
+//                    boiteDialogueFunction(F);
+//                    break;
+                case Frame:
+                    frame *fr=add_frame(parent_w,F);
+                    lire_son_elem(fr,F);
+                    c=epurer_blan(F);
+                    break;
+              case Image:
+                   image *img=add_image(F);
+                   add_to_parent(img->widget,parent_w,parent_token,img->x,img->y);
+                   c=epurer_blan(F);
+                   break;
+                  case ProgBar:
+                      barre_prog *prog_bar=add_progress_bar(F);
+                      add_to_parent(prog_bar->parent,parent_w,parent_token,prog_bar->x,prog_bar->y);
+                      c=epurer_blan(F);
+                      break;
+                case ScrollBar:
+                    barre_def *scbar=add_scrollbar(F);
+                    printf("fffffff\n");
+                    add_to_parent(scbar->widget,parent_w,parent_token,0,0);
+                    lire_fichier(F,W,scbar->widget,"/scroll_bar");
+                    c=epurer_blan(F);
+                    break;
+//                case spB:
+//                    spinButtonFunction(F);
+//                    break;
+                case ToolBar:
+                    toolbar *tbar=add_toolbar(parent_w,F);
+                    lire_son_item(tbar ,F);
+                    c=epurer_blan(F);
+//                case ItemBar:
+//                    itemBarFunction(F);
+//                    break;
+//                case Tab:
+//                    ongletFunction(F);
+//                    break;
+                  case MenuBar:
+                        menubar *mbar =add_menubar(mbar,F);
+                         ajouter_elems(mbar,F);
+                        add_to_parent(mbar->menubar,parent_w,parent_token,mbar->posx,mbar->posy);
+                        printf("\nSortirADD");
+                        c=epurer_blan(F);
+
+                        break;
+//                case MenuItem:
+//                    menuItemFunction(F);
+//                    break;
+                default:
+                    // Gérer le cas où le token n'est pas reconnu
+                    break;
+            }
+
 
         }
+        else
+           {
+             printf("\nssssWWW"); return ;
+           }
+
+
+
+
     }
+
 }
+
+
+
+//
+//void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox,GtkWidget *pere)
+//{
+//    if(!F) exit(-1);
+//    gchar c ;
+//    gchar current_token[MAX];
+//    Token tok;
+//    c=epurer_blan(F);
+//    while(c!=EOF)
+//    {
+//        printf("%c",c);
+//        if(c=='<')
+//        {
+//             fscanf(F,"%s",current_token);
+//             tok=string_to_token(current_token);
+//             switch(tok) {
+////                case fenetre:
+////                    windowFunction(F);
+////                    break;
+////                case Fixed:
+////                    fixedFunction(F);
+////                    break;
+//                case Label:
+//                   Etiquette *lab= add_label(F);
+//                   add_widget_to_fixed(fixed0,lab->widget,lab->x,lab->y);
+//                   c=epurer_blan(F);
+//                   break;
+////                case Entry:
+////                    entryFunction(F);
+////                    break;
+//                case Button:
+//                    ButtonSimple* B=add_button(F);
+//                    add_widget_to_fixed(fixed0,B->button,50,50);
+//                    c=epurer_blan(F);
+//                    break;
+////                case Radio:
+////                    buttonRadioFunction(F);
+////                    break;
+////                case Checkbox:
+////                    checkboxFunction(F);
+////                    break;
+////                case BoiteDialogue:
+////                    boiteDialogueFunction(F);
+////                    break;
+//                  case Frame:
+//                    frame *fr=add_frame(fixed0->fixed,F);
+//                    lire_son_elem(fr,F);
+//                    c=epurer_blan(F);
+//                    break;
+//                 case Image:
+//                   image *img=add_image(F);
+//                   add_widget_to_fixed(fixed0,img->widget,img->x,img->y);
+//                   c=epurer_blan(F);
+//                   break;
+//                  case ProgBar:
+//                      barre_prog *prog_bar=add_progress_bar(F);
+//                      add_widget_to_fixed(fixed0,prog_bar->parent,prog_bar->x,prog_bar->y);
+//                      c=epurer_blan(F);
+//                      break;
+//                case ScrollBar:
+//                    printf("SDJSJAS");
+//                    barre_def *scbar=add_scrollbar(pere,pvbox,F);
+//                    c=epurer_blan(F);
+//                    break;
+////                case spB:
+////                    spinButtonFunction(F);
+////                    break;
+//                case ToolBar:
+//                    toolbar *tbar=add_toolbar(pvbox,F);
+//                    lire_son_item(tbar ,F);
+//                    c=epurer_blan(F);
+//                    /*
+//                    add_item_bar(tbar,GTK_STOCK_SAVE,"enregistrer",100,100,1);
+//                    add_item_bar(tbar,GTK_STOCK_CLOSE,"fermer",100,100,-1);
+//                    add_item_bar(tbar,GTK_STOCK_QUIT,"quitter",100,100,-1);
+//                    */
+//
+//                    break;
+////                case ItemBar:
+////                    itemBarFunction(F);
+////                    break;
+////                case MenuBar:
+////                    menuBarFunction(F);
+////                    break;
+////                case Tab:
+////                    ongletFunction(F);
+////                    break;
+////                case MenuItem:
+////                    menuItemFunction(F);
+////                    break;
+//                default:
+//                    // Gérer le cas où le token n'est pas reconnu
+//                    break;
+//            }
+//            printf("\n fin de if");
+//
+//        }
+//        else
+//                return;
+//    }
+//}
 
 
 #endif // READER_H_INCLUDED
