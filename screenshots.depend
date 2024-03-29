@@ -3268,11 +3268,11 @@
 	"image.h"
 	"label.h"
 
-1711208088 ated upstream
+1711215390 ated upstream
 
 1711287952 e:\screenshots\cocher.h
 
-1711246895 shed changes
+1711333703 shed changes
 
 1711286452 e:\screenshots\radio.h
 
@@ -3363,8 +3363,6 @@
 
 1711215390 c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\ex_buttons.h
 
-<<<<<<< Updated upstream
-=======
 1711240607 source:c:\users\hamza_chroqui\desktop\screenshots-gtk_file\main.c
 	"headers.h"
 
@@ -3467,4 +3465,47 @@
 
 1711333703 c:\users\hkmed\onedrive\bureau\screenshots-main\ex_buttons.h
 
->>>>>>> Stashed changes
+1711730514 source:c:\users\hkmed\downloads\screenshots-gtk_file\main.c
+	"headers.h"
+
+1711373159 c:\users\hkmed\downloads\screenshots-gtk_file\headers.h
+	<gtk/gtk.h>
+	<gdk/gdk.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"boutton_normal.h"
+	"cocher.h"
+	"radio.h"
+	"spin_button.h"
+	"window.h"
+	"onglet.h"
+	"fixed.h"
+	"reader.h"
+	"ex_buttons.h"
+
+1711744940 c:\users\hkmed\downloads\screenshots-gtk_file\boutton_normal.h
+	"image.h"
+	"label.h"
+
+1711373159 c:\users\hkmed\downloads\screenshots-gtk_file\image.h
+
+1711373159 c:\users\hkmed\downloads\screenshots-gtk_file\label.h
+
+1711744940 c:\users\hkmed\downloads\screenshots-gtk_file\cocher.h
+
+1711744940 c:\users\hkmed\downloads\screenshots-gtk_file\radio.h
+
+1711745120 c:\users\hkmed\downloads\screenshots-gtk_file\spin_button.h
+
+1711373159 c:\users\hkmed\downloads\screenshots-gtk_file\window.h
+
+1711373159 c:\users\hkmed\downloads\screenshots-gtk_file\onglet.h
+	<gtk/gtk.h>
+
+1711373159 c:\users\hkmed\downloads\screenshots-gtk_file\fixed.h
+
+1711745179 c:\users\hkmed\downloads\screenshots-gtk_file\reader.h
+
+1711730349 c:\users\hkmed\downloads\screenshots-gtk_file\ex_buttons.h
+

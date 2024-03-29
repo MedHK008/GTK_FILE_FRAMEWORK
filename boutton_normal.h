@@ -12,6 +12,8 @@ typedef struct {
     guint width;       // longueur du bouton
     guint height;      // largeur du bouton
     gchar* bgColor;    // Couleur de fond du GtkGrid
+    gint x_pos;
+    gint y_pos;
 } ButtonSimple;
 
 
@@ -20,9 +22,11 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
     gchar* elem;
     elem=(gchar*)g_malloc(sizeof(gchar)*50);
     gchar c;
+    printf("\nboutton : \n");
     do
     {
         fscanf(F,"%s",elem);
+        printf("Read element: %s\n", elem);
        if (strcmp(elem, "name") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 if ((c = epurer_blan(F)) == '\"') {
@@ -58,7 +62,15 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &b->height);
             }
-        } else if (strcmp(elem, "bgColor") == 0) {
+        }else if (strcmp(elem, "posx") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &b->x_pos);
+            }
+        }else if (strcmp(elem, "posy") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &b->y_pos);
+            }
+        }else if (strcmp(elem, "bgColor") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 if ((c = epurer_blan(F)) == '\"') {
                     int i = 0;
@@ -94,6 +106,8 @@ ButtonSimple* init_button_simple(texte* label_text) {
     b->lien=(gchar*)g_malloc(sizeof(gchar)*30);
     b->lien[0]='\0';
     b->width=0;
+    b->x_pos;
+    b->y_pos;
     return b;
 }
 //***************************************************************

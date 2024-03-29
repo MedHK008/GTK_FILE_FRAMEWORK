@@ -15,6 +15,8 @@ typedef struct {
     gint digits;
     gint numeric;
     gint arrondissement;
+    gint x_pos;
+    gint y_pos;
     gchar* bgcolor;
 } SpinButton;
 
@@ -22,8 +24,10 @@ typedef struct {
 SpinButton* spinButtonFunction(SpinButton* sb, FILE* file) {
     gchar elem[50];
     gchar c;
+    printf("spin : \n");
     do {
         fscanf(file, "%s", elem);
+        printf("Read element: %s\n", elem);
         if (strcmp(elem, "name") == 0) {
             if ((c = epurer_blan(file)) == '=') {
                 if ((c = epurer_blan(file)) == '\"') {
@@ -74,7 +78,15 @@ SpinButton* spinButtonFunction(SpinButton* sb, FILE* file) {
             if ((c = epurer_blan(file)) == '=') {
                 fscanf(file, "%d", &sb->arrondissement);
             }
-        } else if (strcmp(elem, "bgcolor") == 0) {
+        } else if (strcmp(elem, "posx") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->x_pos);
+            }
+        }else if (strcmp(elem, "posy") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->y_pos);
+            }
+        }else if (strcmp(elem, "bgcolor") == 0) {
             if ((c = epurer_blan(file)) == '=') {
                 if ((c = fgetc(file)) == '\"') {
                     int i = 0;
@@ -83,6 +95,7 @@ SpinButton* spinButtonFunction(SpinButton* sb, FILE* file) {
                     sb->bgcolor[i] = '\0';
                 }
             }
+            c=fgetc(file);
         }
     } while (strcmp(elem, ">"));
     return sb;
@@ -100,11 +113,11 @@ SpinButton* init_spin_button() {
     sb->name =(gchar*)g_malloc(sizeof(char)*50);
     sb->bgcolor = NULL;
     sb->bgcolor =(gchar*)g_malloc(sizeof(char)*50);
-
+    sb->x_pos=0;
+    sb->y_pos=0;
     return sb;
 }
 
-// Function to create the SpinButton widget based on the SpinButton structure
 void create_spin_button_widget(SpinButton* sb) {
 
 
@@ -125,7 +138,6 @@ void create_spin_button_widget(SpinButton* sb) {
     }
 }
 
-// Function to add a background color to the SpinButton widget
 void add_bgcolor_spin_button(GtkWidget* widget, const gchar* color, gdouble opacity) {
     GdkRGBA rgba;
     if (gdk_rgba_parse(&rgba, color)) {
@@ -136,7 +148,6 @@ void add_bgcolor_spin_button(GtkWidget* widget, const gchar* color, gdouble opac
     }
 }
 
-// Function to add a SpinButton widget with specified parameters
 SpinButton* add_spin_button_from_file(FILE* file) {
     SpinButton* sb = init_spin_button();
     sb = spinButtonFunction(sb, file);

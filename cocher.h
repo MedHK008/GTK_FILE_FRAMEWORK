@@ -7,8 +7,8 @@ typedef struct {
     gchar *label;
     gchar *name;
     GtkWidget *boutcoche;
-    gint x;
-    gint y;
+    gint x_pos;
+    gint y_pos;
     gchar *gui;
     gboolean checked;
 } cocher;
@@ -19,8 +19,8 @@ cocher *init_empty_cocher() {
     C->parent = NULL;
     C->label = NULL;
     C->name = NULL;
-    C->x = 0;
-    C->y = 0;
+    C->x_pos = 0;
+    C->y_pos = 0;
     C->gui = NULL;
     C->checked = FALSE;
     return C;
@@ -44,9 +44,10 @@ cocher *cocherFunction(cocher *C, FILE *F) {
     gchar elem[50];
     gchar c;
     int check;
+    printf("\ncheckbox : \n");
     do {
         fscanf(F, "%s", elem);
-        printf("%s",elem);
+        printf("Read element: %s\n", elem);
         if (strcmp(elem, "label") == 0)
         {
             C->label=(gchar*)g_malloc(sizeof(gchar)*50);
@@ -57,7 +58,6 @@ cocher *cocherFunction(cocher *C, FILE *F) {
                     while ((c=fgetc(F)) != '\"')
                         C->label[i++] = c;
                     C->label[i] = '\0';
-                    printf("  %s   ",C->label);
                 }
             }
         }
@@ -84,8 +84,15 @@ cocher *cocherFunction(cocher *C, FILE *F) {
                     C->gui[i] = '\0';
                 }
             }
-        }
-        else if (strcmp(elem, "checked") == 0)
+        }else if (strcmp(elem, "posx") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &C->x_pos);
+            }
+        }else if (strcmp(elem, "posy") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &C->y_pos);
+            }
+        }else if (strcmp(elem, "checked") == 0)
         {
             if ((c = epurer_blan(F)) == '=') {
                     fscanf(F,"%d",&check);
@@ -101,13 +108,9 @@ cocher *cocherFunction(cocher *C, FILE *F) {
 }
 
 cocher *add_cocher(FILE *F) {
-    printf("fuck4\n");
     cocher *checkbox = init_empty_cocher();
-    printf("fuck5\n");
     checkbox = cocherFunction(checkbox, F);
-    printf("\nfuck6\n");
     create_cocher(checkbox);
-    printf("\nfuck7\n");
     return checkbox;
 }
 
