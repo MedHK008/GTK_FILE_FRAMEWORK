@@ -4,7 +4,7 @@
 
 
 
-typedef struct {
+typedef struct f{
   GtkWidget *window; // Pointeur vers le widget de la fenêtre (obligatoire)
   GtkWidget *scrollwin; // Ajout d'un pointeur vers GtkScrolledWindow
   gboolean scroll_bool;
@@ -23,6 +23,7 @@ typedef struct {
          GTK_WIN_POS_NONE */
   guint border_width; // Largeur de la bordure de la fenêtre en pixels (facultatif, par défaut : 0)
   gboolean modifiable; // Indique si la taille de la fenêtre peut être modifiée (facultatif, par défaut : TRUE)
+  struct f *svt;
 } Fenetre;
 
 
@@ -56,6 +57,7 @@ Fenetre* init_window()
     win->posy=0;
     win->border_width=0;
     win->modifiable=TRUE;
+    win->svt=NULL;
     return win;
 }
 //Fonction pour transformer une chaine a un element de type GtkWindowPosition
@@ -235,7 +237,7 @@ void create_window(Fenetre *W)
 
     // Si redimensionnable, autorisez le redimensionnement
     gtk_window_set_resizable(GTK_WINDOW(W->window), W->modifiable);
-    if(W->scrollwin)
+    if(W->scroll_bool)
     {
         W->scrollwin = gtk_scrolled_window_new(NULL, NULL);
         gtk_container_add(GTK_CONTAINER(W->window), W->scrollwin);

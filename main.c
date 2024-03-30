@@ -7,16 +7,23 @@ int main(int argc, char *argv[]) {
      }
     Fenetre *Win=(Fenetre*)malloc(sizeof(Fenetre));
     if(Win)
-    {
+        {
 
 //              ButtonSimple*b=
-        lire_fichier(F,Win,NULL,"/root");
-//      FILE *G=fopen("boite_dialogue.txt","r");
+                lire_fichier(F,Win,NULL,"/root");
+//              FILE *G=fopen("boite_dialogue.txt","r");
 //              BD=lire_Boite_dialogue(G,b);
-          printf("\nSOrtie");
+              printf("\nSOrtie");
 
+        }
+    while(Win){
+            Fenetre *sup=Win;
+            Win=Win->svt;
+        free(sup);
     }
-    free(Win);
+
+
+
     return 0;
 }
 

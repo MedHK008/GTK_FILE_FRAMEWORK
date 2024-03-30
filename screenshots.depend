@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1711819878 source:e:\screenshots\main.c
+1711205841 source:e:\screenshots\main.c
 	"headers.h"
 
 1704104925 c:\msys64\mingw64\include\stdio.h
@@ -3260,44 +3260,41 @@
 
 1703052288 c:\msys64\mingw64\include\gtk-3.0\gtk\gtk-autocleanups.h
 
-1711819679 e:\screenshots\menu.h
+1710763723 e:\screenshots\menu.h
 
-1711814258 e:\screenshots\window.h
+1711205584 e:\screenshots\window.h
 
-1711814258 e:\screenshots\boutton_normal.h
+1711207391 e:\screenshots\boutton_normal.h
 	"image.h"
 
-1711814258 e:\screenshots\cocher.h
+1711154626 e:\screenshots\cocher.h
 
-1711814258 e:\screenshots\radio.h
+1711155363 e:\screenshots\radio.h
 
-1711814258 e:\screenshots\spin_button.h
+1711156152 e:\screenshots\spin_button.h
 
-1711814258 e:\screenshots\onglet.h
+1710679885 e:\screenshots\onglet.h
 	<gtk/gtk.h>
 
-1711814258 e:\screenshots\tool_bar.h
+1710634294 e:\screenshots\tool_bar.h
 
-1711814258 e:\screenshots\prog_bar.h
+1710634301 e:\screenshots\prog_bar.h
 
-1711814258 e:\screenshots\image.h
+1711201969 e:\screenshots\image.h
 
-1711814258 e:\screenshots\label.h
+1710796834 e:\screenshots\label.h
 
-1711814258 e:\screenshots\frame.h
-	"scrollbar.h"
-	"window.h"
-	"fixed.h"
+1710634291 e:\screenshots\frame.h
 
-1711820679 e:\screenshots\scrollbar.h
+1710636189 e:\screenshots\scrollbar.h
 
-1711814258 e:\screenshots\boite_dialog.h
+1710766316 e:\screenshots\boite_dialog.h
 
-1711814258 e:\screenshots\entry.h
+1710678149 e:\screenshots\entry.h
 
-1711819772 e:\screenshots\fixed.h
+1711209047 e:\screenshots\fixed.h
 
-1711814258 e:\screenshots\headers.h
+1711208088 e:\screenshots\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3307,22 +3304,16 @@
 	"cocher.h"
 	"radio.h"
 	"spin_button.h"
-	"prog_bar.h"
 	"label.h"
-	"frame.h"
-	"tool_bar.h"
-	"boite_dialog.h"
-	"entry.h"
-	"menu.h"
 	"window.h"
 	"onglet.h"
-	"reader.h"
 	"fixed.h"
+	"reader.h"
 	"ex_buttons.h"
 
-1711814258 e:\screenshots\ex_buttons.h
+1711209019 e:\screenshots\ex_buttons.h
 
-1711820470 e:\screenshots\reader.h
+1711209082 e:\screenshots\reader.h
 
 1711303214 source:c:\users\pc\onedrive\bureau\flex\screenshots-gtk_file\main.c
 	"headers.h"
@@ -3504,7 +3495,7 @@
 
 1711333021 c:\users\hamza_chroqui\desktop\screenshots-main\entry.h
 
-1711810903 source:c:\users\pc\onedrive\bureau\screenshots-chroqui\main.c
+1711833172 source:c:\users\pc\onedrive\bureau\screenshots-chroqui\main.c
 	"headers.h"
 
 1711749156 c:\users\pc\onedrive\bureau\screenshots-chroqui\headers.h
@@ -3550,7 +3541,7 @@
 	"window.h"
 	"fixed.h"
 
-1711371888 c:\users\pc\onedrive\bureau\screenshots-chroqui\scrollbar.h
+1711831212 c:\users\pc\onedrive\bureau\screenshots-chroqui\scrollbar.h
 
 1711807144 c:\users\pc\onedrive\bureau\screenshots-chroqui\tool_bar.h
 
@@ -3558,16 +3549,16 @@
 
 1711371887 c:\users\pc\onedrive\bureau\screenshots-chroqui\entry.h
 
-1711371888 c:\users\pc\onedrive\bureau\screenshots-chroqui\menu.h
+1711831848 c:\users\pc\onedrive\bureau\screenshots-chroqui\menu.h
 
-1711371888 c:\users\pc\onedrive\bureau\screenshots-chroqui\window.h
+1711833172 c:\users\pc\onedrive\bureau\screenshots-chroqui\window.h
 
 1711371888 c:\users\pc\onedrive\bureau\screenshots-chroqui\onglet.h
 	<gtk/gtk.h>
 
 1711808645 c:\users\pc\onedrive\bureau\screenshots-chroqui\fixed.h
 
-1711811855 c:\users\pc\onedrive\bureau\screenshots-chroqui\reader.h
+1711833380 c:\users\pc\onedrive\bureau\screenshots-chroqui\reader.h
 
 1711371887 c:\users\pc\onedrive\bureau\screenshots-chroqui\ex_buttons.h
 

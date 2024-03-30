@@ -19,10 +19,10 @@ barre_def *initialiser_barre_def()
 {
     // Allocation dynamique de m�moire pour une nouvelle structure barre_def
     barre_def *scrBar = (barre_def *)g_malloc(sizeof(barre_def));
-    scrBar->widget=(GtkWidget*)g_malloc(sizeof(GtkWidget));
-    // Cr�ation d'une nouvelle barre de d�filement GtkScrolledWindow
-    scrBar->widget = gtk_scrolled_window_new(NULL, NULL);
 
+    // Cr�ation d'une nouvelle barre de d�filement GtkScrolledWindo
+    scrBar->widget = gtk_scrolled_window_new(NULL, NULL);
+    if(scrBar->widget) printf("\n fffffffffffffffffffff");
     // Initialisation des champs de style
     scrBar->h = 0;
     scrBar->w = 0;
@@ -34,7 +34,7 @@ barre_def *initialiser_barre_def()
     scrBar->vpolic = 2;
 
     // Retour de la structure initialis�e
-    return scrBar;
+    return(barre_def*) scrBar;
 }
 barre_def *scrollbarfunction(barre_def *scbar,FILE *F)
 {
@@ -70,21 +70,22 @@ barre_def *scrollbarfunction(barre_def *scbar,FILE *F)
             }
         }
     }while(strcmp(elem,">"));
-    return scbar;
+    return(barre_def*) scbar;
 }
 
 // Fonction pour cr�er une barre de d�filement avec un conteneur associ�
-void creer_scrollbar(barre_def *scrbar)
+GtkWidget* creer_scrollbar(barre_def *scrbar,GtkWidget *pere)
 {
+    GtkWidget *conteneur=gtk_fixed_new();
     // Ajout de la barre de d�filement en tant que fils du widget parent
-    //gtk_container_add(GTK_CONTAINER(pere), scrbar->widget);
+    gtk_container_add(GTK_CONTAINER(pere), scrbar->widget);
    //gtk_box_pack_start(GTK_BOX(pere), scrbar->widget, FALSE, FALSE,10);
     // D�finition de la taille demand�e pour la barre de d�filement
     gtk_widget_set_size_request(scrbar->widget, scrbar->w, scrbar->h);
-    // Ajout du conteneur � la barre de d�filement avec une vue
-   // gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(scrbar->widget), conteneur);
+    gtk_container_add(GTK_CONTAINER(scrbar->widget),conteneur);
     // D�finition des politiques de d�filement (horizontal et vertical)
     gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrbar->widget),polic(scrbar->vpolic), polic(scrbar->hpolic));
+    return(GtkWidget*) conteneur;
 }
 gint polic(gint type)
 {
@@ -96,12 +97,13 @@ gint polic(gint type)
         case 4: return GTK_POLICY_EXTERNAL;
     }
 }
-barre_def *add_scrollbar(FILE *F)
+GtkWidget *add_scrollbar(FILE *F,GtkWidget *pere)
 {
+
     barre_def *scrolled=initialiser_barre_def();
     scrolled=scrollbarfunction(scrolled,F);
-    creer_scrollbar(scrolled);
-    return scrolled;
+   GtkWidget *conteneur= creer_scrollbar(scrolled,pere);
+    return(GtkWidget*) conteneur;
 }
 
 
