@@ -6,6 +6,8 @@
 
 typedef struct {
   GtkWidget *window; // Pointeur vers le widget de la fenêtre (obligatoire)
+  GtkWidget *scrollwin; // Ajout d'un pointeur vers GtkScrolledWindow
+  gboolean scroll_bool;
   gchar *titre; // Titre de la fenêtre (facultatif, par défaut : "")
   gchar *icon; // Chemin vers l'icône de la fenêtre (facultatif, par défaut : "")
   gchar *name; // Nom de la fenêtre (facultatif, par défaut : "")
@@ -47,6 +49,7 @@ Fenetre* init_window()
     win->icon=(gchar*)g_malloc(sizeof(gchar)*100);
     win->icon[0]='\0';
 
+    win->scroll_bool=FALSE;
     win->largeur=0;
     win->hauteur=0;
     win->posx=0;
@@ -162,6 +165,17 @@ GtkWindowPosition string_to_window_position( gchar *str)
                   }
 
         }
+         else if (strcmp(elem, "scrolled") == 0)
+        {
+                if ((c = epurer_blan(F)) == '=')
+                  {
+                    if((c = epurer_blan(F)) == 'F')
+                      w->scroll_bool=FALSE;
+                    else w->scroll_bool=TRUE;
+
+                  }
+
+        }
         else if (strcmp(elem, "position_init") == 0)
         {
             gchar temp[30];
@@ -221,6 +235,13 @@ void create_window(Fenetre *W)
 
     // Si redimensionnable, autorisez le redimensionnement
     gtk_window_set_resizable(GTK_WINDOW(W->window), W->modifiable);
+    if(W->scrollwin)
+    {
+        W->scrollwin = gtk_scrolled_window_new(NULL, NULL);
+        gtk_container_add(GTK_CONTAINER(W->window), W->scrollwin);
+         gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(W->scrollwin),
+                                    GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+    }
 }
 
 Fenetre* add_window(FILE* F)
