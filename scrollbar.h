@@ -19,7 +19,7 @@ barre_def *initialiser_barre_def()
 {
     // Allocation dynamique de m�moire pour une nouvelle structure barre_def
     barre_def *scrBar = (barre_def *)g_malloc(sizeof(barre_def));
-
+    scrBar->widget=(GtkWidget*)g_malloc(sizeof(GtkWidget));
     // Cr�ation d'une nouvelle barre de d�filement GtkScrolledWindow
     scrBar->widget = gtk_scrolled_window_new(NULL, NULL);
 

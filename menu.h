@@ -60,6 +60,8 @@ menubar* init_menubar()
         printf("\nErreur d'allocation !!\n");
         exit(0);
     }
+    mb->menubar=(GtkWidget*)g_malloc(sizeof(GtkWidget));
+    mb->parent=(GtkWidget*)g_malloc(sizeof(GtkWidget));
     mb->name=(gchar*)g_malloc(sizeof(gchar)*30);
     mb->name[0] ='\0';
     mb->posx=0;
@@ -139,7 +141,8 @@ menu* init_menu_item()
         g_critical("Echec d'allocation mémoire pour l'élément de menu");
         exit(-1);
     }
-
+    NM->menu_item=(GtkWidget*)g_malloc(sizeof(GtkWidget));
+    NM->MENU=(GtkWidget*)g_malloc(sizeof(GtkWidget));
     // Allocation de la mémoire pour le nom de l'élément
     NM->nom=(gchar*)g_malloc(sizeof(gchar)*30);
     NM->nom[0] ='\0';
@@ -239,6 +242,7 @@ menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
         switch (menu_elem->type_composant) {
             case 1:
                 // Créer une case à cocher
+                printf("\n nom du menu eleme : %s",menu_elem->nom);
                 menu_elem->menu_item = gtk_check_menu_item_new_with_mnemonic(menu_elem->nom);
                 break;
             case 2:

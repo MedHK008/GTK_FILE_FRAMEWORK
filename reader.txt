@@ -1,93 +1,71 @@
 <root >
-<window  name ="f1" title ="Test des Fonctions GTK+" icon ="insg.jpg" width =500 height =600 
-         bgColor ="#7C9ED9" position_init ="center" resizable =T  >
-
-<scroll_bar name ="barre_def" hpolic =1 vpolic =1 width =400 height =400 > 
-<fixed >
-<fixed posx =0 posy =0 >
-<menu_bar name ="mb1" orientation ="RTL" posx =0 posy =0 >
-<menu_item name ="Monchoix" type =0 IsSubmenu =T >
-       <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
-       <menu_item name ="P_roject" type =3 >
-       <menu_item name ="C_lass" type =3 >
-       <menu_item name ="Sep" type =2 >
-       <menu_item name ="_Save" type =1 >
-  <menu_item/>
- 
-  <menu_item name ="Votrechoix" IsSubmenu =T >
-    <menu_item name ="choix1"  IsSubmenu =T > 
-    <menu_item/>
-       <menu_item name ="choix2"  IsSubmenu =T >
-          <menu_item name ="choix3"  IsSubmenu =T > 
-      <menu_item/>
-       <menu_item name ="choix21"  IsSubmenu =T > 
-      <menu_item/>
-       <menu_item name ="choix22"  IsSubmenu =T > 
-      <menu_item/>
-          
-       <menu_item/>
-       <menu_item name ="choix23"  IsSubmenu =T > 
-      <menu_item/>
-    <menu_item/>  
-  <menu_item/>
-  <menu_item name ="View" type =0 IsSubmenu =T >
-       <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
-       <menu_item name ="P_roject" type =3 >
-       <menu_item name ="C_lass" type =3 >
-       <menu_item name ="Sep" type =2 >
-       <menu_item name ="_Save" type =1 >
-  <menu_item/>
-  
-<menu_bar/>
-     <label name ="label" selectable =1 wrap =0 xligne =900 yligne =300 >
-         <text_label text ="je suis Mohamed" size =30 color ="red" bgcolor ="green" width =100 height =100 >
-     <frame name ="frame" type =1 xligne =900 yligne =400 xligne_text =0.5 yligne_text =0.5 >
-     <text_label text ="je suis Mohamed" size =30 color ="white" bgcolor ="green" width =100 height =100 >
-                   <label name ="label" selectable =1 wrap =0 xligne =0 yligne =100 >
-                         <text_label text ="mohamed" size =30 color ="#7C9ED9" bgcolor ="green" width =100 height =100 >
-                   <frame name ="frame" type =1 xligne =00 yligne =300 xligne_text =0.5 yligne_text =0.5 height =100 width =100 >
-     		   <text_label text ="WAFIN" size =30 color ="#FFB6C1" bgcolor ="green" width =100 height =100 >
-		  
-                   	<radio name ="radio1" label ="first" hexcolor ="#FFFFFF" posx =10 posy =10 checked =0 >
-		        <radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =30 checked =0 >
-			<radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =50 checked =0 >
-			<radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =70 checked =0 >
-   </frame >
-                   
-     </frame >
-     <box posx =30 posy =300 orientation ='v' >
-                   <scroll_bar name ="barre_def" hpolic =1 vpolic =1 width =0 height =600 >
-                   <fixed >
-                   <checkbox label ="check1" name ="check1" gui ="#FF00FF" checked =1 posx =0 posy = 100 >
-                   <checkbox label ="check2" name ="check2" gui ="#FF00FF" checked =1 posx =00 posy = 150 >
-                   <checkbox label ="check3" name ="check1" gui ="#FF00FF" checked =1 posx =0 posy = 200 >
-                   <checkbox label ="check4" name ="check2" gui ="#FF00FF" checked =1 posx =00 posy = 300 >
-                   </fixed >
-                   </scroll_bar >
-      </box >
-     <button name ="button1" label ="click" lien ="gtklogo.png" width =200 height =200 bgColor ="yellow" >
-     <image name ="image" fichier =gtklogo.png width =100 height =100 xligne =900 yligne =0 type =1 style_icon =3 >
-     <entry name ="hello" bgColor ="red" placeholder ="saisir votre nom3" width =100 height =50 visibility =0 invisible_carac ="A" x_pos =220 y_pos =500 >
-     <entry name ="hello1" placeholder ="saisir votre nom1"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =200 y_pos =600 >
-     <entry name ="hello1"  bgColor ="white" width =100 height =50 x_pos =500 y_pos =100 >
-</fixed >
-<fixed posx =0 posy =900 >
-      
-      <entry name ="hello" bgColor ="red" placeholder ="saisir votre nom"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =20 y_pos =20 >
-      <button_dialogue label ="click me" >
-      
-
-</fixed >
-</fixed >
-
-</scroll_bar >
-</window >
+      <window  name ="f1" title ="Test des Fonctions GTK+" icon ="insg.jpg" width =500 height =600 bgColor ="#7C9ED9" position_init ="center" resizable =T  >
+            <scroll_bar name ="barre_def" hpolic =1 vpolic =1 width =400 height =400 > 
+                  <fixed posx =0 posy =0 >
+                        <fixed posx =0 posy =0 >
+                              <menu_bar name ="mb1" orientation ="RTL" posx =0 posy =0 >
+                                    <menu_item name ="Monchoix" type =0 IsSubmenu =T >
+                                          <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
+                                          <menu_item name ="P_roject" type =3 >
+                                          <menu_item name ="C_lass" type =3 >
+                                          <menu_item name ="Sep" type =2 >
+                                          <menu_item name ="_Save" type =1 >
+                                    <menu_item/>
+                                    <menu_item name ="Votrechoix" IsSubmenu =T >
+                                          <menu_item name ="choix1"  IsSubmenu =T > 
+                                          <menu_item/>
+                                          <menu_item name ="choix2"  IsSubmenu =T >
+                                                <menu_item name ="choix3"  IsSubmenu =T > 
+                                                <menu_item/>
+                                                <menu_item name ="choix21"  IsSubmenu =T > 
+                                                <menu_item/>
+                                                <menu_item name ="choix22"  IsSubmenu =T > 
+                                                <menu_item/>
+                                          <menu_item/>
+                                          <menu_item name ="choix23"  IsSubmenu =T > 
+                                          <menu_item/> 
+                                    <menu_item/>
+                                    <menu_item name ="View" type =0 IsSubmenu =T >
+                                          <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
+                                          <menu_item name ="P_roject" type =3 >
+                                          <menu_item name ="C_lass" type =3 >
+                                          <menu_item name ="Sep" type =2 >
+                                          <menu_item name ="_Save" type =1 >
+                                    <menu_item/>
+                              <menu_bar/>
+                              <label name ="label" selectable =1 wrap =0 xligne =900 yligne =300 >
+                              <text_label text ="je suis Mohamed" size =30 color ="red" bgcolor ="green" width =100 height =100 >
+                              <frame name ="frame" type =1 xligne =900 yligne =400 xligne_text =0.5 yligne_text =0.5 >
+                                    <text_label text ="je suis Mohamed" size =30 color ="white" bgcolor ="green" width =100 height =100 >
+                                    <label name ="label" selectable =1 wrap =0 xligne =0 yligne =100 >
+                                    <text_label text ="mohamed" size =30 color ="#7C9ED9" bgcolor ="green" width =100 height =100 >
+                                    <frame name ="frame" type =1 xligne =00 yligne =300 xligne_text =0.5 yligne_text =0.5 height =100 width =100 >
+                                          <text_label text ="WAFIN" size =30 color ="#FFB6C1" bgcolor ="green" width =100 height =100 >
+                                          <radio name ="radio1" label ="first" hexcolor ="#FFFFFF" posx =10 posy =10 checked =0 >
+                                          <radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =30 checked =0 >
+                                          <radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =50 checked =0 >
+                                          <radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =70 checked =0 >
+                                    </frame >
+                              </frame >
+                              <box posx =30 posy =300 orientation ='v' >
+                                    <fixed >
+                                          <checkbox label ="check1" name ="check1" gui ="#FF00FF" checked =1 posx =0 posy = 100 >
+                                          <checkbox label ="check2" name ="check2" gui ="#FF00FF" checked =1 posx =00 posy = 150 >
+                                          <checkbox label ="check3" name ="check1" gui ="#FF00FF" checked =1 posx =0 posy = 200 >
+                                          <checkbox label ="check4" name ="check2" gui ="#FF00FF" checked =1 posx =00 posy = 300 >
+                                    </fixed >
+                              </box >
+                              <button name ="button1" label ="click" lien ="gtklogo.png" width =200 height =200 bgColor ="yellow" >
+                              <image name ="image" fichier =gtklogo.png width =100 height =100 xligne =900 yligne =0 type =1 style_icon =3 >
+                              <entry name ="hello" bgColor ="red" placeholder ="saisir votre nom3" width =100 height =50 visibility =0 invisible_carac ="A" x_pos =220 y_pos =500 >
+                              <entry name ="hello1" placeholder ="saisir votre nom1"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =200 y_pos =600 >
+                              <entry name ="hello1"  bgColor ="white" width =100 height =50 x_pos =500 y_pos =100 >
+                        </fixed >
+                        <fixed posx =0 posy =900 >
+                              <entry name ="hello" bgColor ="red" placeholder ="saisir votre nom"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =20 y_pos =20 >
+                              <button_dialogue label ="click me" >
+                        </fixed >
+                  </fixed >
+            </scroll_bar >
+      </window >
 </root >
-
-
-
-
-
-  
-
-
