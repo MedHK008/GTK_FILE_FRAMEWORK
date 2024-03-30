@@ -230,12 +230,11 @@ toolbar *toolBarFunction(toolbar *tool_bar,FILE *F)
     return tool_bar;
 }
 
-toolbar *add_toolbar(GtkWidget *box,FILE *F)
+toolbar *add_toolbar(FILE *F)
 {
     toolbar *tool_bar=initialiser_toolbar();
     toolBarFunction(tool_bar,F);
     creer_toolbar(tool_bar);
-    gtk_box_pack_start(GTK_BOX(box), tool_bar->widget, FALSE, FALSE, tool_bar->padding);
     return tool_bar;
 
 }

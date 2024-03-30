@@ -42,11 +42,13 @@ void add_to_parent(GtkWidget* child,GtkWidget* parent_w, gchar* parent,guint pos
   if(!strcmp(parent,"/fixed"))
     gtk_fixed_put(GTK_FIXED(parent_w),child,posx,posy);
  else if(!strcmp(parent,"/box"))
-    gtk_box_pack_start(GTK_BOX(parent_w),child,FALSE,FALSE,0);
+    gtk_box_pack_start(GTK_BOX(parent_w),child,TRUE,TRUE,0);
  else if(!strcmp(parent,"/window"))
     gtk_container_add(GTK_CONTAINER(parent_w),child);
  else if(!strcmp(parent,"/scroll_bar"))
     gtk_scrolled_window_add_with_viewport(GTK_SCROLLED_WINDOW(parent_w), child);
+else if (!strcmp(parent,"/boite_dialogue"))
+    ajouter_a_boite_dialogue(parent_w,child,posx,posy);
 
 }
 void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
@@ -54,7 +56,10 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
     gchar c ;
     gchar current_token[MAX];
     Token tok;
+    int into=0;
     c=epurer_blan(F);
+    ButtonSimple *Button_dial;
+    GtkWidget* radiopar = gtk_radio_button_new(NULL);
     printf("\n%s->%c",parent_token,c);
     while(c!=EOF)
     {
@@ -65,6 +70,7 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
               printf("\n%s",current_token);
 
             if (!strcmp(current_token , parent_token))
+
             {
                 if(!(strcmp(current_token,"/root")))
                   {
@@ -75,6 +81,12 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                 c=epurer_blan(F);
                 return ;
             }
+            else if (!strcmp(current_token,"/boite_dialogue>"))
+            {
+                into=0;
+                printf("%s",current_token);
+            }
+
              tok=string_to_token(current_token);
              switch(tok)
              {
@@ -90,71 +102,113 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                     printf("\nsortie F");
                     c=epurer_blan(F);
                     break;
-                case Fixed:
+               case Fixed:
 
                     fixed* fix=add_fixed(F,fix);
-                    printf("JE SUIS LA2222 \n");
                     add_to_parent(fix->fixed,parent_w,parent_token,fix->posx,fix->posy);
-                    printf("JE SUIS LA \n");
                     lire_fichier(F,W,fix->fixed,"/fixed");
-                     printf("\nsortie FIXED");
+                    free(fix);
                     c=epurer_blan(F);
 
                     break;
                 case Label:
                    Etiquette *lab= add_label(F);
                    add_to_parent(lab->widget,parent_w,parent_token,lab->x,lab->y);
+                   free(lab);
                    c=epurer_blan(F);
                    break;
-//                case Entry:
-//                    entryFunction(F);
-//                    break;
+                case Entry:
+                   Saisie* E=Add_Entry(F);
+                   add_to_parent(E->entree,parent_w,parent_token,E->x_pos,E->y_pos);
+                   free(E);
+                    c=epurer_blan(F);
+                    break;
                 case Button:
                      ButtonSimple* B=add_button(F);
                     add_to_parent(B->button,parent_w,parent_token,50,50);
+                    free(B);
                     c=epurer_blan(F);
                     break;
-//                case Radio:
-//                    buttonRadioFunction(F);
+                case Radio:
+                   elem_radio* R = add_radio(F, fix, radiopar);
+                    if (R) {
+                            add_to_parent(R->pRadio,parent_w,parent_token,R->x_pos,R->y_pos);
+                            free(R);
+                    }
+                    c=epurer_blan(F);
+                    break;
+                case Checkbox:
+                        cocher* C = add_cocher(F);
+                        add_to_parent(C->boutcoche,parent_w,parent_token,C->x_pos,C->y_pos);
+                        free(C);
+                        c=epurer_blan(F);
+                        break;
+//                case button_dialogue :
+//                    Button_dial=add_button(F);
+//                    add_to_parent(Button_dial->button,parent_w,parent_token,100,100);
+//                    free()
+//                    c=epurer_blan(F);
 //                    break;
-//                case Checkbox:
-//                    checkboxFunction(F);
-//                    break;
-//                case BoiteDialogue:
-//                    boiteDialogueFunction(F);
+//                case boiteDialogue:
+//
+//                    BD=Add_boite_dialogue(F);
+//                    c=epurer_blan(F);
+//                    ungetc(c,F);
+//                    lire_boite_dialogue(F,BD);
+//                                        printf("\nsortie de boite dialogue\n");
+//
+//                    g_signal_connect(Button_dial->button, "clicked", G_CALLBACK(on_button_clicked),BD->dialogue);
+//                    c=epurer_blan(F);
 //                    break;
                 case Frame:
                     frame *fr=add_frame(parent_w,F);
-                    lire_son_elem(fr,F);
+                    lire_son_elem(fr,F,W);
+                    free(fr);
                     c=epurer_blan(F);
                     break;
               case Image:
                    image *img=add_image(F);
                    add_to_parent(img->widget,parent_w,parent_token,img->x,img->y);
+                   free(img);
                    c=epurer_blan(F);
                    break;
                   case ProgBar:
                       barre_prog *prog_bar=add_progress_bar(F);
                       add_to_parent(prog_bar->parent,parent_w,parent_token,prog_bar->x,prog_bar->y);
+                      free(prog_bar);
                       c=epurer_blan(F);
                       break;
                 case ScrollBar:
                     barre_def *scbar=add_scrollbar(F);
-                    printf("fffffff\n");
                     add_to_parent(scbar->widget,parent_w,parent_token,0,0);
                     lire_fichier(F,W,scbar->widget,"/scroll_bar");
+                    free(scbar);
                     c=epurer_blan(F);
                     break;
-//                case spB:
-//                    spinButtonFunction(F);
-//                    break;
+                 case spB:
+                        SpinButton* spB=add_spin_button_from_file(F);
+                        add_to_parent(spB->SpinButton,parent_w,parent_token,spB->posx,spB->posy);
+                        free(spB);
+                        c=epurer_blan(F);
+                        break;
                 case ToolBar:
-                    toolbar *tbar=add_toolbar(parent_w,F);
+                   toolbar *tbar=add_toolbar(F);
                     lire_son_item(tbar ,F);
+                    gtk_box_pack_start(GTK_BOX(parent_w),tbar->widget,TRUE,FALSE,0);
+                    free(tbar);
                     c=epurer_blan(F);
-//                case ItemBar:
-//                    itemBarFunction(F);
-//                    break;
+                    break;
+               case Box:
+                    printf("\n HANI KHRAJT ");
+                    box * bx=NULL;
+                    bx=add_box(F);
+                    printf("\n hani hna ");
+                    add_to_parent(bx->box,parent_w,parent_token,bx->posx,bx->posy);
+
+                    lire_fichier(F,W,bx->box,"/box");
+                    free(bx);
+                    c=epurer_blan(F);
+                    break;
 //                case Tab:
 //                    ongletFunction(F);
 //                    break;
@@ -162,12 +216,14 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                         menubar *mbar =add_menubar(mbar,F);
                          ajouter_elems(mbar,F);
                         add_to_parent(mbar->menubar,parent_w,parent_token,mbar->posx,mbar->posy);
+                        free(mbar);
                         printf("\nSortirADD");
                         c=epurer_blan(F);
 
                         break;
 //                case MenuItem:
 //                    menuItemFunction(F);
+//
 //                    break;
                 default:
                     // Gérer le cas où le token n'est pas reconnu
@@ -186,9 +242,113 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
 
     }
 
+
 }
-
-
+//BoiteDialogue* lire_Boite_dialogue(FILE*F,ButtonSimple*B)
+//{
+//    BoiteDialogue*BD=Add_boite_dialogue(F);
+//    if(!BD) exit(-1);
+//    gchar c ;
+//    gchar current_token[MAX];
+//    Token tok;
+//    gchar*elem=(gchar*)g_malloc(sizeof(gchar)*50);
+//    c=epurer_blan(F);
+//
+//    Saisie*E;
+//    while(c!=EOF)
+//    {
+//        if(c=='<')
+//        {
+//            c=fgetc(F);
+//            if(c!='/')
+//            {
+//            ungetc(c,F);
+//             fscanf(F,"%s",current_token);
+//             printf("%s",current_token);
+//
+//
+//             tok=string_to_token(current_token);
+//             switch(tok) {
+//                case Entry:
+//
+//                    E=Add_Entry(F);
+//                    c=epurer_blan(F);
+//                        ajouter_a_boite_dialogue(BD,E->entree,E->x_pos,E->y_pos);
+//
+//                    break;
+//                case Button:
+//                     B=add_button(F);
+////                    add_widget_to_fixed(fixed0,B->button,50,50);
+//                    c=epurer_blan(F);
+//
+//                        ajouter_a_boite_dialogue(BD,B->button,100,100);
+//
+//                    break;
+////                case Radio:
+////                    buttonRadioFunction(F);
+////                    break;
+////                case Checkbox:
+////                    checkboxFunction(F);
+////                    break;
+//
+////                case Frame:
+////                    frameFunction(F);
+////                    break;
+////                case Image:
+////                    imageFunction(F);
+////                    break;
+////                case ProgBar:
+////                    progBarFunction(F);
+////                    break;
+////                case ScrollBar:
+////                    scrollBarFunction(F);
+////                    break;
+////                case spB:
+////                    spinButtonFunction(F);
+////                    break;
+////                case ToolBar:
+////                    toolBarFunction(F);
+////                    break;
+////                case ItemBar:
+////                    itemBarFunction(F);
+////                    break;
+////                case MenuBar:
+////                    menuBarFunction(F);
+////                    break;
+////                case Tab:
+////                    ongletFunction(F);
+////                    break;
+////                case MenuItem:
+////                    menuItemFunction(F);
+////                    break;
+//                default:
+//                    // Gérer le cas où le token n'est pas reconnu
+//                    break;
+//            }
+//
+//
+//        }
+//        else
+//        {
+//
+//            fscanf(F,"%s",elem);
+//            if(!strcmp(elem,"boite_dialogue>"))
+//            {
+//
+//
+//
+//
+//            }
+//            c=epurer_blan(F);
+//
+//        }
+//
+//    }
+//    }
+//    g_signal_connect(B->button, "clicked", G_CALLBACK(on_button_clicked), BD->dialogue);
+//
+//    return BD;
+//}
 
 //
 //void lire_fichier(FILE*F,fixed* fixed0,GtkWidget *pvbox,GtkWidget *pere)

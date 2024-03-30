@@ -20,7 +20,7 @@ typedef struct
 gchar epurer_blan(FILE*f)
 {
     char c ;
-    while((c=fgetc(f))==' ' || c=='\n');
+    while((c=fgetc(f))==' ' || c=='\n' || c=='\t');
     return (gchar)(c);
 }
 

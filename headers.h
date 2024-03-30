@@ -28,15 +28,16 @@
 #include "tool_bar.h"
 //#include "image.h"
 
-//#include "boite_dialog.h"
-//#include "entry.h"
+#include "boite_dialog.h"
+#include "entry.h"
 //
 //
 #include "menu.h"
 #include "window.h"
 #include "onglet.h"
-#include "fixed.h"
 #include "reader.h"
+#include "fixed.h"
+
 #include "ex_buttons.h"
 
 

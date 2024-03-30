@@ -64,13 +64,16 @@ texte *textefunction(texte *tx,FILE *F)
 {
     gchar* elem;
     elem=(gchar*)g_malloc(sizeof(gchar)*50);
+
     gchar c=epurer_blan(F);
     fscanf(F,"%s",elem);
+    printf("\n %s ???? ",elem);
     if(!strcmp(elem,"text_label"))
+    {
+        printf("\n\n je suis la \n\n");
     do
     {
         fscanf(F,"%s",elem);
-        printf("%s\n",elem);
        if (strcmp(elem, "text") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 if ((c = epurer_blan(F)) == '\"') {
@@ -78,12 +81,12 @@ texte *textefunction(texte *tx,FILE *F)
                     printf("%s\n ",tx->tex);
                     while ((c = fgetc(F)) != '\"')
                     {
-                        printf("%c\n ",c);
+
                         tx->tex[i++] = c;
                     }
 
                     tx->tex[i] = '\0';
-                    printf("%s\n ",tx->tex);
+
                 }
             }
         } else if (strcmp(elem, "style") == 0) {
@@ -131,7 +134,7 @@ texte *textefunction(texte *tx,FILE *F)
                     while ((c = fgetc(F)) != '\"')
                         tx->couleur_text[i++] = c;
                     tx->couleur_text[i] = '\0';
-                    printf("%s\n",tx->couleur_text);
+
                 }
             }
         }else if (strcmp(elem, "souligne") == 0) {
@@ -158,6 +161,7 @@ texte *textefunction(texte *tx,FILE *F)
             }
         }
     }while(strcmp(elem,">"));
+    }
     return tx;
  }
 

@@ -1,18 +1,18 @@
 #include "headers.h"
 int main(int argc, char *argv[]) {
-    printf("\n333");
     debut_programme(argc,argv);
      FILE *F = fopen("reader.txt", "r"); // Ouvre le fichier en mode lecture
     if (F == NULL) {
         g_print("Impossible d'ouvrir le fichier!!\n");
      }
-     printf("\n333");
     Fenetre *Win=(Fenetre*)malloc(sizeof(Fenetre));
     if(Win)
         {
 
-           printf("\n333");
-              lire_fichier(F,Win,NULL,"/root");
+//              ButtonSimple*b=
+                lire_fichier(F,Win,NULL,"/root");
+//              FILE *G=fopen("boite_dialogue.txt","r");
+//              BD=lire_Boite_dialogue(G,b);
               printf("\nSOrtie");
 
         }

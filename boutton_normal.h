@@ -29,8 +29,8 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
                     while ((c = fgetc(F)) != '\"')
                         b->name[i++] = c;
                     b->name[i] = '\0';
-                 printf("\n %s \n",b->name);
                 }
+
             }
         } else if (strcmp(elem, "label") == 0) {
             if ((c = epurer_blan(F)) == '=') {

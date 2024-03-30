@@ -1,6 +1,8 @@
 #ifndef FRAME_H_INCLUDED
 #define FRAME_H_INCLUDED
 #include "scrollbar.h"
+#include "window.h"
+#include "fixed.h"
 typedef enum{
     fenetre,
     Fixed,
@@ -9,7 +11,7 @@ typedef enum{
     Button,
     Radio,
     Checkbox,
-    BoiteDialogue,
+    boiteDialogue,
     Frame,
     Image,
     ProgBar,
@@ -20,7 +22,9 @@ typedef enum{
     MenuBar,
     Tab,
     MenuItem,
-    Root
+    Root,
+    button_dialogue,
+    Box
 }Token;
 
 
@@ -75,7 +79,7 @@ Token string_to_token(const char *str) {
     } else if (!strcmp(str, "checkbox")) {
         return Checkbox;
     } else if (!strcmp(str, "boite_dialogue")) {
-        return BoiteDialogue;
+        return boiteDialogue;
     } else if (!strcmp(str, "frame")) {
         return Frame;
     } else if (!strcmp(str, "image")) {
@@ -96,9 +100,17 @@ Token string_to_token(const char *str) {
         return Tab;
     } else if (!strcmp(str, "menu_item")) {
         return MenuItem;
-       } else if (!strcmp(str, "root")){
+       }else if (!strcmp(str, "box")) {
+        return Box;
+    } else if (!strcmp(str, "root")){
         return Root;
-    } else {
+    }else if (!strcmp(str, "radio")){
+        return Radio;
+    }
+     else if (!strcmp(str, "button_dialogue")) {
+        return button_dialogue;
+     }
+    else {
         // Retourner une valeur par défaut ou une valeur d'erreur
         return -1;
     }
@@ -179,7 +191,6 @@ frame *framefunction(frame *fr,FILE *F)
     do
     {
         fscanf(F,"%s",elem);
-        printf("%s\n",elem);
        if (strcmp(elem, "name") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 if ((c = epurer_blan(F)) == '\"') {
@@ -213,7 +224,18 @@ frame *framefunction(frame *fr,FILE *F)
     }while(strcmp(elem,">"));
     return fr;
 }
-void lire_son_elem(frame *fr,FILE *F)
+
+frame * add_frame(GtkWidget *pere,FILE *F)
+{
+    frame *fr=initialiser_frame();
+    fr=framefunction(fr,F);
+    fr->text=initialiser_texte();
+    fr->text=textefunction(fr->text,F);
+    creer_frame(fr);
+    gtk_fixed_put(GTK_FIXED(pere),fr->widget,fr->x,fr->y);
+    return fr;
+}
+void lire_son_elem(frame *fr,FILE *F,Fenetre *W)
 {
     GtkWidget *fix=gtk_fixed_new();
     gtk_container_add(GTK_CONTAINER(fr->widget),fix);
@@ -221,17 +243,15 @@ void lire_son_elem(frame *fr,FILE *F)
     gchar c ;
     gchar current_token[30];
     Token tok;
+    GtkWidget* radiopar = gtk_radio_button_new(NULL);
     c=epurer_blan(F);
     while(c!=EOF)
     {
-        printf("%c",c);
         if(c=='<')
         {
              fscanf(F,"%s",current_token);
-             printf("djddjdjdjdjdjdjdjdj11111111111\n");
              if(!strcmp(current_token,"/frame"))
              {
-                 printf("djddjdjdjdjdjdjdjdj11111111111\n");
                  c=epurer_blan(F);
                  return;
              }
@@ -240,12 +260,18 @@ void lire_son_elem(frame *fr,FILE *F)
 //                case fenetre:
 //                    windowFunction(F);
 //                    break;
-//                case Fixed:
-//                    fixedFunction(F);
+//               case Fixed:
+//
+//                    fixed* fix=add_fixed(F,fix);
+//                    gtk_fixed_put(GTK_FIXED(fix),fix->fixed,fix->posx,fix->posy);
+//                    lire_fichier(F,W,fix->fixed,"/fixed");
+//                    c=epurer_blan(F);
+//
 //                    break;
                 case Label:
                    Etiquette *lab= add_label(F);
                    gtk_fixed_put(GTK_FIXED(fix),lab->widget,lab->x,lab->y);
+                   free(lab);
                    c=epurer_blan(F);
                    break;
 //                case Entry:
@@ -254,38 +280,55 @@ void lire_son_elem(frame *fr,FILE *F)
                 case Button:
                     ButtonSimple* B=add_button(F);
                     gtk_fixed_put(GTK_FIXED(fix),B->button,50,50);
+                    free(B);
                     c=epurer_blan(F);
                     break;
-//                case Radio:
-//                    buttonRadioFunction(F);
-//                    break;
-//                case Checkbox:
-//                    checkboxFunction(F);
-//                    break;
-//                case BoiteDialogue:
+
+              case Radio:
+                   elem_radio* R = add_radio(F,fix, radiopar);
+                    if (R) {
+                            gtk_fixed_put(GTK_FIXED(fix),R->pRadio,R->x_pos,R->y_pos);
+                            free(R);
+                    }
+                    c=epurer_blan(F);
+                    break;
+                case Checkbox:
+                        cocher* C = add_cocher(F);
+                        gtk_fixed_put(GTK_FIXED(fix),C->boutcoche,C->x_pos,C->y_pos);
+                        c=epurer_blan(F);
+                        break;
+//            case BoiteDialogue:
 //                    boiteDialogueFunction(F);
 //                    break;
-                  //case Frame:
-                   // frame *fr=add_frame(fix,F);
-                   // lire_son_elem(fr,F);
-                    //c=epurer_blan(F);
-                    //break;
+                  case Frame:
+                    frame *fr=add_frame(fix,F);
+                    lire_son_elem(fr,F,W);
+                    free(fr);
+                    c=epurer_blan(F);
+                    break;
                  case Image:
                    image *img=add_image(F);
                    gtk_fixed_put(GTK_FIXED(fix),img->widget,img->x,img->y);
+                   free(img);
                    c=epurer_blan(F);
                    break;
                   case ProgBar:
                       barre_prog *prog_bar=add_progress_bar(F);
                       gtk_fixed_put(GTK_FIXED(fix),prog_bar->widget,prog_bar->x,prog_bar->y);
+                      g_free(prog_bar);
                       c=epurer_blan(F);
                       break;
-                case ScrollBar:
-                    barre_def *scbar=add_scrollbar(F);
-                    gtk_container_add(GTK_CONTAINER(fr->widget),scbar->widget);
-                    lire_fichier(F,NULL,scbar->widget,"/scroll_bar");
-                    c=epurer_blan(F);
-                    break;
+//                case ScrollBar:
+//                    printf("\nmmmmmmmmmmmmmmmm");
+//                    barre_def *scbar=add_scrollbar(F);
+//                    printf("\nmmmmmmmmmmmmmmmm");
+//                    add_to_parent(scbar->widget,)
+//
+//                    printf("\nmmmmmmmmmmmmmmmm");
+//                    lire_fichier(F,NULL,scbar->widget,"/scroll_bar");
+//                    c=epurer_blan(F);
+//
+//                    break;
 //                case spB:
 //                    spinButtonFunction(F);
 //                    break;
@@ -299,10 +342,17 @@ void lire_son_elem(frame *fr,FILE *F)
                     add_item_bar(tbar,GTK_STOCK_QUIT,"quitter",100,100,-1);
                     */
 
+                    //break;
+                case Box:
+
+                    box * bx=NULL;
+                    bx=add_box(F);
+                    //add_to_parent(bx,parent_w,parent_token,fix->posx,fix->posy);
+                    gtk_fixed_put(GTK_FIXED(fix),bx->box,bx->posx,bx->posy);
+                    lire_fichier(F,W,bx->box,"/Box");
+                    g_free(bx);
+                    c=epurer_blan(F);
                     break;
-//                case ItemBar:
-//                    itemBarFunction(F);
-//                    break;
 //                case MenuBar:
 //                    menuBarFunction(F);
 //                    break;
@@ -316,23 +366,13 @@ void lire_son_elem(frame *fr,FILE *F)
                     // Gérer le cas où le token n'est pas reconnu
                     break;
             }
-            printf("\n fin de if");
 
         }
         else
                 return;
     }
 }
-frame * add_frame(GtkWidget *pere,FILE *F)
-{
-    frame *fr=initialiser_frame();
-    fr=framefunction(fr,F);
-    fr->text=initialiser_texte();
-    fr->text=textefunction(fr->text,F);
-    creer_frame(fr);
-    gtk_fixed_put(GTK_FIXED(pere),fr->widget,fr->x,fr->y);
-    return fr;
-}
+
 
 
 
