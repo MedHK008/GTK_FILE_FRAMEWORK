@@ -50,7 +50,10 @@ void load_css() {
         g_error_free(error);
         return;
     }
+    gtk_style_context_add_provider_for_screen(screen, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    g_object_unref(provider);
 }
+
 void debut_programme(int argc,char*argv[]){
     gtk_init(&argc,&argv);
 }
