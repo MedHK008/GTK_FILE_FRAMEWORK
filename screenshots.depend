@@ -3562,3 +3562,70 @@
 
 1711371887 c:\users\pc\onedrive\bureau\screenshots-chroqui\ex_buttons.h
 
+1711846537 source:c:\users\hkmed\onedrive\bureau\screenshots\main.c
+	"headers.h"
+
+1711900826 c:\users\hkmed\onedrive\bureau\screenshots\headers.h
+	<gtk/gtk.h>
+	<gdk/gdk.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"boutton_normal.h"
+	"cocher.h"
+	"radio.h"
+	"spin_button.h"
+	"prog_bar.h"
+	"label.h"
+	"frame.h"
+	"tool_bar.h"
+	"boite_dialog.h"
+	"entry.h"
+	"menu.h"
+	"window.h"
+	"onglet.h"
+	"reader.h"
+	"fixed.h"
+	"ex_buttons.h"
+
+1711900602 c:\users\hkmed\onedrive\bureau\screenshots\boutton_normal.h
+	"image.h"
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\image.h
+
+1711814258 c:\users\hkmed\onedrive\bureau\screenshots\cocher.h
+
+1711814258 c:\users\hkmed\onedrive\bureau\screenshots\radio.h
+
+1711814258 c:\users\hkmed\onedrive\bureau\screenshots\spin_button.h
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\prog_bar.h
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\label.h
+
+1711835869 c:\users\hkmed\onedrive\bureau\screenshots\frame.h
+	"scrollbar.h"
+	"window.h"
+	"fixed.h"
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\scrollbar.h
+
+1711897293 c:\users\hkmed\onedrive\bureau\screenshots\window.h
+
+1711853868 c:\users\hkmed\onedrive\bureau\screenshots\fixed.h
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\tool_bar.h
+
+1711900847 c:\users\hkmed\onedrive\bureau\screenshots\boite_dialog.h
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\entry.h
+
+1711893880 c:\users\hkmed\onedrive\bureau\screenshots\menu.h
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\onglet.h
+	<gtk/gtk.h>
+
+1711900881 c:\users\hkmed\onedrive\bureau\screenshots\reader.h
+
+1711846537 c:\users\hkmed\onedrive\bureau\screenshots\ex_buttons.h
+

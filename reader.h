@@ -1,48 +1,34 @@
 #ifndef READER_H_INCLUDED
 #define READER_H_INCLUDED
-
 #define MAX 100
 
+///g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), NULL);
+///g_signal_connect(button, "pressed", G_CALLBACK(on_button_pressed), NULL);
+///g_signal_connect(button, "released", G_CALLBACK(on_button_released), NULL);
+///g_signal_connect(quit_button, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
+void on_button_clicked(GtkWidget *widget, gpointer data) {
+    g_print("\nButton clicked!\n");
+}
 
-//typedef struct pl{
-//    gchar *contenue;
-//    struct pl*svt;
-//}Pile;
-//Pile *initialiser_Pile(Pile*P)
-//{
-//    P=NULL;
-//    return(Pile*)(P);
-//}
-//Pile*empiler(Pile *P,gchar*name)
-//{
-//    Pile*NE=(Pile*)malloc(sizeof(Pile));
-//    if(NE){
-//        NE->contenue=name;
-//        if(!P) return(Pile*)(NE);
-//        else {
-//            NE->svt=P;
-//            return(Pile*)(P);
-//        }
-//    }
-//    exit(-1);
-//}
-//Pile* depiler(Pile*P)
-//{
-//    if(!P) return(Pile*)(NULL);
-//    Pile*Supp=P;
-//    P=P->svt;
-//    free(Supp);
-//    return (Pile*)(P);
-//}
+void on_button_pressed(GtkWidget *widget, gpointer data) {
+    g_print("\nButton pressed!\n");
+}
 
+void on_button_released(GtkWidget *widget, gpointer data) {
+    g_print("\nButton released!\n");
+}
 
+void on_quit_button_clicked(GtkWidget *widget, gpointer data) {
+    g_print("\nQuitting the program!\n");
+    gtk_main_quit();
+}
 
 void add_to_parent(GtkWidget* child,GtkWidget* parent_w, gchar* parent,guint posx, guint posy)
 {
   if(!strcmp(parent,"/fixed"))
     gtk_fixed_put(GTK_FIXED(parent_w),child,posx,posy);
  else if(!strcmp(parent,"/box"))
-    gtk_box_pack_start(GTK_BOX(parent_w),child,TRUE,TRUE,0);
+    gtk_box_pack_start(GTK_BOX(parent_w),child,FALSE,TRUE,0);
  else if(!strcmp(parent,"/window"))
     gtk_container_add(GTK_CONTAINER(parent_w),child);
 else if (!strcmp(parent,"/boite_dialogue"))
@@ -144,6 +130,23 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                 case Button:
                      ButtonSimple* B=add_button(F);
                     add_to_parent(B->button,parent_w,parent_token,50,50);
+                    switch(B->signal)
+                    {
+                    case 0:
+                        g_signal_connect(B->button, "clicked", G_CALLBACK(on_button_clicked), NULL);
+                        break;
+                    case 1:
+                        g_signal_connect(B->button, "pressed", G_CALLBACK(on_button_pressed), NULL);
+                        break;
+                    case 2:
+                        g_signal_connect(B->button, "released", G_CALLBACK(on_button_released), NULL);
+                        break;
+                    case 3:
+                        g_signal_connect(B->button, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
+                        break;
+                    default:
+                        break;
+                    }
                     free(B);
                     c=epurer_blan(F);
                     break;

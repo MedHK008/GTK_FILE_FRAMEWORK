@@ -27,42 +27,6 @@ typedef enum{
     Box
 }Token;
 
-
-//typedef struct pl{
-//    gchar *contenue;
-//    struct pl*svt;
-//}Pile;
-//Pile *initialiser_Pile(Pile*P)
-//{
-//    P=NULL;
-//    return(Pile*)(P);
-//}
-//Pile*empiler(Pile *P,gchar*name)
-//{
-//    Pile*NE=(Pile*)malloc(sizeof(Pile));
-//    if(NE){
-//        NE->contenue=name;
-//        if(!P) return(Pile*)(NE);
-//        else {
-//            NE->svt=P;
-//            return(Pile*)(P);
-//        }
-//    }
-//    exit(-1);
-//}
-//Pile* depiler(Pile*P)
-//{
-//    if(!P) return(Pile*)(NULL);
-//    Pile*Supp=P;
-//    P=P->svt;
-//    free(Supp);
-//    return (Pile*)(P);
-//}
-
-
-
-
-
 Token string_to_token(const char *str) {
     if (!strcmp(str, "window")){
         return fenetre;
@@ -261,12 +225,10 @@ void lire_son_elem(frame *fr,FILE *F,Fenetre *W)
 //                    windowFunction(F);
 //                    break;
 //               case Fixed:
-//
 //                    fixed* fix=add_fixed(F,fix);
 //                    gtk_fixed_put(GTK_FIXED(fix),fix->fixed,fix->posx,fix->posy);
 //                    lire_fichier(F,W,fix->fixed,"/fixed");
 //                    c=epurer_blan(F);
-//
 //                    break;
                 case Label:
                    Etiquette *lab= add_label(F);
@@ -345,11 +307,9 @@ void lire_son_elem(frame *fr,FILE *F,Fenetre *W)
                     //break;
                 case Box:
 
-                    box * bx=NULL;
-                    bx=add_box(F);
-                    //add_to_parent(bx,parent_w,parent_token,fix->posx,fix->posy);
+                    box * bx=add_box(F);
                     gtk_fixed_put(GTK_FIXED(fix),bx->box,bx->posx,bx->posy);
-                    lire_fichier(F,W,bx->box,"/Box");
+                    lire_fichier(F,W,bx->box,"/box");
                     g_free(bx);
                     c=epurer_blan(F);
                     break;

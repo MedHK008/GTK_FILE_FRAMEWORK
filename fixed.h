@@ -20,7 +20,8 @@ fixed* init_gtk_fixed()
         g_print("Error: Failed to allocate memory for fixed\n");
         exit(-1);
     }
-    info->name=(gchar*)malloc(sizeof(gchar)*30);
+    info->fixed=(GtkWidget*)g_malloc(sizeof(GtkWidget));
+    info->name=(gchar*)g_malloc(sizeof(gchar)*30);
     info->name[0]='\0';
     info->posx=0;
     info->posy=0;
@@ -49,6 +50,7 @@ fixed *fixedFunction(FILE* F,fixed* fix)
     do
     {
         fscanf(F,"%s",elem);
+        printf("read element : %s \n",elem);
        if (strcmp(elem, "name") == 0)
         {
             if ((c = epurer_blan(F)) == '=')
@@ -112,32 +114,25 @@ box *boxFunction(FILE* F,box *b)
 }
 fixed *add_fixed(FILE* F,fixed* fix)
 {
-    fixed* f1=NULL;
-    f1=init_gtk_fixed();
+    fixed* f1=init_gtk_fixed();
     f1=fixedFunction(F,f1);
     f1->fixed = gtk_fixed_new();
-
     return (fixed *)f1;
 }
 box *add_box(FILE *F)
 {
     box *bx=init_BOX();
-    printf("\n je suis hna ");
     bx=boxFunction(F,bx);
-    printf("\n je fjdjdf ");
 
     if(bx->or=='v')
     {
-        printf("\n     mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm \n");
-        bx->box=gtk_vbox_new(TRUE,10);
+        bx->box=gtk_vbox_new(TRUE,0);
     }
 
     else
         {
-            printf("\n     mmmmmmmmmmmmmmmmmmmm1111111 : %c\n",bx->or);
-            bx->box=gtk_hbox_new(TRUE,10);
+            bx->box=gtk_hbox_new(TRUE,0);
         }
-     printf("\n je fjdjdf ");
     return bx;
 
 

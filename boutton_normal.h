@@ -3,14 +3,15 @@
 #include "image.h"
 //*********************************************STRUCTURES***********************************************
 typedef struct {
-    GtkWidget* button; // bouton widget
-    gchar* name;       // Nom du bouton
-    gchar* label;      // Le texte sur le bouton
-    gchar* lien;       // Chemin icone du bouton
-    guint width;       // longueur du bouton
-    guint height;      // largeur du bouton
-    gchar* bgColor;    // Couleur de fond du GtkGrid
-    GtkWidget* image;  // Widget de l'image pour le bouton
+    GtkWidget* button;// bouton widget
+    gchar* name;// Nom du bouton
+    gchar* label;// Le texte sur le bouton
+    gchar* lien;// Chemin icone du bouton
+    guint width;// longueur du bouton
+    guint height;// largeur du bouton
+    gchar* bgColor;// Couleur de fond du GtkGrid
+    gint signal;//0,1,2,3
+    GtkWidget* image;// Widget de l'image pour le bouton
 } ButtonSimple;
 
 
@@ -67,6 +68,10 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
                     b->bgColor[i] = '\0';
                 }
             }
+        }else if (strcmp(elem, "signal") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &b->signal);
+            }
         }
     }while(strcmp(elem,">"));
     return b;
@@ -86,7 +91,7 @@ ButtonSimple* init_button_simple() {
     b->name = NULL;
     b->label=(gchar*)g_malloc(sizeof(gchar)*30);
     b->label[0]='\0';
-
+    b->signal=0;
     b->image = NULL;  // Initialize image widget to NULL
 
 

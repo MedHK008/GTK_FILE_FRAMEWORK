@@ -1,89 +1,127 @@
 <root >
-<window  name ="f1" title ="Test des Fonctions GTK+" icon ="insg.jpg" width =500 height =600 
-         bgColor ="#7C9ED9" position_init ="center" resizable =T scrolled =T >
-
-
-<fixed posx =0 posy =0 >
-<menu_bar name ="mb1" orientation ="RTL" posx =0 posy =0 >
-<menu_item name ="Monchoix" type =0 IsSubmenu =T >
-       <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
-       <menu_item name ="P_roject" type =3 >
-       <menu_item name ="C_lass" type =3 >
-       <menu_item name ="Sep" type =2 >
-       <menu_item name ="_Save" type =1 >
-  <menu_item/>
- 
-  <menu_item name ="Votrechoix" IsSubmenu =T >
-    <menu_item name ="choix1"  IsSubmenu =T > 
-    <menu_item/>
-       <menu_item name ="choix2"  IsSubmenu =T >
-          <menu_item name ="choix3"  IsSubmenu =T > 
+<window  name ="f1" title ="Test des Fonctions GTK+" icon ="insg.jpg" width =1920 height =1080 bgImage ="OIP.jpg" position_init ="center" resizable =T scrolled =T >
+  <fixed >
+    <menu_bar name ="mb1" orientation ="RTL" posx =300 posy =100 >
+      <menu_item name ="MonChoix" IsSubmenu =F >
       <menu_item/>
-       <menu_item name ="choix21"  IsSubmenu =T > 
+      <menu_item name ="VotreChoix" IsSubmenu =T orientation ="RTL" >
+        <menu_item name ="Sous choix1" IsSubmenu =F > 
+          <menu_item name ="Sous choix2"  IsSubmenu =T >
+            <menu_item name ="choix221" IsSubmenu =T > 
+              <menu_item name ="choix222" IsSubmenu =T > 
+                <menu_item name ="choix223" IsSubmenu =F > 
+                <menu_item/>
+              <menu_item/>
+            <menu_item/>
+          <menu_item name ="Sous choix3" IsSubmenu =F > 
+        <menu_item/>
       <menu_item/>
-       <menu_item name ="choix22"  IsSubmenu =T > 
+      <menu_item name ="LeurChoix" IsSubmenu =F >
       <menu_item/>
-          
-       <menu_item/>
-       <menu_item name ="choix23"  IsSubmenu =T > 
-      <menu_item/>
-    <menu_item/>  
-  <menu_item/>
-  <menu_item name ="View" type =0 IsSubmenu =T >
-       <menu_item name ="Empty-File" type =3 IsradioGroup =T  >
-       <menu_item name ="P_roject" type =3 >
-       <menu_item name ="C_lass" type =3 >
-       <menu_item name ="Sep" type =2 >
-       <menu_item name ="_Save" type =1 >
-  <menu_item/>
-  
-<menu_bar/>
-<fixed posx =0 posy =0 >
-
-     <label name ="label" selectable =1 wrap =0 xligne =900 yligne =300 >
-         <text_label text ="je suis Mohamed" size =30 color ="red" bgcolor ="green" width =100 height =100 >
-     <frame name ="frame" type =1 xligne =900 yligne =400 xligne_text =0.5 yligne_text =0.5 >
-     <text_label text ="je suis Mohamed" size =30 color ="white" bgcolor ="green" width =100 height =100 >
-                   <label name ="label" selectable =1 wrap =0 xligne =0 yligne =100 >
-                         <text_label text ="mohamed" size =30 color ="#7C9ED9" bgcolor ="green" width =100 height =100 >
-                   <frame name ="frame" type =1 xligne =00 yligne =300 xligne_text =0.5 yligne_text =0.5 height =100 width =100 >
-     		   <text_label text ="WAFIN" size =30 color ="#FFB6C1" bgcolor ="green" width =100 height =100 >
-		  
-                   	<radio name ="radio1" label ="first" hexcolor ="#FFFFFF" posx =10 posy =10 checked =0 >
-		        <radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =30 checked =0 >
-			<radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =50 checked =0 >
-			<radio name ="radio2" label ="second" hexcolor ="#FFFFFF" posx =10 posy =70 checked =0 >
-   </frame >
-                   
-     </frame >
-     
-     <button name ="button1" label ="click" lien ="gtklogo.png" width =200 height =200 bgColor ="yellow" >
-     <image name ="image" fichier =gtklogo.png width =100 height =100 xligne =900 yligne =0 type =1 style_icon =3 >
-     <entry name ="hello" bgColor ="red" placeholder ="saisir votre nom3" width =100 height =50 visibility =0 invisible_carac ="A" x_pos =220 y_pos =500 >
-     <entry name ="hello1" placeholder ="saisir votre nom1"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =200 y_pos =600 >
-     <entry name ="hello1"  bgColor ="white" width =100 height =50 x_pos =500 y_pos =100 >
-</fixed >
-<fixed posx =0 posy =900 >
-       
-      <entry name ="hello" bgColor ="red" placeholder ="saisir votre nom"  width =100 height =50 visibility =0 invisible_carac ="A" x_pos =20 y_pos =20 >
-       <box posx =30 posy =300 orientation ='v' >
-        
-                   <fixed >
-                   <checkbox label ="check1" name ="check1" gui ="#FF00FF" checked =1 posx =0 posy = 100 >
-                   <checkbox label ="check2" name ="check2" gui ="#FF00FF" checked =1 posx =00 posy = 150 >
-                   <checkbox label ="check3" name ="check1" gui ="#FF00FF" checked =1 posx =0 posy = 200 >
-                   <checkbox label ="check4" name ="check2" gui ="#FF00FF" checked =1 posx =00 posy = 300 >
-                   </fixed >
-                   
+    <menu_bar/>
+    <box posx =300 posy =200 orientation ='h' >
+      <button name ="button1" label ="click" lien ="gtklogo.png" width =20 height =20 posx =0 posy =0 mnemo =1 signal =0 >
+      <button name ="button2" label ="welcome" lien =" gtklogo.png" width =20 height =20 posx =0 posy =0 signal =1 >
+      <button name ="button3" label ="what" lien ="gtklogo.png" width =20 height =20 posx =0 posy =0 signal =2 >
+      <button name ="button3" label ="quit" lien ="gtklogo.png" width =20 height =20 posx =0 posy =0 signal =3 >
+    </box >
+    <frame name ="frame" type =1 xligne =300 yligne =300 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
+      <text_label text =NULL size =30 color ="#FFB6C1" bgcolor ="green" >
+      <box posx =0 posy =0 orientation ='h' >
+        <radio name ="radio1" label ="Faible" posx =0 posy =0 checked =0 >
+        <radio name ="radio2" label ="Moyen" posx =0 posy =0 checked =0 >
+        <radio name ="radio3" label ="Bien" posx =0 posy =0 checked =0 >
+        <radio name ="radio4" label ="Très Bien" posx =0 posy =0 checked =1 >
       </box >
- 
-      
-
-</fixed >
-
-<image name ="image" fichier =img_example.jpg width =300 height =700 xligne =100 yligne =1000 type =1 >
-</fixed >
-
+    </frame >
+    <frame name ="frame" type =1 xligne =300 yligne =400 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
+      <text_label text =NULL size =30 color ="#FFB6C1" bgcolor ="green" width =100 height =100 >
+      <box posx =0 posy =0 orientation ='h' >
+        <checkbox label ="Convival" name ="check1" checked =1 posx =0 posy = 100 >
+        <checkbox label ="Intéressant" name ="check2" checked =1 posx =00 posy = 150 >
+        <checkbox label ="Facile à utiliser" name ="check3" checked =1 posx =0 posy = 200 >
+        <checkbox label ="Optimise le travail" name ="check4" checked =1 posx =00 posy = 300 >
+      </box >
+    </frame >
+    <frame name ="frame" type =2 xligne =300 yligne =500 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
+      <text_label text =NULL size =0 color ="#FFB6C1" bgcolor ="green" width =100 height =100 >
+      <box posx =0 posy =0 orientation ='h' >
+        <radio name ="radio1" label ="Malade" posx =0 posy =0 checked =0 >
+        <radio name ="radio2" label ="Suspect" posx =0 posy =0 checked =0 >
+        <radio name ="radio2" label ="Guéri" posx =0 posy =0 checked =0 >
+        <radio name ="radio2" label ="Sain" posx =0 posy =0 checked =0 >
+      </box >
+    </frame >
+    <menu_bar name ="mb2" orientation ="LTR" posx =300 posy =600 >
+    <menu_item name ="Jour" IsSubmenu =F >
+    <menu_item/>
+    <menu_item name ="1" IsSubmenu =T >
+      <menu_item name ="1" IsSubmenu =F >
+      <menu_item name ="2" IsSubmenu =F >
+      <menu_item name ="3" IsSubmenu =F >
+      <menu_item name ="4" IsSubmenu =F >
+      <menu_item name ="5" IsSubmenu =F >
+      <menu_item name ="6" IsSubmenu =F >
+      <menu_item name ="7" IsSubmenu =F >
+      <menu_item name ="8" IsSubmenu =F >
+      <menu_item name ="9" IsSubmenu =F >
+      <menu_item name ="10" IsSubmenu =F >
+      <menu_item name ="11" IsSubmenu =F >
+      <menu_item name ="12" IsSubmenu =F >
+      <menu_item name ="13" IsSubmenu =F >
+      <menu_item name ="14" IsSubmenu =F >
+      <menu_item name ="15" IsSubmenu =F >
+      <menu_item name ="16" IsSubmenu =F >
+      <menu_item name ="17" IsSubmenu =F >
+      <menu_item name ="18" IsSubmenu =F >
+      <menu_item name ="19" IsSubmenu =F >
+      <menu_item name ="20" IsSubmenu =F >
+      <menu_item name ="21" IsSubmenu =F >
+      <menu_item name ="22" IsSubmenu =F >
+      <menu_item name ="23" IsSubmenu =F >
+      <menu_item name ="24" IsSubmenu =F >
+      <menu_item name ="25" IsSubmenu =F >
+      <menu_item name ="26" IsSubmenu =F >
+      <menu_item name ="27" IsSubmenu =F >
+      <menu_item name ="28" IsSubmenu =F >
+      <menu_item name ="29" IsSubmenu =F >
+      <menu_item name ="30" IsSubmenu =F >
+      <menu_item name ="31" IsSubmenu =F >
+    <menu_item/>
+    <menu_item name ="Mois" IsSubmenu =F >
+    <menu_item/>
+    <menu_item name ="0" IsSubmenu =T >
+      <menu_item name ="1" IsSubmenu =F >
+      <menu_item name ="2" IsSubmenu =F >
+      <menu_item name ="3" IsSubmenu =F >
+      <menu_item name ="4" IsSubmenu =F >
+      <menu_item name ="5" IsSubmenu =F >
+      <menu_item name ="6" IsSubmenu =F >
+      <menu_item name ="7" IsSubmenu =F >
+      <menu_item name ="8" IsSubmenu =F >
+      <menu_item name ="9" IsSubmenu =F >
+      <menu_item name ="10" IsSubmenu =F >
+      <menu_item name ="11" IsSubmenu =F >
+      <menu_item name ="12" IsSubmenu =F >
+    <menu_item/>
+    <menu_item name ="Annee" IsSubmenu =F >
+    <menu_item/>
+    <menu_item name ="0" IsSubmenu =T >
+      <menu_item name ="2005" IsSubmenu =F >
+      <menu_item name ="2004" IsSubmenu =F >
+      <menu_item name ="2003" IsSubmenu =F >
+      <menu_item name ="2002" IsSubmenu =F >
+      <menu_item name ="2001" IsSubmenu =F >
+      <menu_item name ="2000" IsSubmenu =F >
+      <menu_item name ="1999" IsSubmenu =F >
+      <menu_item name ="1998" IsSubmenu =F >
+      <menu_item name ="1997" IsSubmenu =F >
+      <menu_item name ="1996" IsSubmenu =F >
+      <menu_item name ="1995" IsSubmenu =F >
+      <menu_item name ="1994" IsSubmenu =F >
+    <menu_item/>
+  <menu_bar/>
+  </fixed >
 </window >
 </root >
 
