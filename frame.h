@@ -24,7 +24,8 @@ typedef enum{
     MenuItem,
     Root,
     button_dialogue,
-    Box
+    Box,
+    Combobox
 }Token;
 
 Token string_to_token(const char *str) {
@@ -70,10 +71,10 @@ Token string_to_token(const char *str) {
         return Root;
     }else if (!strcmp(str, "radio")){
         return Radio;
-    }
-     else if (!strcmp(str, "button_dialogue")) {
+    }else if (!strcmp(str, "button_dialogue")) {
         return button_dialogue;
-     }
+    }else if (!strcmp(str, "combobox")) {
+        return Combobox;
     else {
         // Retourner une valeur par défaut ou une valeur d'erreur
         return -1;
