@@ -2,7 +2,7 @@
 #define HEADERS_H_INCLUDED
 
 
-///les bibliothèque
+///les bibliothÃ¨que
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include <stdio.h>
@@ -13,7 +13,7 @@
 #define NBC 100
 #define NB_RADIO 3
 
-///les bibliothèque des widget
+///les bibliothÃ¨que des widget
 #include "boutton_normal.h"
 #include "cocher.h"
 #include "radio.h"
@@ -39,8 +39,18 @@
 #include "fixed.h"
 
 #include "ex_buttons.h"
+void load_css() {
+    GtkCssProvider *provider = gtk_css_provider_new();
+    GdkDisplay *display = gdk_display_get_default();
+    GdkScreen *screen = gdk_display_get_default_screen(display);
+    GError *error = NULL;
 
-
+    if (!gtk_css_provider_load_from_path(provider, "style_win.css", &error)) {
+        g_warning("Failed to load CSS file: %s", error->message);
+        g_error_free(error);
+        return;
+    }
+}
 void debut_programme(int argc,char*argv[]){
     gtk_init(&argc,&argv);
 }
