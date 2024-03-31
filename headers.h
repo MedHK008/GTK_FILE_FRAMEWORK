@@ -27,7 +27,7 @@
 //#include "scrollbar.h"
 #include "tool_bar.h"
 //#include "image.h"
-
+#include "combobox.h"
 #include "boite_dialog.h"
 #include "entry.h"
 //
