@@ -336,24 +336,6 @@ Boite_message*ajouter_to_boite_message_fichier(FILE*F,Boite_message*BM)
             case Button:
                     ButtonSimple* B=add_button(F);
                    ajouter_to_boite_message(BM,B->button,B->x_pos,B->y_pos);
-                   switch(B->signal)
-                    {
-                    case 1:
-                        g_signal_connect(B->button, "clicked", G_CALLBACK(on_button_clicked), NULL);
-                        break;
-                    case 2:
-                        g_signal_connect(B->button, "pressed", G_CALLBACK(on_button_pressed), NULL);
-                        break;
-                    case 3:
-                        g_signal_connect(B->button, "released", G_CALLBACK(on_button_released), NULL);
-                        break;
-                    case 4:
-                        g_signal_connect(B->button, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
-                        break;
-                    default:
-                        break;
-                    }
-                    load_css();
                     c=epurer_blan(F);
                     break;
              case Label:

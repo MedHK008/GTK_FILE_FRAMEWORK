@@ -172,7 +172,7 @@ void definir_attribut_boite_message(Boite_message *BM) {
 
     BM->message_box = gtk_message_dialog_new(GTK_WINDOW(BM->parent),
                                              GTK_DIALOG_MODAL,
-                                             BM->type,
+                                             GTK_MESSAGE_WARNING,
                                              BM->button_type,NULL, NULL);
     if(BM->titre)
         gtk_window_set_title(GTK_WINDOW(BM->message_box), BM->titre);
