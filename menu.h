@@ -127,6 +127,7 @@ menubar *add_menubar(menubar* mb,FILE *F)
     mb->menubar = gtk_menu_bar_new();
     // Définition de l'orientation de la barre de menus
     gtk_menu_bar_set_pack_direction(GTK_MENU_BAR(mb->menubar), mb->orientation);
+    load_css();
     // Retour de la structure menubar
     return mb;
 }

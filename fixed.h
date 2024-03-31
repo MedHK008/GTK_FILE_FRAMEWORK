@@ -126,12 +126,12 @@ box *add_box(FILE *F)
 
     if(bx->or=='v')
     {
-        bx->box=gtk_vbox_new(TRUE,0);
+        bx->box=gtk_vbox_new(FALSE,0);
     }
 
     else
         {
-            bx->box=gtk_hbox_new(TRUE,0);
+            bx->box=gtk_hbox_new(FALSE,0);
         }
     return bx;
 

@@ -147,6 +147,7 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                     default:
                         break;
                     }
+                    load_css();
                     free(B);
                     c=epurer_blan(F);
                     break;

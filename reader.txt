@@ -25,16 +25,16 @@
       <button name ="button3" label ="what" lien ="gtklogo.png" width =20 height =20 posx =0 posy =0 signal =2 >
       <button name ="button3" label ="quit" lien ="gtklogo.png" width =20 height =20 posx =0 posy =0 signal =3 >
     </box >
-    <frame name ="frame" type =1 xligne =300 yligne =300 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
+    <frame name ="frame1" type =1 xligne =300 yligne =300 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
       <text_label text =NULL size =30 color ="#FFB6C1" bgcolor ="green" >
       <box posx =0 posy =0 orientation ='h' >
         <radio name ="radio1" label ="Faible" posx =0 posy =0 checked =0 >
-        <radio name ="radio2" label ="Moyen" posx =0 posy =0 checked =0 >
-        <radio name ="radio3" label ="Bien" posx =0 posy =0 checked =0 >
+        <radio name ="radio2" label ="Moyen" posx =20 posy =0 checked =0 >
+        <radio name ="radio3" label ="Bien" posx =40 posy =0 checked =0 >
         <radio name ="radio4" label ="Très Bien" posx =0 posy =0 checked =1 >
-      </box >
+        </box >
     </frame >
-    <frame name ="frame" type =1 xligne =300 yligne =400 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
+    <frame name ="frame2" type =1 xligne =300 yligne =400 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
       <text_label text =NULL size =30 color ="#FFB6C1" bgcolor ="green" width =100 height =100 >
       <box posx =0 posy =0 orientation ='h' >
         <checkbox label ="Convival" name ="check1" checked =1 posx =0 posy = 100 >
@@ -43,7 +43,7 @@
         <checkbox label ="Optimise le travail" name ="check4" checked =1 posx =00 posy = 300 >
       </box >
     </frame >
-    <frame name ="frame" type =2 xligne =300 yligne =500 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
+    <frame name ="frame3" type =2 xligne =300 yligne =500 xligne_text =0.5 yligne_text =0.5 height =500 width =800 >
       <text_label text =NULL size =0 color ="#FFB6C1" bgcolor ="green" width =100 height =100 >
       <box posx =0 posy =0 orientation ='h' >
         <radio name ="radio1" label ="Malade" posx =0 posy =0 checked =0 >

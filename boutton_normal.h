@@ -10,6 +10,8 @@ typedef struct {
     guint width;// longueur du bouton
     guint height;// largeur du bouton
     gchar* bgColor;// Couleur de fond du GtkGrid
+    gint x_pos;
+    gint y_pos;
     gint signal;//0,1,2,3
     GtkWidget* image;// Widget de l'image pour le bouton
 } ButtonSimple;
@@ -68,7 +70,16 @@ ButtonSimple* buttonSimpleFunction(ButtonSimple* b,FILE* F)
                     b->bgColor[i] = '\0';
                 }
             }
-        }else if (strcmp(elem, "signal") == 0) {
+        }else if (strcmp(elem, "posx") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &b->x_pos);
+                c=fgetc(F);
+            }
+        } else if (strcmp(elem, "posy") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &b->y_pos);
+            }
+        } else if (strcmp(elem, "signal") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &b->signal);
             }
@@ -93,8 +104,8 @@ ButtonSimple* init_button_simple() {
     b->label[0]='\0';
     b->signal=0;
     b->image = NULL;  // Initialize image widget to NULL
-
-
+    b->x_pos=0;
+    b->y_pos=0;
     b->bgColor=(gchar*)g_malloc(sizeof(gchar)*30);
     b->bgColor[0]='\0';
     b->name=(gchar*)g_malloc(sizeof(gchar)*30);

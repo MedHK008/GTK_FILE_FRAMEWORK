@@ -1,3 +1,25 @@
 #f1 {
     background-image: url("606173.jpg");
 }
+
+frame {
+    border: solid 10px;
+    border-color:blue;
+    border-radius: 5px;
+    background-color:white ;
+}
+
+button {
+    border-radius: 10px;
+    border: solid 1px;
+    border-color: white;
+    background: white;
+}
+
+menuitem {
+    background-color: white;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: large;
+    border-radius: 5px;
+}
+

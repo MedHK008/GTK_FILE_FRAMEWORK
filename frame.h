@@ -196,13 +196,16 @@ frame * add_frame(GtkWidget *pere,FILE *F)
     fr->text=initialiser_texte();
     fr->text=textefunction(fr->text,F);
     creer_frame(fr);
+    load_css();
     gtk_fixed_put(GTK_FIXED(pere),fr->widget,fr->x,fr->y);
     return fr;
 }
 void lire_son_elem(frame *fr,FILE *F,Fenetre *W)
 {
     GtkWidget *fix=gtk_fixed_new();
+    gtk_container_set_border_width(GTK_CONTAINER(fix), 0);
     gtk_container_add(GTK_CONTAINER(fr->widget),fix);
+
     if(!F) exit(-1);
     gchar c ;
     gchar current_token[30];
@@ -241,7 +244,7 @@ void lire_son_elem(frame *fr,FILE *F,Fenetre *W)
 //                    break;
                 case Button:
                     ButtonSimple* B=add_button(F);
-                    gtk_fixed_put(GTK_FIXED(fix),B->button,50,50);
+                    gtk_fixed_put(GTK_FIXED(fix),B->button,B->x_pos,B->y_pos);
                     free(B);
                     c=epurer_blan(F);
                     break;
