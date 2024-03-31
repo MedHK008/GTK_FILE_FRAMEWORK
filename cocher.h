@@ -11,6 +11,7 @@ typedef struct {
     gint y_pos;
     gchar *gui;
     gboolean checked;
+    gint signal;
 } cocher;
 
 cocher *init_empty_cocher() {
@@ -23,6 +24,7 @@ cocher *init_empty_cocher() {
     C->y_pos = 0;
     C->gui = NULL;
     C->checked = FALSE;
+    C->signal=0;
     return C;
 }
 
@@ -91,8 +93,7 @@ cocher *cocherFunction(cocher *C, FILE *F) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &C->y_pos);
             }
-        }else if (strcmp(elem, "checked") == 0)
-        {
+        }else if (strcmp(elem, "checked") == 0) {
             if ((c = epurer_blan(F)) == '=') {
                     fscanf(F,"%d",&check);
                     if(check == 1)
@@ -100,6 +101,10 @@ cocher *cocherFunction(cocher *C, FILE *F) {
                     else
                         C->checked = FALSE;
                 }
+        } else if (strcmp(elem, "signal") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &C->signal);
+            }
         }
     } while (strcmp(elem, ">"));
 

@@ -18,6 +18,7 @@ typedef struct {
     gchar* bgcolor;
     gint posx;
     gint posy;
+    gint signal;
 } SpinButton;
 
 // Function to read attributes from a text file and assign them to a SpinButton structure
@@ -93,6 +94,10 @@ SpinButton* spinButtonFunction(SpinButton* sb, FILE* file) {
             if ((c = epurer_blan(file)) == '=') {
                 fscanf(file, "%d", &sb->posy);
             }
+        } else if (strcmp(elem, "signal") == 0) {
+            if ((c = epurer_blan(file)) == '=') {
+                fscanf(file, "%d", &sb->signal);
+            }
         }
     } while (strcmp(elem, ">"));
     return sb;
@@ -110,8 +115,19 @@ SpinButton* init_spin_button() {
     sb->name =(gchar*)g_malloc(sizeof(char)*50);
     sb->bgcolor = NULL;
     sb->bgcolor =(gchar*)g_malloc(sizeof(char)*50);
-
+    sb->signal=0;
     return sb;
+}
+
+// Function to add a background color to the SpinButton widget
+void add_bgcolor_spin_button(GtkWidget* widget, const gchar* color, gdouble opacity) {
+    GdkRGBA rgba;
+    if (gdk_rgba_parse(&rgba, color)) {
+        rgba.alpha = opacity;
+        gtk_widget_override_background_color(widget, GTK_STATE_NORMAL, &rgba);
+    } else {
+        g_print("Erreur : Impossible de parser la couleur %s\n", color);
+    }
 }
 
 // Function to create the SpinButton widget based on the SpinButton structure
@@ -135,16 +151,7 @@ void create_spin_button_widget(SpinButton* sb) {
     }
 }
 
-// Function to add a background color to the SpinButton widget
-void add_bgcolor_spin_button(GtkWidget* widget, const gchar* color, gdouble opacity) {
-    GdkRGBA rgba;
-    if (gdk_rgba_parse(&rgba, color)) {
-        rgba.alpha = opacity;
-        gtk_widget_override_background_color(widget, GTK_STATE_NORMAL, &rgba);
-    } else {
-        g_print("Erreur : Impossible de parser la couleur %s\n", color);
-    }
-}
+
 
 // Function to add a SpinButton widget with specified parameters
 SpinButton* add_spin_button_from_file(FILE* file) {

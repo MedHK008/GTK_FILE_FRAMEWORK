@@ -9,6 +9,7 @@ typedef struct elem_radio {
     gchar *hexcolor; // couleur de fond en hexadécimal
     gint x_pos;
     gint y_pos;
+    gint signal;
     gboolean checked; // indique si le bouton est coché au début ou non
 } elem_radio;
 
@@ -25,6 +26,7 @@ elem_radio* init_elem_radio()
     R->checked=FALSE;
     R->x_pos=0;
     R->y_pos=0;
+    R->signal=0;
     return((elem_radio*)R);
 }
 elem_radio* elemRadioFunction(elem_radio* R, FILE* F) {
@@ -76,6 +78,10 @@ elem_radio* elemRadioFunction(elem_radio* R, FILE* F) {
             if ((c = epurer_blan(F)) == '=') {
                 fscanf(F, "%d", &check);
                 R->checked = (check == 1) ? TRUE : FALSE;
+            }
+        } else if (strcmp(elem, "signal") == 0) {
+            if ((c = epurer_blan(F)) == '=') {
+                fscanf(F, "%d", &R->signal);
             }
         }
     } while (strcmp(elem, ">"));

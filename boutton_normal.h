@@ -12,7 +12,7 @@ typedef struct {
     gchar* bgColor;// Couleur de fond du GtkGrid
     gint x_pos;
     gint y_pos;
-    gint signal;//0,1,2,3
+    gint signal;//1,2,3,4
     GtkWidget* image;// Widget de l'image pour le bouton
 } ButtonSimple;
 

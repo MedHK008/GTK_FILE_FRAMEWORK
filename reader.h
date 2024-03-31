@@ -7,15 +7,18 @@
 ///g_signal_connect(button, "released", G_CALLBACK(on_button_released), NULL);
 ///g_signal_connect(quit_button, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
 void on_button_clicked(GtkWidget *widget, gpointer data) {
-    g_print("\nButton clicked!\n");
+    const gchar *label = gtk_button_get_label(GTK_BUTTON(widget));
+    g_print("Button '%s' clicked!\n", label);
 }
 
 void on_button_pressed(GtkWidget *widget, gpointer data) {
-    g_print("\nButton pressed!\n");
+    const gchar *label = gtk_button_get_label(GTK_BUTTON(widget));
+    g_print("Button '%s' pressed!\n", label);
 }
 
 void on_button_released(GtkWidget *widget, gpointer data) {
-    g_print("\nButton released!\n");
+    const gchar *label = gtk_button_get_label(GTK_BUTTON(widget));
+    g_print("Button '%s' released!\n", label);
 }
 
 void on_quit_button_clicked(GtkWidget *widget, gpointer data) {
@@ -132,16 +135,16 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                     add_to_parent(B->button,parent_w,parent_token,50,50);
                     switch(B->signal)
                     {
-                    case 0:
+                    case 1:
                         g_signal_connect(B->button, "clicked", G_CALLBACK(on_button_clicked), NULL);
                         break;
-                    case 1:
+                    case 2:
                         g_signal_connect(B->button, "pressed", G_CALLBACK(on_button_pressed), NULL);
                         break;
-                    case 2:
+                    case 3:
                         g_signal_connect(B->button, "released", G_CALLBACK(on_button_released), NULL);
                         break;
-                    case 3:
+                    case 4:
                         g_signal_connect(B->button, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
                         break;
                     default:
@@ -155,13 +158,48 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                    elem_radio* R = add_radio(F, fix, radiopar);
                     if (R) {
                             add_to_parent(R->pRadio,parent_w,parent_token,R->x_pos,R->y_pos);
+                            switch(R->signal)
+                            {
+                            case 1:
+                                g_signal_connect(R->pRadio, "clicked", G_CALLBACK(on_button_clicked), NULL);
+                                break;
+                            case 2:
+                                g_signal_connect(R->pRadio, "pressed", G_CALLBACK(on_button_pressed), NULL);
+                                break;
+                            case 3:
+                                g_signal_connect(R->pRadio, "released", G_CALLBACK(on_button_released), NULL);
+                                break;
+                            case 4:
+                                g_signal_connect(R->pRadio, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
+                                break;
+                            default:
+                                break;
+                            }
                             free(R);
                     }
+
                     c=epurer_blan(F);
                     break;
                 case Checkbox:
                         cocher* C = add_cocher(F);
                         add_to_parent(C->boutcoche,parent_w,parent_token,C->x_pos,C->y_pos);
+                        switch(C->signal)
+                        {
+                        case 1:
+                            g_signal_connect(C->boutcoche, "clicked", G_CALLBACK(on_button_clicked), NULL);
+                            break;
+                        case 2:
+                            g_signal_connect(C->boutcoche, "pressed", G_CALLBACK(on_button_pressed), NULL);
+                            break;
+                        case 3:
+                            g_signal_connect(C->boutcoche, "released", G_CALLBACK(on_button_released), NULL);
+                            break;
+                        case 4:
+                            g_signal_connect(C->boutcoche, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
+                            break;
+                        default:
+                            break;
+                        }
                         free(C);
                         c=epurer_blan(F);
                         break;
@@ -211,6 +249,23 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                  case spB:
                         SpinButton* spB=add_spin_button_from_file(F);
                         add_to_parent(spB->SpinButton,parent_w,parent_token,spB->posx,spB->posy);
+                        switch(spB->signal)
+                        {
+                        case 1:
+                            g_signal_connect(spB->SpinButton, "clicked", G_CALLBACK(on_button_clicked), NULL);
+                            break;
+                        case 2:
+                            g_signal_connect(spB->SpinButton, "pressed", G_CALLBACK(on_button_pressed), NULL);
+                            break;
+                        case 3:
+                            g_signal_connect(spB->SpinButton, "released", G_CALLBACK(on_button_released), NULL);
+                            break;
+                        case 4:
+                            g_signal_connect(spB->SpinButton, "clicked", G_CALLBACK(on_quit_button_clicked), NULL);
+                            break;
+                        default:
+                            break;
+                        }
                         free(spB);
                         c=epurer_blan(F);
                         break;
