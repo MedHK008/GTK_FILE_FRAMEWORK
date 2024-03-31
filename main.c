@@ -1,16 +1,28 @@
 #include "headers.h"
 int main(int argc, char *argv[]) {
     debut_programme(argc,argv);
-     FILE *F = fopen("reader.txt", "r"); // Ouvre le fichier en mode lecture
-    if (F == NULL) {
+     FILE *F = fopen("reader.txt", "r");
+    FILE *G = fopen("boite_dialogue.txt", "r"); // Ouvre le fichier en mode lecture
+     Boite_message*BD; // Ouvre le fichier en mode lecture
+    if (F == NULL || G==NULL) {
         g_print("Impossible d'ouvrir le fichier!!\n");
      }
     Fenetre *Win=(Fenetre*)malloc(sizeof(Fenetre));
     if(Win)
         {
+            fseek(G,0,SEEK_END);
+            int taille=ftell(G);
+            if(G>0)
+            {
 
-//              ButtonSimple*b=
-                lire_fichier(F,Win,NULL,"/root");
+            fseek(G,0,SEEK_SET);
+             BD=initialiser_boite_message();
+              BD=lire_boite_message(G,BD);
+              definir_attribut_boite_message(BD);
+              BD=ajouter_to_boite_message_fichier(G,BD);
+               fclose(G);
+            }
+                lire_fichier(F,Win,NULL,"/root",BD);
 //              FILE *G=fopen("boite_dialogue.txt","r");
 //              BD=lire_Boite_dialogue(G,b);
               printf("\nSOrtie");

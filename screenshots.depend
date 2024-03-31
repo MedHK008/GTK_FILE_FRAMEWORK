@@ -3430,10 +3430,10 @@
 
 1711318849 c:\users\pc\onedrive\bureau\flex\screenshots-moujahid\menu.h
 
-1711337092 source:c:\users\hamza_chroqui\desktop\screenshots-main\main.c
+1711908069 source:c:\users\hamza_chroqui\desktop\screenshots-main\main.c
 	"headers.h"
 
-1711327048 c:\users\hamza_chroqui\desktop\screenshots-main\headers.h
+1711906544 c:\users\hamza_chroqui\desktop\screenshots-main\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3452,48 +3452,50 @@
 	"menu.h"
 	"window.h"
 	"onglet.h"
-	"fixed.h"
 	"reader.h"
+	"fixed.h"
 	"ex_buttons.h"
 
-1711335375 c:\users\hamza_chroqui\desktop\screenshots-main\boutton_normal.h
+1711907404 c:\users\hamza_chroqui\desktop\screenshots-main\boutton_normal.h
 	"image.h"
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\image.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\image.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\cocher.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\cocher.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\radio.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\radio.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\spin_button.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\spin_button.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\prog_bar.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\prog_bar.h
 
-1711330053 c:\users\hamza_chroqui\desktop\screenshots-main\label.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\label.h
 
-1711329830 c:\users\hamza_chroqui\desktop\screenshots-main\frame.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\frame.h
 	"scrollbar.h"
+	"window.h"
+	"fixed.h"
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\scrollbar.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\scrollbar.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\tool_bar.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\tool_bar.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\menu.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\menu.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\window.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\window.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\onglet.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\onglet.h
 	<gtk/gtk.h>
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\fixed.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\fixed.h
 
-1711337392 c:\users\hamza_chroqui\desktop\screenshots-main\reader.h
+1711908435 c:\users\hamza_chroqui\desktop\screenshots-main\reader.h
 
-1711325432 c:\users\hamza_chroqui\desktop\screenshots-main\ex_buttons.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\ex_buttons.h
 
-1711335487 c:\users\hamza_chroqui\desktop\screenshots-main\boite_dialog.h
+1711911309 c:\users\hamza_chroqui\desktop\screenshots-main\boite_dialog.h
 
-1711333021 c:\users\hamza_chroqui\desktop\screenshots-main\entry.h
+1711903995 c:\users\hamza_chroqui\desktop\screenshots-main\entry.h
 
 1711833172 source:c:\users\pc\onedrive\bureau\screenshots-chroqui\main.c
 	"headers.h"
@@ -3628,4 +3630,71 @@
 1711903810 c:\users\hkmed\onedrive\bureau\screenshots\reader.h
 
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\ex_buttons.h
+
+1711908069 source:c:\users\hkmed\onedrive\documents\screenshots-main\main.c
+	"headers.h"
+
+1711906544 c:\users\hkmed\onedrive\documents\screenshots-main\headers.h
+	<gtk/gtk.h>
+	<gdk/gdk.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"boutton_normal.h"
+	"cocher.h"
+	"radio.h"
+	"spin_button.h"
+	"prog_bar.h"
+	"label.h"
+	"frame.h"
+	"tool_bar.h"
+	"boite_dialog.h"
+	"entry.h"
+	"menu.h"
+	"window.h"
+	"onglet.h"
+	"reader.h"
+	"fixed.h"
+	"ex_buttons.h"
+
+1711907404 c:\users\hkmed\onedrive\documents\screenshots-main\boutton_normal.h
+	"image.h"
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\image.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\cocher.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\radio.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\spin_button.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\prog_bar.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\label.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\frame.h
+	"scrollbar.h"
+	"window.h"
+	"fixed.h"
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\scrollbar.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\window.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\fixed.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\tool_bar.h
+
+1711911309 c:\users\hkmed\onedrive\documents\screenshots-main\boite_dialog.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\entry.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\menu.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\onglet.h
+	<gtk/gtk.h>
+
+1711923875 c:\users\hkmed\onedrive\documents\screenshots-main\reader.h
+
+1711903995 c:\users\hkmed\onedrive\documents\screenshots-main\ex_buttons.h
 
