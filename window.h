@@ -12,6 +12,7 @@ typedef struct f{
   gchar *icon; // Chemin vers l'icône de la fenêtre (facultatif, par défaut : "")
   gchar *name; // Nom de la fenêtre (facultatif, par défaut : "")
   gchar *bgcolor; // Couleur de fond de la fenêtre (facultatif, par défaut : "#FFFFFF")
+  gchar* bgimg ;
   guint hauteur; // Hauteur de la fenêtre en pixels (obligatoire)
   guint largeur; // Largeur de la fenêtre en pixels (obligatoire)
   gint posx; // Position horizontale de la fenêtre par rapport à l'écran (facultatif, par défaut : -1)
@@ -49,6 +50,9 @@ Fenetre* init_window()
 
     win->icon=(gchar*)g_malloc(sizeof(gchar)*100);
     win->icon[0]='\0';
+
+    win->bgimg=(gchar*)g_malloc(sizeof(gchar)*100);
+    win->bgimg[0]='\0';
 
     win->scroll_bool=FALSE;
     win->largeur=0;
@@ -178,6 +182,19 @@ GtkWindowPosition string_to_window_position( gchar *str)
                   }
 
         }
+         else if (strcmp(elem, "bgImage") == 0)
+        {
+        if ((c = epurer_blan(F)) == '=')
+            if ((c = epurer_blan(F)) == '\"')
+            {
+                 i = 0;
+                while ((c = fgetc(F)) != '\"')
+                    w->bgimg[i++] = c;
+                w->bgimg[i] = '\0';
+            }
+        }
+
+
         else if (strcmp(elem, "position_init") == 0)
         {
             gchar temp[30];
@@ -200,6 +217,10 @@ GtkWindowPosition string_to_window_position( gchar *str)
     return(Fenetre*) w;
 }
 
+
+
+
+
 void create_window(Fenetre *W)
 {
     // Créez la fenêtre
@@ -211,7 +232,7 @@ void create_window(Fenetre *W)
     if (W->icon)
         gtk_window_set_icon_from_file(GTK_WINDOW(W->window), W->icon, NULL);
     //Ajout de couleur de fond
-    if(W->bgcolor)
+    if(W->bgcolor[0]!='\0')
     {
         GdkRGBA color;
         // Utilisez gdk_rgba_parse pour définir la couleur de fond de la fenêtre
@@ -243,6 +264,13 @@ void create_window(Fenetre *W)
         gtk_container_add(GTK_CONTAINER(W->window), W->scrollwin);
          gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(W->scrollwin),
                                     GTK_POLICY_ALWAYS, GTK_POLICY_ALWAYS);
+    }
+    if(W->name[0]!='\0')
+      gtk_widget_set_name(W->window,W->name);
+
+    if(W->bgimg[0]!='\0')
+    {
+       load_css();
     }
 }
 
