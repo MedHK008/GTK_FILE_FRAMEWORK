@@ -225,8 +225,12 @@ menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
 {
     // Vérifie si le menu parent a déjà un élément
     if (!parent_menu->liste)
+    {
+         printf("\n ici dans add menu item dans creer  dans la premier de la liste");
         // Le menu parent est vide, ajouter l'élément comme premier élément
         parent_menu->liste = menu_elem;
+    }
+
     else {
         // Le menu parent n'est pas vide, ajouter l'élément à la fin de la liste
         menu *courant;
@@ -235,25 +239,40 @@ menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
         courant->suivant = menu_elem;
         menu_elem->suivant = NULL; // Marque la fin de la liste
     }
-
+    printf("\n ici dans add menu item dans creer");
     // Si l'élément n'est pas un sous-menu, créer le widget approprié en fonction du type
     if (!menu_elem->IsSubmenu) {
         switch (menu_elem->type_composant) {
             case 1:
+                 printf("\n ici dans add menu item dans creer is check");
                 // Créer une case à cocher
                 menu_elem->menu_item = gtk_check_menu_item_new_with_mnemonic(menu_elem->nom);
                 break;
             case 2:
+                printf("\n ici dans add menu item dans creer is separator");
                 // Créer un séparateur
                 menu_elem->menu_item = gtk_separator_menu_item_new();
                 break;
             case 3:
+                printf("\n ici dans add menu item dans creer is radio");
                 // Créer un bouton radio
                 menu* Rgroup = RadioGroup(parent_menu->liste);//trouver l'element de groupe radio
-                if ((!parent_menu->liste) ||(!Rgroup))//Si on a pas encore creer le premier button radio qui sera le greoupe
+                printf("\n ici dans add menu item dans creer is radio apres radio groupe");
+                if ((!parent_menu->liste) || (!Rgroup))//Si on a pas encore creer le premier button radio qui sera le greoupe
+                {
+                    printf("\n ici dans add menu item dans creer is radio apres radio groupe dans if");
                     menu_elem->menu_item = gtk_radio_menu_item_new_with_mnemonic(NULL, menu_elem->nom);
+                }
+
                 else if(Rgroup)
-                    menu_elem->menu_item = gtk_radio_menu_item_new_with_mnemonic_from_widget(GTK_RADIO_MENU_ITEM(Rgroup->menu_item), menu_elem->nom);
+                {
+                    printf("\n ici dans add menu item dans creer is radio apres radio groupe dans else");
+                    if(menu_elem->nom) printf("\n ici dans add menu item dans creer is radio apres radio groupe dans else dans if");
+                    if(Rgroup->menu_item) printf("\n ici dans add menu item dans creer is radio apres radio groupe dans else dans if 2");
+                    if(menu_elem->menu_item) printf("\n ici dans add menu item dans creer is radio apres radio groupe dans else dans if 3");
+                    menu_elem->menu_item= gtk_radio_menu_item_new_with_mnemonic_from_widget(GTK_RADIO_MENU_ITEM(Rgroup->menu_item), menu_elem->nom);
+                    printf("\n ici dans add menu item dans creer is radio apres radio groupe dans else apres");
+                }
                 break;
             default:
                 // Item par défaut (élément de menu standard)
@@ -261,6 +280,7 @@ menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
                 break;
         }
     } else {
+        printf("\n ici dans add menu item dans creer is  submenu");
         // Créer un sous-menu
         menu_elem->menu_item = gtk_menu_item_new_with_mnemonic(menu_elem->nom);
         menu_elem->MENU = gtk_menu_new();
@@ -277,9 +297,16 @@ menu* creer_menu_item(menu *parent_menu, menu *menu_elem)
 menu *add_menu_item(menu *parent,menu* newItem, FILE *F) {
     // Initialisation de l'élément de menu
     newItem = init_menu_item();
+    printf("\n ici dans add menu item");
     newItem=menuItemFunction(newItem,F);
+    printf("\n ici dans add menu item apres menufunction");
     if(newItem)
-      newItem=creer_menu_item(parent, newItem);
+    {
+        printf("\n ici dans add menu item apres menufunction avant creer");
+        newItem=creer_menu_item(parent, newItem);
+        printf("\n ici dans add menu item apres menufunction apres creer");
+    }
+
     else return NULL;
 
     return newItem;
@@ -290,6 +317,7 @@ void ajouter_subelem(menu *parent,FILE* F)
    menu* ne=NULL;
     while((ne=add_menu_item(parent,ne,F))!=NULL)
     {
+        printf("\n ici dans ajouter submenu ");
          if(ne->IsSubmenu==TRUE)
             ajouter_subelem(ne,F);
     }
@@ -363,7 +391,12 @@ void ajouter_elems(menubar *parent ,FILE *F)
 {
     menu* ne=NULL;
     while((ne=add_menu(parent,ne,F))!=NULL)
-       ajouter_subelem(ne,F);
+    {
+        printf("\n ici dans ajouter");
+        ajouter_subelem(ne,F);
+        printf("\n ici dans ajouter apres ajouter submenu");
+    }
+
 
 }
 

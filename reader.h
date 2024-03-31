@@ -218,10 +218,8 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
                     c=epurer_blan(F);
                     break;
                case Box:
-                    printf("\n HANI KHRAJT ");
                     box * bx=NULL;
                     bx=add_box(F);
-                    printf("\n hani hna ");
                     add_to_parent(bx->box,parent_w,parent_token,bx->posx,bx->posy);
 
                     lire_fichier(F,W,bx->box,"/box");
@@ -232,11 +230,14 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token)
 //                    ongletFunction(F);
 //                    break;
                   case MenuBar:
+                      printf("\n ici menubar    ");
                         menubar *mbar =add_menubar(mbar,F);
+                        printf("\n ici menubar  apres add_menubar  ");
                          ajouter_elems(mbar,F);
+                         printf("\n ici menubar  apres ajouter  ");
                         add_to_parent(mbar->menubar,parent_w,parent_token,mbar->posx,mbar->posy);
                         free(mbar);
-                        printf("\nSortirADD");
+
                         c=epurer_blan(F);
 
                         break;
