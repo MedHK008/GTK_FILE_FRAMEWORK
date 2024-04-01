@@ -3567,7 +3567,7 @@
 1711927314 source:c:\users\hkmed\onedrive\bureau\screenshots\main.c
 	"headers.h"
 
-1711927329 c:\users\hkmed\onedrive\bureau\screenshots\headers.h
+1711928526 c:\users\hkmed\onedrive\bureau\screenshots\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3591,7 +3591,7 @@
 	"fixed.h"
 	"ex_buttons.h"
 
-1711927314 c:\users\hkmed\onedrive\bureau\screenshots\boutton_normal.h
+1711928982 c:\users\hkmed\onedrive\bureau\screenshots\boutton_normal.h
 	"image.h"
 
 1711903248 c:\users\hkmed\onedrive\bureau\screenshots\image.h
@@ -3606,7 +3606,7 @@
 
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\label.h
 
-1711901959 c:\users\hkmed\onedrive\bureau\screenshots\frame.h
+1711929449 c:\users\hkmed\onedrive\bureau\screenshots\frame.h
 	"scrollbar.h"
 	"window.h"
 	"fixed.h"
@@ -3628,9 +3628,9 @@
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\onglet.h
 	<gtk/gtk.h>
 
-1711927314 c:\users\hkmed\onedrive\bureau\screenshots\reader.h
+1711930923 c:\users\hkmed\onedrive\bureau\screenshots\reader.h
 
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\ex_buttons.h
 
-1711927329 c:\users\hkmed\onedrive\bureau\screenshots\combobox.h
+1711931018 c:\users\hkmed\onedrive\bureau\screenshots\combobox.h
 

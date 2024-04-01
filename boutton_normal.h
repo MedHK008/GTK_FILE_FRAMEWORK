@@ -123,15 +123,14 @@ void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
     GdkRGBA rgba;
     if(color)
     {
-            if (gdk_rgba_parse(&rgba, color)) {
-        rgba.alpha = opacity;
-        gtk_widget_override_background_color(widget, GTK_STATE_NORMAL, &rgba);
-    } else {
-        g_print("Erreur : Impossible de parser la couleur %s\n", color);
+        if (gdk_rgba_parse(&rgba, color))
+        {
+            rgba.alpha = opacity;
+            gtk_widget_override_background_color(widget, GTK_STATE_NORMAL, &rgba);
+        }
+        else
+            g_print("Erreur : Impossible de parser la couleur %s\n", color);
     }
-    }
-
-
 }
 //***********************************************************
 // CREER LE BOUTON SIMPLE

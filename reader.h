@@ -45,10 +45,8 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
     c=epurer_blan(F);
     ButtonSimple *Button_dial;
     GtkWidget* radiopar = gtk_radio_button_new(NULL);
-    printf("\n%s->%c",parent_token,c);
     while(c!=EOF)
     {
-        printf("\n%s ::: %c",parent_token,c);
         if(c=='<')
         {
               fscanf(F, "%s", current_token);
@@ -59,7 +57,6 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
             {
                 if(!(strcmp(current_token,"/root")))
                   {
-                       printf("\nRRRRRRRRR");
                        gtk_widget_show_all(W->window);
                        if(W->svt)
                            gtk_widget_show_all(W->svt->window);
@@ -78,7 +75,6 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
                    break;
 
                 case fenetre:
-                    printf("\nswitch F");
                     if(W->window)
                     {
                         W->svt=add_window(F);
@@ -88,7 +84,6 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
 
                         else
                         lire_fichier(F,W->svt,W->svt->scrollwin,"/window",BM);
-                        printf("\nsortie F");
                         c=epurer_blan(F);
                     }
                     else{
@@ -202,7 +197,13 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
                         free(C);
                         c=epurer_blan(F);
                         break;
-
+                case Combobox:
+                    ComboBox* CB=add_comboBox(parent_w,F);
+                    combobox_add(CB,F);
+                    add_to_parent(CB->comboBox,parent_w,parent_token,CB->posx,CB->posy);
+                    free(CB);
+                    c=epurer_blan(F);
+                    break;
                 case Frame:
                     frame *fr=add_frame(parent_w,F);
                     lire_son_elem(fr,F,W);
@@ -268,9 +269,6 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
                     free(bx);
                     c=epurer_blan(F);
                     break;
-//                case Tab:
-//                    ongletFunction(F);
-//                    break;
                   case MenuBar:
                       printf("\n ici menubar    ");
                         menubar *mbar =add_menubar(mbar,F);
@@ -283,10 +281,6 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
                         c=epurer_blan(F);
 
                         break;
-//                case MenuItem:
-//                    menuItemFunction(F);
-//
-//                    break;
                 default:
                     // Gérer le cas où le token n'est pas reconnu
                     break;

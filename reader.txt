@@ -50,6 +50,13 @@
 	<button_dialogue name ="button2" label ="OK" posx =0 posy =0 width =90 height =50 >
 	<button name ="button2" label ="Quitter" posx =90 posy =0 width =90 height =50 signal =4 >
 </box >
+<combobox name ="combobox" label ="combo" posx =300 posy =100 >
+  <option label =" " >
+  <option label ="combo1" >
+  <option label ="combo2" >
+  <option label ="combo3" >
+  <option label ="combo4" >
+</combobox>
 </fixed >
 </window >
 </root >

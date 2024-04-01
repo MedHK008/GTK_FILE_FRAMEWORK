@@ -75,7 +75,7 @@ Token string_to_token(const char *str) {
         return button_dialogue;
     }else if (!strcmp(str, "combobox")) {
         return Combobox;
-    else {
+    } else {
         // Retourner une valeur par défaut ou une valeur d'erreur
         return -1;
     }
