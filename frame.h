@@ -249,7 +249,13 @@ void lire_son_elem(frame *fr,FILE *F,Fenetre *W)
                     free(B);
                     c=epurer_blan(F);
                     break;
-
+                case Combobox:
+                    ComboBox* CB=add_comboBox(fix,F);
+                    combobox_add(CB,F);
+                    gtk_fixed_put(GTK_FIXED(fix),CB->comboBox,CB->posx,CB->posy);
+                    free(CB);
+                    c=epurer_blan(F);
+                    break;
               case Radio:
                    elem_radio* R = add_radio(F,fix, radiopar);
                     if (R) {

@@ -34,6 +34,7 @@
 		<Unit filename="boite_dialog.h" />
 		<Unit filename="boutton_normal.h" />
 		<Unit filename="cocher.h" />
+		<Unit filename="combobox.h" />
 		<Unit filename="entry.h" />
 		<Unit filename="ex_buttons.h" />
 		<Unit filename="fixed.h" />

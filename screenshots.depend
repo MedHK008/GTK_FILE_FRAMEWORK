@@ -3567,7 +3567,7 @@
 1711927314 source:c:\users\hkmed\onedrive\bureau\screenshots\main.c
 	"headers.h"
 
-1711928526 c:\users\hkmed\onedrive\bureau\screenshots\headers.h
+1711932109 c:\users\hkmed\onedrive\bureau\screenshots\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3577,11 +3577,11 @@
 	"cocher.h"
 	"radio.h"
 	"spin_button.h"
+	"combobox.h"
 	"prog_bar.h"
 	"label.h"
 	"frame.h"
 	"tool_bar.h"
-	"combobox.h"
 	"boite_dialog.h"
 	"entry.h"
 	"menu.h"
@@ -3606,7 +3606,7 @@
 
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\label.h
 
-1711929449 c:\users\hkmed\onedrive\bureau\screenshots\frame.h
+1711932147 c:\users\hkmed\onedrive\bureau\screenshots\frame.h
 	"scrollbar.h"
 	"window.h"
 	"fixed.h"

@@ -50,13 +50,34 @@
 	<button_dialogue name ="button2" label ="OK" posx =0 posy =0 width =90 height =50 >
 	<button name ="button2" label ="Quitter" posx =90 posy =0 width =90 height =50 signal =4 >
 </box >
-<combobox name ="combobox" label ="combo" posx =300 posy =100 >
-  <option label =" " >
-  <option label ="combo1" >
-  <option label ="combo2" >
-  <option label ="combo3" >
-  <option label ="combo4" >
-</combobox>
+<frame name ="F3" type =1 xligne =100 yligne =500 >
+  <text_label text ="choix multiple de 5 : " >
+  <box name ="box3" orientation =v posx =40 posy =0 >
+    <combobox name ="combo1" label ="choix parmi 5:" posx =100 posy =500 >
+      <option label ="0" >
+      <option label ="choix1" >
+      <option label ="choix2" >
+      <option label ="choix3" >
+      <option label ="choix4" >
+      <option label ="choix5" >
+    </combobox>
+  </box >
+</frame >
+<frame name ="F3" type =1 xligne =100 yligne =600 >
+  <text_label text ="choix multiple de 7 : " >
+  <box name ="box3" orientation =h posx =40 posy =0 >
+    <combobox name ="combo1" label ="choix parmi 5:" posx =100 posy =500 >
+      <option label ="0" >
+      <option label ="choix1" >
+      <option label ="choix2" >
+      <option label ="choix3" >
+      <option label ="choix4" >
+      <option label ="choix5" >
+      <option label ="choix6" >
+      <option label ="choix7" >
+    </combobox>
+  </box >
+</frame >
 </fixed >
 </window >
 </root >
