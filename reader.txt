@@ -1,5 +1,5 @@
 <root >
-<window name ="f1" title ="Test Macro GTK 2023-2024" icon ="insg.jpg" width =800 height =800 resizable =T position_init ="center" >
+<window name ="f1" title ="Test Macro GTK 2023-2024" icon ="insg.jpg" width =800 height =800 resizable =T position_init ="center" scrolled =T >
 <fixed >
   <menu_bar name ="mb1" orientation ="RTL" posx =0 posy =0 >
 	<menu_item name ="Fichier" >
