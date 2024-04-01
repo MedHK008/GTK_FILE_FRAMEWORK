@@ -48,7 +48,7 @@
 </frame >
 <box name ="box2" orientation =h posx =700 posy =500 >
 	<button_dialogue name ="button2" label ="OK" posx =0 posy =0 width =90 height =50 >
-	<button name ="button2" label ="Quitter" posx =90 posy =0 width =90 height =50 signal =4 >
+	<button name ="button2" lien ="gtklogo.png" label ="Quitter" posx =90 posy =0 width =90 height =50 signal =4 >
 </box >
 <frame name ="F3" type =1 xligne =100 yligne =500 >
   <text_label text ="choix multiple de 5 : " >

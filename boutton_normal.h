@@ -180,10 +180,8 @@ ButtonSimple* add_button(FILE* F) {
     ButtonSimple* B =NULL;
     B = init_button_simple();
     B = buttonSimpleFunction(B,F);
-    creer_button_Simple(B);
     // Initialize image widget
-    image* img = initialiser_image(B, 1, B->lien, GTK_ICON_SIZE_BUTTON, B->width, B->height);
-    creer_img(img);
+    creer_button_Simple(B);
     return B;
 }
 

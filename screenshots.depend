@@ -3567,7 +3567,7 @@
 1711927314 source:c:\users\hkmed\onedrive\bureau\screenshots\main.c
 	"headers.h"
 
-1711932109 c:\users\hkmed\onedrive\bureau\screenshots\headers.h
+1711964170 c:\users\hkmed\onedrive\bureau\screenshots\headers.h
 	<gtk/gtk.h>
 	<gdk/gdk.h>
 	<stdio.h>
@@ -3591,10 +3591,10 @@
 	"fixed.h"
 	"ex_buttons.h"
 
-1711928982 c:\users\hkmed\onedrive\bureau\screenshots\boutton_normal.h
+1711974192 c:\users\hkmed\onedrive\bureau\screenshots\boutton_normal.h
 	"image.h"
 
-1711903248 c:\users\hkmed\onedrive\bureau\screenshots\image.h
+1711970611 c:\users\hkmed\onedrive\bureau\screenshots\image.h
 
 1711903002 c:\users\hkmed\onedrive\bureau\screenshots\cocher.h
 
@@ -3602,7 +3602,7 @@
 
 1711903315 c:\users\hkmed\onedrive\bureau\screenshots\spin_button.h
 
-1711846537 c:\users\hkmed\onedrive\bureau\screenshots\prog_bar.h
+1711964112 c:\users\hkmed\onedrive\bureau\screenshots\prog_bar.h
 
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\label.h
 
@@ -3617,18 +3617,18 @@
 
 1711901369 c:\users\hkmed\onedrive\bureau\screenshots\fixed.h
 
-1711846537 c:\users\hkmed\onedrive\bureau\screenshots\tool_bar.h
+1711964303 c:\users\hkmed\onedrive\bureau\screenshots\tool_bar.h
 
 1711927314 c:\users\hkmed\onedrive\bureau\screenshots\boite_dialog.h
 
-1711846537 c:\users\hkmed\onedrive\bureau\screenshots\entry.h
+1711964303 c:\users\hkmed\onedrive\bureau\screenshots\entry.h
 
 1711902234 c:\users\hkmed\onedrive\bureau\screenshots\menu.h
 
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\onglet.h
 	<gtk/gtk.h>
 
-1711930923 c:\users\hkmed\onedrive\bureau\screenshots\reader.h
+1711964348 c:\users\hkmed\onedrive\bureau\screenshots\reader.h
 
 1711846537 c:\users\hkmed\onedrive\bureau\screenshots\ex_buttons.h
 

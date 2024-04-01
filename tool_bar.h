@@ -7,7 +7,7 @@ typedef struct
     GtkWidget *widget; // Widget associ� � l'�l�ment de la barre d'outils
     gint h;
     gint w;
-    const gchar *icon;    // Ic�ne associ�e � l'�l�ment
+    gchar *icon;    // Ic�ne associ�e � l'�l�ment
     gchar *text;      // Texte associ� � l'�l�ment
     GtkWidget *parent;
     gint pos;//// Position dans la barre d'outils

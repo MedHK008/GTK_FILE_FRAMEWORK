@@ -9,6 +9,24 @@
 #include <stdlib.h>
 #include <string.h>
 
+
+void load_css() {
+    GtkCssProvider *provider = gtk_css_provider_new();
+    GdkDisplay *display = gdk_display_get_default();
+    GdkScreen *screen = gdk_display_get_default_screen(display);
+    GError *error = NULL;
+
+    if (!gtk_css_provider_load_from_path(provider, "style_win.css", &error)) {
+        g_warning("Failed to load CSS file: %s", error->message);
+        g_error_free(error);
+        return;
+    }
+    gtk_style_context_add_provider_for_screen(screen, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
+    g_object_unref(provider);
+}
+
+
+
 ///les constante
 #define NBC 100
 #define NB_RADIO 3
@@ -38,20 +56,6 @@
 #include "fixed.h"
 
 #include "ex_buttons.h"
-void load_css() {
-    GtkCssProvider *provider = gtk_css_provider_new();
-    GdkDisplay *display = gdk_display_get_default();
-    GdkScreen *screen = gdk_display_get_default_screen(display);
-    GError *error = NULL;
-
-    if (!gtk_css_provider_load_from_path(provider, "style_win.css", &error)) {
-        g_warning("Failed to load CSS file: %s", error->message);
-        g_error_free(error);
-        return;
-    }
-    gtk_style_context_add_provider_for_screen(screen, GTK_STYLE_PROVIDER(provider), GTK_STYLE_PROVIDER_PRIORITY_APPLICATION);
-    g_object_unref(provider);
-}
 
 void debut_programme(int argc,char*argv[]){
     gtk_init(&argc,&argv);
@@ -62,7 +66,6 @@ void fin_programme(Fenetre* ma_fenetre)
     g_signal_connect(G_OBJECT(ma_fenetre->window), "destroy", G_CALLBACK(gtk_main_quit), NULL);
     gtk_main();
 }
-
 
 
 

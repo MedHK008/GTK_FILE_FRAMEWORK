@@ -32,7 +32,7 @@ image *initialiser_image()
     // Initialiser les champs de la structure image
     //img->parent = pere;               // Stocker le widget parent
     img->type = 1;                     // Stocker le type d'image
-    img->icon_anim_stock = (const gchar *)g_malloc(sizeof(const gchar )*30);
+    img->icon_anim_stock = (gchar*)g_malloc(sizeof(gchar)*30);
     img->sizeicon = 1;                    // Stocker la taille de l'ic�ne
     img->name=(gchar *)g_malloc(sizeof( gchar )*30);
     img->name[0]='\0';

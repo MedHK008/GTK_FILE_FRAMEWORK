@@ -1,4 +1,4 @@
-<boite_message  modal =1 height =150 width =700 icone ="bgwin.jpg" >
+<boite_message  modal =1 height =150 width =700 >
 <label name ="label" selectable =0 wrap =0 xligne =250 yligne =0 >
 <text_label text ="Voulez vous afficher une image ?" size =10  width =70 height =40  >
 <button name ="button4" label ="Oui" lien ="gtklogo.png" width =100 height =50 posx =150 posy =50 mnemo =1 signal =1 >

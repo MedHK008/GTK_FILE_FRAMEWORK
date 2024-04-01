@@ -5,8 +5,8 @@ typedef struct
 {
     GtkWidget *widget;   // Pointeur vers l'objet de la barre de progression (GtkProgressBar)
     GtkWidget *parent;   // Pointeur vers un widget parent
-    gdouble fraction;    // La fraction actuelle de la barre de progression (peut varier de 0 � 1)
-    gdouble unite;      // L'unit� de progression de la barre de progression
+    gfloat fraction;    // La fraction actuelle de la barre de progression (peut varier de 0 � 1)
+    gfloat unite;      // L'unit� de progression de la barre de progression
     gint type;
     gchar *name;
     gint x;
@@ -139,7 +139,7 @@ barre_prog *progBarFunction(barre_prog*p,FILE *F)
 }
 
 //GtkWidget *pere,gdouble dfr,gdouble unite,gint x,gint y,gboolean type,gint w,gint h
-GtkWidget *add_progress_bar(FILE *F)
+barre_prog *add_progress_bar(FILE *F)
 {
     barre_prog *bar=initialiser_barre_prog();
     GtkWidget *pVBox=gtk_vbox_new(FALSE,10);

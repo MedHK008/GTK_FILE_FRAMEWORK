@@ -13,7 +13,7 @@ typedef struct {
     gfloat alignement_x;        // L'alignement horizontal du texte (0 pour � gauche, 1 pour � droite)
     gint visible;               // Indique si le texte saisi est visible (TRUE) ou cach� (FALSE)
     gint caractere_visible;     // Indique si un caract�re sp�cifique est utilis� pour masquer le texte saisi
-    guchar caractere;           // Le caract�re utilis� pour masquer le texte saisi (si caractere_visible est TRUE)
+    gchar caractere;           // Le caract�re utilis� pour masquer le texte saisi (si caractere_visible est TRUE)
     gint hauteur;               // La hauteur de la zone de saisie
     gint largeur;               // La largeur de la zone de saisie
     gint etat;                  // L'�tat de la zone de saisie (0: normal, 1: actif, 2: pr�-s�lectionn�, 3: s�lectionn�, 4: insensible)
@@ -120,7 +120,7 @@ Saisie* entryFunction(Saisie* S,FILE* F)
          }
          else if (strcmp(elem, "X_alignement") == 0) {
             if ((c = epurer_blan(F)) == '=') {
-                fscanf(F, "%.2f", &S->alignement_x);
+                fscanf(F, "%f", &S->alignement_x);
             }
 
          }
