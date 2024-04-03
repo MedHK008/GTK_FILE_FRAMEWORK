@@ -137,12 +137,6 @@ void add_bgcolor_btn(GtkWidget* widget, const gchar* color, gdouble opacity) {
 void creer_button_Simple(ButtonSimple* B) {
     // Créer un GtkBox vertical pour contenir l'image et le label
     GtkWidget* vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
-    // Changer la couleur de fond de la vbox
-    if(B->bgColor)
-    {
-
-               add_bgcolor_btn(vbox, B->bgColor, 1.0); // Utiliser la couleur de fond spécifiée
-    }
     // Créer un label pour le texte
     GtkWidget* label = NULL;
     if (B->label) {

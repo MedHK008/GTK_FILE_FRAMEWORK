@@ -247,9 +247,11 @@ void definir_attributs_saisie(Saisie *e) {
 
 Saisie *Add_Entry(FILE *F)
 {
+    printf("here : \n");
     Saisie *S=init_Saisie();
-
+    printf("again\n");
     S=entryFunction(S,F);
+    printf("again\n");
     definir_attributs_saisie(S);
     return(Saisie*)(S);
 

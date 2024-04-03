@@ -17,7 +17,7 @@ ComboBox *init_combobox(GtkWidget *pere) {
     ComboBox *cb = (ComboBox*)malloc(sizeof(ComboBox));
     cb->comboBox = NULL;
     cb->container = (GtkWidget*)malloc(sizeof(GtkWidget));
-    cb->container = pere;
+    if(pere) cb->container = pere;
     cb->nom = (gchar*)malloc(35 * sizeof(gchar));
     cb->posx = 0;
     cb->posy = 0;
@@ -28,7 +28,7 @@ ComboBox *init_combobox(GtkWidget *pere) {
 void create_combobox(ComboBox *cb) {
     cb->comboBox = gtk_combo_box_text_new();
     gtk_widget_set_name(cb->comboBox, cb->nom);
-    gtk_fixed_put(GTK_FIXED(cb->container), cb->comboBox, cb->posx, cb->posy);
+    gtk_box_pack_start(GTK_BOX(cb->container), cb->comboBox,FALSE,TRUE,0);
 }
 
 ComboBox *comboFunction(FILE* F,ComboBox* CB)

@@ -68,7 +68,8 @@ toolbar *creer_toolbar(toolbar *tbar)
         gtk_orientable_set_orientation(GTK_TOOLBAR(tbar), GTK_ORIENTATION_HORIZONTAL);
     else
         // Sinon, d�finir l'orientation de la barre d'outils comme verticale
-     gtk_orientable_set_orientation(GTK_TOOLBAR(tbar),GTK_ORIENTATION_VERTICAL);
+        gtk_orientable_set_orientation(GTK_TOOLBAR(tbar),GTK_ORIENTATION_VERTICAL);
+    return ((toolbar*)tbar);
 }
 
 //Fonction pour initialiser un �l�ment de la barre d'outils � partir d'une ic�ne stock�e
@@ -99,6 +100,7 @@ const gchar *element_icon(gint type)
        case 3: return GTK_STOCK_CLOSE;
        case 4: return GTK_STOCK_SAVE;
    }
+   return NULL;
 }
 // Fonction pour cr�er un GtkToolItem � partir d'un item_bar et l'ajouter � la barre d'outils
 void creer_toolitem(item_bar *toolitem, toolbar *bar,gboolean choix,void (*fonction)(GtkWidget*,gpointer),gchar *type,gpointer data)
@@ -143,13 +145,17 @@ GtkWidget *creer_separ(GtkWidget *sep, GtkWidget *pere, gint pos)
 
 gint style_toolbar(gint type)
 {
-  switch(type){
-     case 1:return GTK_TOOLBAR_ICONS;
-     case 2:return GTK_TOOLBAR_TEXT;
-     case 3:return GTK_TOOLBAR_BOTH;
-     case 4:return GTK_TOOLBAR_BOTH_HORIZ;
-  }
-
+    switch(type){
+        case 1:
+            return GTK_TOOLBAR_ICONS;
+        case 2:
+            return GTK_TOOLBAR_TEXT;
+        case 3:
+            return GTK_TOOLBAR_BOTH;
+        case 4:
+            return GTK_TOOLBAR_BOTH_HORIZ;
+    }
+    return NULL;
 }
 
 gint style_iconsize(gint type) {

@@ -36,7 +36,8 @@ void create_cocher(cocher *C) {
     {
         GdkColor color;
         gdk_color_parse(C->gui, &color);
-        gtk_widget_modify_bg(C->boutcoche, GTK_STATE_NORMAL, &color);
+//        gtk_widget_modify_bg(C->boutcoche, GTK_STATE_NORMAL, &color);
+        gtk_widget_override_background_color(C->boutcoche, GTK_STATE_NORMAL, &color);
     }
     gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(C->boutcoche), C->checked);
 }

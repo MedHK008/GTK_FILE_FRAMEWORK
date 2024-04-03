@@ -1,6 +1,5 @@
 #ifndef READER_H_INCLUDED
 #define READER_H_INCLUDED
-#define MAX 100
 
 ///g_signal_connect(button, "clicked", G_CALLBACK(on_button_clicked), NULL);
 ///g_signal_connect(button, "pressed", G_CALLBACK(on_button_pressed), NULL);
@@ -50,7 +49,6 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
         if(c=='<')
         {
             fscanf(F, "%s", current_token);
-            printf("\n%s",current_token);
             if (!strcmp(current_token , parent_token))
             {
                 if(!(strcmp(current_token,"/root")))
@@ -58,7 +56,7 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
                     gtk_widget_show_all(W->window);
                     if(W->svt)
                        gtk_widget_show_all(W->svt->window);
-                    fin_programme(W);
+                        fin_programme(W);
                 }
                 c=epurer_blan(F);
                 return ;
@@ -87,7 +85,6 @@ void lire_fichier(FILE*F,Fenetre* W,GtkWidget* parent_w , gchar* parent_token,Bo
                                      lire_fichier(F,W,W->window,"/window",BM);
                                 else
                                     lire_fichier(F,W,W->scrollwin,"/window",BM);
-                                printf("\nsortie F");
                                 c=epurer_blan(F);
                             }
                             break;
@@ -271,8 +268,6 @@ Boite_message*ajouter_to_boite_message_fichier(FILE*F,Boite_message*BM)
 {
     gchar c;
     gchar elem[50];
-    gchar att[50];
-    int i ;
     Token tok;
     c=epurer_blan(F);
 
@@ -282,7 +277,6 @@ Boite_message*ajouter_to_boite_message_fichier(FILE*F,Boite_message*BM)
         {
 
             fscanf(F,"%s",elem);
-            printf("\nwidget---->%s\n",elem);
             tok=string_to_token(elem);
             switch(tok)
             {

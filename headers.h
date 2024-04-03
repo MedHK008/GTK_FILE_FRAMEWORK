@@ -29,7 +29,7 @@ void load_css() {
 
 ///les constante
 #define NBC 100
-#define NB_RADIO 3
+#define MAX 100
 
 ///les bibliothèque des widget
 #include "boutton_normal.h"

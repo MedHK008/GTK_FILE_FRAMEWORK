@@ -96,6 +96,7 @@ gint polic(gint type)
         case 3: return GTK_POLICY_NEVER;
         case 4: return GTK_POLICY_EXTERNAL;
     }
+    return NULL;
 }
 GtkWidget *add_scrollbar(FILE *F,GtkWidget *pere)
 {

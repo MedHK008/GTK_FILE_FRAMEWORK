@@ -106,7 +106,9 @@ gint style_border(gint type)
         case 5: return GTK_SHADOW_NONE;
         case 4: return GTK_SHADOW_OUT;
     }
+    return NULL;
 }
+
 // Fonction pour initialiser une structure de cadre avec des param�tres sp�cifi�s
 frame *initialiser_frame()
 {
